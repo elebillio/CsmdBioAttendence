@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-PK">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <EFDataSource Name="EF Data Source 1" Source="CsmdBioDatabase.CsmdBioAttendenceEntities, CsmdBioDatabase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" CustomAssemblyPath="C:\Users\Madina\Documents\Visual Studio 2015\Projects\CsmdBioAttendence\CsmdBioDashBoard\bin\Debug\CsmdBioDatabase.dll" CustomContextName="CsmdBioDatabase.CsmdBioAttendenceEntities" ComponentName="dashboardEFDataSource1" />
+  </DataSources>
+  <Items>
+    <Card ComponentName="cardDashboardItem1" Name="Cards 1" DataSource="dashboardEFDataSource1" DataMember="Emp_Attendence_Device">
+      <DataItems>
+        <Measure DataMember="Emp_Bio_Device_Users.Attendence_Status.Attendence_Status_Type" SummaryType="Count" UniqueName="DataItem1" />
+        <Dimension DataMember="Emp_Bio_Device_Users.Employee.Emp_Name" UniqueName="DataItem0" />
+        <Dimension DataMember="Emp_Bio_Device_Users.Attendence_Status_ID" SortByMeasure="DataItem1" UniqueName="DataItem3" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension UniqueName="DataItem0" />
+      </SeriesDimensions>
+      <Card>
+        <ActualValue UniqueName="DataItem1" />
+      </Card>
+      <SparklineArgument UniqueName="DataItem3" />
+    </Card>
+    <RangeFilter ComponentName="rangeFilterDashboardItem1" Name="Range Filter 1" DataSource="dashboardEFDataSource1" DataMember="Emp_Attendence_Device">
+      <DataItems>
+        <Dimension DataMember="Emp_Attendence_Device_Date" DateTimeGroupInterval="MonthYear" UniqueName="DataItem0" />
+        <Measure DataMember="Emp_Bio_Device_Users.Attendence_Status_ID" UniqueName="DataItem2" />
+      </DataItems>
+      <Argument UniqueName="DataItem0" />
+      <Series>
+        <Simple SeriesType="Line">
+          <Value UniqueName="DataItem2" />
+        </Simple>
+      </Series>
+    </RangeFilter>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutItem DashboardItem="rangeFilterDashboardItem1" Weight="13.193116634799235" />
+      <LayoutItem DashboardItem="cardDashboardItem1" Weight="86.806883365200761" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

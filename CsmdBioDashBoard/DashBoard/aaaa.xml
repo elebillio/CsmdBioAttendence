@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-PK">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <EFDataSource Name="EF Data Source 1" Source="CsmdBioDatabase.CsmdBioAttendenceEntities, CsmdBioDatabase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" CustomAssemblyPath="C:\Users\Madina\Documents\Visual Studio 2015\Projects\CsmdBioAttendence\CsmdBioDashBoard\bin\Debug\CsmdBioDatabase.dll" CustomContextName="CsmdBioDatabase.CsmdBioAttendenceEntities" ComponentName="dashboardEFDataSource1" />
+  </DataSources>
+  <Items>
+    <Card ComponentName="cardDashboardItem1" Name="Cards 1" DataSource="dashboardEFDataSource1" DataMember="Employees">
+      <DataItems>
+        <Measure DataMember="Emp_Status" SummaryType="Count" UniqueName="DataItem0" />
+        <Dimension DataMember="Emp_Status" Name="Emp_Status" UniqueName="DataItem1" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension UniqueName="DataItem1" />
+      </SeriesDimensions>
+      <Card>
+        <ActualValue UniqueName="DataItem0" />
+      </Card>
+    </Card>
+    <Card ComponentName="cardDashboardItem2" Name="Cards 2" DataSource="dashboardEFDataSource1" DataMember="Employees">
+      <DataItems>
+        <Measure DataMember="Emp_ID" SummaryType="Count" UniqueName="DataItem0" />
+      </DataItems>
+      <Card>
+        <ActualValue UniqueName="DataItem0" />
+      </Card>
+    </Card>
+    <Card ComponentName="cardDashboardItem3" Name="Cards 3" />
+    <Card ComponentName="cardDashboardItem4" Name="Cards 4" />
+    <Pie ComponentName="pieDashboardItem1" Name="Pies 1" DataSource="dashboardEFDataSource1" DataMember="Employees" PieType="Donut" LabelContentType="ArgumentValueAndPercent" TooltipContentType="Value">
+      <DataItems>
+        <Measure DataMember="Emp_Status" SummaryType="Count" UniqueName="DataItem0" />
+        <Dimension DataMember="Emp_Status" UniqueName="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem1" />
+      </Arguments>
+      <Values>
+        <Value UniqueName="DataItem0" />
+      </Values>
+    </Pie>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutGroup Weight="28.87189292543021">
+        <LayoutItem DashboardItem="cardDashboardItem1" Weight="51.025331724969845" />
+        <LayoutItem DashboardItem="cardDashboardItem2" Weight="48.974668275030155" />
+      </LayoutGroup>
+      <LayoutGroup Orientation="Vertical" Weight="71.128107074569783">
+        <LayoutItem DashboardItem="cardDashboardItem4" Weight="17.741935483870968" />
+        <LayoutGroup Weight="82.258064516129039">
+          <LayoutItem DashboardItem="cardDashboardItem3" Weight="63.44993968636912" />
+          <LayoutItem DashboardItem="pieDashboardItem1" Weight="36.55006031363088" />
+        </LayoutGroup>
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

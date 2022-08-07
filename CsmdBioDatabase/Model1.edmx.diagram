@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="193e1d314b5e4f308df32b8d17a4caca" Name="Diagram1">
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Attendence_Status" Width="1.5" PointX="8.25" PointY="5.75" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Auto_Number" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Emp_Att_Payment" Width="1.5" PointX="7.5" PointY="9" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Emp_Att_Set" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Emp_Attendence_Device" Width="1.5" PointX="12.75" PointY="8.625" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Emp_Bio_Device_Users" Width="1.5" PointX="10.5" PointY="8.875" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Emp_Cash_Register" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Employee" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.Plaza_User" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.sysdiagram" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel.User_Type" Width="1.5" PointX="0.75" PointY="9.875" />
+        <AssociationConnector Association="CsmdBioAttendenceModel.FK_Emp_Bio_Device_Users_Attendence_Status" />
+        <AssociationConnector Association="CsmdBioAttendenceModel.FK_Emp_Att_Payment_Employees" />
+        <AssociationConnector Association="CsmdBioAttendenceModel.FK_Emp_Attendence_Device_Emp_Bio_Device_Users" />
+        <AssociationConnector Association="CsmdBioAttendenceModel.FK_Emp_Bio_Device_Users_Employees" />
+        <AssociationConnector Association="CsmdBioAttendenceModel.FK_Employees_Plaza_User" />
+        <AssociationConnector Association="CsmdBioAttendenceModel.FK_Plaza_User_User_Type" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

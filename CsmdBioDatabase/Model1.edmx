@@ -1,0 +1,935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CsmdBioAttendenceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attendence_Status">
+          <Key>
+            <PropertyRef Name="Attendence_Status_ID" />
+          </Key>
+          <Property Name="Attendence_Status_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Attendence_Status_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Attendence_Status_Dep" Type="varchar" MaxLength="50" />
+          <Property Name="Attendence_Status_Finger" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Auto_Number">
+          <Key>
+            <PropertyRef Name="Auto_ID" />
+          </Key>
+          <Property Name="Auto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Auto_Emp_Num" Type="int" />
+          <Property Name="Auto_Invoice" Type="int" />
+          <Property Name="Auto_Receipt" Type="int" />
+          <Property Name="Payroll_Receipt" Type="int" />
+        </EntityType>
+        <EntityType Name="Emp_Att_Payment">
+          <Key>
+            <PropertyRef Name="Emp_Att_Payment_ID" />
+          </Key>
+          <Property Name="Emp_Att_Payment_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_ID" Type="int" />
+          <Property Name="Emp_Att_Payment_Issue_Date" Type="date" />
+          <Property Name="Emp_Att_Payment_From_Date" Type="date" />
+          <Property Name="Emp_Att_Payment_To_Date" Type="date" />
+          <Property Name="Emp_Att_Payment_DutyOn" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_DutyOff" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_DutyFriOff" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Total_Hours" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Total_MonthDays" Type="float" />
+          <Property Name="Emp_Att_Payment_Total_OffDays" Type="float" />
+          <Property Name="Emp_Att_Payment_Total_OffDays_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Total_Days" Type="float" />
+          <Property Name="Emp_Att_Payment_Total_Salaray_Days" Type="float" />
+          <Property Name="Emp_Att_Payment_Total_DayRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Total_MinRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_ExtraDays" Type="float" />
+          <Property Name="Emp_Att_Payment_ExtraDays_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Absent_D" Type="float" />
+          <Property Name="Emp_Att_Payment_Absent_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_InOutDays" Type="float" />
+          <Property Name="Emp_Att_Payment_InOutDays_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Salaray_Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Late_H" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Late_D" Type="float" />
+          <Property Name="Emp_Att_Payment_Late_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Early_H" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Early_D" Type="float" />
+          <Property Name="Emp_Att_Payment_Early_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_OverTime_H" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_OverTime_D" Type="float" />
+          <Property Name="Emp_Att_Payment_OverTime_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Private_Late_H" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Private_Late_D" Type="float" />
+          <Property Name="Emp_Att_Payment_Private_Late_D_T" Type="float" />
+          <Property Name="Emp_Att_Payment_Private_Late_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Short_H" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Short_D" Type="float" />
+          <Property Name="Emp_Att_Payment_Short_D_T" Type="float" />
+          <Property Name="Emp_Att_Payment_Short_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Lunch_Late_H" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Lunch_Late_D" Type="float" />
+          <Property Name="Emp_Att_Payment_Lunch_Late_D_T" Type="float" />
+          <Property Name="Emp_Att_Payment_Lunch_Late_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Lunch_OverTime_H" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Lunch_OverTime_D" Type="float" />
+          <Property Name="Emp_Att_Payment_Lunch_OverTime_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Prayer_Late_H" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Payment_Prayer_Late_D" Type="float" />
+          <Property Name="Emp_Att_Payment_Prayer_Late_D_T" Type="float" />
+          <Property Name="Emp_Att_Payment_Prayer_Late_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Add_Days" Type="float" />
+          <Property Name="Emp_Att_Payment_Late" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Fix" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Beg" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Advance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Fine" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Bonus" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Paid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Balance" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Emp_Att_Set">
+          <Key>
+            <PropertyRef Name="Emp_Att_Set_ID" />
+          </Key>
+          <Property Name="Emp_Att_Set_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Att_Set_Open_Time" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Set_Close_Time" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Set_Fri_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_DutyFriOn" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Set_DutyFriOff" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Set_FridayOff" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Att_Set_Late_Arrival_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_Late_Arrival_Time" Type="float" />
+          <Property Name="Emp_Att_Set_Early_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_Early_Time" Type="float" />
+          <Property Name="Emp_Att_Set_Duty_OverTime_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_Date" Type="date" />
+          <Property Name="Emp_Att_Set_Duty_OverTime_Time" Type="float" />
+          <Property Name="Emp_Att_Set_Prayer_Late_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_Prayer_Late_Time" Type="float" />
+          <Property Name="Emp_Att_Set_Short_Leave_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_Short_Leave_Time" Type="float" />
+          <Property Name="Emp_Att_Set_Lunch_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_Lunch_Time" Type="float" />
+          <Property Name="Emp_Att_Set_Lunch_OverTime_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_Private_Late_Status" Type="bit" />
+          <Property Name="Emp_Att_Set_Private_Time" Type="float" />
+        </EntityType>
+        <EntityType Name="Emp_Attendence_Device">
+          <Key>
+            <PropertyRef Name="Emp_Attendence_Device_ID" />
+            <PropertyRef Name="Emp_Attendence_Device_DateTime" />
+          </Key>
+          <Property Name="Emp_Attendence_Device_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Attendence_Device_DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Emp_Bio_Device_Users_UserID" Type="int" />
+          <Property Name="Emp_Attendence_Device_Duty_On_Off" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Date" Type="date" />
+          <Property Name="Emp_Attendence_Device_Time" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Cal1" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Cal2" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Cal3" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Cal4" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Cal5" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Cal6" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Cal7" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Attendence_Device_Status" Type="bit" />
+          <Property Name="User_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Emp_Bio_Device_Users">
+          <Key>
+            <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
+          </Key>
+          <Property Name="Emp_ID" Type="int" Nullable="false" />
+          <Property Name="Attendence_Status_ID" Type="int" />
+          <Property Name="Emp_Bio_Device_Users_UserID" Type="int" Nullable="false" />
+          <Property Name="Emp_Bio_Device_User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Bio_Device_User_Finger" Type="int" />
+          <Property Name="Emp_Bio_Device_User_tmpData" Type="varchar(max)" />
+          <Property Name="Emp_Bio_Device_User_Privilege" Type="int" />
+          <Property Name="Emp_Bio_Device_User_Password" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Bio_Device_User_FacetmpData" Type="nvarchar(max)" />
+          <Property Name="Emp_Bio_Device_User_iLength" Type="int" />
+          <Property Name="Emp_Bio_Device_User_Enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="Emp_Cash_Register">
+          <Key>
+            <PropertyRef Name="Emp_Cash_Register_ID" />
+          </Key>
+          <Property Name="Emp_Cash_Register_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Cash_Register_Date" Type="date" />
+          <Property Name="Emp_Cash_Register_Description" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Cash_Register_Amt" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Emp_ID" />
+          </Key>
+          <Property Name="Emp_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Reg" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Pass" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Emp_Father" Type="nvarchar" MaxLength="50" />
+          <Property Name="Emp_Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Phone2" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Address" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Quali" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Designation" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Report_To" Type="int" />
+          <Property Name="Emp_Date_Hired" Type="date" />
+          <Property Name="Emp_Date_Terminated" Type="date" />
+          <Property Name="Emp_Date_ReHired" Type="datetime" />
+          <Property Name="Emp_Image" Type="image" />
+          <Property Name="Emp_Finger_Code" Type="varchar(max)" />
+          <Property Name="Emp_Finger_Image" Type="image" />
+          <Property Name="Emp_Signature" Type="image" />
+          <Property Name="Emp_Birth_Date" Type="date" />
+          <Property Name="Emp_NIC_No" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Beg_Balance" Type="float" />
+          <Property Name="Emp_Status" Type="bit" />
+          <Property Name="Emp_DutyOn" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Duty_Off" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Salary" Type="float" />
+          <Property Name="User_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Plaza_User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Type_ID" Type="int" />
+          <Property Name="User_Name" Type="varchar" MaxLength="50" />
+          <Property Name="User_Pass" Type="varchar" MaxLength="50" />
+          <Property Name="User_Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User_Type">
+          <Key>
+            <PropertyRef Name="User_Type_ID" />
+          </Key>
+          <Property Name="User_Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Emp_Att_Payment_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Emp_Att_Payment" Type="Self.Emp_Att_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Emp_ID" />
+            </Principal>
+            <Dependent Role="Emp_Att_Payment">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Attendence_Device_Emp_Bio_Device_Users">
+          <End Role="Emp_Bio_Device_Users" Type="Self.Emp_Bio_Device_Users" Multiplicity="0..1" />
+          <End Role="Emp_Attendence_Device" Type="Self.Emp_Attendence_Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp_Bio_Device_Users">
+              <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
+            </Principal>
+            <Dependent Role="Emp_Attendence_Device">
+              <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Bio_Device_Users_Attendence_Status">
+          <End Role="Attendence_Status" Type="Self.Attendence_Status" Multiplicity="0..1" />
+          <End Role="Emp_Bio_Device_Users" Type="Self.Emp_Bio_Device_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendence_Status">
+              <PropertyRef Name="Attendence_Status_ID" />
+            </Principal>
+            <Dependent Role="Emp_Bio_Device_Users">
+              <PropertyRef Name="Attendence_Status_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Bio_Device_Users_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Emp_Bio_Device_Users" Type="Self.Emp_Bio_Device_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Emp_ID" />
+            </Principal>
+            <Dependent Role="Emp_Bio_Device_Users">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Plaza_User">
+          <End Role="Plaza_User" Type="Self.Plaza_User" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plaza_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plaza_User_User_Type">
+          <End Role="User_Type" Type="Self.User_Type" Multiplicity="0..1" />
+          <End Role="Plaza_User" Type="Self.Plaza_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Type">
+              <PropertyRef Name="User_Type_ID" />
+            </Principal>
+            <Dependent Role="Plaza_User">
+              <PropertyRef Name="User_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CsmdBioAttendenceModelStoreContainer">
+          <EntitySet Name="Attendence_Status" EntityType="Self.Attendence_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Auto_Number" EntityType="Self.Auto_Number" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emp_Att_Payment" EntityType="Self.Emp_Att_Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emp_Att_Set" EntityType="Self.Emp_Att_Set" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emp_Attendence_Device" EntityType="Self.Emp_Attendence_Device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emp_Bio_Device_Users" EntityType="Self.Emp_Bio_Device_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emp_Cash_Register" EntityType="Self.Emp_Cash_Register" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plaza_User" EntityType="Self.Plaza_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Type" EntityType="Self.User_Type" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Emp_Att_Payment_Employees" Association="Self.FK_Emp_Att_Payment_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Emp_Att_Payment" EntitySet="Emp_Att_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Attendence_Device_Emp_Bio_Device_Users" Association="Self.FK_Emp_Attendence_Device_Emp_Bio_Device_Users">
+            <End Role="Emp_Bio_Device_Users" EntitySet="Emp_Bio_Device_Users" />
+            <End Role="Emp_Attendence_Device" EntitySet="Emp_Attendence_Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Bio_Device_Users_Attendence_Status" Association="Self.FK_Emp_Bio_Device_Users_Attendence_Status">
+            <End Role="Attendence_Status" EntitySet="Attendence_Status" />
+            <End Role="Emp_Bio_Device_Users" EntitySet="Emp_Bio_Device_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Bio_Device_Users_Employees" Association="Self.FK_Emp_Bio_Device_Users_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Emp_Bio_Device_Users" EntitySet="Emp_Bio_Device_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Plaza_User" Association="Self.FK_Employees_Plaza_User">
+            <End Role="Plaza_User" EntitySet="Plaza_User" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plaza_User_User_Type" Association="Self.FK_Plaza_User_User_Type">
+            <End Role="User_Type" EntitySet="User_Type" />
+            <End Role="Plaza_User" EntitySet="Plaza_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CsmdBioAttendenceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CsmdBioAttendenceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendence_Status" EntityType="CsmdBioAttendenceModel.Attendence_Status" />
+          <EntitySet Name="Auto_Number" EntityType="CsmdBioAttendenceModel.Auto_Number" />
+          <EntitySet Name="Emp_Att_Payment" EntityType="CsmdBioAttendenceModel.Emp_Att_Payment" />
+          <EntitySet Name="Emp_Att_Set" EntityType="CsmdBioAttendenceModel.Emp_Att_Set" />
+          <EntitySet Name="Emp_Attendence_Device" EntityType="CsmdBioAttendenceModel.Emp_Attendence_Device" />
+          <EntitySet Name="Emp_Bio_Device_Users" EntityType="CsmdBioAttendenceModel.Emp_Bio_Device_Users" />
+          <EntitySet Name="Emp_Cash_Register" EntityType="CsmdBioAttendenceModel.Emp_Cash_Register" />
+          <EntitySet Name="Employees" EntityType="CsmdBioAttendenceModel.Employee" />
+          <EntitySet Name="Plaza_User" EntityType="CsmdBioAttendenceModel.Plaza_User" />
+          <EntitySet Name="sysdiagrams" EntityType="CsmdBioAttendenceModel.sysdiagram" />
+          <EntitySet Name="User_Type" EntityType="CsmdBioAttendenceModel.User_Type" />
+          <AssociationSet Name="FK_Emp_Bio_Device_Users_Attendence_Status" Association="CsmdBioAttendenceModel.FK_Emp_Bio_Device_Users_Attendence_Status">
+            <End Role="Attendence_Status" EntitySet="Attendence_Status" />
+            <End Role="Emp_Bio_Device_Users" EntitySet="Emp_Bio_Device_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Att_Payment_Employees" Association="CsmdBioAttendenceModel.FK_Emp_Att_Payment_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Emp_Att_Payment" EntitySet="Emp_Att_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Attendence_Device_Emp_Bio_Device_Users" Association="CsmdBioAttendenceModel.FK_Emp_Attendence_Device_Emp_Bio_Device_Users">
+            <End Role="Emp_Bio_Device_Users" EntitySet="Emp_Bio_Device_Users" />
+            <End Role="Emp_Attendence_Device" EntitySet="Emp_Attendence_Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Bio_Device_Users_Employees" Association="CsmdBioAttendenceModel.FK_Emp_Bio_Device_Users_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Emp_Bio_Device_Users" EntitySet="Emp_Bio_Device_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Plaza_User" Association="CsmdBioAttendenceModel.FK_Employees_Plaza_User">
+            <End Role="Plaza_User" EntitySet="Plaza_User" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plaza_User_User_Type" Association="CsmdBioAttendenceModel.FK_Plaza_User_User_Type">
+            <End Role="User_Type" EntitySet="User_Type" />
+            <End Role="Plaza_User" EntitySet="Plaza_User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Attendence_Status">
+          <Key>
+            <PropertyRef Name="Attendence_Status_ID" />
+          </Key>
+          <Property Name="Attendence_Status_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Attendence_Status_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Attendence_Status_Dep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Attendence_Status_Finger" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Emp_Bio_Device_Users" Relationship="CsmdBioAttendenceModel.FK_Emp_Bio_Device_Users_Attendence_Status" FromRole="Attendence_Status" ToRole="Emp_Bio_Device_Users" />
+        </EntityType>
+        <EntityType Name="Auto_Number">
+          <Key>
+            <PropertyRef Name="Auto_ID" />
+          </Key>
+          <Property Name="Auto_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Auto_Emp_Num" Type="Int32" />
+          <Property Name="Auto_Invoice" Type="Int32" />
+          <Property Name="Auto_Receipt" Type="Int32" />
+          <Property Name="Payroll_Receipt" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Emp_Att_Payment">
+          <Key>
+            <PropertyRef Name="Emp_Att_Payment_ID" />
+          </Key>
+          <Property Name="Emp_Att_Payment_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_ID" Type="Int32" />
+          <Property Name="Emp_Att_Payment_Issue_Date" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Att_Payment_From_Date" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Att_Payment_To_Date" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Att_Payment_DutyOn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_DutyOff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_DutyFriOff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Total_Hours" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Total_MonthDays" Type="Double" />
+          <Property Name="Emp_Att_Payment_Total_OffDays" Type="Double" />
+          <Property Name="Emp_Att_Payment_Total_OffDays_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Total_Days" Type="Double" />
+          <Property Name="Emp_Att_Payment_Total_Salaray_Days" Type="Double" />
+          <Property Name="Emp_Att_Payment_Total_DayRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Total_MinRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_ExtraDays" Type="Double" />
+          <Property Name="Emp_Att_Payment_ExtraDays_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Absent_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_Absent_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_InOutDays" Type="Double" />
+          <Property Name="Emp_Att_Payment_InOutDays_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Salaray_Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Late_H" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Late_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_Late_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Early_H" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Early_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_Early_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_OverTime_H" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_OverTime_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_OverTime_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Private_Late_H" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Private_Late_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_Private_Late_D_T" Type="Double" />
+          <Property Name="Emp_Att_Payment_Private_Late_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Short_H" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Short_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_Short_D_T" Type="Double" />
+          <Property Name="Emp_Att_Payment_Short_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Lunch_Late_H" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Lunch_Late_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_Lunch_Late_D_T" Type="Double" />
+          <Property Name="Emp_Att_Payment_Lunch_Late_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Lunch_OverTime_H" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Lunch_OverTime_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_Lunch_OverTime_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Prayer_Late_H" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Payment_Prayer_Late_D" Type="Double" />
+          <Property Name="Emp_Att_Payment_Prayer_Late_D_T" Type="Double" />
+          <Property Name="Emp_Att_Payment_Prayer_Late_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Add_Days" Type="Double" />
+          <Property Name="Emp_Att_Payment_Late" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Fix" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Beg" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Advance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Fine" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Bonus" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Paid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Emp_Att_Payment_Balance" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Employee" Relationship="CsmdBioAttendenceModel.FK_Emp_Att_Payment_Employees" FromRole="Emp_Att_Payment" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Emp_Att_Set">
+          <Key>
+            <PropertyRef Name="Emp_Att_Set_ID" />
+          </Key>
+          <Property Name="Emp_Att_Set_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Att_Set_Open_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Set_Close_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Set_Fri_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_DutyFriOn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Set_DutyFriOff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Set_FridayOff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Att_Set_Late_Arrival_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_Late_Arrival_Time" Type="Double" />
+          <Property Name="Emp_Att_Set_Early_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_Early_Time" Type="Double" />
+          <Property Name="Emp_Att_Set_Duty_OverTime_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_Date" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Att_Set_Duty_OverTime_Time" Type="Double" />
+          <Property Name="Emp_Att_Set_Prayer_Late_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_Prayer_Late_Time" Type="Double" />
+          <Property Name="Emp_Att_Set_Short_Leave_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_Short_Leave_Time" Type="Double" />
+          <Property Name="Emp_Att_Set_Lunch_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_Lunch_Time" Type="Double" />
+          <Property Name="Emp_Att_Set_Lunch_OverTime_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_Private_Late_Status" Type="Boolean" />
+          <Property Name="Emp_Att_Set_Private_Time" Type="Double" />
+        </EntityType>
+        <EntityType Name="Emp_Attendence_Device">
+          <Key>
+            <PropertyRef Name="Emp_Attendence_Device_ID" />
+            <PropertyRef Name="Emp_Attendence_Device_DateTime" />
+          </Key>
+          <Property Name="Emp_Attendence_Device_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Attendence_Device_DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Emp_Bio_Device_Users_UserID" Type="Int32" />
+          <Property Name="Emp_Attendence_Device_Duty_On_Off" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Date" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Attendence_Device_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Cal1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Cal2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Cal3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Cal4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Cal5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Cal6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Cal7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Attendence_Device_Status" Type="Boolean" />
+          <Property Name="User_ID" Type="Int32" />
+          <NavigationProperty Name="Emp_Bio_Device_Users" Relationship="CsmdBioAttendenceModel.FK_Emp_Attendence_Device_Emp_Bio_Device_Users" FromRole="Emp_Attendence_Device" ToRole="Emp_Bio_Device_Users" />
+        </EntityType>
+        <EntityType Name="Emp_Bio_Device_Users">
+          <Key>
+            <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
+          </Key>
+          <Property Name="Emp_ID" Type="Int32" Nullable="false" />
+          <Property Name="Attendence_Status_ID" Type="Int32" />
+          <Property Name="Emp_Bio_Device_Users_UserID" Type="Int32" Nullable="false" />
+          <Property Name="Emp_Bio_Device_User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Bio_Device_User_Finger" Type="Int32" />
+          <Property Name="Emp_Bio_Device_User_tmpData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Bio_Device_User_Privilege" Type="Int32" />
+          <Property Name="Emp_Bio_Device_User_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Bio_Device_User_FacetmpData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Bio_Device_User_iLength" Type="Int32" />
+          <Property Name="Emp_Bio_Device_User_Enabled" Type="Boolean" />
+          <NavigationProperty Name="Attendence_Status" Relationship="CsmdBioAttendenceModel.FK_Emp_Bio_Device_Users_Attendence_Status" FromRole="Emp_Bio_Device_Users" ToRole="Attendence_Status" />
+          <NavigationProperty Name="Emp_Attendence_Device" Relationship="CsmdBioAttendenceModel.FK_Emp_Attendence_Device_Emp_Bio_Device_Users" FromRole="Emp_Bio_Device_Users" ToRole="Emp_Attendence_Device" />
+          <NavigationProperty Name="Employee" Relationship="CsmdBioAttendenceModel.FK_Emp_Bio_Device_Users_Employees" FromRole="Emp_Bio_Device_Users" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Emp_Cash_Register">
+          <Key>
+            <PropertyRef Name="Emp_Cash_Register_ID" />
+          </Key>
+          <Property Name="Emp_Cash_Register_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Cash_Register_Date" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Cash_Register_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Cash_Register_Amt" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_ID" />
+          </Key>
+          <Property Name="Emp_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Reg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Father" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Phone2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Quali" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Report_To" Type="Int32" />
+          <Property Name="Emp_Date_Hired" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Date_Terminated" Type="DateTime" Precision="0" />
+          <Property Name="Emp_Date_ReHired" Type="DateTime" Precision="3" />
+          <Property Name="Emp_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Emp_Finger_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Finger_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Emp_Signature" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Emp_Birth_Date" Type="DateTime" Precision="0" />
+          <Property Name="Emp_NIC_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Beg_Balance" Type="Double" />
+          <Property Name="Emp_Status" Type="Boolean" />
+          <Property Name="Emp_DutyOn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Duty_Off" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Salary" Type="Double" />
+          <Property Name="User_ID" Type="Int32" />
+          <NavigationProperty Name="Emp_Att_Payment" Relationship="CsmdBioAttendenceModel.FK_Emp_Att_Payment_Employees" FromRole="Employee" ToRole="Emp_Att_Payment" />
+          <NavigationProperty Name="Emp_Bio_Device_Users" Relationship="CsmdBioAttendenceModel.FK_Emp_Bio_Device_Users_Employees" FromRole="Employee" ToRole="Emp_Bio_Device_Users" />
+          <NavigationProperty Name="Plaza_User" Relationship="CsmdBioAttendenceModel.FK_Employees_Plaza_User" FromRole="Employee" ToRole="Plaza_User" />
+        </EntityType>
+        <EntityType Name="Plaza_User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Type_ID" Type="Int32" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_Status" Type="Boolean" />
+          <NavigationProperty Name="Employees" Relationship="CsmdBioAttendenceModel.FK_Employees_Plaza_User" FromRole="Plaza_User" ToRole="Employee" />
+          <NavigationProperty Name="User_Type" Relationship="CsmdBioAttendenceModel.FK_Plaza_User_User_Type" FromRole="Plaza_User" ToRole="User_Type" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User_Type">
+          <Key>
+            <PropertyRef Name="User_Type_ID" />
+          </Key>
+          <Property Name="User_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Type1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plaza_User" Relationship="CsmdBioAttendenceModel.FK_Plaza_User_User_Type" FromRole="User_Type" ToRole="Plaza_User" />
+        </EntityType>
+        <Association Name="FK_Emp_Bio_Device_Users_Attendence_Status">
+          <End Type="CsmdBioAttendenceModel.Attendence_Status" Role="Attendence_Status" Multiplicity="0..1" />
+          <End Type="CsmdBioAttendenceModel.Emp_Bio_Device_Users" Role="Emp_Bio_Device_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendence_Status">
+              <PropertyRef Name="Attendence_Status_ID" />
+            </Principal>
+            <Dependent Role="Emp_Bio_Device_Users">
+              <PropertyRef Name="Attendence_Status_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Att_Payment_Employees">
+          <End Type="CsmdBioAttendenceModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="CsmdBioAttendenceModel.Emp_Att_Payment" Role="Emp_Att_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Emp_ID" />
+            </Principal>
+            <Dependent Role="Emp_Att_Payment">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Attendence_Device_Emp_Bio_Device_Users">
+          <End Type="CsmdBioAttendenceModel.Emp_Bio_Device_Users" Role="Emp_Bio_Device_Users" Multiplicity="0..1" />
+          <End Type="CsmdBioAttendenceModel.Emp_Attendence_Device" Role="Emp_Attendence_Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp_Bio_Device_Users">
+              <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
+            </Principal>
+            <Dependent Role="Emp_Attendence_Device">
+              <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Bio_Device_Users_Employees">
+          <End Type="CsmdBioAttendenceModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="CsmdBioAttendenceModel.Emp_Bio_Device_Users" Role="Emp_Bio_Device_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Emp_ID" />
+            </Principal>
+            <Dependent Role="Emp_Bio_Device_Users">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Plaza_User">
+          <End Type="CsmdBioAttendenceModel.Plaza_User" Role="Plaza_User" Multiplicity="0..1" />
+          <End Type="CsmdBioAttendenceModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plaza_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plaza_User_User_Type">
+          <End Type="CsmdBioAttendenceModel.User_Type" Role="User_Type" Multiplicity="0..1" />
+          <End Type="CsmdBioAttendenceModel.Plaza_User" Role="Plaza_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Type">
+              <PropertyRef Name="User_Type_ID" />
+            </Principal>
+            <Dependent Role="Plaza_User">
+              <PropertyRef Name="User_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CsmdBioAttendenceModelStoreContainer" CdmEntityContainer="CsmdBioAttendenceEntities">
+          <EntitySetMapping Name="Attendence_Status">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Attendence_Status">
+              <MappingFragment StoreEntitySet="Attendence_Status">
+                <ScalarProperty Name="Attendence_Status_Finger" ColumnName="Attendence_Status_Finger" />
+                <ScalarProperty Name="Attendence_Status_Dep" ColumnName="Attendence_Status_Dep" />
+                <ScalarProperty Name="Attendence_Status_Type" ColumnName="Attendence_Status_Type" />
+                <ScalarProperty Name="Attendence_Status_ID" ColumnName="Attendence_Status_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auto_Number">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Auto_Number">
+              <MappingFragment StoreEntitySet="Auto_Number">
+                <ScalarProperty Name="Payroll_Receipt" ColumnName="Payroll_Receipt" />
+                <ScalarProperty Name="Auto_Receipt" ColumnName="Auto_Receipt" />
+                <ScalarProperty Name="Auto_Invoice" ColumnName="Auto_Invoice" />
+                <ScalarProperty Name="Auto_Emp_Num" ColumnName="Auto_Emp_Num" />
+                <ScalarProperty Name="Auto_ID" ColumnName="Auto_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_Att_Payment">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Emp_Att_Payment">
+              <MappingFragment StoreEntitySet="Emp_Att_Payment">
+                <ScalarProperty Name="Emp_Att_Payment_Balance" ColumnName="Emp_Att_Payment_Balance" />
+                <ScalarProperty Name="Emp_Att_Payment_Paid" ColumnName="Emp_Att_Payment_Paid" />
+                <ScalarProperty Name="Emp_Att_Payment_Total" ColumnName="Emp_Att_Payment_Total" />
+                <ScalarProperty Name="Emp_Att_Payment_Bonus" ColumnName="Emp_Att_Payment_Bonus" />
+                <ScalarProperty Name="Emp_Att_Payment_Fine" ColumnName="Emp_Att_Payment_Fine" />
+                <ScalarProperty Name="Emp_Att_Payment_Amount" ColumnName="Emp_Att_Payment_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Advance" ColumnName="Emp_Att_Payment_Advance" />
+                <ScalarProperty Name="Emp_Att_Payment_Beg" ColumnName="Emp_Att_Payment_Beg" />
+                <ScalarProperty Name="Emp_Att_Payment_Fix" ColumnName="Emp_Att_Payment_Fix" />
+                <ScalarProperty Name="Emp_Att_Payment_Late" ColumnName="Emp_Att_Payment_Late" />
+                <ScalarProperty Name="Emp_Att_Payment_Add_Days" ColumnName="Emp_Att_Payment_Add_Days" />
+                <ScalarProperty Name="Emp_Att_Payment_Prayer_Late_Amount" ColumnName="Emp_Att_Payment_Prayer_Late_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Prayer_Late_D_T" ColumnName="Emp_Att_Payment_Prayer_Late_D_T" />
+                <ScalarProperty Name="Emp_Att_Payment_Prayer_Late_D" ColumnName="Emp_Att_Payment_Prayer_Late_D" />
+                <ScalarProperty Name="Emp_Att_Payment_Prayer_Late_H" ColumnName="Emp_Att_Payment_Prayer_Late_H" />
+                <ScalarProperty Name="Emp_Att_Payment_Lunch_OverTime_Amount" ColumnName="Emp_Att_Payment_Lunch_OverTime_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Lunch_OverTime_D" ColumnName="Emp_Att_Payment_Lunch_OverTime_D" />
+                <ScalarProperty Name="Emp_Att_Payment_Lunch_OverTime_H" ColumnName="Emp_Att_Payment_Lunch_OverTime_H" />
+                <ScalarProperty Name="Emp_Att_Payment_Lunch_Late_Amount" ColumnName="Emp_Att_Payment_Lunch_Late_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Lunch_Late_D_T" ColumnName="Emp_Att_Payment_Lunch_Late_D_T" />
+                <ScalarProperty Name="Emp_Att_Payment_Lunch_Late_D" ColumnName="Emp_Att_Payment_Lunch_Late_D" />
+                <ScalarProperty Name="Emp_Att_Payment_Lunch_Late_H" ColumnName="Emp_Att_Payment_Lunch_Late_H" />
+                <ScalarProperty Name="Emp_Att_Payment_Short_Amount" ColumnName="Emp_Att_Payment_Short_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Short_D_T" ColumnName="Emp_Att_Payment_Short_D_T" />
+                <ScalarProperty Name="Emp_Att_Payment_Short_D" ColumnName="Emp_Att_Payment_Short_D" />
+                <ScalarProperty Name="Emp_Att_Payment_Short_H" ColumnName="Emp_Att_Payment_Short_H" />
+                <ScalarProperty Name="Emp_Att_Payment_Private_Late_Amount" ColumnName="Emp_Att_Payment_Private_Late_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Private_Late_D_T" ColumnName="Emp_Att_Payment_Private_Late_D_T" />
+                <ScalarProperty Name="Emp_Att_Payment_Private_Late_D" ColumnName="Emp_Att_Payment_Private_Late_D" />
+                <ScalarProperty Name="Emp_Att_Payment_Private_Late_H" ColumnName="Emp_Att_Payment_Private_Late_H" />
+                <ScalarProperty Name="Emp_Att_Payment_OverTime_Amount" ColumnName="Emp_Att_Payment_OverTime_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_OverTime_D" ColumnName="Emp_Att_Payment_OverTime_D" />
+                <ScalarProperty Name="Emp_Att_Payment_OverTime_H" ColumnName="Emp_Att_Payment_OverTime_H" />
+                <ScalarProperty Name="Emp_Att_Payment_Early_Amount" ColumnName="Emp_Att_Payment_Early_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Early_D" ColumnName="Emp_Att_Payment_Early_D" />
+                <ScalarProperty Name="Emp_Att_Payment_Early_H" ColumnName="Emp_Att_Payment_Early_H" />
+                <ScalarProperty Name="Emp_Att_Payment_Late_Amount" ColumnName="Emp_Att_Payment_Late_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Late_D" ColumnName="Emp_Att_Payment_Late_D" />
+                <ScalarProperty Name="Emp_Att_Payment_Late_H" ColumnName="Emp_Att_Payment_Late_H" />
+                <ScalarProperty Name="Emp_Att_Payment_Salaray_Total" ColumnName="Emp_Att_Payment_Salaray_Total" />
+                <ScalarProperty Name="Emp_Att_Payment_InOutDays_Amount" ColumnName="Emp_Att_Payment_InOutDays_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_InOutDays" ColumnName="Emp_Att_Payment_InOutDays" />
+                <ScalarProperty Name="Emp_Att_Payment_Absent_Amount" ColumnName="Emp_Att_Payment_Absent_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Absent_D" ColumnName="Emp_Att_Payment_Absent_D" />
+                <ScalarProperty Name="Emp_Att_Payment_ExtraDays_Amount" ColumnName="Emp_Att_Payment_ExtraDays_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_ExtraDays" ColumnName="Emp_Att_Payment_ExtraDays" />
+                <ScalarProperty Name="Emp_Att_Payment_Total_MinRate" ColumnName="Emp_Att_Payment_Total_MinRate" />
+                <ScalarProperty Name="Emp_Att_Payment_Total_DayRate" ColumnName="Emp_Att_Payment_Total_DayRate" />
+                <ScalarProperty Name="Emp_Att_Payment_Total_Salaray_Days" ColumnName="Emp_Att_Payment_Total_Salaray_Days" />
+                <ScalarProperty Name="Emp_Att_Payment_Total_Days" ColumnName="Emp_Att_Payment_Total_Days" />
+                <ScalarProperty Name="Emp_Att_Payment_Total_OffDays_Amount" ColumnName="Emp_Att_Payment_Total_OffDays_Amount" />
+                <ScalarProperty Name="Emp_Att_Payment_Total_OffDays" ColumnName="Emp_Att_Payment_Total_OffDays" />
+                <ScalarProperty Name="Emp_Att_Payment_Total_MonthDays" ColumnName="Emp_Att_Payment_Total_MonthDays" />
+                <ScalarProperty Name="Emp_Att_Payment_Total_Hours" ColumnName="Emp_Att_Payment_Total_Hours" />
+                <ScalarProperty Name="Emp_Att_Payment_DutyFriOff" ColumnName="Emp_Att_Payment_DutyFriOff" />
+                <ScalarProperty Name="Emp_Att_Payment_DutyOff" ColumnName="Emp_Att_Payment_DutyOff" />
+                <ScalarProperty Name="Emp_Att_Payment_DutyOn" ColumnName="Emp_Att_Payment_DutyOn" />
+                <ScalarProperty Name="Emp_Att_Payment_To_Date" ColumnName="Emp_Att_Payment_To_Date" />
+                <ScalarProperty Name="Emp_Att_Payment_From_Date" ColumnName="Emp_Att_Payment_From_Date" />
+                <ScalarProperty Name="Emp_Att_Payment_Issue_Date" ColumnName="Emp_Att_Payment_Issue_Date" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="Emp_Att_Payment_ID" ColumnName="Emp_Att_Payment_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_Att_Set">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Emp_Att_Set">
+              <MappingFragment StoreEntitySet="Emp_Att_Set">
+                <ScalarProperty Name="Emp_Att_Set_Private_Time" ColumnName="Emp_Att_Set_Private_Time" />
+                <ScalarProperty Name="Emp_Att_Set_Private_Late_Status" ColumnName="Emp_Att_Set_Private_Late_Status" />
+                <ScalarProperty Name="Emp_Att_Set_Lunch_OverTime_Status" ColumnName="Emp_Att_Set_Lunch_OverTime_Status" />
+                <ScalarProperty Name="Emp_Att_Set_Lunch_Time" ColumnName="Emp_Att_Set_Lunch_Time" />
+                <ScalarProperty Name="Emp_Att_Set_Lunch_Status" ColumnName="Emp_Att_Set_Lunch_Status" />
+                <ScalarProperty Name="Emp_Att_Set_Short_Leave_Time" ColumnName="Emp_Att_Set_Short_Leave_Time" />
+                <ScalarProperty Name="Emp_Att_Set_Short_Leave_Status" ColumnName="Emp_Att_Set_Short_Leave_Status" />
+                <ScalarProperty Name="Emp_Att_Set_Prayer_Late_Time" ColumnName="Emp_Att_Set_Prayer_Late_Time" />
+                <ScalarProperty Name="Emp_Att_Set_Prayer_Late_Status" ColumnName="Emp_Att_Set_Prayer_Late_Status" />
+                <ScalarProperty Name="Emp_Att_Set_Duty_OverTime_Time" ColumnName="Emp_Att_Set_Duty_OverTime_Time" />
+                <ScalarProperty Name="Emp_Att_Set_Date" ColumnName="Emp_Att_Set_Date" />
+                <ScalarProperty Name="Emp_Att_Set_Duty_OverTime_Status" ColumnName="Emp_Att_Set_Duty_OverTime_Status" />
+                <ScalarProperty Name="Emp_Att_Set_Early_Time" ColumnName="Emp_Att_Set_Early_Time" />
+                <ScalarProperty Name="Emp_Att_Set_Early_Status" ColumnName="Emp_Att_Set_Early_Status" />
+                <ScalarProperty Name="Emp_Att_Set_Late_Arrival_Time" ColumnName="Emp_Att_Set_Late_Arrival_Time" />
+                <ScalarProperty Name="Emp_Att_Set_Late_Arrival_Status" ColumnName="Emp_Att_Set_Late_Arrival_Status" />
+                <ScalarProperty Name="Emp_Att_Set_FridayOff" ColumnName="Emp_Att_Set_FridayOff" />
+                <ScalarProperty Name="Emp_Att_Set_DutyFriOff" ColumnName="Emp_Att_Set_DutyFriOff" />
+                <ScalarProperty Name="Emp_Att_Set_DutyFriOn" ColumnName="Emp_Att_Set_DutyFriOn" />
+                <ScalarProperty Name="Emp_Att_Set_Fri_Status" ColumnName="Emp_Att_Set_Fri_Status" />
+                <ScalarProperty Name="Emp_Att_Set_Close_Time" ColumnName="Emp_Att_Set_Close_Time" />
+                <ScalarProperty Name="Emp_Att_Set_Open_Time" ColumnName="Emp_Att_Set_Open_Time" />
+                <ScalarProperty Name="Emp_Att_Set_ID" ColumnName="Emp_Att_Set_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_Attendence_Device">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Emp_Attendence_Device">
+              <MappingFragment StoreEntitySet="Emp_Attendence_Device">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Emp_Attendence_Device_Status" ColumnName="Emp_Attendence_Device_Status" />
+                <ScalarProperty Name="Emp_Attendence_Device_Cal7" ColumnName="Emp_Attendence_Device_Cal7" />
+                <ScalarProperty Name="Emp_Attendence_Device_Cal6" ColumnName="Emp_Attendence_Device_Cal6" />
+                <ScalarProperty Name="Emp_Attendence_Device_Cal5" ColumnName="Emp_Attendence_Device_Cal5" />
+                <ScalarProperty Name="Emp_Attendence_Device_Cal4" ColumnName="Emp_Attendence_Device_Cal4" />
+                <ScalarProperty Name="Emp_Attendence_Device_Cal3" ColumnName="Emp_Attendence_Device_Cal3" />
+                <ScalarProperty Name="Emp_Attendence_Device_Cal2" ColumnName="Emp_Attendence_Device_Cal2" />
+                <ScalarProperty Name="Emp_Attendence_Device_Cal1" ColumnName="Emp_Attendence_Device_Cal1" />
+                <ScalarProperty Name="Emp_Attendence_Device_Time" ColumnName="Emp_Attendence_Device_Time" />
+                <ScalarProperty Name="Emp_Attendence_Device_Date" ColumnName="Emp_Attendence_Device_Date" />
+                <ScalarProperty Name="Emp_Attendence_Device_Duty_On_Off" ColumnName="Emp_Attendence_Device_Duty_On_Off" />
+                <ScalarProperty Name="Emp_Bio_Device_Users_UserID" ColumnName="Emp_Bio_Device_Users_UserID" />
+                <ScalarProperty Name="Emp_Attendence_Device_DateTime" ColumnName="Emp_Attendence_Device_DateTime" />
+                <ScalarProperty Name="Emp_Attendence_Device_ID" ColumnName="Emp_Attendence_Device_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_Bio_Device_Users">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Emp_Bio_Device_Users">
+              <MappingFragment StoreEntitySet="Emp_Bio_Device_Users">
+                <ScalarProperty Name="Emp_Bio_Device_User_Enabled" ColumnName="Emp_Bio_Device_User_Enabled" />
+                <ScalarProperty Name="Emp_Bio_Device_User_iLength" ColumnName="Emp_Bio_Device_User_iLength" />
+                <ScalarProperty Name="Emp_Bio_Device_User_FacetmpData" ColumnName="Emp_Bio_Device_User_FacetmpData" />
+                <ScalarProperty Name="Emp_Bio_Device_User_Password" ColumnName="Emp_Bio_Device_User_Password" />
+                <ScalarProperty Name="Emp_Bio_Device_User_Privilege" ColumnName="Emp_Bio_Device_User_Privilege" />
+                <ScalarProperty Name="Emp_Bio_Device_User_tmpData" ColumnName="Emp_Bio_Device_User_tmpData" />
+                <ScalarProperty Name="Emp_Bio_Device_User_Finger" ColumnName="Emp_Bio_Device_User_Finger" />
+                <ScalarProperty Name="Emp_Bio_Device_User_Name" ColumnName="Emp_Bio_Device_User_Name" />
+                <ScalarProperty Name="Emp_Bio_Device_Users_UserID" ColumnName="Emp_Bio_Device_Users_UserID" />
+                <ScalarProperty Name="Attendence_Status_ID" ColumnName="Attendence_Status_ID" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_Cash_Register">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Emp_Cash_Register">
+              <MappingFragment StoreEntitySet="Emp_Cash_Register">
+                <ScalarProperty Name="Emp_Cash_Register_Amt" ColumnName="Emp_Cash_Register_Amt" />
+                <ScalarProperty Name="Emp_Cash_Register_Description" ColumnName="Emp_Cash_Register_Description" />
+                <ScalarProperty Name="Emp_Cash_Register_Date" ColumnName="Emp_Cash_Register_Date" />
+                <ScalarProperty Name="Emp_Cash_Register_ID" ColumnName="Emp_Cash_Register_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Emp_Salary" ColumnName="Emp_Salary" />
+                <ScalarProperty Name="Emp_Duty_Off" ColumnName="Emp_Duty_Off" />
+                <ScalarProperty Name="Emp_DutyOn" ColumnName="Emp_DutyOn" />
+                <ScalarProperty Name="Emp_Status" ColumnName="Emp_Status" />
+                <ScalarProperty Name="Emp_Beg_Balance" ColumnName="Emp_Beg_Balance" />
+                <ScalarProperty Name="Emp_NIC_No" ColumnName="Emp_NIC_No" />
+                <ScalarProperty Name="Emp_Birth_Date" ColumnName="Emp_Birth_Date" />
+                <ScalarProperty Name="Emp_Signature" ColumnName="Emp_Signature" />
+                <ScalarProperty Name="Emp_Finger_Image" ColumnName="Emp_Finger_Image" />
+                <ScalarProperty Name="Emp_Finger_Code" ColumnName="Emp_Finger_Code" />
+                <ScalarProperty Name="Emp_Image" ColumnName="Emp_Image" />
+                <ScalarProperty Name="Emp_Date_ReHired" ColumnName="Emp_Date_ReHired" />
+                <ScalarProperty Name="Emp_Date_Terminated" ColumnName="Emp_Date_Terminated" />
+                <ScalarProperty Name="Emp_Date_Hired" ColumnName="Emp_Date_Hired" />
+                <ScalarProperty Name="Emp_Report_To" ColumnName="Emp_Report_To" />
+                <ScalarProperty Name="Emp_Designation" ColumnName="Emp_Designation" />
+                <ScalarProperty Name="Emp_Quali" ColumnName="Emp_Quali" />
+                <ScalarProperty Name="Emp_Address" ColumnName="Emp_Address" />
+                <ScalarProperty Name="Emp_Phone2" ColumnName="Emp_Phone2" />
+                <ScalarProperty Name="Emp_Phone" ColumnName="Emp_Phone" />
+                <ScalarProperty Name="Emp_Father" ColumnName="Emp_Father" />
+                <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+                <ScalarProperty Name="Emp_Pass" ColumnName="Emp_Pass" />
+                <ScalarProperty Name="Emp_Reg" ColumnName="Emp_Reg" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plaza_User">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.Plaza_User">
+              <MappingFragment StoreEntitySet="Plaza_User">
+                <ScalarProperty Name="User_Status" ColumnName="User_Status" />
+                <ScalarProperty Name="User_Pass" ColumnName="User_Pass" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Type_ID" ColumnName="User_Type_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Type">
+            <EntityTypeMapping TypeName="CsmdBioAttendenceModel.User_Type">
+              <MappingFragment StoreEntitySet="User_Type">
+                <ScalarProperty Name="User_Type1" ColumnName="User_Type" />
+                <ScalarProperty Name="User_Type_ID" ColumnName="User_Type_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-PK">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <EFDataSource Name="EF Data Source 1" Source="CsmdBioDatabase.CsmdBioAttendenceEntities, CsmdBioDatabase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" CustomAssemblyPath="C:\Users\Madina\Documents\Visual Studio 2015\Projects\CsmdBioAttendence\CsmdBioDashBoard\bin\Debug\CsmdBioDatabase.dll" CustomContextName="CsmdBioDatabase.CsmdBioAttendenceEntities" ComponentName="dashboardEFDataSource1" />
+  </DataSources>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Chart 1" DataSource="dashboardEFDataSource1" DataMember="Emp_Attendence_Device">
+      <DataItems>
+        <Dimension DataMember="Emp_Bio_Device_Users.Employee.Emp_Name" UniqueName="DataItem0" />
+        <Dimension DataMember="Emp_Bio_Device_Users.Attendence_Status.Attendence_Status_Type" UniqueName="DataItem1" />
+        <Measure DataMember="Emp_Attendence_Device_ID" SummaryType="Count" UniqueName="DataItem2" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension UniqueName="DataItem1" />
+      </SeriesDimensions>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple>
+              <Value UniqueName="DataItem2" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <RangeFilter ComponentName="rangeFilterDashboardItem1" Name="Range Filter 1" DataSource="dashboardEFDataSource1" DataMember="Emp_Attendence_Device">
+      <DataItems>
+        <Measure DataMember="Emp_Attendence_Device_ID" SummaryType="Count" UniqueName="DataItem0" />
+        <Dimension DataMember="Emp_Attendence_Device_Date" DateTimeGroupInterval="DayMonthYear" UniqueName="DataItem1" />
+      </DataItems>
+      <Argument UniqueName="DataItem1" />
+      <Series>
+        <Simple SeriesType="Line">
+          <Value UniqueName="DataItem0" />
+        </Simple>
+      </Series>
+    </RangeFilter>
+    <ListBox ComponentName="listBoxDashboardItem1" Name="List Box 1" DataSource="dashboardEFDataSource1" DataMember="Emp_Attendence_Device">
+      <DataItems>
+        <Dimension DataMember="Emp_Bio_Device_Users.Employee.Emp_Name" SortOrder="Descending" UniqueName="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension UniqueName="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutItem DashboardItem="rangeFilterDashboardItem1" Weight="14.913957934990441" />
+      <LayoutGroup Weight="85.086042065009565">
+        <LayoutItem DashboardItem="listBoxDashboardItem1" Weight="14.645103324348607" />
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="85.354896675651389" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
