@@ -23,6 +23,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.RibbonControl1 = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
@@ -53,15 +54,16 @@ Partial Class frmMain
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup3 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup5 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.Dcm1 = New DevExpress.XtraBars.Docking2010.DocumentManager()
-        Me.TabX1 = New DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView()
-        Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel()
+        Me.Dcm1 = New DevExpress.XtraBars.Docking2010.DocumentManager(Me.components)
+        Me.TabX1 = New DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(Me.components)
+        Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
         Me.FormAssistant1 = New DevExpress.XtraBars.FormAssistant()
-        Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager()
+        Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
         Me.DockPanel1 = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.NavReports = New DevExpress.XtraNavBar.NavBarControl()
         Me.NavBarGroup1 = New DevExpress.XtraNavBar.NavBarGroup()
+        Me.BarButtonItem15 = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.RibbonControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemColorPickEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Dcm1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,9 +79,9 @@ Partial Class frmMain
         Me.RibbonControl1.ApplicationIcon = CType(resources.GetObject("RibbonControl1.ApplicationIcon"), System.Drawing.Bitmap)
         Me.RibbonControl1.AutoSizeItems = True
         Me.RibbonControl1.ExpandCollapseItem.Id = 0
-        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BarButtonItem4, Me.BarButtonItem6, Me.BarSubItem1, Me.BarSubItem2, Me.SkinRibbonGalleryBarItem1, Me.BarButtonItem8, Me.SkinColor, Me.BarButtonItem10, Me.BarButtonItem9, Me.BarButtonItem11, Me.BarButtonItem12, Me.BarSubItem3, Me.BarSubItem4, Me.BarSubItem5, Me.BarButtonItem5, Me.BarButtonItem7, Me.BarButtonItem13, Me.BarButtonItem14})
+        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BarButtonItem4, Me.BarButtonItem6, Me.BarSubItem1, Me.BarSubItem2, Me.SkinRibbonGalleryBarItem1, Me.BarButtonItem8, Me.SkinColor, Me.BarButtonItem10, Me.BarButtonItem9, Me.BarButtonItem11, Me.BarButtonItem12, Me.BarSubItem3, Me.BarSubItem4, Me.BarSubItem5, Me.BarButtonItem5, Me.BarButtonItem7, Me.BarButtonItem13, Me.BarButtonItem14, Me.BarButtonItem15})
         Me.RibbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl1.MaxItemId = 8
+        Me.RibbonControl1.MaxItemId = 9
         Me.RibbonControl1.Name = "RibbonControl1"
         Me.RibbonControl1.PageHeaderItemLinks.Add(Me.BarSubItem4)
         Me.RibbonControl1.PageHeaderItemLinks.Add(Me.BarSubItem1)
@@ -269,7 +271,7 @@ Partial Class frmMain
         Me.BarSubItem5.Glyph = CType(resources.GetObject("BarSubItem5.Glyph"), System.Drawing.Image)
         Me.BarSubItem5.Id = 3
         Me.BarSubItem5.LargeGlyph = CType(resources.GetObject("BarSubItem5.LargeGlyph"), System.Drawing.Image)
-        Me.BarSubItem5.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.BarButtonItem5, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.BarButtonItem14, "", True, True, True, 0, Nothing, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)})
+        Me.BarSubItem5.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.BarButtonItem5, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, Me.BarButtonItem14, "", True, True, True, 0, Nothing, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem15, True)})
         Me.BarSubItem5.Name = "BarSubItem5"
         '
         'BarButtonItem5
@@ -415,6 +417,13 @@ Partial Class frmMain
         Me.NavBarGroup1.Expanded = True
         Me.NavBarGroup1.Name = "NavBarGroup1"
         '
+        'BarButtonItem15
+        '
+        Me.BarButtonItem15.Caption = "Download Updater From CSMD server"
+        Me.BarButtonItem15.Glyph = CType(resources.GetObject("BarButtonItem15.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem15.Id = 8
+        Me.BarButtonItem15.Name = "BarButtonItem15"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -479,4 +488,5 @@ Partial Class frmMain
     Friend WithEvents BarButtonItem7 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarButtonItem13 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarButtonItem14 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem15 As DevExpress.XtraBars.BarButtonItem
 End Class

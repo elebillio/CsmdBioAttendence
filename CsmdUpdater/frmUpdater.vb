@@ -123,7 +123,7 @@ Public Class frmUpdater
     Public downloader As WebClient
 
     Public Sub DownloadStart(fileName As String, FileAction As Boolean)
-        Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/faazalplaza/main/"
+        Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/abidhospital/main/"
         ProgressBar1.Visible = True
         ServicePointManager.Expect100Continue = True
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
@@ -223,7 +223,7 @@ Public Class frmUpdater
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         'If LabelControl1.Text = "" Then
-        Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/faazalplaza/main/header.txt"
+        Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/abidhospital/main/header.txt"
         ProgressBar1.Visible = True
             ServicePointManager.Expect100Continue = True
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
@@ -276,7 +276,7 @@ Public Class frmUpdater
             End Select
             j += 1
         End While
-        Dim remoteUri2 As String = "https://raw.githubusercontent.com/elebillio/faazalplaza/main/notes.txt"
+        Dim remoteUri2 As String = "https://raw.githubusercontent.com/elebillio/abidhospital/main/notes.txt"
         'ProgressBar1.Visible = True
         ServicePointManager.Expect100Continue = True
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12

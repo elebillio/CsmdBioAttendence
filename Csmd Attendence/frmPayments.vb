@@ -509,7 +509,7 @@ Public Class frmPayments
                 'ClientScript.RegisterStartupScript(Me.[GetType](), "script", script, True)
                 strDetail = strDetail & "phone="
                 strDetail = strDetail & "92" + Microsoft.VisualBasic.Right(dt.Employee.Emp_Phone, 10)
-                strDetail = strDetail + "&text=" & dt.Employee.Emp_Name & " >> " & "WhatsApp PayRoll Invoice by Csmd Softwares 0318-7785452"
+                strDetail = strDetail + "&text=" & dt.Employee.Emp_Name & " >> " & "WhatsApp PayRoll Invoice by Csmd Softwares 0318-7785452 / 0310-7397851"
                 strDetail = strDetail + "*-----------------------*%0a%0a"
 
 
@@ -579,13 +579,13 @@ Public Class frmPayments
                 strDetail = strDetail & "&text="
                 strDetail = strDetail & "*" & dt.Emp_Name & "*%0a"
                 'strDetail = strDetail & "*Faazal Furniture*%0a"
-                strDetail = strDetail & "*Faazal Pharmacy and Mart*%0a"
+                strDetail = strDetail & "*YOUSAF HOSPITAL*%0a"
 
                 'strDetail = strDetail & "%09%09Satisfaction Guaranteed%0a"
                 'strDetail = strDetail & "*Dhulyan Road Dinga*%0a"
-                strDetail = strDetail & "*Dhulyan Chowk Dinga*%0a"
+                strDetail = strDetail & "*LAL QILAH CHOWK KHARIAN ROAD DINGA*%0a"
                 'strDetail = strDetail & "*Phone:*	%090537-401910 %0a"
-                strDetail = strDetail & "*Cell :*		%09%090332-7117786%0a%0a"
+                strDetail = strDetail & "*Cell :*		%09%090344-7402521%0a%0a"
                 'strDetail = strDetail & "*...............................................*%0a%0a"
 
                 strDetail = strDetail & "*Name :*		%09%09" & dt.Emp_Name & " s/o " & dt.a.Employee.Emp_Father & "%0a%0a"

@@ -343,6 +343,44 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub BarButtonItem15_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem15.ItemClick
+        'Using db As New CsmdBioAttendenceEntities
+        '    Dim dt = (From a In db.Employees Select a.Emp_Name, a.Emp_Father, a.Emp_Salary, a.Emp_DutyOn, a.Emp_Duty_Off).ToList
+        '    If dt.Count > 0 Then
+        '        For Each dts In dt
+        '            Dim EmployeesName As String = dts.Emp_Name
+        '            Dim EmployeesFather As String = dts.Emp_Father
+        '            Dim EmployeesSalary As Decimal = dts.Emp_Salary
+        '            Dim EmployeesDutyON As String = CType(dts.Emp_DutyOn, String)
+        '            Dim EmployeesDutyOFF As String = CType(dts.Emp_Duty_Off, String)
+
+        '            Select Case EmployeesDutyON
+        '                Case "08:00"
+        '                    Dim LateArrival As String = "A"
+        '                    Dim EarlyDeparture As String = "B"
+        '                    If LateArrival = "08:00" Then
+        '                        MsgBox("Successfull")
+        '                    Else
+        '                        If EarlyDeparture = "20:00" Then
+        '                            MsgBox("Successfull")
+        '                        Else
+        '                            MsgBox("Early Departure", vbCritical, "Duty time Error")
+        '                        End If
+        '                    End If
+        '                Case "09:00"
+
+        '                Case "10:00"
+
+        '                Case "11:00"
+
+
+        '            End Select
+
+        '        Next
+        '    End If
+        'End Using
+    End Sub
+
 
 
 
