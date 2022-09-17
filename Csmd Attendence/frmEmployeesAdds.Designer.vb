@@ -24,16 +24,16 @@ Partial Class frmEmployeesAdds
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEmployeesAdds))
-        Dim SerializableAppearanceObject4 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim SerializableAppearanceObject5 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim SerializableAppearanceObject6 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim TileItemElement8 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
-        Dim TileItemElement9 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
-        Dim TileItemElement10 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
-        Dim TileItemElement11 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
-        Dim TileItemElement12 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
-        Dim TileItemElement13 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
-        Dim TileItemElement14 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
+        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject3 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim TileItemElement1 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
+        Dim TileItemElement2 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
+        Dim TileItemElement3 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
+        Dim TileItemElement4 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
+        Dim TileItemElement5 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
+        Dim TileItemElement6 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
+        Dim TileItemElement7 As DevExpress.XtraEditors.TileItemElement = New DevExpress.XtraEditors.TileItemElement()
         Me.RibbonControl1 = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem2 = New DevExpress.XtraBars.BarButtonItem()
@@ -45,11 +45,24 @@ Partial Class frmEmployeesAdds
         Me.txtPort = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.lblState = New DevExpress.XtraBars.BarStaticItem()
+        Me.BarButtonItem5 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem6 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem10 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem11 = New DevExpress.XtraBars.BarButtonItem()
+        Me.sIP = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemTextEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.sPort = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemTextEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.lblStatem = New DevExpress.XtraBars.BarStaticItem()
         Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.rg1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup3 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonStatusBar1 = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.ProgressBarControl1 = New DevExpress.XtraEditors.ProgressBarControl()
         Me.LayoutControl5 = New DevExpress.XtraLayout.LayoutControl()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
@@ -134,12 +147,20 @@ Partial Class frmEmployeesAdds
         Me.EmptySpaceItem4 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem6 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem18 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem11 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
+        Me.BarButtonItem7 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem8 = New DevExpress.XtraBars.BarButtonItem()
+        Me.txtFin = New DevExpress.XtraEditors.TextEdit()
+        Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.RibbonControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.ProgressBarControl1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl5.SuspendLayout()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -207,18 +228,22 @@ Partial Class frmEmployeesAdds
         CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtFin.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl1
         '
+        Me.RibbonControl1.AutoSizeItems = True
         Me.RibbonControl1.ExpandCollapseItem.Id = 0
-        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BarButtonItem4, Me.btnConnect, Me.txtIP, Me.txtPort, Me.lblState})
+        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BarButtonItem4, Me.btnConnect, Me.txtIP, Me.txtPort, Me.lblState, Me.BarButtonItem5, Me.BarButtonItem6, Me.BarButtonItem10, Me.BarButtonItem11, Me.sIP, Me.sPort, Me.lblStatem})
         Me.RibbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl1.MaxItemId = 5
+        Me.RibbonControl1.MaxItemId = 13
         Me.RibbonControl1.Name = "RibbonControl1"
         Me.RibbonControl1.PageCategories.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageCategory() {Me.RibbonPageCategory1})
-        Me.RibbonControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2})
+        Me.RibbonControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit3, Me.RepositoryItemTextEdit4})
         Me.RibbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013
         Me.RibbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl1.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.[False]
@@ -312,6 +337,76 @@ Partial Class frmEmployeesAdds
         Me.lblState.Name = "lblState"
         Me.lblState.TextAlignment = System.Drawing.StringAlignment.Near
         '
+        'BarButtonItem5
+        '
+        Me.BarButtonItem5.Caption = "Import EMPLOYEES From Master PC"
+        Me.BarButtonItem5.Glyph = CType(resources.GetObject("BarButtonItem5.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem5.Id = 5
+        Me.BarButtonItem5.LargeGlyph = CType(resources.GetObject("BarButtonItem5.LargeGlyph"), System.Drawing.Image)
+        Me.BarButtonItem5.Name = "BarButtonItem5"
+        '
+        'BarButtonItem6
+        '
+        Me.BarButtonItem6.Caption = "Import FINGERS-DATA From Master PC"
+        Me.BarButtonItem6.Glyph = CType(resources.GetObject("BarButtonItem6.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem6.Id = 6
+        Me.BarButtonItem6.LargeGlyph = CType(resources.GetObject("BarButtonItem6.LargeGlyph"), System.Drawing.Image)
+        Me.BarButtonItem6.Name = "BarButtonItem6"
+        '
+        'BarButtonItem10
+        '
+        Me.BarButtonItem10.Caption = "Export EMPLOYEES To Master PC"
+        Me.BarButtonItem10.Glyph = CType(resources.GetObject("BarButtonItem10.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem10.Id = 8
+        Me.BarButtonItem10.LargeGlyph = CType(resources.GetObject("BarButtonItem10.LargeGlyph"), System.Drawing.Image)
+        Me.BarButtonItem10.Name = "BarButtonItem10"
+        '
+        'BarButtonItem11
+        '
+        Me.BarButtonItem11.Caption = "Connect"
+        Me.BarButtonItem11.Glyph = CType(resources.GetObject("BarButtonItem11.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem11.Id = 9
+        Me.BarButtonItem11.LargeGlyph = CType(resources.GetObject("BarButtonItem11.LargeGlyph"), System.Drawing.Image)
+        Me.BarButtonItem11.Name = "BarButtonItem11"
+        '
+        'sIP
+        '
+        Me.sIP.Caption = "IP"
+        Me.sIP.Edit = Me.RepositoryItemTextEdit3
+        Me.sIP.EditValue = "192.168.23.229"
+        Me.sIP.Id = 10
+        Me.sIP.Name = "sIP"
+        Me.sIP.Width = 100
+        '
+        'RepositoryItemTextEdit3
+        '
+        Me.RepositoryItemTextEdit3.AutoHeight = False
+        Me.RepositoryItemTextEdit3.Name = "RepositoryItemTextEdit3"
+        '
+        'sPort
+        '
+        Me.sPort.Caption = "Port"
+        Me.sPort.Edit = Me.RepositoryItemTextEdit4
+        Me.sPort.EditValue = "786"
+        Me.sPort.Id = 11
+        Me.sPort.Name = "sPort"
+        '
+        'RepositoryItemTextEdit4
+        '
+        Me.RepositoryItemTextEdit4.Appearance.Options.UseTextOptions = True
+        Me.RepositoryItemTextEdit4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.RepositoryItemTextEdit4.AutoHeight = False
+        Me.RepositoryItemTextEdit4.Name = "RepositoryItemTextEdit4"
+        '
+        'lblStatem
+        '
+        Me.lblStatem.Caption = "Status: Disconnected"
+        Me.lblStatem.Id = 12
+        Me.lblStatem.ItemAppearance.Normal.BackColor = System.Drawing.Color.Red
+        Me.lblStatem.ItemAppearance.Normal.Options.UseBackColor = True
+        Me.lblStatem.Name = "lblStatem"
+        Me.lblStatem.TextAlignment = System.Drawing.StringAlignment.Near
+        '
         'RibbonPageCategory1
         '
         Me.RibbonPageCategory1.Name = "RibbonPageCategory1"
@@ -320,7 +415,7 @@ Partial Class frmEmployeesAdds
         '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.rg1, Me.RibbonPageGroup2, Me.RibbonPageGroup3})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Controls"
         '
@@ -334,6 +429,34 @@ Partial Class frmEmployeesAdds
         Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
         Me.RibbonPageGroup1.ShowCaptionButton = False
         Me.RibbonPageGroup1.Text = "Editor Controls"
+        '
+        'rg1
+        '
+        Me.rg1.AllowTextClipping = False
+        Me.rg1.ItemLinks.Add(Me.sIP)
+        Me.rg1.ItemLinks.Add(Me.sPort)
+        Me.rg1.ItemLinks.Add(Me.lblStatem)
+        Me.rg1.ItemLinks.Add(Me.BarButtonItem11, True)
+        Me.rg1.Name = "rg1"
+        Me.rg1.ShowCaptionButton = False
+        Me.rg1.Text = "Connection"
+        '
+        'RibbonPageGroup2
+        '
+        Me.RibbonPageGroup2.AllowTextClipping = False
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem5)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem6)
+        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
+        Me.RibbonPageGroup2.ShowCaptionButton = False
+        Me.RibbonPageGroup2.Text = "Importing"
+        '
+        'RibbonPageGroup3
+        '
+        Me.RibbonPageGroup3.AllowTextClipping = False
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.BarButtonItem10)
+        Me.RibbonPageGroup3.Name = "RibbonPageGroup3"
+        Me.RibbonPageGroup3.ShowCaptionButton = False
+        Me.RibbonPageGroup3.Text = "Exporting"
         '
         'RibbonStatusBar1
         '
@@ -350,6 +473,7 @@ Partial Class frmEmployeesAdds
         '
         Me.LayoutControl1.Appearance.Control.Font = New System.Drawing.Font("Tahoma", 12.0!)
         Me.LayoutControl1.Appearance.Control.Options.UseFont = True
+        Me.LayoutControl1.Controls.Add(Me.ProgressBarControl1)
         Me.LayoutControl1.Controls.Add(Me.LayoutControl5)
         Me.LayoutControl1.Controls.Add(Me.Emp_Image)
         Me.LayoutControl1.Controls.Add(Me.TileBar1)
@@ -370,10 +494,20 @@ Partial Class frmEmployeesAdds
         Me.LayoutControl1.TabIndex = 5
         Me.LayoutControl1.Text = "LayoutControl1"
         '
+        'ProgressBarControl1
+        '
+        Me.ProgressBarControl1.Location = New System.Drawing.Point(12, 12)
+        Me.ProgressBarControl1.MenuManager = Me.RibbonControl1
+        Me.ProgressBarControl1.Name = "ProgressBarControl1"
+        Me.ProgressBarControl1.Size = New System.Drawing.Size(1252, 14)
+        Me.ProgressBarControl1.StyleController = Me.LayoutControl1
+        Me.ProgressBarControl1.TabIndex = 36
+        '
         'LayoutControl5
         '
         Me.LayoutControl5.Appearance.Control.Font = New System.Drawing.Font("Tahoma", 12.0!)
         Me.LayoutControl5.Appearance.Control.Options.UseFont = True
+        Me.LayoutControl5.Controls.Add(Me.txtFin)
         Me.LayoutControl5.Controls.Add(Me.SimpleButton1)
         Me.LayoutControl5.Controls.Add(Me.GridControl1)
         Me.LayoutControl5.Controls.Add(Me.Emp_Salary)
@@ -389,11 +523,11 @@ Partial Class frmEmployeesAdds
         Me.LayoutControl5.Controls.Add(Me.Emp_Date_Leave)
         Me.LayoutControl5.Controls.Add(Me.Emp_Date_Join)
         Me.LayoutControl5.Controls.Add(Me.Emp_Address_ID)
-        Me.LayoutControl5.Location = New System.Drawing.Point(209, 203)
+        Me.LayoutControl5.Location = New System.Drawing.Point(209, 221)
         Me.LayoutControl5.Name = "LayoutControl5"
         Me.LayoutControl5.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(517, 353, 250, 259)
         Me.LayoutControl5.Root = Me.LayoutControlGroup5
-        Me.LayoutControl5.Size = New System.Drawing.Size(1055, 386)
+        Me.LayoutControl5.Size = New System.Drawing.Size(1055, 368)
         Me.LayoutControl5.TabIndex = 0
         Me.LayoutControl5.Text = "LayoutControl5"
         '
@@ -406,20 +540,20 @@ Partial Class frmEmployeesAdds
         Me.SimpleButton1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.SimpleButton1.Enabled = False
         Me.SimpleButton1.Image = CType(resources.GetObject("SimpleButton1.Image"), System.Drawing.Image)
-        Me.SimpleButton1.Location = New System.Drawing.Point(771, 12)
+        Me.SimpleButton1.Location = New System.Drawing.Point(693, 12)
         Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(272, 38)
+        Me.SimpleButton1.Size = New System.Drawing.Size(198, 38)
         Me.SimpleButton1.StyleController = Me.LayoutControl5
         Me.SimpleButton1.TabIndex = 85
         Me.SimpleButton1.Text = "Download"
         '
         'GridControl1
         '
-        Me.GridControl1.Location = New System.Drawing.Point(482, 54)
+        Me.GridControl1.Location = New System.Drawing.Point(461, 54)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
         Me.GridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemButtonEdit1, Me.RepositoryItemButtonEdit2, Me.RepositoryItemButtonEdit3})
-        Me.GridControl1.Size = New System.Drawing.Size(561, 320)
+        Me.GridControl1.Size = New System.Drawing.Size(582, 302)
         Me.GridControl1.TabIndex = 84
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -527,7 +661,7 @@ Partial Class frmEmployeesAdds
         'RepositoryItemButtonEdit1
         '
         Me.RepositoryItemButtonEdit1.AutoHeight = False
-        Me.RepositoryItemButtonEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit1.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject4, "", Nothing, Nothing, True)})
+        Me.RepositoryItemButtonEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit1.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "", Nothing, Nothing, True)})
         Me.RepositoryItemButtonEdit1.Name = "RepositoryItemButtonEdit1"
         Me.RepositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -544,7 +678,7 @@ Partial Class frmEmployeesAdds
         'RepositoryItemButtonEdit2
         '
         Me.RepositoryItemButtonEdit2.AutoHeight = False
-        Me.RepositoryItemButtonEdit2.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit2.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject5, "", Nothing, Nothing, True)})
+        Me.RepositoryItemButtonEdit2.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit2.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
         Me.RepositoryItemButtonEdit2.Name = "RepositoryItemButtonEdit2"
         Me.RepositoryItemButtonEdit2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -592,7 +726,7 @@ Partial Class frmEmployeesAdds
         'RepositoryItemButtonEdit3
         '
         Me.RepositoryItemButtonEdit3.AutoHeight = False
-        Me.RepositoryItemButtonEdit3.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit3.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject6, "", Nothing, Nothing, True)})
+        Me.RepositoryItemButtonEdit3.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit3.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject3, "", Nothing, Nothing, True)})
         Me.RepositoryItemButtonEdit3.Name = "RepositoryItemButtonEdit3"
         Me.RepositoryItemButtonEdit3.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -606,7 +740,7 @@ Partial Class frmEmployeesAdds
         Me.Emp_Salary.Properties.Appearance.Options.UseTextOptions = True
         Me.Emp_Salary.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.Emp_Salary.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
-        Me.Emp_Salary.Size = New System.Drawing.Size(363, 26)
+        Me.Emp_Salary.Size = New System.Drawing.Size(342, 26)
         Me.Emp_Salary.StyleController = Me.LayoutControl5
         Me.Emp_Salary.TabIndex = 42
         '
@@ -624,7 +758,7 @@ Partial Class frmEmployeesAdds
         Me.Emp_Duty_Off.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.Emp_Duty_Off.Properties.Mask.EditMask = "HH:mm"
         Me.Emp_Duty_Off.Properties.TimeEditStyle = DevExpress.XtraEditors.Repository.TimeEditStyle.TouchUI
-        Me.Emp_Duty_Off.Size = New System.Drawing.Size(131, 30)
+        Me.Emp_Duty_Off.Size = New System.Drawing.Size(110, 30)
         Me.Emp_Duty_Off.StyleController = Me.LayoutControl5
         Me.Emp_Duty_Off.TabIndex = 41
         '
@@ -655,9 +789,9 @@ Partial Class frmEmployeesAdds
         Me.SimpleButton5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.SimpleButton5.Enabled = False
         Me.SimpleButton5.Image = CType(resources.GetObject("SimpleButton5.Image"), System.Drawing.Image)
-        Me.SimpleButton5.Location = New System.Drawing.Point(482, 12)
+        Me.SimpleButton5.Location = New System.Drawing.Point(461, 12)
         Me.SimpleButton5.Name = "SimpleButton5"
-        Me.SimpleButton5.Size = New System.Drawing.Size(285, 38)
+        Me.SimpleButton5.Size = New System.Drawing.Size(228, 38)
         Me.SimpleButton5.StyleController = Me.LayoutControl5
         Me.SimpleButton5.TabIndex = 39
         Me.SimpleButton5.Text = "Generate and Upload"
@@ -668,7 +802,7 @@ Partial Class frmEmployeesAdds
         Me.Emp_Report_To.Name = "Emp_Report_To"
         Me.Emp_Report_To.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.Emp_Report_To.Properties.NullText = "Select"
-        Me.Emp_Report_To.Size = New System.Drawing.Size(363, 26)
+        Me.Emp_Report_To.Size = New System.Drawing.Size(342, 26)
         Me.Emp_Report_To.StyleController = Me.LayoutControl5
         Me.Emp_Report_To.TabIndex = 37
         '
@@ -676,18 +810,18 @@ Partial Class frmEmployeesAdds
         '
         Me.Emp_Phone2.Location = New System.Drawing.Point(342, 80)
         Me.Emp_Phone2.Name = "Emp_Phone2"
-        Me.Emp_Phone2.Size = New System.Drawing.Size(131, 26)
+        Me.Emp_Phone2.Size = New System.Drawing.Size(110, 26)
         Me.Emp_Phone2.StyleController = Me.LayoutControl5
         Me.Emp_Phone2.TabIndex = 36
         '
         'Emp_Date_ReHired
         '
         Me.Emp_Date_ReHired.EditValue = Nothing
-        Me.Emp_Date_ReHired.Location = New System.Drawing.Point(110, 306)
+        Me.Emp_Date_ReHired.Location = New System.Drawing.Point(110, 290)
         Me.Emp_Date_ReHired.Name = "Emp_Date_ReHired"
         Me.Emp_Date_ReHired.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.Emp_Date_ReHired.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.Emp_Date_ReHired.Size = New System.Drawing.Size(363, 26)
+        Me.Emp_Date_ReHired.Size = New System.Drawing.Size(342, 26)
         Me.Emp_Date_ReHired.StyleController = Me.LayoutControl5
         Me.Emp_Date_ReHired.TabIndex = 33
         '
@@ -716,29 +850,29 @@ Partial Class frmEmployeesAdds
         '
         Me.Emp_NIC_No.Location = New System.Drawing.Point(342, 46)
         Me.Emp_NIC_No.Name = "Emp_NIC_No"
-        Me.Emp_NIC_No.Size = New System.Drawing.Size(131, 26)
+        Me.Emp_NIC_No.Size = New System.Drawing.Size(110, 26)
         Me.Emp_NIC_No.StyleController = Me.LayoutControl5
         Me.Emp_NIC_No.TabIndex = 31
         '
         'Emp_Date_Leave
         '
         Me.Emp_Date_Leave.EditValue = Nothing
-        Me.Emp_Date_Leave.Location = New System.Drawing.Point(110, 276)
+        Me.Emp_Date_Leave.Location = New System.Drawing.Point(110, 260)
         Me.Emp_Date_Leave.Name = "Emp_Date_Leave"
         Me.Emp_Date_Leave.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.Emp_Date_Leave.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.Emp_Date_Leave.Size = New System.Drawing.Size(363, 26)
+        Me.Emp_Date_Leave.Size = New System.Drawing.Size(342, 26)
         Me.Emp_Date_Leave.StyleController = Me.LayoutControl5
         Me.Emp_Date_Leave.TabIndex = 13
         '
         'Emp_Date_Join
         '
         Me.Emp_Date_Join.EditValue = Nothing
-        Me.Emp_Date_Join.Location = New System.Drawing.Point(110, 246)
+        Me.Emp_Date_Join.Location = New System.Drawing.Point(110, 230)
         Me.Emp_Date_Join.Name = "Emp_Date_Join"
         Me.Emp_Date_Join.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.Emp_Date_Join.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.Emp_Date_Join.Size = New System.Drawing.Size(363, 26)
+        Me.Emp_Date_Join.Size = New System.Drawing.Size(342, 26)
         Me.Emp_Date_Join.StyleController = Me.LayoutControl5
         Me.Emp_Date_Join.TabIndex = 12
         '
@@ -746,7 +880,7 @@ Partial Class frmEmployeesAdds
         '
         Me.Emp_Address_ID.Location = New System.Drawing.Point(110, 110)
         Me.Emp_Address_ID.Name = "Emp_Address_ID"
-        Me.Emp_Address_ID.Size = New System.Drawing.Size(363, 26)
+        Me.Emp_Address_ID.Size = New System.Drawing.Size(342, 26)
         Me.Emp_Address_ID.StyleController = Me.LayoutControl5
         Me.Emp_Address_ID.TabIndex = 8
         '
@@ -754,10 +888,10 @@ Partial Class frmEmployeesAdds
         '
         Me.LayoutControlGroup5.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup5.GroupBordersVisible = False
-        Me.LayoutControlGroup5.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem35, Me.EmptySpaceItem5, Me.LayoutControlItem9, Me.LayoutControlItem10, Me.LayoutControlItem12, Me.LayoutControlItem23, Me.EmptySpaceItem2, Me.EmptySpaceItem3, Me.SplitterItem1, Me.LayoutControlItem34, Me.LayoutControlItem22, Me.LayoutControlItem26, Me.EmptySpaceItem1, Me.LayoutControlItem14, Me.LayoutControlItem17, Me.LayoutControlItem13, Me.LayoutControlItem21, Me.LayoutControlItem25})
+        Me.LayoutControlGroup5.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem35, Me.EmptySpaceItem5, Me.LayoutControlItem9, Me.LayoutControlItem10, Me.LayoutControlItem12, Me.LayoutControlItem23, Me.EmptySpaceItem2, Me.EmptySpaceItem3, Me.SplitterItem1, Me.LayoutControlItem34, Me.LayoutControlItem22, Me.LayoutControlItem26, Me.EmptySpaceItem1, Me.LayoutControlItem14, Me.LayoutControlItem17, Me.LayoutControlItem13, Me.LayoutControlItem21, Me.LayoutControlItem25, Me.LayoutControlItem19})
         Me.LayoutControlGroup5.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup5.Name = "Root"
-        Me.LayoutControlGroup5.Size = New System.Drawing.Size(1055, 386)
+        Me.LayoutControlGroup5.Size = New System.Drawing.Size(1055, 368)
         Me.LayoutControlGroup5.TextVisible = False
         '
         'LayoutControlItem4
@@ -782,7 +916,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem5.Control = Me.Emp_Address_ID
         Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 98)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(465, 30)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(444, 30)
         Me.LayoutControlItem5.Text = "Address:"
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(95, 19)
         '
@@ -795,16 +929,16 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem35.Control = Me.Emp_Report_To
         Me.LayoutControlItem35.Location = New System.Drawing.Point(0, 138)
         Me.LayoutControlItem35.Name = "LayoutControlItem35"
-        Me.LayoutControlItem35.Size = New System.Drawing.Size(465, 30)
+        Me.LayoutControlItem35.Size = New System.Drawing.Size(444, 30)
         Me.LayoutControlItem35.Text = "Report to:"
         Me.LayoutControlItem35.TextSize = New System.Drawing.Size(95, 19)
         '
         'EmptySpaceItem5
         '
         Me.EmptySpaceItem5.AllowHotTrack = False
-        Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 324)
+        Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 308)
         Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Size = New System.Drawing.Size(465, 42)
+        Me.EmptySpaceItem5.Size = New System.Drawing.Size(444, 40)
         Me.EmptySpaceItem5.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem9
@@ -814,9 +948,9 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem9.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem9.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem9.Control = Me.Emp_Date_Join
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(0, 234)
+        Me.LayoutControlItem9.Location = New System.Drawing.Point(0, 218)
         Me.LayoutControlItem9.Name = "LayoutControlItem9"
-        Me.LayoutControlItem9.Size = New System.Drawing.Size(465, 30)
+        Me.LayoutControlItem9.Size = New System.Drawing.Size(444, 30)
         Me.LayoutControlItem9.Text = "Hired:"
         Me.LayoutControlItem9.TextSize = New System.Drawing.Size(95, 19)
         '
@@ -827,9 +961,9 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem10.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem10.Control = Me.Emp_Date_Leave
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(0, 264)
+        Me.LayoutControlItem10.Location = New System.Drawing.Point(0, 248)
         Me.LayoutControlItem10.Name = "LayoutControlItem10"
-        Me.LayoutControlItem10.Size = New System.Drawing.Size(465, 30)
+        Me.LayoutControlItem10.Size = New System.Drawing.Size(444, 30)
         Me.LayoutControlItem10.Text = "Terminated:"
         Me.LayoutControlItem10.TextSize = New System.Drawing.Size(95, 19)
         '
@@ -840,9 +974,9 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem12.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem12.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem12.Control = Me.Emp_Date_ReHired
-        Me.LayoutControlItem12.Location = New System.Drawing.Point(0, 294)
+        Me.LayoutControlItem12.Location = New System.Drawing.Point(0, 278)
         Me.LayoutControlItem12.Name = "LayoutControlItem12"
-        Me.LayoutControlItem12.Size = New System.Drawing.Size(465, 30)
+        Me.LayoutControlItem12.Size = New System.Drawing.Size(444, 30)
         Me.LayoutControlItem12.Text = "ReHired:"
         Me.LayoutControlItem12.TextSize = New System.Drawing.Size(95, 19)
         '
@@ -866,7 +1000,7 @@ Partial Class frmEmployeesAdds
         Me.EmptySpaceItem2.MaxSize = New System.Drawing.Size(0, 10)
         Me.EmptySpaceItem2.MinSize = New System.Drawing.Size(10, 10)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(465, 10)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(444, 10)
         Me.EmptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
@@ -877,16 +1011,16 @@ Partial Class frmEmployeesAdds
         Me.EmptySpaceItem3.MaxSize = New System.Drawing.Size(0, 10)
         Me.EmptySpaceItem3.MinSize = New System.Drawing.Size(10, 10)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Size = New System.Drawing.Size(465, 10)
+        Me.EmptySpaceItem3.Size = New System.Drawing.Size(444, 10)
         Me.EmptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
         '
         'SplitterItem1
         '
         Me.SplitterItem1.AllowHotTrack = True
-        Me.SplitterItem1.Location = New System.Drawing.Point(465, 0)
+        Me.SplitterItem1.Location = New System.Drawing.Point(444, 0)
         Me.SplitterItem1.Name = "SplitterItem1"
-        Me.SplitterItem1.Size = New System.Drawing.Size(5, 366)
+        Me.SplitterItem1.Size = New System.Drawing.Size(5, 348)
         '
         'LayoutControlItem34
         '
@@ -897,7 +1031,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem34.Control = Me.Emp_Phone2
         Me.LayoutControlItem34.Location = New System.Drawing.Point(232, 68)
         Me.LayoutControlItem34.Name = "LayoutControlItem34"
-        Me.LayoutControlItem34.Size = New System.Drawing.Size(233, 30)
+        Me.LayoutControlItem34.Size = New System.Drawing.Size(212, 30)
         Me.LayoutControlItem34.Text = "Emergency #"
         Me.LayoutControlItem34.TextSize = New System.Drawing.Size(95, 19)
         '
@@ -910,7 +1044,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem22.Control = Me.Emp_NIC_No
         Me.LayoutControlItem22.Location = New System.Drawing.Point(232, 34)
         Me.LayoutControlItem22.Name = "LayoutControlItem22"
-        Me.LayoutControlItem22.Size = New System.Drawing.Size(233, 34)
+        Me.LayoutControlItem22.Size = New System.Drawing.Size(212, 34)
         Me.LayoutControlItem22.Text = "NIC#"
         Me.LayoutControlItem22.TextSize = New System.Drawing.Size(95, 19)
         '
@@ -924,7 +1058,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem26.Control = Me.Emp_Salary
         Me.LayoutControlItem26.Location = New System.Drawing.Point(0, 178)
         Me.LayoutControlItem26.Name = "LayoutControlItem26"
-        Me.LayoutControlItem26.Size = New System.Drawing.Size(465, 30)
+        Me.LayoutControlItem26.Size = New System.Drawing.Size(444, 30)
         Me.LayoutControlItem26.Text = "Salary:"
         Me.LayoutControlItem26.TextSize = New System.Drawing.Size(95, 19)
         '
@@ -933,33 +1067,33 @@ Partial Class frmEmployeesAdds
         Me.EmptySpaceItem1.AllowHotTrack = False
         Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 208)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(465, 26)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(444, 10)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem14
         '
         Me.LayoutControlItem14.Control = Me.GridControl1
-        Me.LayoutControlItem14.Location = New System.Drawing.Point(470, 42)
+        Me.LayoutControlItem14.Location = New System.Drawing.Point(449, 42)
         Me.LayoutControlItem14.Name = "LayoutControlItem14"
-        Me.LayoutControlItem14.Size = New System.Drawing.Size(565, 324)
+        Me.LayoutControlItem14.Size = New System.Drawing.Size(586, 306)
         Me.LayoutControlItem14.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem14.TextVisible = False
         '
         'LayoutControlItem17
         '
         Me.LayoutControlItem17.Control = Me.SimpleButton1
-        Me.LayoutControlItem17.Location = New System.Drawing.Point(759, 0)
+        Me.LayoutControlItem17.Location = New System.Drawing.Point(681, 0)
         Me.LayoutControlItem17.Name = "LayoutControlItem17"
-        Me.LayoutControlItem17.Size = New System.Drawing.Size(276, 42)
+        Me.LayoutControlItem17.Size = New System.Drawing.Size(202, 42)
         Me.LayoutControlItem17.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem17.TextVisible = False
         '
         'LayoutControlItem13
         '
         Me.LayoutControlItem13.Control = Me.SimpleButton5
-        Me.LayoutControlItem13.Location = New System.Drawing.Point(470, 0)
+        Me.LayoutControlItem13.Location = New System.Drawing.Point(449, 0)
         Me.LayoutControlItem13.Name = "LayoutControlItem13"
-        Me.LayoutControlItem13.Size = New System.Drawing.Size(289, 42)
+        Me.LayoutControlItem13.Size = New System.Drawing.Size(232, 42)
         Me.LayoutControlItem13.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem13.TextVisible = False
         '
@@ -985,13 +1119,13 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem25.Control = Me.Emp_Duty_Off
         Me.LayoutControlItem25.Location = New System.Drawing.Point(232, 0)
         Me.LayoutControlItem25.Name = "LayoutControlItem25"
-        Me.LayoutControlItem25.Size = New System.Drawing.Size(233, 34)
+        Me.LayoutControlItem25.Size = New System.Drawing.Size(212, 34)
         Me.LayoutControlItem25.Text = "Duty Off:"
         Me.LayoutControlItem25.TextSize = New System.Drawing.Size(95, 19)
         '
         'Emp_Image
         '
-        Me.Emp_Image.Location = New System.Drawing.Point(1128, 12)
+        Me.Emp_Image.Location = New System.Drawing.Point(1128, 30)
         Me.Emp_Image.Name = "Emp_Image"
         Me.Emp_Image.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Always
         Me.Emp_Image.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
@@ -1012,12 +1146,12 @@ Partial Class frmEmployeesAdds
         Me.TileBar1.DropDownOptions.BeakColor = System.Drawing.Color.Empty
         Me.TileBar1.Groups.Add(Me.TileBarGroup2)
         Me.TileBar1.ItemSize = 40
-        Me.TileBar1.Location = New System.Drawing.Point(12, 12)
+        Me.TileBar1.Location = New System.Drawing.Point(12, 30)
         Me.TileBar1.MaxId = 2
         Me.TileBar1.Name = "TileBar1"
         Me.TileBar1.Orientation = System.Windows.Forms.Orientation.Vertical
         Me.TileBar1.ScrollMode = DevExpress.XtraEditors.TileControlScrollMode.ScrollButtons
-        Me.TileBar1.Size = New System.Drawing.Size(193, 577)
+        Me.TileBar1.Size = New System.Drawing.Size(193, 559)
         Me.TileBar1.TabIndex = 11
         Me.TileBar1.Text = "TileBar1"
         '
@@ -1030,32 +1164,32 @@ Partial Class frmEmployeesAdds
         'TileBarItem1
         '
         Me.TileBarItem1.DropDownOptions.BeakColor = System.Drawing.Color.Empty
-        TileItemElement8.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft
-        TileItemElement8.ImageLocation = New System.Drawing.Point(-13, 0)
-        TileItemElement8.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Stretch
-        TileItemElement8.ImageSize = New System.Drawing.Size(35, 40)
-        TileItemElement8.Text = ""
-        TileItemElement9.Text = "Name"
-        TileItemElement9.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft
-        TileItemElement9.TextLocation = New System.Drawing.Point(25, -7)
-        TileItemElement10.Text = "Father"
-        TileItemElement10.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft
-        TileItemElement10.TextLocation = New System.Drawing.Point(25, 0)
-        TileItemElement11.Text = "DutyOn"
-        TileItemElement11.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.BottomLeft
-        TileItemElement11.TextLocation = New System.Drawing.Point(25, 6)
-        TileItemElement12.Text = "DutyOff"
-        TileItemElement12.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.BottomRight
-        TileItemElement12.TextLocation = New System.Drawing.Point(5, 6)
-        TileItemElement13.Text = ""
-        TileItemElement13.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft
-        TileItemElement13.TextLocation = New System.Drawing.Point(-50, 0)
-        Me.TileBarItem1.Elements.Add(TileItemElement8)
-        Me.TileBarItem1.Elements.Add(TileItemElement9)
-        Me.TileBarItem1.Elements.Add(TileItemElement10)
-        Me.TileBarItem1.Elements.Add(TileItemElement11)
-        Me.TileBarItem1.Elements.Add(TileItemElement12)
-        Me.TileBarItem1.Elements.Add(TileItemElement13)
+        TileItemElement1.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft
+        TileItemElement1.ImageLocation = New System.Drawing.Point(-13, 0)
+        TileItemElement1.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Stretch
+        TileItemElement1.ImageSize = New System.Drawing.Size(35, 40)
+        TileItemElement1.Text = ""
+        TileItemElement2.Text = "Name"
+        TileItemElement2.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft
+        TileItemElement2.TextLocation = New System.Drawing.Point(25, -7)
+        TileItemElement3.Text = "Father"
+        TileItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft
+        TileItemElement3.TextLocation = New System.Drawing.Point(25, 0)
+        TileItemElement4.Text = "DutyOn"
+        TileItemElement4.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.BottomLeft
+        TileItemElement4.TextLocation = New System.Drawing.Point(25, 6)
+        TileItemElement5.Text = "DutyOff"
+        TileItemElement5.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.BottomRight
+        TileItemElement5.TextLocation = New System.Drawing.Point(5, 6)
+        TileItemElement6.Text = ""
+        TileItemElement6.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft
+        TileItemElement6.TextLocation = New System.Drawing.Point(-50, 0)
+        Me.TileBarItem1.Elements.Add(TileItemElement1)
+        Me.TileBarItem1.Elements.Add(TileItemElement2)
+        Me.TileBarItem1.Elements.Add(TileItemElement3)
+        Me.TileBarItem1.Elements.Add(TileItemElement4)
+        Me.TileBarItem1.Elements.Add(TileItemElement5)
+        Me.TileBarItem1.Elements.Add(TileItemElement6)
         Me.TileBarItem1.Id = 0
         Me.TileBarItem1.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide
         Me.TileBarItem1.Name = "TileBarItem1"
@@ -1065,17 +1199,17 @@ Partial Class frmEmployeesAdds
         '
         Me.TileBarItem2.AppearanceItem.Normal.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal
         Me.TileBarItem2.DropDownOptions.BeakColor = System.Drawing.Color.Empty
-        TileItemElement14.Text = "TileBarItem2"
-        Me.TileBarItem2.Elements.Add(TileItemElement14)
+        TileItemElement7.Text = "TileBarItem2"
+        Me.TileBarItem2.Elements.Add(TileItemElement7)
         Me.TileBarItem2.Id = 1
         Me.TileBarItem2.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide
         Me.TileBarItem2.Name = "TileBarItem2"
         '
         'Emp_Reg
         '
-        Me.Emp_Reg.Location = New System.Drawing.Point(402, 103)
+        Me.Emp_Reg.Location = New System.Drawing.Point(402, 121)
         Me.Emp_Reg.Name = "Emp_Reg"
-        Me.Emp_Reg.Size = New System.Drawing.Size(578, 26)
+        Me.Emp_Reg.Size = New System.Drawing.Size(263, 26)
         Me.Emp_Reg.StyleController = Me.LayoutControl1
         Me.Emp_Reg.TabIndex = 35
         '
@@ -1083,7 +1217,7 @@ Partial Class frmEmployeesAdds
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Times New Roman", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.LabelControl1.Location = New System.Drawing.Point(209, 12)
+        Me.LabelControl1.Location = New System.Drawing.Point(209, 30)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(915, 46)
         Me.LabelControl1.StyleController = Me.LayoutControl1
@@ -1092,7 +1226,7 @@ Partial Class frmEmployeesAdds
         '
         'Emp_Quali
         '
-        Me.Emp_Quali.Location = New System.Drawing.Point(862, 133)
+        Me.Emp_Quali.Location = New System.Drawing.Point(862, 151)
         Me.Emp_Quali.Name = "Emp_Quali"
         Me.Emp_Quali.Size = New System.Drawing.Size(262, 26)
         Me.Emp_Quali.StyleController = Me.LayoutControl1
@@ -1101,16 +1235,16 @@ Partial Class frmEmployeesAdds
         'Emp_Status
         '
         Me.Emp_Status.EditValue = True
-        Me.Emp_Status.Location = New System.Drawing.Point(984, 103)
+        Me.Emp_Status.Location = New System.Drawing.Point(669, 121)
         Me.Emp_Status.Name = "Emp_Status"
         Me.Emp_Status.Properties.Caption = "Active?"
-        Me.Emp_Status.Size = New System.Drawing.Size(140, 23)
+        Me.Emp_Status.Size = New System.Drawing.Size(455, 23)
         Me.Emp_Status.StyleController = Me.LayoutControl1
         Me.Emp_Status.TabIndex = 9
         '
         'Emp_Father
         '
-        Me.Emp_Father.Location = New System.Drawing.Point(402, 163)
+        Me.Emp_Father.Location = New System.Drawing.Point(402, 181)
         Me.Emp_Father.Name = "Emp_Father"
         Me.Emp_Father.Size = New System.Drawing.Size(263, 26)
         Me.Emp_Father.StyleController = Me.LayoutControl1
@@ -1119,7 +1253,7 @@ Partial Class frmEmployeesAdds
         'Emp_Name
         '
         Me.Emp_Name.EditValue = ""
-        Me.Emp_Name.Location = New System.Drawing.Point(402, 133)
+        Me.Emp_Name.Location = New System.Drawing.Point(402, 151)
         Me.Emp_Name.Name = "Emp_Name"
         Me.Emp_Name.Properties.NullText = "Select or Write"
         Me.Emp_Name.Size = New System.Drawing.Size(263, 26)
@@ -1128,7 +1262,7 @@ Partial Class frmEmployeesAdds
         '
         'SearchLookUpEdit1
         '
-        Me.SearchLookUpEdit1.Location = New System.Drawing.Point(402, 62)
+        Me.SearchLookUpEdit1.Location = New System.Drawing.Point(402, 80)
         Me.SearchLookUpEdit1.Name = "SearchLookUpEdit1"
         Me.SearchLookUpEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SearchLookUpEdit1.Properties.NullText = ""
@@ -1146,7 +1280,7 @@ Partial Class frmEmployeesAdds
         '
         'Emp_Designation_ID
         '
-        Me.Emp_Designation_ID.Location = New System.Drawing.Point(862, 163)
+        Me.Emp_Designation_ID.Location = New System.Drawing.Point(862, 181)
         Me.Emp_Designation_ID.Name = "Emp_Designation_ID"
         Me.Emp_Designation_ID.Properties.NullText = "Select"
         Me.Emp_Designation_ID.Size = New System.Drawing.Size(262, 26)
@@ -1157,7 +1291,7 @@ Partial Class frmEmployeesAdds
         '
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6, Me.LayoutControlItem15, Me.LayoutControlItem28, Me.LayoutControlItem16, Me.LayoutControlItem24, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem7, Me.LayoutControlItem8, Me.LayoutControlItem1, Me.EmptySpaceItem4, Me.EmptySpaceItem6, Me.LayoutControlItem18})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem6, Me.LayoutControlItem15, Me.LayoutControlItem28, Me.LayoutControlItem16, Me.LayoutControlItem24, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem7, Me.LayoutControlItem8, Me.LayoutControlItem1, Me.EmptySpaceItem4, Me.EmptySpaceItem6, Me.LayoutControlItem18, Me.LayoutControlItem11})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
         Me.LayoutControlGroup1.Size = New System.Drawing.Size(1276, 601)
@@ -1166,16 +1300,16 @@ Partial Class frmEmployeesAdds
         'LayoutControlItem6
         '
         Me.LayoutControlItem6.Control = Me.Emp_Status
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(972, 91)
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(657, 109)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(144, 30)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(459, 30)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
         '
         'LayoutControlItem15
         '
         Me.LayoutControlItem15.Control = Me.LabelControl1
-        Me.LayoutControlItem15.Location = New System.Drawing.Point(197, 0)
+        Me.LayoutControlItem15.Location = New System.Drawing.Point(197, 18)
         Me.LayoutControlItem15.MaxSize = New System.Drawing.Size(0, 50)
         Me.LayoutControlItem15.MinSize = New System.Drawing.Size(350, 50)
         Me.LayoutControlItem15.Name = "LayoutControlItem15"
@@ -1191,20 +1325,20 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem28.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem28.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem28.Control = Me.Emp_Reg
-        Me.LayoutControlItem28.Location = New System.Drawing.Point(197, 91)
+        Me.LayoutControlItem28.Location = New System.Drawing.Point(197, 109)
         Me.LayoutControlItem28.Name = "LayoutControlItem28"
-        Me.LayoutControlItem28.Size = New System.Drawing.Size(775, 30)
+        Me.LayoutControlItem28.Size = New System.Drawing.Size(460, 30)
         Me.LayoutControlItem28.Text = "Reg#"
         Me.LayoutControlItem28.TextSize = New System.Drawing.Size(190, 19)
         '
         'LayoutControlItem16
         '
         Me.LayoutControlItem16.Control = Me.TileBar1
-        Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 18)
         Me.LayoutControlItem16.MaxSize = New System.Drawing.Size(197, 0)
         Me.LayoutControlItem16.MinSize = New System.Drawing.Size(197, 24)
         Me.LayoutControlItem16.Name = "LayoutControlItem16"
-        Me.LayoutControlItem16.Size = New System.Drawing.Size(197, 581)
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(197, 563)
         Me.LayoutControlItem16.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem16.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem16.TextVisible = False
@@ -1212,7 +1346,7 @@ Partial Class frmEmployeesAdds
         'LayoutControlItem24
         '
         Me.LayoutControlItem24.Control = Me.Emp_Image
-        Me.LayoutControlItem24.Location = New System.Drawing.Point(1116, 0)
+        Me.LayoutControlItem24.Location = New System.Drawing.Point(1116, 18)
         Me.LayoutControlItem24.MaxSize = New System.Drawing.Size(140, 175)
         Me.LayoutControlItem24.MinSize = New System.Drawing.Size(140, 175)
         Me.LayoutControlItem24.Name = "LayoutControlItem24"
@@ -1228,7 +1362,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem2.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem2.Control = Me.Emp_Name
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(197, 121)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(197, 139)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
         Me.LayoutControlItem2.Size = New System.Drawing.Size(460, 30)
         Me.LayoutControlItem2.Text = "Name:"
@@ -1241,7 +1375,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem3.Control = Me.Emp_Father
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(197, 151)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(197, 169)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
         Me.LayoutControlItem3.Size = New System.Drawing.Size(460, 30)
         Me.LayoutControlItem3.Text = "Father Name:"
@@ -1254,7 +1388,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem7.Control = Me.Emp_Quali
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(657, 121)
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(657, 139)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
         Me.LayoutControlItem7.Size = New System.Drawing.Size(459, 30)
         Me.LayoutControlItem7.Text = "Qualification:"
@@ -1267,7 +1401,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem8.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem8.Control = Me.Emp_Designation_ID
-        Me.LayoutControlItem8.Location = New System.Drawing.Point(657, 151)
+        Me.LayoutControlItem8.Location = New System.Drawing.Point(657, 169)
         Me.LayoutControlItem8.Name = "LayoutControlItem8"
         Me.LayoutControlItem8.Size = New System.Drawing.Size(459, 30)
         Me.LayoutControlItem8.Text = "Designation:"
@@ -1280,7 +1414,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem1.Control = Me.SearchLookUpEdit1
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(197, 50)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(197, 68)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
         Me.LayoutControlItem1.Size = New System.Drawing.Size(919, 30)
         Me.LayoutControlItem1.Text = "     Search  Employee ID #"
@@ -1289,7 +1423,7 @@ Partial Class frmEmployeesAdds
         'EmptySpaceItem4
         '
         Me.EmptySpaceItem4.AllowHotTrack = False
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(197, 80)
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(197, 98)
         Me.EmptySpaceItem4.MaxSize = New System.Drawing.Size(0, 11)
         Me.EmptySpaceItem4.MinSize = New System.Drawing.Size(10, 11)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
@@ -1300,7 +1434,7 @@ Partial Class frmEmployeesAdds
         'EmptySpaceItem6
         '
         Me.EmptySpaceItem6.AllowHotTrack = False
-        Me.EmptySpaceItem6.Location = New System.Drawing.Point(197, 181)
+        Me.EmptySpaceItem6.Location = New System.Drawing.Point(197, 199)
         Me.EmptySpaceItem6.MaxSize = New System.Drawing.Size(0, 10)
         Me.EmptySpaceItem6.MinSize = New System.Drawing.Size(10, 10)
         Me.EmptySpaceItem6.Name = "EmptySpaceItem6"
@@ -1311,15 +1445,55 @@ Partial Class frmEmployeesAdds
         'LayoutControlItem18
         '
         Me.LayoutControlItem18.Control = Me.LayoutControl5
-        Me.LayoutControlItem18.Location = New System.Drawing.Point(197, 191)
+        Me.LayoutControlItem18.Location = New System.Drawing.Point(197, 209)
         Me.LayoutControlItem18.Name = "LayoutControlItem18"
-        Me.LayoutControlItem18.Size = New System.Drawing.Size(1059, 390)
+        Me.LayoutControlItem18.Size = New System.Drawing.Size(1059, 372)
         Me.LayoutControlItem18.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem18.TextVisible = False
+        '
+        'LayoutControlItem11
+        '
+        Me.LayoutControlItem11.Control = Me.ProgressBarControl1
+        Me.LayoutControlItem11.Location = New System.Drawing.Point(0, 0)
+        Me.LayoutControlItem11.Name = "LayoutControlItem11"
+        Me.LayoutControlItem11.Size = New System.Drawing.Size(1256, 18)
+        Me.LayoutControlItem11.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem11.TextVisible = False
         '
         'DxErrorProvider1
         '
         Me.DxErrorProvider1.ContainerControl = Me
+        '
+        'BarButtonItem7
+        '
+        Me.BarButtonItem7.Caption = "Import EMPLOYEES From Master PC"
+        Me.BarButtonItem7.Id = 5
+        Me.BarButtonItem7.Name = "BarButtonItem7"
+        '
+        'BarButtonItem8
+        '
+        Me.BarButtonItem8.Caption = "Import EMPLOYEES From Master PC"
+        Me.BarButtonItem8.Id = 5
+        Me.BarButtonItem8.Name = "BarButtonItem8"
+        '
+        'txtFin
+        '
+        Me.txtFin.EditValue = "0"
+        Me.txtFin.Location = New System.Drawing.Point(993, 12)
+        Me.txtFin.MenuManager = Me.RibbonControl1
+        Me.txtFin.Name = "txtFin"
+        Me.txtFin.Size = New System.Drawing.Size(50, 26)
+        Me.txtFin.StyleController = Me.LayoutControl5
+        Me.txtFin.TabIndex = 86
+        '
+        'LayoutControlItem19
+        '
+        Me.LayoutControlItem19.Control = Me.txtFin
+        Me.LayoutControlItem19.Location = New System.Drawing.Point(883, 0)
+        Me.LayoutControlItem19.Name = "LayoutControlItem19"
+        Me.LayoutControlItem19.Size = New System.Drawing.Size(152, 42)
+        Me.LayoutControlItem19.Text = "Finger No"
+        Me.LayoutControlItem19.TextSize = New System.Drawing.Size(95, 13)
         '
         'frmEmployeesAdds
         '
@@ -1338,8 +1512,11 @@ Partial Class frmEmployeesAdds
         CType(Me.RibbonControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.ProgressBarControl1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl5.ResumeLayout(False)
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1407,7 +1584,10 @@ Partial Class frmEmployeesAdds
         CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtFin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1514,4 +1694,22 @@ Partial Class frmEmployeesAdds
     Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemButtonEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents BarButtonItem5 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents BarButtonItem6 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem7 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem8 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents ProgressBarControl1 As DevExpress.XtraEditors.ProgressBarControl
+    Friend WithEvents LayoutControlItem11 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents BarButtonItem10 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPageGroup3 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents BarButtonItem11 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents rg1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents sIP As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemTextEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents sPort As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemTextEdit4 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents lblStatem As DevExpress.XtraBars.BarStaticItem
+    Friend WithEvents txtFin As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LayoutControlItem19 As DevExpress.XtraLayout.LayoutControlItem
 End Class

@@ -773,110 +773,83 @@ Public Class frmEmployeesAdds
         axCZKEM1.BeginBatchUpdate(iMachineNumber, 1) 'create memory space for batching data
         axCZKEM1.ReadAllUserID(iMachineNumber) 'read all the user information to the memory
         axCZKEM1.ReadAllTemplate(iMachineNumber) 'read all the users' fingerprint templates to the memory
+        Using db As New CsmdBioAttendenceEntities
+            Dim finID As Integer = CInt(txtFin.Text)
+            'get the corresponding templates string and length from the memory
+            ' Dim ddd As Integer = If(CInt(Microsoft.VisualBasic.Right(idwEnrollNumber.ToString, 1)) = 0, 10, CInt(Microsoft.VisualBasic.Right(idwEnrollNumber.ToString, 1)))
+            Dim khk As Boolean = False
+            Dim fg = (From a In db.Emp_Bio_Device_Users Where a.Emp_ID = EmpID Select a).ToList
+            If fg.Count > 0 Then
+                For Each dts In fg
+                    With dts
+                        '.Emp_ID = EmpID
+                        '.Attendence_Status_ID = dts.Attendence_Status_ID
+                        '.Emp_Bio_Device_User_Name = sName
 
-        While axCZKEM1.SSR_GetAllUserInfo(iMachineNumber, idwEnrollNumber, sName, sPassword, iPrivilege, bEnabled) = True  'get all the users' information from the memory
-            'For idwFingerIndex = 0 To 9
-            Using db As New CsmdBioAttendenceEntities
-                If axCZKEM1.GetUserTmpExStr(iMachineNumber, idwEnrollNumber, 0, iFlag, sTmpData, iTmpLength) Then 'get the corresponding templates string and length from the memory
-
-
-
-                    Dim ddd As Integer = If(CInt(Microsoft.VisualBasic.Right(idwEnrollNumber.ToString, 1)) = 0, 10, CInt(Microsoft.VisualBasic.Right(idwEnrollNumber.ToString, 1)))
-                    Dim fg = (From a In db.Emp_Bio_Device_Users Where a.Emp_ID = EmpID And a.Emp_Bio_Device_Users_UserID = CType(idwEnrollNumber, Integer?) Select a).FirstOrDefault
-                    If fg IsNot Nothing Then
-                        With fg
-                            .Emp_ID = EmpID
-                            .Attendence_Status_ID = ddd
-                            .Emp_Bio_Device_User_Name = sName
-                            .Emp_Bio_Device_User_Finger = 0
+                        If axCZKEM1.GetUserTmpExStr(iMachineNumber, .Emp_Bio_Device_Users_UserID.ToString, finID, iFlag, sTmpData, iTmpLength) Then
+                            .Emp_Bio_Device_User_Finger = finID
                             .Emp_Bio_Device_User_tmpData = sTmpData
                             .Emp_Bio_Device_User_Privilege = iPrivilege
                             .Emp_Bio_Device_User_Password = sPassword
-                            .Emp_Bio_Device_User_Enabled = bEnabled
-                        End With
-                        db.SaveChanges()
-                        'Else
-                        '    Dim dtNew = New Emp_Bio_Device_Users
-                        '    With dtNew
-                        '        .Emp_ID = EmpID
-                        '        .Attendence_Status_ID = ddd
-                        '        .Emp_Bio_Device_Users_UserID = CInt(idwEnrollNumber)
-                        '        .Emp_Bio_Device_User_Name = sName
-                        '        .Emp_Bio_Device_User_Finger = idwFingerIndex
-                        '        .Emp_Bio_Device_User_tmpData = sTmpData
-                        '        .Emp_Bio_Device_User_Privilege = iPrivilege
-                        '        .Emp_Bio_Device_User_Password = sPassword
-                        '        .Emp_Bio_Device_User_Enabled = bEnabled
-                        '    End With
-                        '    db.Emp_Bio_Device_Users.Add(dtNew)
-                        '    db.SaveChanges()
-                    End If
+                        End If
+                        If khk = False Then
+                            If axCZKEM1.GetUserFaceStr(iMachineNumber, .Emp_Bio_Device_Users_UserID.ToString, iFaceIndex, sFaceTmpData, iLength) Then
+                                .Emp_Bio_Device_User_FacetmpData = sFaceTmpData
+                                .Emp_Bio_Device_User_iLength = iLength
+                                khk = True
+                            End If
+                        End If
+                        .Emp_Bio_Device_User_Enabled = True
+
+                    End With
+                Next
+                db.SaveChanges()
+            End If
 
 
-                End If
+            'get the corresponding templates string and length from the memory
 
-            End Using
-            'Next
-        End While
-        axCZKEM1.EnableDevice(iMachineNumber, False)
+            '    Dim ddd As Integer = If(CInt(Microsoft.VisualBasic.Right(idwEnrollNumber.ToString, 1)) = 0, 10, CInt(Microsoft.VisualBasic.Right(idwEnrollNumber.ToString, 1)))
+            'Dim fg = (From a In db.Emp_Bio_Device_Users Where a.Emp_ID = EmpID And a.Emp_Bio_Device_Users_UserID = 11 Select a).FirstOrDefault
+            '    If fg IsNot Nothing Then
+            '        With fg
+            '            .Emp_ID = EmpID
+            '            .Attendence_Status_ID = 1
+            '            .Emp_Bio_Device_User_Name = sName
+            '            ' .Emp_Bio_Device_User_Finger = 0
+            '            .Emp_Bio_Device_User_FacetmpData = sFaceTmpData
+            '            '.Emp_Bio_Device_User_Privilege = iPrivilege
+            '            .Emp_Bio_Device_User_iLength = iLength
+            '            '.Emp_Bio_Device_User_Password = sPassword
+            '            .Emp_Bio_Device_User_Enabled = bEnabled
+            '        End With
+            '        db.SaveChanges()
+            '    End If
+
+
+
+        End Using
+        'axCZKEM1.EnableDevice(iMachineNumber, False)
         Cursor = Cursors.WaitCursor
-        'axCZKEM1.BatchUpdate(iMachineNumber) 'download all the information in the memory
-        'axCZKEM1.RefreshData(iMachineNumber) 'the data in the device should be refreshed
-
-        '    axCZKEM1.EnableDevice(iMachineNumber, True)
-
-        axCZKEM1.BeginBatchUpdate(iMachineNumber, 1) 'create memory space for batching data
-        axCZKEM1.ReadAllUserID(iMachineNumber) 'read all the user information to the memory
-        axCZKEM1.ReadAllTemplate(iMachineNumber)
-        While axCZKEM1.SSR_GetAllUserInfo(iMachineNumber, idwEnrollNumber, sName, sPassword, iPrivilege, bEnabled) = True  'get all the users' information from the memory
-            'For idwFingerIndex = 0 To 9
-            Using db As New CsmdBioAttendenceEntities
-
-                If axCZKEM1.GetUserFaceStr(iMachineNumber, idwEnrollNumber, iFaceIndex, sFaceTmpData, iLength) Then 'get the corresponding templates string and length from the memory
-
-
-
-                    Dim ddd As Integer = If(CInt(Microsoft.VisualBasic.Right(idwEnrollNumber.ToString, 1)) = 0, 10, CInt(Microsoft.VisualBasic.Right(idwEnrollNumber.ToString, 1)))
-                    Dim fg = (From a In db.Emp_Bio_Device_Users Where a.Emp_ID = EmpID And a.Emp_Bio_Device_Users_UserID = CType(idwEnrollNumber, Integer?) Select a).FirstOrDefault
-                    If fg IsNot Nothing Then
-                        With fg
-                            .Emp_ID = EmpID
-                            .Attendence_Status_ID = ddd
-                            .Emp_Bio_Device_User_Name = sName
-                            ' .Emp_Bio_Device_User_Finger = 0
-                            .Emp_Bio_Device_User_FacetmpData = sFaceTmpData
-                            '.Emp_Bio_Device_User_Privilege = iPrivilege
-                            .Emp_Bio_Device_User_iLength = iLength
-                            '.Emp_Bio_Device_User_Password = sPassword
-                            .Emp_Bio_Device_User_Enabled = bEnabled
-                        End With
-                        db.SaveChanges()
-                        'Else
-                        '    Dim dtNew = New Emp_Bio_Device_Users
-                        '    With dtNew
-                        '        .Emp_ID = EmpID
-                        '        .Attendence_Status_ID = ddd
-                        '        .Emp_Bio_Device_Users_UserID = CInt(idwEnrollNumber)
-                        '        .Emp_Bio_Device_User_Name = sName
-                        '        .Emp_Bio_Device_User_Finger = idwFingerIndex
-                        '        .Emp_Bio_Device_User_tmpData = sTmpData
-                        '        .Emp_Bio_Device_User_Privilege = iPrivilege
-                        '        .Emp_Bio_Device_User_Password = sPassword
-                        '        .Emp_Bio_Device_User_Enabled = bEnabled
-                        '    End With
-                        '    db.Emp_Bio_Device_Users.Add(dtNew)
-                        '    db.SaveChanges()
-                    End If
-
-
-                End If
-            End Using
-            'Next
-        End While
-        'lvDownload.EndUpdate()
         axCZKEM1.BatchUpdate(iMachineNumber) 'download all the information in the memory
         axCZKEM1.RefreshData(iMachineNumber) 'the data in the device should be refreshed
+
         axCZKEM1.EnableDevice(iMachineNumber, True)
+
+        'axCZKEM1.BeginBatchUpdate(iMachineNumber, 1) 'create memory space for batching data
+        'axCZKEM1.ReadAllUserID(iMachineNumber) 'read all the user information to the memory
+        'axCZKEM1.ReadAllTemplate(iMachineNumber)
+        'While axCZKEM1.SSR_GetAllUserInfo(iMachineNumber, idwEnrollNumber, sName, sPassword, iPrivilege, bEnabled) = True  'get all the users' information from the memory
+        '    'For idwFingerIndex = 0 To 9
+        '    Using db As New CsmdBioAttendenceEntities
+
+        '    End Using
+        '    'Next
+        'End While
+        ''lvDownload.EndUpdate()
+        'axCZKEM1.BatchUpdate(iMachineNumber) 'download all the information in the memory
+        'axCZKEM1.RefreshData(iMachineNumber) 'the data in the device should be refreshed
+        'axCZKEM1.EnableDevice(iMachineNumber, True)
         Cursor = Cursors.Default
         LoadFromDb(EmpID)
     End Sub
@@ -1053,7 +1026,7 @@ Public Class frmEmployeesAdds
         Dim idwErrorCode As Integer
 
         Dim iUserID As String = CStr(GridView1.GetFocusedRowCellValue("Emp_Bio_Device_Users_UserID"))
-        Dim iFingerIndex As Integer = 0 'Convert.ToInt32(cbFingerIndex.Text.Trim())
+        Dim iFingerIndex As Integer = CInt(txtFin.Text)  'Convert.ToInt32(cbFingerIndex.Text.Trim())
         'Dim EmpID As String = tx1.Text
         Cursor = Cursors.WaitCursor
 
@@ -1216,6 +1189,198 @@ Public Class frmEmployeesAdds
             axCZKEM1.GetLastError(idwErrorCode)
             MsgBox("Operation failed,ErrorCode=" & idwErrorCode.ToString(), MsgBoxStyle.Exclamation, "Error")
         End If
+    End Sub
+
+    Private Sub BarButtonItem5_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem5.ItemClick
+        Using db As New CsmdBioAttendenceEntities1
+            Dim dt = (From a In db.Employees Select a).ToList
+            If dt.Count > 0 Then
+                Dim k As Integer = 0
+                ProgressBarControl1.Properties.Maximum = dt.Count
+                ProgressBarControl1.Properties.Minimum = 0
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 0
+                ProgressBarControl1.Update()
+                For Each dts In dt
+                    ProgressBarControl1.Position = k
+                    ProgressBarControl1.Update()
+                    k += 1
+                    Using db2 As New CsmdBioAttendenceEntities
+                        Dim df = (From a In db2.Employees Where a.Emp_ID = dts.Emp_ID Select a).FirstOrDefault
+                        If df IsNot Nothing Then
+
+                        Else
+                            Dim dfNew = New Employee
+                            With dfNew
+                                .Emp_Address = dts.Emp_Address
+                                .Emp_Beg_Balance = dts.Emp_Beg_Balance
+                                .Emp_Birth_Date = dts.Emp_Birth_Date
+                                .Emp_Date_Hired = dts.Emp_Date_Hired
+                                .Emp_Date_ReHired = dts.Emp_Date_ReHired
+                                .Emp_Date_Terminated = dts.Emp_Date_Terminated
+                                .Emp_Designation = dts.Emp_Designation
+                                .Emp_DutyOn = dts.Emp_DutyOn
+                                .Emp_Duty_Off = dts.Emp_Duty_Off
+                                .Emp_Father = dts.Emp_Father
+                                .Emp_Image = dts.Emp_Image
+                                .Emp_Name = dts.Emp_Name
+                                .Emp_NIC_No = dts.Emp_NIC_No
+                                .Emp_Phone = dts.Emp_Phone
+                                .Emp_Phone2 = dts.Emp_Phone2
+                                .Emp_Quali = dts.Emp_Quali
+                                .Emp_Reg = dts.Emp_Reg
+                                .Emp_Report_To = dts.Emp_Report_To
+                                .Emp_Salary = dts.Emp_Salary
+                                .Emp_Status = dts.Emp_Status
+                            End With
+                            db2.Employees.Add(dfNew)
+                            db2.SaveChanges()
+                        End If
+                    End Using
+                Next
+                Dim gg = (From a In db.Auto_Number Where a.Auto_ID = 1 Select a).FirstOrDefault
+                If gg IsNot Nothing Then
+                    Using db2 As New CsmdBioAttendenceEntities
+                        Dim hh = (From a In db2.Auto_Number Where a.Auto_ID = 1 Select a).FirstOrDefault
+                        If hh IsNot Nothing Then
+                            hh.Auto_Emp_Num = gg.Auto_Emp_Num
+                            db2.SaveChanges()
+                        End If
+                    End Using
+
+                End If
+                MsgBox("Import Done")
+            End If
+
+        End Using
+    End Sub
+
+    Private Sub BarButtonItem6_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem6.ItemClick
+        Using db As New CsmdBioAttendenceEntities1
+            Dim dt = (From a In db.Emp_Bio_Device_Users Select a).ToList
+            If dt.Count > 0 Then
+                Dim k As Integer = 0
+                ProgressBarControl1.Properties.Maximum = dt.Count
+                ProgressBarControl1.Properties.Minimum = 0
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 0
+                ProgressBarControl1.Update()
+                For Each dts In dt
+                    ProgressBarControl1.Position = k
+                    ProgressBarControl1.Update()
+                    k += 1
+                    Using db2 As New CsmdBioAttendenceEntities
+                        Dim df = (From a In db2.Emp_Bio_Device_Users Where a.Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID Select a).FirstOrDefault
+                        If df IsNot Nothing Then
+
+                        Else
+                            Dim dfNew = New Emp_Bio_Device_Users
+                            With dfNew
+                                .Attendence_Status_ID = dts.Attendence_Status_ID
+                                .Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID
+                                .Emp_Bio_Device_User_Enabled = dts.Emp_Bio_Device_User_Enabled
+                                .Emp_Bio_Device_User_FacetmpData = dts.Emp_Bio_Device_User_FacetmpData
+                                .Emp_Bio_Device_User_Finger = dts.Emp_Bio_Device_User_Finger
+                                .Emp_Bio_Device_User_iLength = dts.Emp_Bio_Device_User_iLength
+                                .Emp_Bio_Device_User_Name = dts.Emp_Bio_Device_User_Name
+                                .Emp_Bio_Device_User_Password = dts.Emp_Bio_Device_User_Password
+                                .Emp_Bio_Device_User_Privilege = dts.Emp_Bio_Device_User_Privilege
+                                .Emp_Bio_Device_User_tmpData = dts.Emp_Bio_Device_User_tmpData
+                                .Emp_ID = dts.Emp_ID
+                            End With
+                            db2.Emp_Bio_Device_Users.Add(dfNew)
+                            db2.SaveChanges()
+                        End If
+                    End Using
+                Next
+                MsgBox("Import Done")
+                Load_cmb_Employee_Search_Look.ColumnsAndData(SearchLookUpEdit1)
+                Load_cmb_Emp_Report_To.ColumnsAndData(Emp_Report_To)
+                LoadTile()
+            End If
+
+        End Using
+    End Sub
+
+    Private Sub BarButtonItem9_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs)
+
+    End Sub
+
+    Private Sub BarButtonItem10_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem10.ItemClick
+        Using db As New CsmdBioAttendenceEntities
+            Dim dt = (From a In db.Employees Select a).ToList
+            If dt.Count > 0 Then
+                Dim k As Integer = 0
+                ProgressBarControl1.Properties.Maximum = dt.Count
+                ProgressBarControl1.Properties.Minimum = 0
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 0
+                ProgressBarControl1.Update()
+                For Each dts In dt
+                    ProgressBarControl1.Position = k
+                    ProgressBarControl1.Update()
+                    k += 1
+                    Using db2 As New CsmdBioAttendenceEntities1
+                        Dim df = (From a In db2.Employees Where a.Emp_ID = dts.Emp_ID Select a).FirstOrDefault
+                        If df IsNot Nothing Then
+
+                        Else
+                            Dim dfNew = New Employee
+                            With dfNew
+                                .Emp_Address = dts.Emp_Address
+                                .Emp_Beg_Balance = dts.Emp_Beg_Balance
+                                .Emp_Birth_Date = dts.Emp_Birth_Date
+                                .Emp_Date_Hired = dts.Emp_Date_Hired
+                                .Emp_Date_ReHired = dts.Emp_Date_ReHired
+                                .Emp_Date_Terminated = dts.Emp_Date_Terminated
+                                .Emp_Designation = dts.Emp_Designation
+                                .Emp_DutyOn = dts.Emp_DutyOn
+                                .Emp_Duty_Off = dts.Emp_Duty_Off
+                                .Emp_Father = dts.Emp_Father
+                                .Emp_Image = dts.Emp_Image
+                                .Emp_Name = dts.Emp_Name
+                                .Emp_NIC_No = dts.Emp_NIC_No
+                                .Emp_Phone = dts.Emp_Phone
+                                .Emp_Phone2 = dts.Emp_Phone2
+                                .Emp_Quali = dts.Emp_Quali
+                                .Emp_Reg = dts.Emp_Reg
+                                .Emp_Report_To = dts.Emp_Report_To
+                                .Emp_Salary = dts.Emp_Salary
+                                .Emp_Status = dts.Emp_Status
+                            End With
+                            db2.Employees.Add(dfNew)
+                            db2.SaveChanges()
+                        End If
+                    End Using
+                Next
+                Dim gg = (From a In db.Auto_Number Where a.Auto_ID = 1 Select a).FirstOrDefault
+                If gg IsNot Nothing Then
+                    Using db22 As New CsmdBioAttendenceEntities1
+                        Dim hh = (From a In db22.Auto_Number Where a.Auto_ID = 1 Select a).FirstOrDefault
+                        If hh IsNot Nothing Then
+                            hh.Auto_Emp_Num = gg.Auto_Emp_Num
+                            db22.SaveChanges()
+                        End If
+                    End Using
+
+                End If
+                MsgBox("Export Done")
+
+            End If
+
+        End Using
+    End Sub
+
+    Private Sub BarButtonItem11_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem11.ItemClick
+        Dim filePath As String = Replace(System.Reflection.Assembly.GetExecutingAssembly().Location, ".exe", "") + ".exe.config"
+        Dim objDoc As XDocument = XDocument.Load(filePath)
+        Dim conEl = objDoc.Descendants("connectionStrings").Elements().First()
+        conEl.Attribute("name").Value = "CsmdBioAttendenceEntities1"
+        conEl.Attribute("connectionString").Value = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string='data source=" & sIP.EditValue.ToString & "," & sPort.EditValue.ToString & "; initial catalog=CsmdBioAttendence ;user id=sa; password=123;multipleactiveresultsets=True;application name=EntityFramework;'"
+        'conEl.Attribute("connectionString").Value = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.\sqlexpress; AttachDbFileName=|DataDirectory|DATA\CsmdTheLeadsSchool.mdf ;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;"
+        objDoc.Save(filePath)
+        lblStatem.Caption = "Current State: Connected"
+        lblStatem.ItemAppearance.Normal.BackColor = Color.LimeGreen
     End Sub
 #End Region
 

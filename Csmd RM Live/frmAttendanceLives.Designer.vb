@@ -151,6 +151,11 @@ Partial Class frmAttendanceLives
         Me.ck2 = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem6 = New DevExpress.XtraBars.BarButtonItem()
+        Me.sIP = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemTextEdit10 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.sPort = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemTextEdit11 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup5 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -220,6 +225,8 @@ Partial Class frmAttendanceLives
         CType(Me.RepositoryItemTimeEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemToggleSwitch3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1141,14 +1148,14 @@ Partial Class frmAttendanceLives
         Me.RibbonControl1.ApplicationIcon = CType(resources.GetObject("RibbonControl1.ApplicationIcon"), System.Drawing.Bitmap)
         Me.RibbonControl1.AutoSizeItems = True
         Me.RibbonControl1.ExpandCollapseItem.Id = 0
-        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.btnConnect, Me.BarButtonItem15, Me.txtIP, Me.txtPort, Me.lblState, Me.Dtp1, Me.BarButtonItem16, Me.BarButtonItem17, Me.BarButtonItem18, Me.BarButtonItem19, Me.SkinRibbonGalleryBarItem1, Me.BarEditItem10, Me.BarButtonItem2, Me.BarButtonItem5, Me.FF1, Me.FF2, Me.TT1, Me.TT2, Me.ck1, Me.ck2, Me.BarButtonItem3})
+        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.btnConnect, Me.BarButtonItem15, Me.txtIP, Me.txtPort, Me.lblState, Me.Dtp1, Me.BarButtonItem16, Me.BarButtonItem17, Me.BarButtonItem18, Me.BarButtonItem19, Me.SkinRibbonGalleryBarItem1, Me.BarEditItem10, Me.BarButtonItem2, Me.BarButtonItem5, Me.FF1, Me.FF2, Me.TT1, Me.TT2, Me.ck1, Me.ck2, Me.BarButtonItem3, Me.BarButtonItem6, Me.sIP, Me.sPort})
         Me.RibbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl1.MaxItemId = 36
+        Me.RibbonControl1.MaxItemId = 42
         Me.RibbonControl1.Name = "RibbonControl1"
         Me.RibbonControl1.PageCategories.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageCategory() {Me.RibbonPageCategory1})
         Me.RibbonControl1.PageHeaderItemLinks.Add(Me.SkinRibbonGalleryBarItem1, True)
         Me.RibbonControl1.PageHeaderItemLinks.Add(Me.RibbonControl1.ExpandCollapseItem)
-        Me.RibbonControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit4, Me.RepositoryItemTextEdit5, Me.RepositoryItemDateEdit3, Me.RepositoryItemToggleSwitch3, Me.RepositoryItemSpinEdit1, Me.RepositoryItemSpinEdit2, Me.RepositoryItemDateEdit1, Me.RepositoryItemDateEdit4, Me.RepositoryItemTimeEdit3, Me.RepositoryItemTimeEdit4, Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit6, Me.RepositoryItemTextEdit7, Me.RepositoryItemTextEdit8, Me.RepositoryItemTimeEdit5, Me.RepositoryItemTextEdit9})
+        Me.RibbonControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit4, Me.RepositoryItemTextEdit5, Me.RepositoryItemDateEdit3, Me.RepositoryItemToggleSwitch3, Me.RepositoryItemSpinEdit1, Me.RepositoryItemSpinEdit2, Me.RepositoryItemDateEdit1, Me.RepositoryItemDateEdit4, Me.RepositoryItemTimeEdit3, Me.RepositoryItemTimeEdit4, Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit6, Me.RepositoryItemTextEdit7, Me.RepositoryItemTextEdit8, Me.RepositoryItemTimeEdit5, Me.RepositoryItemTextEdit9, Me.RepositoryItemTextEdit10, Me.RepositoryItemTextEdit11})
         Me.RibbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013
         Me.RibbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl1.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.[False]
@@ -1178,6 +1185,7 @@ Partial Class frmAttendanceLives
         Me.txtIP.EditValue = "192.168.1.201"
         Me.txtIP.Id = 5
         Me.txtIP.Name = "txtIP"
+        Me.txtIP.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         Me.txtIP.Width = 100
         '
         'RepositoryItemTextEdit4
@@ -1194,6 +1202,7 @@ Partial Class frmAttendanceLives
         Me.txtPort.EditValue = "4370"
         Me.txtPort.Id = 6
         Me.txtPort.Name = "txtPort"
+        Me.txtPort.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         '
         'RepositoryItemTextEdit5
         '
@@ -1415,6 +1424,43 @@ Partial Class frmAttendanceLives
         Me.BarButtonItem3.LargeGlyph = CType(resources.GetObject("BarButtonItem3.LargeGlyph"), System.Drawing.Image)
         Me.BarButtonItem3.Name = "BarButtonItem3"
         '
+        'BarButtonItem6
+        '
+        Me.BarButtonItem6.Caption = "Import"
+        Me.BarButtonItem6.Glyph = CType(resources.GetObject("BarButtonItem6.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem6.Id = 36
+        Me.BarButtonItem6.LargeGlyph = CType(resources.GetObject("BarButtonItem6.LargeGlyph"), System.Drawing.Image)
+        Me.BarButtonItem6.Name = "BarButtonItem6"
+        '
+        'sIP
+        '
+        Me.sIP.Caption = "IP"
+        Me.sIP.Edit = Me.RepositoryItemTextEdit10
+        Me.sIP.EditValue = "192.168.23.229"
+        Me.sIP.Id = 37
+        Me.sIP.Name = "sIP"
+        Me.sIP.Width = 100
+        '
+        'RepositoryItemTextEdit10
+        '
+        Me.RepositoryItemTextEdit10.AutoHeight = False
+        Me.RepositoryItemTextEdit10.Name = "RepositoryItemTextEdit10"
+        '
+        'sPort
+        '
+        Me.sPort.Caption = "Port"
+        Me.sPort.Edit = Me.RepositoryItemTextEdit11
+        Me.sPort.EditValue = "786"
+        Me.sPort.Id = 39
+        Me.sPort.Name = "sPort"
+        '
+        'RepositoryItemTextEdit11
+        '
+        Me.RepositoryItemTextEdit11.Appearance.Options.UseTextOptions = True
+        Me.RepositoryItemTextEdit11.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.RepositoryItemTextEdit11.AutoHeight = False
+        Me.RepositoryItemTextEdit11.Name = "RepositoryItemTextEdit11"
+        '
         'RibbonPageCategory1
         '
         Me.RibbonPageCategory1.Name = "RibbonPageCategory1"
@@ -1434,17 +1480,21 @@ Partial Class frmAttendanceLives
         Me.RibbonPageGroup5.ItemLinks.Add(Me.btnConnect)
         Me.RibbonPageGroup5.ItemLinks.Add(Me.txtIP, True)
         Me.RibbonPageGroup5.ItemLinks.Add(Me.txtPort)
-        Me.RibbonPageGroup5.ItemLinks.Add(Me.lblState)
         Me.RibbonPageGroup5.ItemLinks.Add(Me.BarButtonItem15, True)
-        Me.RibbonPageGroup5.ItemLinks.Add(Me.BarButtonItem16, True)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.sIP, True)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.sPort)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.lblState)
+        Me.RibbonPageGroup5.ItemLinks.Add(Me.BarButtonItem6, True)
         Me.RibbonPageGroup5.Name = "RibbonPageGroup5"
         Me.RibbonPageGroup5.ShowCaptionButton = False
         Me.RibbonPageGroup5.Text = "Device Connection"
         '
         'RibbonPageGroup4
         '
+        Me.RibbonPageGroup4.AllowMinimize = False
         Me.RibbonPageGroup4.AllowTextClipping = False
-        Me.RibbonPageGroup4.ItemLinks.Add(Me.Dtp1, True)
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.BarButtonItem16, True)
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.Dtp1)
         Me.RibbonPageGroup4.ItemLinks.Add(Me.BarButtonItem17)
         Me.RibbonPageGroup4.ItemLinks.Add(Me.BarButtonItem18, True)
         Me.RibbonPageGroup4.Name = "RibbonPageGroup4"
@@ -1639,6 +1689,8 @@ Partial Class frmAttendanceLives
         CType(Me.RepositoryItemTimeEdit4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemToggleSwitch3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit6, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1793,4 +1845,9 @@ Partial Class frmAttendanceLives
     Friend WithEvents RibbonPageGroup7 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents RepositoryItemTextEdit9 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents BarButtonItem3 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem6 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents sIP As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemTextEdit10 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents sPort As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemTextEdit11 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
 End Class

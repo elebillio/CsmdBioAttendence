@@ -41,7 +41,7 @@ Public Class frmLogin
         End Try
         'MsgBox(SplitOnCapitals("ThisIsMyCapsDelimitedString"))
         uName.Text = "Csmd Softwares"
-        uName.Text = "moaz"
+        ' uName.Text = "moaz"
         ''uName.Text = "ch imran"
         uPass.Text = "12321"
         uPass.Focus()

@@ -3167,6 +3167,69 @@ Public Class frmAttendanceLives
         'End Using
     End Sub
 
+    Private Sub BarButtonItem6_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem6.ItemClick
+        Dim filePath As String = Replace(System.Reflection.Assembly.GetExecutingAssembly().Location, ".exe", "") + ".exe.config"
+        Dim objDoc As XDocument = XDocument.Load(filePath)
+        Dim conEl = objDoc.Descendants("connectionStrings").Elements().First()
+        conEl.Attribute("name").Value = "CsmdBioAttendenceEntities1"
+        conEl.Attribute("connectionString").Value = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string='data source=" & sIP.EditValue.ToString & "," & sPort.EditValue.ToString & "; initial catalog=CsmdBioAttendence ;user id=sa; password=123;multipleactiveresultsets=True;application name=EntityFramework;'"
+        'conEl.Attribute("connectionString").Value = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.\sqlexpress; AttachDbFileName=|DataDirectory|DATA\CsmdTheLeadsSchool.mdf ;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;"
+        objDoc.Save(filePath)
+
+        lblState.Caption = "Current State: Connected"
+        lblState.ItemAppearance.Normal.BackColor = Color.LimeGreen
+
+        Dim datx As Date = CDate(Dtp1.EditValue)
+        Using db As New CsmdBioAttendenceEntities1
+            Dim dt = (From a In db.Emp_Attendence_Device Where a.Emp_Attendence_Device_Date.Value.Month >= datx.Month And
+                                                                          a.Emp_Attendence_Device_Date.Value.Month <= datx.Month And
+                                                                          a.Emp_Attendence_Device_Date.Value.Year >= datx.Year And
+                                                                          a.Emp_Attendence_Device_Date.Value.Year <= datx.Year
+                      Select a).ToList
+            If dt.Count > 0 Then
+                Dim k As Integer = 0
+                ProgressBarControl1.Properties.Maximum = dt.Count
+                ProgressBarControl1.Properties.Minimum = 0
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 0
+                ProgressBarControl1.Update()
+                For Each dts In dt
+                    ProgressBarControl1.Position = k
+                    ProgressBarControl1.Update()
+                    k += 1
+                    Using db2 As New CsmdBioAttendenceEntities
+                        Dim df = (From a In db2.Emp_Attendence_Device Where a.Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID And
+                                                                          a.Emp_Attendence_Device_DateTime = dts.Emp_Attendence_Device_DateTime
+                                  Select a).FirstOrDefault
+                        If df IsNot Nothing Then
+
+                        Else
+                            Dim dfNew = New Emp_Attendence_Device
+                            With dfNew
+                                .Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID
+                                .Emp_Attendence_Device_Date = dts.Emp_Attendence_Device_Date
+                                .Emp_Attendence_Device_DateTime = dts.Emp_Attendence_Device_DateTime
+                                .Emp_Attendence_Device_Time = dts.Emp_Attendence_Device_Time
+                                .Emp_Attendence_Device_Status = dts.Emp_Attendence_Device_Status
+
+                            End With
+                            db2.Emp_Attendence_Device.Add(dfNew)
+                            db2.SaveChanges()
+                        End If
+                    End Using
+                Next
+                MsgBox("Import Done")
+                bn = False
+                Load_From_DeviceDB()
+                EmpDate = CDate(Dtp1.EditValue)
+                Load_MainView_Multi_Emp_DeviceBy_Day(EmpDate)
+                lblState.Caption = "Status: Disconnected"
+                lblState.ItemAppearance.Normal.BackColor = Color.Red
+            End If
+
+        End Using
+    End Sub
+
 #End Region
 
 End Class

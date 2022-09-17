@@ -579,13 +579,13 @@ Public Class frmPayments
                 strDetail = strDetail & "&text="
                 strDetail = strDetail & "*" & dt.Emp_Name & "*%0a"
                 'strDetail = strDetail & "*Faazal Furniture*%0a"
-                strDetail = strDetail & "*YOUSAF HOSPITAL*%0a"
+                strDetail = strDetail & "*FAAZAL PHARMACY AND MART*%0a"
 
                 'strDetail = strDetail & "%09%09Satisfaction Guaranteed%0a"
                 'strDetail = strDetail & "*Dhulyan Road Dinga*%0a"
-                strDetail = strDetail & "*LAL QILAH CHOWK KHARIAN ROAD DINGA*%0a"
+                strDetail = strDetail & "*DHULYAN CHOWK DINGA*%0a"
                 'strDetail = strDetail & "*Phone:*	%090537-401910 %0a"
-                strDetail = strDetail & "*Cell :*		%09%090344-7402521%0a%0a"
+                strDetail = strDetail & "*Cell :*		%09%090332-7117786%0a%0a"
                 'strDetail = strDetail & "*...............................................*%0a%0a"
 
                 strDetail = strDetail & "*Name :*		%09%09" & dt.Emp_Name & " s/o " & dt.a.Employee.Emp_Father & "%0a%0a"
