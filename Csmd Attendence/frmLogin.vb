@@ -12,6 +12,7 @@ Public Class frmLogin
             Dim dt = (From a In db.Plaza_User Where a.User_Name = Unm And a.User_Pass = uPs Select a).FirstOrDefault
             If dt IsNot Nothing Then
                 '
+                'vbccvc
                 Me.Hide()
                 'frmPlazaOpening.Show()
                 PlazaUserID = dt.User_ID
