@@ -71,7 +71,7 @@ Public Class frmFaceTest
             'For idwFingerIndex = 0 To 9
             If axCZKEM1.GetUserFaceStr(iMachineNumber, sEnrollNumber, iFaceIndex, sTmpData, iLength) Then 'get the corresponding templates string and length from the memory
 
-                Using db As New CsmdBioAttendenceEntities
+                        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
                     Dim ddd As Integer = If(CInt(Microsoft.VisualBasic.Right(sEnrollNumber.ToString, 1)) = 0, 10, CInt(Microsoft.VisualBasic.Right(sEnrollNumber.ToString, 1)))
                     Dim fg = (From a In db.Emp_Bio_Device_Users Where a.Emp_ID = 1 And a.Emp_Bio_Device_Users_UserID = CType(sEnrollNumber, Integer?) Select a).FirstOrDefault
@@ -119,9 +119,9 @@ Public Class frmFaceTest
         '    Return 1;
     End Sub
     Public Sub LoadFromDb(EmpID As Integer)
-        Using db As New CsmdBioAttendenceEntities
+                Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Attendence_Status Group Join b In db.Emp_Bio_Device_Users.Where(Function(o) CBool(o.Emp_ID = EmpID)) On a.Attendence_Status_ID Equals b.Attendence_Status_ID Into z = Group From b In z.DefaultIfEmpty()
-                      Select New With {a.Attendence_Status_Type, a.Attendence_Status_Finger, b.Employee.Emp_Image,
+                      Select New With {a.Attendence_Status_Type, a.Attendence_Status_Finger,
                            b.Emp_Bio_Device_Users_UserID,
                            b.Emp_Bio_Device_User_Name,
                            b.Emp_Bio_Device_User_Finger,

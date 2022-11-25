@@ -22,6 +22,7 @@ Partial Public Class CsmdBioAttendenceEntities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
+    Public Overridable Property Attendance_Duty_Status() As DbSet(Of Attendance_Duty_Status)
     Public Overridable Property Attendence_Status() As DbSet(Of Attendence_Status)
     Public Overridable Property Auto_Number() As DbSet(Of Auto_Number)
     Public Overridable Property Emp_Att_Payment() As DbSet(Of Emp_Att_Payment)

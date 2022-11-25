@@ -1,4 +1,5 @@
-﻿Imports System.Text
+﻿Imports System.Data.Entity.Core.Objects
+Imports System.Text
 'Imports CsmdPlazaDatabase
 Imports CsmdBioDatabase
 Imports DevExpress.LookAndFeel
@@ -6,7 +7,7 @@ Imports DevExpress.LookAndFeel
 Public Class frmLogin
 
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim Unm As String = uName.Text
             Dim uPs As String = uPass.Text
             Dim dt = (From a In db.Plaza_User Where a.User_Name = Unm And a.User_Pass = uPs Select a).FirstOrDefault
@@ -20,6 +21,10 @@ Public Class frmLogin
             Else
                 MsgBox("Wrong Password")
             End If
+        End Using
+
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
+
         End Using
     End Sub
 
@@ -42,9 +47,9 @@ Public Class frmLogin
         End Try
         'MsgBox(SplitOnCapitals("ThisIsMyCapsDelimitedString"))
         uName.Text = "Csmd Softwares"
-        ' uName.Text = "moaz"
-        ''uName.Text = "ch imran"
-        uPass.Text = "12321"
+        uName.Text = "moaz"
+        'uName.Text = "ch imran"
+        uPass.Text = "123"
         uPass.Focus()
 
     End Sub

@@ -344,7 +344,7 @@ Public Class frmMain
     End Sub
 
     Private Sub BarButtonItem15_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem15.ItemClick
-        'Using db As New CsmdBioAttendenceEntities
+        '        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
         '    Dim dt = (From a In db.Employees Select a.Emp_Name, a.Emp_Father, a.Emp_Salary, a.Emp_DutyOn, a.Emp_Duty_Off).ToList
         '    If dt.Count > 0 Then
         '        For Each dts In dt

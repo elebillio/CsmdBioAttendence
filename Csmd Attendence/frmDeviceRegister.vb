@@ -14,9 +14,10 @@ Public Class frmDeviceRegister
         TempGridCheckMarksSelection = New GridCheckMarksSelectionxx(AdvBandedGridView1)
         TempGridCheckMarksSelection.View.OptionsSelection.InvertSelection = True
         LoadGridCol()
+        AdvBandedGridView1.IndicatorWidth = 35
     End Sub
     Private Sub LoadGridCol()
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
 
             dataT.Rows.Clear()
@@ -225,20 +226,20 @@ Public Class frmDeviceRegister
         End Using
     End Sub
     Private Sub LoadData()
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dtRow As DataRow
             dataT.Rows.Clear()
-            Dim dt = (From a In db.Employees Select a.Emp_ID, a.Emp_Reg, a.Emp_Name, a.Emp_Father, a.Emp_Image, a.Emp_Address).ToList
+            Dim dt = (From a In db.Employees Select a.Emp_ID, a.Emp_Reg, a.Emp_Name, a.Emp_Father, a.Emp_Address).ToList
             If dt.Count > 0 Then
                 For Each dts In dt
                     dtRow = dataT.NewRow
                     dtRow.Item("ID") = dts.Emp_ID
                     dtRow.Item("RegNo") = dts.Emp_Reg
-                    Try
-                        dtRow.Item("Emp_Image") = DbToImg(dts.Emp_Image)
-                    Catch ex As Exception
+                    'Try
+                    '    dtRow.Item("Emp_Image") = DbToImg(dts.Emp_Image)
+                    'Catch ex As Exception
 
-                    End Try
+                    'End Try
                     dtRow.Item("Emp_Name") = dts.Emp_Name
                     dtRow.Item("Emp_Father") = dts.Emp_Father
                     'dtRow.Item("Emp_Address") = dts.Emp_Address
@@ -268,20 +269,20 @@ Public Class frmDeviceRegister
         End Using
     End Sub
     Private Sub LoadData(Status As Boolean)
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dtRow As DataRow
             dataT.Rows.Clear()
-            Dim dt = (From a In db.Employees Where a.Emp_Status = Status Select a.Emp_ID, a.Emp_Reg, a.Emp_Name, a.Emp_Father, a.Emp_Image, a.Emp_Address).ToList
+            Dim dt = (From a In db.Employees Where a.Emp_Status = Status Select a.Emp_ID, a.Emp_Reg, a.Emp_Name, a.Emp_Father, a.Emp_Address).ToList
             If dt.Count > 0 Then
                 For Each dts In dt
                     dtRow = dataT.NewRow
                     dtRow.Item("ID") = dts.Emp_ID
                     dtRow.Item("RegNo") = dts.Emp_Reg
-                    Try
-                        dtRow.Item("Emp_Image") = DbToImg(dts.Emp_Image)
-                    Catch ex As Exception
+                    'Try
+                    '    dtRow.Item("Emp_Image") = DbToImg(dts.Emp_Image)
+                    'Catch ex As Exception
 
-                    End Try
+                    'End Try
                     dtRow.Item("Emp_Name") = dts.Emp_Name
                     dtRow.Item("Emp_Father") = dts.Emp_Father
                     'dtRow.Item("Emp_Address") = dts.Emp_Address
@@ -350,7 +351,7 @@ Public Class frmDeviceRegister
     End Sub
 
     Private Sub AdvBandedGridView1_RowCellStyle(sender As Object, e As RowCellStyleEventArgs) Handles AdvBandedGridView1.RowCellStyle
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             'Dim dvf = (From a In db.Attendence_Status
             '           Select a).ToList
             'If dvf.Count > 0 Then
@@ -528,5 +529,10 @@ Public Class frmDeviceRegister
         BarButtonItem1.Down = False
         BarButtonItem2.Down = False
         BarButtonItem3.Down = True
+    End Sub
+    Private Sub AdvBandedGridView1_CustomDrawRowIndicator(sender As Object, e As RowIndicatorCustomDrawEventArgs) Handles AdvBandedGridView1.CustomDrawRowIndicator
+        If e.RowHandle >= 0 Then
+            e.Info.DisplayText = (e.RowHandle + 1).ToString()
+        End If
     End Sub
 End Class

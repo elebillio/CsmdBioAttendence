@@ -103,7 +103,7 @@ Module PlazaAutoNumber
     'End Function
 
     Public Function AutoRegisterNumber() As String
-        Using db = New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim GetNumber As String = ""
 
             Dim AutoNumber = (From a In db.Auto_Number Select a).FirstOrDefault

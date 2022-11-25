@@ -5,7 +5,7 @@ Public Class frmEmpCashRegisterLock
         frmUnlock(pw)
     End Sub
     Private Sub frmUnlock(Pw As String)
-        Using db As New CsmdBioAttendenceEntities
+                Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Plaza_User Where a.User_Pass = Pw Select a).FirstOrDefault
             If dt IsNot Nothing Then
                 frmEmpCashRegister.ShowDialog()

@@ -1,4 +1,6 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿Imports CsmdBioDatabase
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Public Class XtraReport1
     Inherits DevExpress.XtraReports.UI.XtraReport
 
@@ -19,11 +21,11 @@ Partial Public Class XtraReport1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim EfConnectionParameters1 As DevExpress.DataAccess.EntityFramework.EFConnectionParameters = New DevExpress.DataAccess.EntityFramework.EFConnectionParameters()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(XtraReport1))
         Dim DynamicListLookUpSettings1 As DevExpress.XtraReports.Parameters.DynamicListLookUpSettings = New DevExpress.XtraReports.Parameters.DynamicListLookUpSettings()
-        Me.EfDataSource1 = New DevExpress.DataAccess.EntityFramework.EFDataSource(Me.components)
+        Dim EfConnectionParameters1 As DevExpress.DataAccess.EntityFramework.EFConnectionParameters = New DevExpress.DataAccess.EntityFramework.EFConnectionParameters()
+        Dim EfConnectionParameters2 As DevExpress.DataAccess.EntityFramework.EFConnectionParameters = New DevExpress.DataAccess.EntityFramework.EFConnectionParameters()
+        Me.ObjectDataSource1 = New DevExpress.DataAccess.ObjectBinding.ObjectDataSource()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
         Me.XrTable18 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow18 = New DevExpress.XtraReports.UI.XRTableRow()
@@ -199,7 +201,11 @@ Partial Public Class XtraReport1
         Me.PageInfo = New DevExpress.XtraReports.UI.XRControlStyle()
         Me.DataField = New DevExpress.XtraReports.UI.XRControlStyle()
         Me.Parameter1 = New DevExpress.XtraReports.Parameters.Parameter()
-        CType(Me.EfDataSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource()
+        Me.BindingSource2 = New System.Windows.Forms.BindingSource()
+        Me.EfDataSource1 = New DevExpress.DataAccess.EntityFramework.EFDataSource()
+        Me.EfDataSource2 = New DevExpress.DataAccess.EntityFramework.EFDataSource()
+        CType(Me.ObjectDataSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable18, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable27, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -230,15 +236,16 @@ Partial Public Class XtraReport1
         CType(Me.XrTable24, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable25, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable26, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EfDataSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EfDataSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
-        'EfDataSource1
+        'ObjectDataSource1
         '
-        EfConnectionParameters1.ConnectionString = ""
-        EfConnectionParameters1.ConnectionStringName = "CsmdBioAttendenceEntities"
-        EfConnectionParameters1.Source = GetType(CsmdBioDatabase.CsmdBioAttendenceEntities)
-        Me.EfDataSource1.ConnectionParameters = EfConnectionParameters1
-        Me.EfDataSource1.Name = "EfDataSource1"
+        Me.ObjectDataSource1.DataSource = GetType(CsmdBioDatabase.CsmdBioAttendenceEntities)
+        Me.ObjectDataSource1.Name = "ObjectDataSource1"
         '
         'Detail
         '
@@ -1683,7 +1690,7 @@ Partial Public Class XtraReport1
         Me.Parameter1.Description = "Employees Ids"
         DynamicListLookUpSettings1.DataAdapter = Nothing
         DynamicListLookUpSettings1.DataMember = "Emp_Att_Payment"
-        DynamicListLookUpSettings1.DataSource = Me.EfDataSource1
+        DynamicListLookUpSettings1.DataSource = Me.ObjectDataSource1
         DynamicListLookUpSettings1.DisplayMember = "Emp_Att_Payment_Issue_Date"
         DynamicListLookUpSettings1.FilterString = "[Emp_Status] = True"
         DynamicListLookUpSettings1.ValueMember = "Emp_Att_Payment_ID"
@@ -1692,12 +1699,36 @@ Partial Public Class XtraReport1
         Me.Parameter1.Name = "Parameter1"
         Me.Parameter1.Type = GetType(Integer)
         '
+        'BindingSource1
+        '
+        Me.BindingSource1.DataSource = GetType(CsmdBioDatabase.Employee)
+        '
+        'BindingSource2
+        '
+        Me.BindingSource2.DataSource = GetType(CsmdBioDatabase.CsmdBioAttendenceEntities)
+        '
+        'EfDataSource1
+        '
+        EfConnectionParameters1.ConnectionString = ""
+        EfConnectionParameters1.ConnectionStringName = ""
+        EfConnectionParameters1.Source = GetType(CsmdBioDatabase.CsmdBioAttendenceEntities)
+        Me.EfDataSource1.ConnectionParameters = EfConnectionParameters1
+        Me.EfDataSource1.Name = "EfDataSource1"
+        '
+        'EfDataSource2
+        '
+        EfConnectionParameters2.ConnectionString = resources.GetString("EfConnectionParameters2.ConnectionString")
+        EfConnectionParameters2.ConnectionStringName = ""
+        EfConnectionParameters2.Source = GetType(CsmdBioDatabase.CsmdBioAttendenceEntities)
+        Me.EfDataSource2.ConnectionParameters = EfConnectionParameters2
+        Me.EfDataSource2.Name = "EfDataSource2"
+        '
         'XtraReport1
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin})
-        Me.ComponentStorage.AddRange(New System.ComponentModel.IComponent() {Me.EfDataSource1})
+        Me.ComponentStorage.AddRange(New System.ComponentModel.IComponent() {Me.ObjectDataSource1, Me.EfDataSource1, Me.EfDataSource2})
         Me.DataMember = "Emp_Att_Payment"
-        Me.DataSource = Me.EfDataSource1
+        Me.DataSource = Me.EfDataSource2
         Me.FilterString = "[Emp_Att_Payment_ID] In (?Parameter1)"
         Me.Margins = New System.Drawing.Printing.Margins(0, 0, 0, 31)
         Me.PageHeight = 900
@@ -1707,7 +1738,7 @@ Partial Public Class XtraReport1
         Me.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic
         Me.StyleSheet.AddRange(New DevExpress.XtraReports.UI.XRControlStyle() {Me.Title, Me.FieldCaption, Me.PageInfo, Me.DataField})
         Me.Version = "15.1"
-        CType(Me.EfDataSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ObjectDataSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrTable18, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrTable27, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrTable28, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1738,13 +1769,17 @@ Partial Public Class XtraReport1
         CType(Me.XrTable24, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrTable25, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrTable26, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EfDataSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EfDataSource2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
     Friend WithEvents Detail As DevExpress.XtraReports.UI.DetailBand
     Friend WithEvents TopMargin As DevExpress.XtraReports.UI.TopMarginBand
     Friend WithEvents BottomMargin As DevExpress.XtraReports.UI.BottomMarginBand
-    Friend WithEvents EfDataSource1 As DevExpress.DataAccess.EntityFramework.EFDataSource
+    'Friend WithEvents EfDataSource1 As DevExpress.DataAccess.EntityFramework.EFDataSource
     Friend WithEvents Title As DevExpress.XtraReports.UI.XRControlStyle
     Friend WithEvents FieldCaption As DevExpress.XtraReports.UI.XRControlStyle
     Friend WithEvents PageInfo As DevExpress.XtraReports.UI.XRControlStyle
@@ -1917,4 +1952,9 @@ Partial Public Class XtraReport1
     Friend WithEvents XrTableCell123 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTableCell124 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrPictureBox1 As DevExpress.XtraReports.UI.XRPictureBox
+    Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents ObjectDataSource1 As DevExpress.DataAccess.ObjectBinding.ObjectDataSource
+    Friend WithEvents BindingSource2 As BindingSource
+    Friend WithEvents EfDataSource1 As DevExpress.DataAccess.EntityFramework.EFDataSource
+    Friend WithEvents EfDataSource2 As DevExpress.DataAccess.EntityFramework.EFDataSource
 End Class

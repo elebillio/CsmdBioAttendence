@@ -190,7 +190,7 @@ Module frm
     ' Acc_7_1_R As TextEdit,
     ' Acc_7_2_L As TextEdit,
     ' Acc_7_2_R As TextEdit)
-    '    Using db As New CsmdBioAttendenceEntities
+    '            Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
     '        'Dim DriverID As Integer = Driver_ID.EditValue
     '        'Dim VehicelID As Integer = Vehicle_ID.EditValue
     '        'Dim Datx As DateTime = DateX.EditValue
@@ -387,13 +387,7 @@ Module frm
         End Using              ' dispose of memstream
         Return tmpData
     End Function
-    Public Function FirstDayOfMonth(ByVal sourceDate As DateTime) As DateTime
-        Return New DateTime(sourceDate.Year, sourceDate.Month, 1)
-    End Function
-    Public Function LastDayOfMonth(ByVal sourceDate As DateTime) As String
-        Dim lastDay As DateTime = New DateTime(sourceDate.Year, sourceDate.Month, 1)
-        Return lastDay.AddMonths(1).AddDays(-1)
-    End Function
+
     Public Function IfNull(txt As TextEdit) As Double
         Return If(txt.Text = "", 0, txt.Text)
     End Function
@@ -401,7 +395,7 @@ Module frm
         Return If(txt.Text = "", "00:00", txt.Text)
     End Function
     Public Sub cashAccountMulti()
-        'Using db As New CsmdBioAttendenceEntities
+        '        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
         '    Dim dtC = (From a In db.Chart_Of_Accounts Where a.Chart_Of_Accounts_Type_ID = 1 Select a).ToList
         '    If dtC.Count > 0 Then
         '        For Each dtX In dtC
@@ -426,7 +420,7 @@ Module frm
         'End Using
     End Sub
     Public Sub cashAccountSingle(AccountID As Integer)
-        'Using db As New CsmdBioAttendenceEntities
+        '        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
         '    Dim dtC = (From a In db.Chart_Of_Accounts Where a.Chart_Of_Accounts_ID = AccountID Select a).FirstOrDefault
         '    If dtC IsNot Nothing Then
         '        Dim dt = (From a In db.RB_Pay_Detail Where a.Chart_Of_Accounts_ID = dtC.Chart_Of_Accounts_ID Group a By a.Chart_Of_Accounts_ID Into z = Group, TotalPaid = Sum(a.RB_Pay_Detail_Paid) Select TotalPaid).FirstOrDefault

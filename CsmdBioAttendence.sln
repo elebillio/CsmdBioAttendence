@@ -17,6 +17,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CsmdUpdater", "CsmdUpdater\
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CsmdWebSender", "CsmdWebSender\CsmdWebSender.vbproj", "{937823F7-577C-460F-A4C4-1E563D04AD17}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CsmdOnline", "CsmdOnline\CsmdOnline.vbproj", "{948F260E-8ADF-42D9-AD70-A0EDBF065E8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{937823F7-577C-460F-A4C4-1E563D04AD17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{937823F7-577C-460F-A4C4-1E563D04AD17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{937823F7-577C-460F-A4C4-1E563D04AD17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{948F260E-8ADF-42D9-AD70-A0EDBF065E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{948F260E-8ADF-42D9-AD70-A0EDBF065E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{948F260E-8ADF-42D9-AD70-A0EDBF065E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{948F260E-8ADF-42D9-AD70-A0EDBF065E8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,9 +15,10 @@ Public Class frmPayments
         TempGridCheckMarksSelection.View.OptionsSelection.InvertSelection = True
         ' Dim tempVar As New LinesDrawHelper(AdvBandedGridView1)
         '  tempVar(AdvBandedGridView1)
+        AdvBandedGridView1.IndicatorWidth = 35
     End Sub
     Private Sub LoadEmp()
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Try
                 Dim dt = (From c In db.Emp_Att_Payment Where c.Employee.Emp_Status = True
                           Order By c.Emp_Att_Payment_Issue_Date Ascending
@@ -58,7 +59,7 @@ Public Class frmPayments
         End Using
     End Sub
     Private Sub LoadEmp(Datx As Date)
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Try
                 Dim dt = (From c In db.Emp_Att_Payment.Where(Function(o) o.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And o.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year)
                           Order By c.Emp_Att_Payment_Issue_Date Ascending
@@ -222,7 +223,7 @@ Public Class frmPayments
 
     Private Sub AdvBandedGridView1_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles AdvBandedGridView1.CellValueChanged
 
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim ID As Integer = CInt(AdvBandedGridView1.GetFocusedRowCellValue("Emp_Att_Payment_ID"))
             Dim Salar As Decimal = CInt(AdvBandedGridView1.GetFocusedRowCellValue("Emp_Att_Payment_Fix"))
 
@@ -492,10 +493,10 @@ Public Class frmPayments
     Public Function Load_Payment_Month_Single_For_WhatsAppChk(EmpID As Integer, Datx As Date) As String
 
 
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             'db.Emp_Att_Payment.Load
             'BindingSource1.DataSource = db.Emp_Att_Payment.Local.ToBindingList()
-            Dim md As Integer = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
+            Dim md As Integer = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
 
             Dim dt = (From a In db.Emp_Att_Payment Where a.Emp_ID = EmpID And a.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And a.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year
                       Select a).FirstOrDefault
@@ -521,17 +522,17 @@ Public Class frmPayments
     Public Function Load_Payment_Month_Single_For_WhatsApp(EmpID As Integer, Datx As Date) As String
 
 
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
 
 
 
             'db.Emp_Att_Payment.Load
             'BindingSource1.DataSource = db.Emp_Att_Payment.Local.ToBindingList()
-            Dim md As Integer = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
+            Dim md As Integer = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
 
             Dim dt = (From a In db.Emp_Att_Payment.AsEnumerable Where a.Emp_ID = EmpID And a.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And a.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year
-                      Select New With {a.Emp_Att_Payment_ID, a, a.Employee.Emp_Name, a.Employee.Emp_Image, a.Employee.Emp_Phone, a.Emp_Att_Payment_Fix,
+                      Select New With {a.Emp_Att_Payment_ID, a, a.Employee.Emp_Name, a.Employee.Emp_Phone, a.Emp_Att_Payment_Fix,
                           a.Emp_Att_Payment_Issue_Date, a.Emp_Att_Payment_From_Date, a.Emp_Att_Payment_To_Date,
                           a.Emp_Att_Payment_DutyOn, a.Emp_Att_Payment_DutyOff,
                           a.Emp_Att_Payment_Total_Hours, a.Emp_Att_Payment_Total_MinRate, a.Emp_Att_Payment_Total_Days, a.Emp_Att_Payment_Total_DayRate,
@@ -764,7 +765,7 @@ Public Class frmPayments
     End Sub
 
     Private Sub BarButtonItem11_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem11.ItemClick
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             If intList2.Count > 0 Then
                 For kk As Integer = 0 To intList2.Count - 1
 
@@ -772,72 +773,72 @@ Public Class frmPayments
 
 
                     Dim ext As Double = If(txtExtraDays.EditValue IsNot Nothing, txtExtraDays.EditValue, 0)
-                        Dim idx As Integer = intList2(k)
-                        Dim Datx As DateTime = Issue_Date.EditValue
-                        Dim dt = (From a In db.Emp_Att_Payment Where a.Emp_ID = idx And a.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And a.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year
-                                  Select a).FirstOrDefault
-                        If dt IsNot Nothing Then
-                            dt.Emp_Att_Payment_ExtraDays = ext
-                            Dim ID As Integer = CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_ID"))
-                            Dim Salar As Decimal = CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Fix"))
+                    Dim idx As Integer = intList2(k)
+                    Dim Datx As DateTime = Issue_Date.EditValue
+                    Dim dt = (From a In db.Emp_Att_Payment Where a.Emp_ID = idx And a.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And a.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year
+                              Select a).FirstOrDefault
+                    If dt IsNot Nothing Then
+                        dt.Emp_Att_Payment_ExtraDays = ext
+                        Dim ID As Integer = CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_ID"))
+                        Dim Salar As Decimal = CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Fix"))
 
 
-                            Dim InOutAmt As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_InOutDays_Amount"))
-                            Dim ExtraDay As Integer = If(txtExtraDays.EditValue IsNot Nothing, txtExtraDays.EditValue, 0)
+                        Dim InOutAmt As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_InOutDays_Amount"))
+                        Dim ExtraDay As Integer = If(txtExtraDays.EditValue IsNot Nothing, txtExtraDays.EditValue, 0)
 
-                            Dim DayRate As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "dr5"))
+                        Dim DayRate As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "dr5"))
 
-                            Dim sds As Decimal = ExtraDay * DayRate
-                            Dim TotAmount As Decimal = sds + InOutAmt
+                        Dim sds As Decimal = ExtraDay * DayRate
+                        Dim TotAmount As Decimal = sds + InOutAmt
 
                         AdvBandedGridView1.SetRowCellValue(k, "Emp_Att_Payment_ExtraDays_Amount", sds)
                         AdvBandedGridView1.SetRowCellValue(k, "Emp_Att_Payment_Salaray_Total", TotAmount)
 
                         Dim R7 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Late_Amount")))
-                            Dim R8 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Early_Amount")))
-                            Dim R9 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_OverTime_Amount")))
-                            Dim R10 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Prayer_Late_Amount")))
-                            Dim R11 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Short_Amount")))
-                            Dim R12 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Lunch_Late_Amount")))
-                            Dim R13 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Lunch_OverTime_Amount")))
-                            Dim R14 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Private_Late_Amount")))
+                        Dim R8 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Early_Amount")))
+                        Dim R9 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_OverTime_Amount")))
+                        Dim R10 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Prayer_Late_Amount")))
+                        Dim R11 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Short_Amount")))
+                        Dim R12 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Lunch_Late_Amount")))
+                        Dim R13 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Lunch_OverTime_Amount")))
+                        Dim R14 As Decimal = Math.Abs(CInt(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Private_Late_Amount")))
 
-                            Dim over As Decimal = R9 + R13
-                            Dim mins As Decimal = (R7 + R8) + (R10 + R11) + (R12 + R14)
+                        Dim over As Decimal = R9 + R13
+                        Dim mins As Decimal = (R7 + R8) + (R10 + R11) + (R12 + R14)
 
-                            Dim salTot As Decimal = (TotAmount + over) - mins
+                        Dim salTot As Decimal = (TotAmount + over) - mins
 
 
 
                         AdvBandedGridView1.SetRowCellValue(k, "Emp_Att_Payment_Amount", salTot)
                         Dim P1 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Beg"))
-                            Dim P3 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Advance"))
-                            Dim P4 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Fine"))
-                            Dim P2 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Bonus"))
+                        Dim P3 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Advance"))
+                        Dim P4 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Fine"))
+                        Dim P2 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Bonus"))
 
-                            Dim P5 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Paid"))
+                        Dim P5 As Decimal = CDec(AdvBandedGridView1.GetRowCellValue(k, "Emp_Att_Payment_Paid"))
 
-                            Dim pTOT As Decimal = salTot + (P1 + P2) - (P3 + P4)
+                        Dim pTOT As Decimal = salTot + (P1 + P2) - (P3 + P4)
                         AdvBandedGridView1.SetRowCellValue(k, "Emp_Att_Payment_Total", pTOT)
                         AdvBandedGridView1.SetRowCellValue(k, "Emp_Att_Payment_Balance", pTOT - P5)
 
                         Dim dts = (From a In db.Emp_Att_Payment Where a.Emp_Att_Payment_ID = ID Select a).FirstOrDefault
-                            If dts IsNot Nothing Then
-                                'dts.Emp_Att_Payment_Add_Days = ExtraDay
-                                'dts.Emp_Att_Payment_Absent_D = totDa
-                                'dts.Emp_Att_Payment_Absent_Amount = -TotAmount
-                                dts.Emp_Att_Payment_ExtraDays = ExtraDay
-                                dts.Emp_Att_Payment_ExtraDays_Amount = sds
-                                dts.Emp_Att_Payment_Salaray_Total = TotAmount
-                                dts.Emp_Att_Payment_Amount = salTot
-                                dts.Emp_Att_Payment_Total = pTOT
-                                dts.Emp_Att_Payment_Balance = pTOT - P5
-                                '  db.SaveChanges()
+                        If dts IsNot Nothing Then
+                            'dts.Emp_Att_Payment_Add_Days = ExtraDay
+                            'dts.Emp_Att_Payment_Absent_D = totDa
+                            'dts.Emp_Att_Payment_Absent_Amount = -TotAmount
+                            dts.Emp_Att_Payment_ExtraDays = ExtraDay
+                            dts.Emp_Att_Payment_ExtraDays_Amount = sds
+                            dts.Emp_Att_Payment_Salaray_Total = TotAmount
+                            dts.Emp_Att_Payment_Amount = salTot
+                            dts.Emp_Att_Payment_Total = pTOT
+                            dts.Emp_Att_Payment_Balance = pTOT - P5
+                            '  db.SaveChanges()
 
-                            End If
-
-                            db.SaveChanges()
                         End If
+
+                        db.SaveChanges()
+                    End If
 
                 Next
                 MsgBox("Add ExtraDays Successfull")
@@ -848,5 +849,10 @@ Public Class frmPayments
                 MsgBox("Please Select Employees")
             End If
         End Using
+    End Sub
+    Private Sub AdvBandedGridView1_CustomDrawRowIndicator(sender As Object, e As RowIndicatorCustomDrawEventArgs) Handles AdvBandedGridView1.CustomDrawRowIndicator
+        If e.RowHandle >= 0 Then
+            e.Info.DisplayText = (e.RowHandle + 1).ToString()
+        End If
     End Sub
 End Class

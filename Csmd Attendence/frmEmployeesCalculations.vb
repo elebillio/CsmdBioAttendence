@@ -109,8 +109,8 @@ Public Class frmEmployeesCalculations
             'u4 = 9
 
         End Try
-        FF1.EditValue = FirstDayOfMonth(Today)
-        FF2.EditValue = LastDayOfMonth(Today)
+        FF1.EditValue = CsmdDateTime.FirstDayOfMonth(Today)
+        FF2.EditValue = CsmdDateTime.LastDayOfMonth(Today)
         'BarEditItem1.EditValue = u1
         'BarEditItem2.EditValue = If(u1 = "", "9", u2)
 
@@ -119,15 +119,19 @@ Public Class frmEmployeesCalculations
         'LayoutControl1.Refresh()
         Folder()
 
-        Load_Att_Setting()
+        'Load_Att_Setting()
         LoadEmp(Today)
         Load_Employees_RepositoryItemLookUpEdit.ColumnsAndData(RepositoryItemLookUpEdit1)
         Load_Attendence_Status_RepositoryItemLookUpEdit.ColumnsAndData(RepositoryItemLookUpEdit2)
         Issue_Date.EditValue = Today
+
+        GridView1.IndicatorWidth = 35
+        GridView2.IndicatorWidth = 35
+        'AdvBandedGridView1.IndicatorWidth = 35
     End Sub
 
     Private Sub LoadEmp(Datx As Date)
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Employees Where a.Emp_Status = True Order By a.Emp_Name
                       Group Join b In db.Emp_Attendence_Device.Where(Function(o) CBool(o.Emp_Attendence_Device_Status = True And o.Emp_Attendence_Device_Date.Value.Month = Datx.Month And o.Emp_Attendence_Device_Date.Value.Year = Datx.Year)) On a.Emp_ID Equals b.Emp_Bio_Device_Users.Emp_ID Into x = Group, mm = Count
                       Group Join c In db.Emp_Att_Payment.Where(Function(o) o.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And o.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year) On a.Emp_ID Equals c.Emp_ID Into z = Group
@@ -150,13 +154,13 @@ Public Class frmEmployeesCalculations
     Public EmpIDs As Integer
 
 
-    Dim db As New CsmdBioAttendenceEntities
+    Dim db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
     Dim objdt As New DataTable
 
 
 #Region "Import From Excel files"
     'Private Sub LoadImportDate()
-    '    Using db As New CsmdBioAttendenceEntities
+    '            Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
 
     '        Dim ExcelCon As New OleDbConnection
@@ -456,7 +460,7 @@ Public Class frmEmployeesCalculations
 #End Region
 
     Private Sub BarButtonItem3_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem3.ItemClick
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             If intList IsNot Nothing Then
                 Dim sF1 As Date = CDate(FF1.EditValue).Date '.ToString("dd/MM/yyyy")
                 Dim sF2 As Date = CDate(FF2.EditValue).Date
@@ -593,7 +597,7 @@ Public Class frmEmployeesCalculations
                     ProgressBarControl1.Update()
                     k += 1
 
-                    Dim firstDay As Date = FirstDayOfMonth(FromDat)
+                    Dim firstDay As Date = CsmdDateTime.FirstDayOfMonth(FromDat)
                     Dim lastDay As Date = DateTime.Parse(CStr(firstDay)).AddDays(Date.DaysInMonth(FromDat.Year, FromDat.Month))
                     Dim AAz As Date = CDate(firstDay & " " & CsmdDateTime.StartDayTime(FromDat.Date))
                     Dim AAx As Date = CDate(lastDay.AddDays(1).Date & " " & CsmdDateTime.EndDayTime(FromDat.Date))
@@ -977,7 +981,7 @@ Public Class frmEmployeesCalculations
 
 
 
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
             If intList IsNot Nothing Then
                 Dim datX As Date = CDate(Issue_Date.EditValue)
@@ -1105,7 +1109,7 @@ Public Class frmEmployeesCalculations
                                 If dtMax IsNot Nothing Then
                                     Emp_Att_Payment_To_Date = CDate(dtMax)
                                 Else
-                                    Emp_Att_Payment_To_Date = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue)))
+                                    Emp_Att_Payment_To_Date = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue)))
                                 End If
 
                                 Dim fff As DateTime = CType(Emp_Att_Payment_From_Date, Date)
@@ -1296,7 +1300,7 @@ Public Class frmEmployeesCalculations
                                 Dim minR As Decimal = Emp_Att_Payment_Fix / Tim
                                 dc.Emp_Att_Payment_Total_MinRate = minR
 
-                                Dim md As Decimal = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
+                                Dim md As Decimal = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
                                 dc.Emp_Att_Payment_Total_MonthDays = md
                                 Dim ofd As Decimal = md - Tdm
                                 dc.Emp_Att_Payment_Total_OffDays = ofd
@@ -1475,7 +1479,7 @@ Public Class frmEmployeesCalculations
                                 If dtMax IsNot Nothing Then
                                     Emp_Att_Payment_To_Date = CDate(dtMax)
                                 Else
-                                    Emp_Att_Payment_To_Date = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue)))
+                                    Emp_Att_Payment_To_Date = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue)))
                                 End If
 
                                 Dim fff As DateTime = Emp_Att_Payment_From_Date
@@ -1661,7 +1665,7 @@ Public Class frmEmployeesCalculations
                                 Dim minR As Decimal = Emp_Att_Payment_Fix / Tim
                                 dcNew.Emp_Att_Payment_Total_MinRate = minR
 
-                                Dim md As Decimal = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
+                                Dim md As Decimal = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
                                 dcNew.Emp_Att_Payment_Total_MonthDays = md
                                 Dim ofd As Decimal = md - Tdm
                                 dcNew.Emp_Att_Payment_Total_OffDays = ofd
@@ -2249,7 +2253,7 @@ Public Class frmEmployeesCalculations
     End Sub
 
     Public Sub LoadAtt(Emp As Integer, FromDat As DateTime)
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             'Dim dt = (From a In db.Emp_Attendence_Device Where a.Emp_Attendence_Device_Status = True And a.Emp_Bio_Device_Users.Emp_ID = Emp And a.Emp_Attendence_Device_Date.Value.Month = FromDat.Month And a.Emp_Attendence_Device_Date.Value.Year = FromDat.Year
             '          Order By a.Emp_Bio_Device_Users.Employee.Emp_Name Let gg = CType(a.Emp_Attendence_Device_Date.Value("ddd"), String)
             '          Select New With {a.Emp_Attendence_Device_ID,
@@ -2464,7 +2468,7 @@ Public Class frmEmployeesCalculations
         RibbonMiniToolbar3.Show(MousePosition)
     End Sub
     Private Sub VGridControl1_CellValueChanged(sender As Object, e As DevExpress.XtraVerticalGrid.Events.CellValueChangedEventArgs) Handles VGridControl1.CellValueChanged
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim ID As Integer = CInt(VGridControl1.GetCellValue(rowEmp_Att_Payment_ID, e.RecordIndex))
             Dim Salar As Decimal = CInt(VGridControl1.GetCellValue(row32.PropertiesCollection.Item("Ch2"), e.RecordIndex))
             If e.Row Is row31 Then
@@ -2857,7 +2861,7 @@ Public Class frmEmployeesCalculations
     End Sub
 
     Public Sub DeleteAllAttendance()
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim FromDat As DateTime = CDate(Issue_Date.EditValue)
             If intList IsNot Nothing Then
                 Dim p1 As Integer = 1
@@ -2907,7 +2911,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Sub
     Public Sub DeleteAllEmpty()
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim FromDat As DateTime = CDate(Issue_Date.EditValue)
             If intList IsNot Nothing Then
                 Dim p1 As Integer = 1
@@ -2955,7 +2959,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Sub
     Public Sub UpdateAllSummaray()
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim FromDat As DateTime = CDate(Issue_Date.EditValue)
             If intList IsNot Nothing Then
                 Dim p1 As Integer = 1
@@ -3009,7 +3013,7 @@ Public Class frmEmployeesCalculations
     End Sub
 
     Public Function GetCash() As Decimal
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim x As Decimal = 0
             Dim z As Decimal = 0
             Dim dtC = (From a In db.Emp_Cash_Register Select a.Emp_Cash_Register_Amt).Sum
@@ -3020,7 +3024,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function GetPayable() As Decimal
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim x As Decimal = 0
             Dim z As Decimal = 0
             Dim dtT = (From a In db.Emp_Att_Payment Select a.Emp_Att_Payment_Total).Sum
@@ -3031,7 +3035,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function Get_Emp_Att_Set_Late_Arrival_Status(Datx As Date) As Boolean
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = Datx.Year
                       Select a.Emp_Att_Set_Late_Arrival_Status).FirstOrDefault
@@ -3043,7 +3047,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function Get_Emp_Att_Set_Early(Datx As Date) As Boolean
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = Datx.Year
                       Select a.Emp_Att_Set_Early_Status).FirstOrDefault
@@ -3055,7 +3059,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function Get_Emp_Att_Set_OverTime(Datx As Date) As Boolean
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = Datx.Year
                       Select a.Emp_Att_Set_Duty_OverTime_Status).FirstOrDefault
@@ -3067,7 +3071,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function Get_Emp_Att_Set_Prayer_Late(Datx As Date) As Boolean
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = Datx.Year
                       Select a.Emp_Att_Set_Prayer_Late_Status).FirstOrDefault
@@ -3079,7 +3083,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function Get_Emp_Att_Set_Short_Leave(Datx As Date) As Boolean
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = Datx.Year
                       Select a.Emp_Att_Set_Prayer_Late_Status).FirstOrDefault
@@ -3091,7 +3095,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function Get_Emp_Att_Set_Lunch_Late(Datx As Date) As Boolean
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = Datx.Year
                       Select a.Emp_Att_Set_Lunch_Status).FirstOrDefault
@@ -3103,7 +3107,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function Get_Emp_Att_Set_Lunch_OverTime(Datx As Date) As Boolean
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = Datx.Year
                       Select a.Emp_Att_Set_Lunch_OverTime_Status).FirstOrDefault
@@ -3115,7 +3119,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Function
     Public Function Get_Emp_Att_Set_Private_Late(Datx As Date) As Boolean
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = Datx.Year
                       Select a.Emp_Att_Set_Private_Late_Status).FirstOrDefault
@@ -3131,17 +3135,17 @@ Public Class frmEmployeesCalculations
     Public Sub Load_Payment_Month_Single(EmpID As Integer, Datx As Date)
 
 
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
 
 
 
             'db.Emp_Att_Payment.Load
             'BindingSource1.DataSource = db.Emp_Att_Payment.Local.ToBindingList()
-            Dim md As Integer = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
+            Dim md As Integer = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
 
             Dim dt = (From a In db.Emp_Att_Payment.AsEnumerable Where a.Emp_ID = EmpID And a.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And a.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year
-                      Select New With {a.Emp_Att_Payment_ID, a.Employee.Emp_Name, a.Employee.Emp_Image, a.Emp_Att_Payment_Fix,
+                      Select New With {a.Emp_Att_Payment_ID, a.Employee.Emp_Name, a.Emp_Att_Payment_Fix,
                           a.Emp_Att_Payment_Issue_Date, a.Emp_Att_Payment_From_Date, a.Emp_Att_Payment_To_Date,
                           a.Emp_Att_Payment_DutyOn, a.Emp_Att_Payment_DutyOff,
                           a.Emp_Att_Payment_Total_Hours, a.Emp_Att_Payment_Total_MinRate, a.Emp_Att_Payment_Total_Days, a.Emp_Att_Payment_Total_DayRate,
@@ -3191,10 +3195,10 @@ Public Class frmEmployeesCalculations
     Public Function Load_Payment_Month_Single_For_WhatsAppChk(EmpID As Integer, Datx As Date) As String
 
 
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             'db.Emp_Att_Payment.Load
             'BindingSource1.DataSource = db.Emp_Att_Payment.Local.ToBindingList()
-            Dim md As Integer = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
+            Dim md As Integer = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
 
             Dim dt = (From a In db.Emp_Att_Payment.AsEnumerable Where a.Emp_ID = EmpID And a.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And a.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year
                       Select a).FirstOrDefault
@@ -3220,17 +3224,17 @@ Public Class frmEmployeesCalculations
     Public Function Load_Payment_Month_Single_For_WhatsApp(EmpID As Integer, Datx As Date) As String
 
 
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
 
 
 
             'db.Emp_Att_Payment.Load
             'BindingSource1.DataSource = db.Emp_Att_Payment.Local.ToBindingList()
-            Dim md As Integer = CDate(LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
+            Dim md As Integer = CDate(CsmdDateTime.LastDayOfMonth(CDate(Issue_Date.EditValue))).Day
 
             Dim dt = (From a In db.Emp_Att_Payment.AsEnumerable Where a.Emp_ID = EmpID And a.Emp_Att_Payment_Issue_Date.Value.Month = Datx.Month And a.Emp_Att_Payment_Issue_Date.Value.Year = Datx.Year
-                      Select New With {a.Emp_Att_Payment_ID, a, a.Employee.Emp_Name, a.Employee.Emp_Image, a.Employee.Emp_Phone, a.Emp_Att_Payment_Fix,
+                      Select New With {a.Emp_Att_Payment_ID, a, a.Employee.Emp_Name, a.Employee.Emp_Phone, a.Emp_Att_Payment_Fix,
                           a.Emp_Att_Payment_Issue_Date, a.Emp_Att_Payment_From_Date, a.Emp_Att_Payment_To_Date,
                           a.Emp_Att_Payment_DutyOn, a.Emp_Att_Payment_DutyOff,
                           a.Emp_Att_Payment_Total_Hours, a.Emp_Att_Payment_Total_MinRate, a.Emp_Att_Payment_Total_Days, a.Emp_Att_Payment_Total_DayRate,
@@ -3428,7 +3432,7 @@ Public Class frmEmployeesCalculations
 
 
     Private Sub Load_Att_Setting()
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim datX As Date = CDate(Issue_Date.EditValue)
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = datX.Month And
                                                    a.Emp_Att_Set_Date.Value.Year = datX.Year
@@ -3447,8 +3451,10 @@ Public Class frmEmployeesCalculations
                           .A12 = "Private Time", a.Emp_Att_Set_Private_Late_Status, a.Emp_Att_Set_Private_Time}).ToList
             If dt.Count > 0 Then
                 VGridControl2.DataSource = dt
+                'VGridControl2.SetCellValue(DateX.PropertiesCollection.Item("Emp_Att_Set_Fri_Status"), 0, True)
             Else
                 VGridControl2.SetCellValue(DateX.PropertiesCollection.Item("Emp_Att_Set_Date"), 0, datX.Date)
+                VGridControl2.SetCellValue(DateX.PropertiesCollection.Item("Emp_Att_Set_Fri_Status"), 0, True)
                 '.Emp_Att_Set_Open_Time = CType(VGridControl1.GetCellValue(DayTime.PropertiesCollection.Item("Emp_Att_Set_Open_Time"), 0), String)
                 '.Emp_Att_Set_Close_Time = CType(VGridControl1.GetCellValue(DayTime.PropertiesCollection.Item("Emp_Att_Set_Close_Time"), 0), String)
 
@@ -3484,7 +3490,7 @@ Public Class frmEmployeesCalculations
     End Sub
 
     Private Sub SaveUpdate_Att_Setting()
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             'Dim DutyFriOnX As DateTime = CDate(CDate(DutyFriOn.EditValue).ToString("HH:mm"))
             'Dim DutyFriOffX As DateTime = CDate(CDate(DutyFriOff.EditValue).ToString("HH:mm"))
             'Dim DutyFriX As DateTime = CDate(CDate(DutyFri.EditValue).ToString("HH:mm"))
@@ -3572,7 +3578,7 @@ Public Class frmEmployeesCalculations
         End Using
     End Sub
     'Private Sub SaveUpdate_Att_Setting(E1 As Boolean, cap As String)
-    '    Using db As New CsmdBioAttendenceEntities
+    '            Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
     '        Dim DutyFriOnX As DateTime = CDate(CDate(DutyFriOn.EditValue).ToString("HH:mm"))
     '        Dim DutyFriOffX As DateTime = CDate(CDate(DutyFriOff.EditValue).ToString("HH:mm"))
     '        Dim DutyFriX As DateTime = CDate(CDate(DutyFri.EditValue).ToString("HH:mm"))
@@ -3728,12 +3734,12 @@ Public Class frmEmployeesCalculations
         Select Case e.Button.Index
             Case 1
                 Issue_Date.EditValue = DateTime.Parse(CType(Issue_Date.EditValue, String)).AddMonths(-1)
-                FF1.EditValue = FirstDayOfMonth(DateTime.Parse(CType(FF1.EditValue, String)).AddMonths(-1))
-                FF2.EditValue = LastDayOfMonth(DateTime.Parse(CType(FF2.EditValue, String)).AddMonths(-1))
+                FF1.EditValue = CsmdDateTime.FirstDayOfMonth(DateTime.Parse(CType(FF1.EditValue, String)).AddMonths(-1))
+                FF2.EditValue = CsmdDateTime.LastDayOfMonth(DateTime.Parse(CType(FF2.EditValue, String)).AddMonths(-1))
             Case 2
                 Issue_Date.EditValue = DateTime.Parse(CType(Issue_Date.EditValue, String)).AddMonths(1)
-                FF1.EditValue = FirstDayOfMonth(DateTime.Parse(CType(FF1.EditValue, String)).AddMonths(1))
-                FF2.EditValue = LastDayOfMonth(DateTime.Parse(CType(FF2.EditValue, String)).AddMonths(1))
+                FF1.EditValue = CsmdDateTime.FirstDayOfMonth(DateTime.Parse(CType(FF1.EditValue, String)).AddMonths(1))
+                FF2.EditValue = CsmdDateTime.LastDayOfMonth(DateTime.Parse(CType(FF2.EditValue, String)).AddMonths(1))
         End Select
     End Sub
 
@@ -4029,12 +4035,15 @@ Public Class frmEmployeesCalculations
             Next
         End If
     End Sub
-
-    Private Sub BarButtonItem6_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem6.ItemClick
-
+    Private Sub GridView1_CustomDrawRowIndicator(sender As Object, e As RowIndicatorCustomDrawEventArgs) Handles GridView1.CustomDrawRowIndicator
+        If e.RowHandle >= 0 Then
+            e.Info.DisplayText = (e.RowHandle + 1).ToString()
+        End If
+    End Sub
+    Private Sub GridView2_CustomDrawRowIndicator(sender As Object, e As RowIndicatorCustomDrawEventArgs) Handles GridView2.CustomDrawRowIndicator
+        If e.RowHandle >= 0 Then
+            e.Info.DisplayText = (e.RowHandle + 1).ToString()
+        End If
     End Sub
 
-    Private Sub VGridControl1_Click(sender As Object, e As EventArgs) Handles VGridControl1.Click
-
-    End Sub
 End Class

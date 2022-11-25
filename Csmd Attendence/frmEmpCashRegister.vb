@@ -2,7 +2,7 @@
 Imports CsmdBioDatabase
 
 Public Class frmEmpCashRegister
-    Dim db As CsmdBioDatabase.CsmdBioAttendenceEntities = New CsmdBioDatabase.CsmdBioAttendenceEntities()
+    Dim db As CsmdBioDatabase.CsmdBioAttendenceEntities = New CsmdBioDatabase.CsmdBioAttendenceEntities
     Sub New()
 
         InitializeComponent()

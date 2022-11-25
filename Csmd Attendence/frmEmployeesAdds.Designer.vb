@@ -64,6 +64,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
         Me.ProgressBarControl1 = New DevExpress.XtraEditors.ProgressBarControl()
         Me.LayoutControl5 = New DevExpress.XtraLayout.LayoutControl()
+        Me.txtFin = New DevExpress.XtraEditors.TextEdit()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -119,6 +120,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem13 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem21 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem25 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.Emp_Image = New DevExpress.XtraEditors.PictureEdit()
         Me.TileBar1 = New DevExpress.XtraBars.Navigation.TileBar()
         Me.TileBarGroup2 = New DevExpress.XtraBars.Navigation.TileBarGroup()
@@ -151,8 +153,6 @@ Partial Class frmEmployeesAdds
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
         Me.BarButtonItem7 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem8 = New DevExpress.XtraBars.BarButtonItem()
-        Me.txtFin = New DevExpress.XtraEditors.TextEdit()
-        Me.LayoutControlItem19 = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.RibbonControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,6 +163,7 @@ Partial Class frmEmployeesAdds
         CType(Me.ProgressBarControl1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControl5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl5.SuspendLayout()
+        CType(Me.txtFin.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemButtonEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -205,6 +206,7 @@ Partial Class frmEmployeesAdds
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem21, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem25, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Emp_Image.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Emp_Reg.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Emp_Quali.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -230,8 +232,6 @@ Partial Class frmEmployeesAdds
         CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtFin.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl1
@@ -440,6 +440,7 @@ Partial Class frmEmployeesAdds
         Me.rg1.Name = "rg1"
         Me.rg1.ShowCaptionButton = False
         Me.rg1.Text = "Connection"
+        Me.rg1.Visible = False
         '
         'RibbonPageGroup2
         '
@@ -449,6 +450,7 @@ Partial Class frmEmployeesAdds
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.ShowCaptionButton = False
         Me.RibbonPageGroup2.Text = "Importing"
+        Me.RibbonPageGroup2.Visible = False
         '
         'RibbonPageGroup3
         '
@@ -457,6 +459,7 @@ Partial Class frmEmployeesAdds
         Me.RibbonPageGroup3.Name = "RibbonPageGroup3"
         Me.RibbonPageGroup3.ShowCaptionButton = False
         Me.RibbonPageGroup3.Text = "Exporting"
+        Me.RibbonPageGroup3.Visible = False
         '
         'RibbonStatusBar1
         '
@@ -530,6 +533,16 @@ Partial Class frmEmployeesAdds
         Me.LayoutControl5.Size = New System.Drawing.Size(1055, 368)
         Me.LayoutControl5.TabIndex = 0
         Me.LayoutControl5.Text = "LayoutControl5"
+        '
+        'txtFin
+        '
+        Me.txtFin.EditValue = "0"
+        Me.txtFin.Location = New System.Drawing.Point(993, 12)
+        Me.txtFin.MenuManager = Me.RibbonControl1
+        Me.txtFin.Name = "txtFin"
+        Me.txtFin.Size = New System.Drawing.Size(50, 26)
+        Me.txtFin.StyleController = Me.LayoutControl5
+        Me.txtFin.TabIndex = 86
         '
         'SimpleButton1
         '
@@ -1123,6 +1136,15 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem25.Text = "Duty Off:"
         Me.LayoutControlItem25.TextSize = New System.Drawing.Size(95, 19)
         '
+        'LayoutControlItem19
+        '
+        Me.LayoutControlItem19.Control = Me.txtFin
+        Me.LayoutControlItem19.Location = New System.Drawing.Point(883, 0)
+        Me.LayoutControlItem19.Name = "LayoutControlItem19"
+        Me.LayoutControlItem19.Size = New System.Drawing.Size(152, 42)
+        Me.LayoutControlItem19.Text = "Finger No"
+        Me.LayoutControlItem19.TextSize = New System.Drawing.Size(95, 13)
+        '
         'Emp_Image
         '
         Me.Emp_Image.Location = New System.Drawing.Point(1128, 30)
@@ -1476,25 +1498,6 @@ Partial Class frmEmployeesAdds
         Me.BarButtonItem8.Id = 5
         Me.BarButtonItem8.Name = "BarButtonItem8"
         '
-        'txtFin
-        '
-        Me.txtFin.EditValue = "0"
-        Me.txtFin.Location = New System.Drawing.Point(993, 12)
-        Me.txtFin.MenuManager = Me.RibbonControl1
-        Me.txtFin.Name = "txtFin"
-        Me.txtFin.Size = New System.Drawing.Size(50, 26)
-        Me.txtFin.StyleController = Me.LayoutControl5
-        Me.txtFin.TabIndex = 86
-        '
-        'LayoutControlItem19
-        '
-        Me.LayoutControlItem19.Control = Me.txtFin
-        Me.LayoutControlItem19.Location = New System.Drawing.Point(883, 0)
-        Me.LayoutControlItem19.Name = "LayoutControlItem19"
-        Me.LayoutControlItem19.Size = New System.Drawing.Size(152, 42)
-        Me.LayoutControlItem19.Text = "Finger No"
-        Me.LayoutControlItem19.TextSize = New System.Drawing.Size(95, 13)
-        '
         'frmEmployeesAdds
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1519,6 +1522,7 @@ Partial Class frmEmployeesAdds
         CType(Me.ProgressBarControl1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControl5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl5.ResumeLayout(False)
+        CType(Me.txtFin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemButtonEdit1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1561,6 +1565,7 @@ Partial Class frmEmployeesAdds
         CType(Me.LayoutControlItem13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem21, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem25, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Emp_Image.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Emp_Reg.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Emp_Quali.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1586,8 +1591,6 @@ Partial Class frmEmployeesAdds
         CType(Me.LayoutControlItem18, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DxErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtFin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LayoutControlItem19, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -54,13 +54,16 @@ Partial Class frmEmployeesCalculations
         Me.BarButtonItem4 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem5 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem6 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarEditItem2 = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemTimeEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit()
+        Me.BarEditItem3 = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemTimeEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit()
         Me.RibbonMiniToolbar1 = New DevExpress.XtraBars.Ribbon.RibbonMiniToolbar()
         Me.RibbonMiniToolbar2 = New DevExpress.XtraBars.Ribbon.RibbonMiniToolbar()
         Me.RibbonMiniToolbar3 = New DevExpress.XtraBars.Ribbon.RibbonMiniToolbar()
         Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
-        Me.RibbonPageGroup4 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup3 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup10 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup5 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -312,7 +315,6 @@ Partial Class frmEmployeesCalculations
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager()
-        Me.hideContainerRight = New DevExpress.XtraBars.Docking.AutoHideContainer()
         Me.DockPanel1 = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.VGridControl2 = New DevExpress.XtraVerticalGrid.VGridControl()
@@ -384,6 +386,12 @@ Partial Class frmEmployeesCalculations
         Me.MultiEditorRowProperties123 = New DevExpress.XtraVerticalGrid.Rows.MultiEditorRowProperties()
         Me.MultiEditorRowProperties124 = New DevExpress.XtraVerticalGrid.Rows.MultiEditorRowProperties()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource()
+        Me.RepositoryItemCheckEdit11 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemTimeEdit5 = New DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit()
+        Me.RepositoryItemTimeEdit9 = New DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit()
+        Me.RepositoryItemCheckEdit12 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemCheckEdit13 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemCheckEdit14 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.RibbonControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemZoomTrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemDateEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -392,6 +400,8 @@ Partial Class frmEmployeesCalculations
         CType(Me.RepositoryItemDateEdit2.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTimeEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTimeEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTimeEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTimeEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -444,7 +454,6 @@ Partial Class frmEmployeesCalculations
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.hideContainerRight.SuspendLayout()
         Me.DockPanel1.SuspendLayout()
         Me.DockPanel1_Container.SuspendLayout()
         CType(Me.VGridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -468,21 +477,29 @@ Partial Class frmEmployeesCalculations
         CType(Me.RepositoryItemSpinEdit14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemToggleSwitch11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit11, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTimeEdit5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTimeEdit9, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit12, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit13, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit14, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RibbonControl1
         '
         Me.RibbonControl1.AutoSizeItems = True
         Me.RibbonControl1.ExpandCollapseItem.Id = 0
-        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.b_Import, Me.BarButtonItem2, Me.b_Delete, Me.b_Update, Me.b_c1, Me.b_c2, Me.b_c3, Me.BarButtonItem9, Me.BarButtonItem10, Me.BarButtonItem11, Me.BarButtonItem14, Me.b_Create, Me.BarEditItem1, Me.BarButtonItem1, Me.BarSubItem1, Me.FF1, Me.FF2, Me.TT1, Me.TT2, Me.BarButtonItem3, Me.BarButtonItem4, Me.BarButtonItem5, Me.BarButtonItem6})
+        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.b_Import, Me.BarButtonItem2, Me.b_Delete, Me.b_Update, Me.b_c1, Me.b_c2, Me.b_c3, Me.BarButtonItem9, Me.BarButtonItem10, Me.BarButtonItem11, Me.BarButtonItem14, Me.b_Create, Me.BarEditItem1, Me.BarButtonItem1, Me.BarSubItem1, Me.FF1, Me.FF2, Me.TT1, Me.TT2, Me.BarButtonItem3, Me.BarButtonItem4, Me.BarButtonItem5, Me.BarButtonItem6, Me.BarEditItem2, Me.BarEditItem3})
         Me.RibbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl1.MaxItemId = 46
+        Me.RibbonControl1.MaxItemId = 54
         Me.RibbonControl1.MiniToolbars.Add(Me.RibbonMiniToolbar1)
         Me.RibbonControl1.MiniToolbars.Add(Me.RibbonMiniToolbar2)
         Me.RibbonControl1.MiniToolbars.Add(Me.RibbonMiniToolbar3)
         Me.RibbonControl1.Name = "RibbonControl1"
         Me.RibbonControl1.PageCategories.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageCategory() {Me.RibbonPageCategory1})
-        Me.RibbonControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit6, Me.RepositoryItemSpinEdit7, Me.RepositoryItemSpinEdit8, Me.RepositoryItemSpinEdit9, Me.RepositoryItemSpinEdit10, Me.RepositoryItemTimeEdit6, Me.RepositoryItemTimeEdit7, Me.RepositoryItemTimeEdit8, Me.RepositoryItemToggleSwitch2, Me.RepositoryItemSpinEdit1, Me.RepositoryItemZoomTrackBar1, Me.RepositoryItemZoomTrackBar2, Me.RepositoryItemTextEdit3, Me.RepositoryItemTextEdit4, Me.RepositoryItemDateEdit1, Me.RepositoryItemDateEdit2, Me.RepositoryItemTimeEdit1, Me.RepositoryItemTimeEdit2})
+        Me.RibbonControl1.PageHeaderItemLinks.Add(Me.BarEditItem2)
+        Me.RibbonControl1.PageHeaderItemLinks.Add(Me.BarEditItem3)
+        Me.RibbonControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit6, Me.RepositoryItemSpinEdit7, Me.RepositoryItemSpinEdit8, Me.RepositoryItemSpinEdit9, Me.RepositoryItemSpinEdit10, Me.RepositoryItemTimeEdit6, Me.RepositoryItemTimeEdit7, Me.RepositoryItemTimeEdit8, Me.RepositoryItemToggleSwitch2, Me.RepositoryItemSpinEdit1, Me.RepositoryItemZoomTrackBar1, Me.RepositoryItemZoomTrackBar2, Me.RepositoryItemTextEdit3, Me.RepositoryItemTextEdit4, Me.RepositoryItemDateEdit1, Me.RepositoryItemDateEdit2, Me.RepositoryItemTimeEdit1, Me.RepositoryItemTimeEdit2, Me.RepositoryItemTimeEdit3, Me.RepositoryItemTimeEdit4, Me.RepositoryItemCheckEdit11, Me.RepositoryItemTimeEdit5, Me.RepositoryItemTimeEdit9, Me.RepositoryItemCheckEdit12, Me.RepositoryItemCheckEdit13, Me.RepositoryItemCheckEdit14})
         Me.RibbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.RibbonControl1.Size = New System.Drawing.Size(1018, 143)
         Me.RibbonControl1.StatusBar = Me.RibbonStatusBar1
@@ -746,6 +763,32 @@ Partial Class frmEmployeesCalculations
         Me.BarButtonItem6.Id = 45
         Me.BarButtonItem6.Name = "BarButtonItem6"
         '
+        'BarEditItem2
+        '
+        Me.BarEditItem2.Caption = "Start Time"
+        Me.BarEditItem2.Edit = Me.RepositoryItemTimeEdit3
+        Me.BarEditItem2.Id = 46
+        Me.BarEditItem2.Name = "BarEditItem2"
+        '
+        'RepositoryItemTimeEdit3
+        '
+        Me.RepositoryItemTimeEdit3.AutoHeight = False
+        Me.RepositoryItemTimeEdit3.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemTimeEdit3.Name = "RepositoryItemTimeEdit3"
+        '
+        'BarEditItem3
+        '
+        Me.BarEditItem3.Caption = "End Time"
+        Me.BarEditItem3.Edit = Me.RepositoryItemTimeEdit4
+        Me.BarEditItem3.Id = 47
+        Me.BarEditItem3.Name = "BarEditItem3"
+        '
+        'RepositoryItemTimeEdit4
+        '
+        Me.RepositoryItemTimeEdit4.AutoHeight = False
+        Me.RepositoryItemTimeEdit4.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemTimeEdit4.Name = "RepositoryItemTimeEdit4"
+        '
         'RibbonMiniToolbar1
         '
         Me.RibbonMiniToolbar1.ItemLinks.Add(Me.BarButtonItem2)
@@ -778,7 +821,7 @@ Partial Class frmEmployeesCalculations
         '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.RibbonPageGroup4, Me.RibbonPageGroup3, Me.RibbonPageGroup10, Me.RibbonPageGroup5, Me.RibbonPageGroup9, Me.RibbonPageGroup6, Me.RibbonPageGroup11, Me.RibbonPageGroup8})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.RibbonPageGroup3, Me.RibbonPageGroup10, Me.RibbonPageGroup5, Me.RibbonPageGroup9, Me.RibbonPageGroup6, Me.RibbonPageGroup11, Me.RibbonPageGroup8})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Controls"
         '
@@ -789,19 +832,6 @@ Partial Class frmEmployeesCalculations
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.ShowCaptionButton = False
         Me.RibbonPageGroup2.Text = "Refresh"
-        '
-        'RibbonPageGroup4
-        '
-        Me.RibbonPageGroup4.AllowTextClipping = False
-        Me.RibbonPageGroup4.ItemLinks.Add(Me.FF1)
-        Me.RibbonPageGroup4.ItemLinks.Add(Me.FF2)
-        Me.RibbonPageGroup4.ItemLinks.Add(Me.TT1, True)
-        Me.RibbonPageGroup4.ItemLinks.Add(Me.TT2)
-        Me.RibbonPageGroup4.ItemLinks.Add(Me.BarButtonItem3, True)
-        Me.RibbonPageGroup4.Name = "RibbonPageGroup4"
-        Me.RibbonPageGroup4.ShowCaptionButton = False
-        Me.RibbonPageGroup4.Text = "Set Duty Time From Date To Date"
-        Me.RibbonPageGroup4.Visible = False
         '
         'RibbonPageGroup3
         '
@@ -1003,7 +1033,7 @@ Partial Class frmEmployeesCalculations
         Me.GridControl2.Location = New System.Drawing.Point(12, 59)
         Me.GridControl2.MainView = Me.GridView2
         Me.GridControl2.Name = "GridControl2"
-        Me.GridControl2.Size = New System.Drawing.Size(327, 522)
+        Me.GridControl2.Size = New System.Drawing.Size(243, 522)
         Me.GridControl2.TabIndex = 0
         Me.GridControl2.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
         '
@@ -1135,7 +1165,7 @@ Partial Class frmEmployeesCalculations
         Me.ProgressBarControl1.Name = "ProgressBarControl1"
         Me.ProgressBarControl1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.ProgressBarControl1.Properties.ShowTitle = True
-        Me.ProgressBarControl1.Size = New System.Drawing.Size(327, 17)
+        Me.ProgressBarControl1.Size = New System.Drawing.Size(243, 17)
         Me.ProgressBarControl1.StyleController = Me.LayoutControl1
         Me.ProgressBarControl1.TabIndex = 18
         '
@@ -1155,7 +1185,7 @@ Partial Class frmEmployeesCalculations
         Me.LayoutControl1.Name = "LayoutControl1"
         Me.LayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(-1521, -366, 391, 464)
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(999, 593)
+        Me.LayoutControl1.Size = New System.Drawing.Size(752, 593)
         Me.LayoutControl1.TabIndex = 23
         Me.LayoutControl1.Text = "LayoutControl1"
         '
@@ -1195,7 +1225,7 @@ Partial Class frmEmployeesCalculations
         Me.VGridControl1.Appearance.VertLine.Options.UseBackColor = True
         Me.VGridControl1.Cursor = System.Windows.Forms.Cursors.SizeWE
         Me.VGridControl1.LayoutStyle = DevExpress.XtraVerticalGrid.LayoutViewStyle.SingleRecordView
-        Me.VGridControl1.Location = New System.Drawing.Point(653, 30)
+        Me.VGridControl1.Location = New System.Drawing.Point(493, 30)
         Me.VGridControl1.Name = "VGridControl1"
         Me.VGridControl1.OptionsBehavior.AutoSelectAllInEditor = False
         Me.VGridControl1.OptionsBehavior.RecordsMouseWheel = True
@@ -1214,7 +1244,7 @@ Partial Class frmEmployeesCalculations
         Me.VGridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemCheckEdit1, Me.RepositoryItemCheckEdit3, Me.RepositoryItemCheckEdit4, Me.RepositoryItemCheckEdit5, Me.RepositoryItemCheckEdit6, Me.RepositoryItemCheckEdit7, Me.RepositoryItemCheckEdit8, Me.RepositoryItemCheckEdit10})
         Me.VGridControl1.RowHeaderWidth = 15
         Me.VGridControl1.Rows.AddRange(New DevExpress.XtraVerticalGrid.Rows.BaseRow() {Me.rowEmp_Att_Payment_ID, Me.NameOfEmployees, Me.IssueDate, Me.category, Me.Absentees, Me.Payments})
-        Me.VGridControl1.Size = New System.Drawing.Size(334, 551)
+        Me.VGridControl1.Size = New System.Drawing.Size(247, 551)
         Me.VGridControl1.TabIndex = 25
         '
         'RepositoryItemTextEdit1
@@ -2445,37 +2475,37 @@ Partial Class frmEmployeesCalculations
         Me.Issue_Date.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.Issue_Date.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, True, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Issue_Date.Properties.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "", Nothing, Nothing, True), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Issue_Date.Properties.Buttons1"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
         Me.Issue_Date.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.Issue_Date.Size = New System.Drawing.Size(248, 22)
+        Me.Issue_Date.Size = New System.Drawing.Size(164, 22)
         Me.Issue_Date.StyleController = Me.LayoutControl1
         Me.Issue_Date.TabIndex = 24
         '
         'ProgressBarControl2
         '
-        Me.ProgressBarControl2.Location = New System.Drawing.Point(348, 12)
+        Me.ProgressBarControl2.Location = New System.Drawing.Point(264, 12)
         Me.ProgressBarControl2.Name = "ProgressBarControl2"
         Me.ProgressBarControl2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.ProgressBarControl2.Properties.ShowTitle = True
-        Me.ProgressBarControl2.Size = New System.Drawing.Size(296, 17)
+        Me.ProgressBarControl2.Size = New System.Drawing.Size(220, 17)
         Me.ProgressBarControl2.StyleController = Me.LayoutControl1
         Me.ProgressBarControl2.TabIndex = 22
         '
         'ProgressBarControl3
         '
-        Me.ProgressBarControl3.Location = New System.Drawing.Point(653, 12)
+        Me.ProgressBarControl3.Location = New System.Drawing.Point(493, 12)
         Me.ProgressBarControl3.Name = "ProgressBarControl3"
         Me.ProgressBarControl3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.ProgressBarControl3.Properties.ShowTitle = True
-        Me.ProgressBarControl3.Size = New System.Drawing.Size(334, 14)
+        Me.ProgressBarControl3.Size = New System.Drawing.Size(247, 14)
         Me.ProgressBarControl3.StyleController = Me.LayoutControl1
         Me.ProgressBarControl3.TabIndex = 21
         '
         'GridControl1
         '
-        Me.GridControl1.Location = New System.Drawing.Point(348, 33)
+        Me.GridControl1.Location = New System.Drawing.Point(264, 33)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
         Me.GridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemLookUpEdit1, Me.RepositoryItemLookUpEdit2, Me.RepositoryItemCheckEdit2})
-        Me.GridControl1.Size = New System.Drawing.Size(296, 548)
+        Me.GridControl1.Size = New System.Drawing.Size(220, 548)
         Me.GridControl1.TabIndex = 19
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -2662,38 +2692,38 @@ Partial Class frmEmployeesCalculations
         Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.Lay2, Me.SplitterItem1, Me.Lay3, Me.SplitterItem2, Me.LayoutControlItem2, Me.LayoutControlItem6, Me.Lay1, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.LayoutControlItem1, Me.EmptySpaceItem1})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "Root"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(999, 593)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(752, 593)
         Me.LayoutControlGroup1.TextVisible = False
         '
         'Lay2
         '
         Me.Lay2.Control = Me.GridControl1
-        Me.Lay2.Location = New System.Drawing.Point(336, 21)
+        Me.Lay2.Location = New System.Drawing.Point(252, 21)
         Me.Lay2.Name = "Lay2"
-        Me.Lay2.Size = New System.Drawing.Size(300, 552)
+        Me.Lay2.Size = New System.Drawing.Size(224, 552)
         Me.Lay2.TextSize = New System.Drawing.Size(0, 0)
         Me.Lay2.TextVisible = False
         '
         'SplitterItem1
         '
         Me.SplitterItem1.AllowHotTrack = True
-        Me.SplitterItem1.Location = New System.Drawing.Point(331, 0)
+        Me.SplitterItem1.Location = New System.Drawing.Point(247, 0)
         Me.SplitterItem1.Name = "SplitterItem1"
         Me.SplitterItem1.Size = New System.Drawing.Size(5, 573)
         '
         'Lay3
         '
         Me.Lay3.Control = Me.VGridControl1
-        Me.Lay3.Location = New System.Drawing.Point(641, 18)
+        Me.Lay3.Location = New System.Drawing.Point(481, 18)
         Me.Lay3.Name = "Lay3"
-        Me.Lay3.Size = New System.Drawing.Size(338, 555)
+        Me.Lay3.Size = New System.Drawing.Size(251, 555)
         Me.Lay3.TextSize = New System.Drawing.Size(0, 0)
         Me.Lay3.TextVisible = False
         '
         'SplitterItem2
         '
         Me.SplitterItem2.AllowHotTrack = True
-        Me.SplitterItem2.Location = New System.Drawing.Point(636, 0)
+        Me.SplitterItem2.Location = New System.Drawing.Point(476, 0)
         Me.SplitterItem2.Name = "SplitterItem2"
         Me.SplitterItem2.Size = New System.Drawing.Size(5, 573)
         '
@@ -2702,7 +2732,7 @@ Partial Class frmEmployeesCalculations
         Me.LayoutControlItem2.Control = Me.ProgressBarControl1
         Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(331, 21)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(247, 21)
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem2.TextVisible = False
         '
@@ -2711,7 +2741,7 @@ Partial Class frmEmployeesCalculations
         Me.LayoutControlItem6.Control = Me.Issue_Date
         Me.LayoutControlItem6.Location = New System.Drawing.Point(49, 21)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(282, 26)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(198, 26)
         Me.LayoutControlItem6.Text = "Date:"
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(27, 13)
         '
@@ -2720,25 +2750,25 @@ Partial Class frmEmployeesCalculations
         Me.Lay1.Control = Me.GridControl2
         Me.Lay1.Location = New System.Drawing.Point(0, 47)
         Me.Lay1.Name = "Lay1"
-        Me.Lay1.Size = New System.Drawing.Size(331, 526)
+        Me.Lay1.Size = New System.Drawing.Size(247, 526)
         Me.Lay1.TextSize = New System.Drawing.Size(0, 0)
         Me.Lay1.TextVisible = False
         '
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.ProgressBarControl2
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(336, 0)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(252, 0)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(300, 21)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(224, 21)
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem3.TextVisible = False
         '
         'LayoutControlItem4
         '
         Me.LayoutControlItem4.Control = Me.ProgressBarControl3
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(641, 0)
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(481, 0)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(338, 18)
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(251, 18)
         Me.LayoutControlItem4.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem4.TextVisible = False
         '
@@ -2771,33 +2801,21 @@ Partial Class frmEmployeesCalculations
         '
         'DockManager1
         '
-        Me.DockManager1.AutoHideContainers.AddRange(New DevExpress.XtraBars.Docking.AutoHideContainer() {Me.hideContainerRight})
         Me.DockManager1.Form = Me
+        Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.DockPanel1})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.StatusBar", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl", "DevExpress.XtraBars.Navigation.OfficeNavigationBar", "DevExpress.XtraBars.Navigation.TileNavPane"})
-        '
-        'hideContainerRight
-        '
-        Me.hideContainerRight.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(239, Byte), Integer))
-        Me.hideContainerRight.Controls.Add(Me.DockPanel1)
-        Me.hideContainerRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.hideContainerRight.Location = New System.Drawing.Point(999, 143)
-        Me.hideContainerRight.Name = "hideContainerRight"
-        Me.hideContainerRight.Size = New System.Drawing.Size(19, 593)
         '
         'DockPanel1
         '
         Me.DockPanel1.Controls.Add(Me.DockPanel1_Container)
         Me.DockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right
         Me.DockPanel1.ID = New System.Guid("26157b4a-26ff-475a-badc-22d61dfa7f49")
-        Me.DockPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.DockPanel1.Location = New System.Drawing.Point(752, 143)
         Me.DockPanel1.Name = "DockPanel1"
         Me.DockPanel1.Options.ShowCloseButton = False
         Me.DockPanel1.OriginalSize = New System.Drawing.Size(266, 200)
-        Me.DockPanel1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right
-        Me.DockPanel1.SavedIndex = 0
         Me.DockPanel1.Size = New System.Drawing.Size(266, 593)
         Me.DockPanel1.Text = "Attendance rules Settings"
-        Me.DockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide
         '
         'DockPanel1_Container
         '
@@ -3221,13 +3239,49 @@ Partial Class frmEmployeesCalculations
         '
         Me.BindingSource1.DataSource = GetType(CsmdBioDatabase.Emp_Att_Set)
         '
+        'RepositoryItemCheckEdit11
+        '
+        Me.RepositoryItemCheckEdit11.AutoHeight = False
+        Me.RepositoryItemCheckEdit11.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.RepositoryItemCheckEdit11.Name = "RepositoryItemCheckEdit11"
+        '
+        'RepositoryItemTimeEdit5
+        '
+        Me.RepositoryItemTimeEdit5.AutoHeight = False
+        Me.RepositoryItemTimeEdit5.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemTimeEdit5.Name = "RepositoryItemTimeEdit5"
+        '
+        'RepositoryItemTimeEdit9
+        '
+        Me.RepositoryItemTimeEdit9.AutoHeight = False
+        Me.RepositoryItemTimeEdit9.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemTimeEdit9.Name = "RepositoryItemTimeEdit9"
+        '
+        'RepositoryItemCheckEdit12
+        '
+        Me.RepositoryItemCheckEdit12.AutoHeight = False
+        Me.RepositoryItemCheckEdit12.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.RepositoryItemCheckEdit12.Name = "RepositoryItemCheckEdit12"
+        '
+        'RepositoryItemCheckEdit13
+        '
+        Me.RepositoryItemCheckEdit13.AutoHeight = False
+        Me.RepositoryItemCheckEdit13.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.RepositoryItemCheckEdit13.Name = "RepositoryItemCheckEdit13"
+        '
+        'RepositoryItemCheckEdit14
+        '
+        Me.RepositoryItemCheckEdit14.AutoHeight = False
+        Me.RepositoryItemCheckEdit14.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.RepositoryItemCheckEdit14.Name = "RepositoryItemCheckEdit14"
+        '
         'frmEmployeesCalculations
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1018, 767)
         Me.Controls.Add(Me.LayoutControl1)
-        Me.Controls.Add(Me.hideContainerRight)
+        Me.Controls.Add(Me.DockPanel1)
         Me.Controls.Add(Me.RibbonStatusBar1)
         Me.Controls.Add(Me.RibbonControl1)
         Me.Name = "frmEmployeesCalculations"
@@ -3243,6 +3297,8 @@ Partial Class frmEmployeesCalculations
         CType(Me.RepositoryItemDateEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTimeEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTimeEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTimeEdit3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTimeEdit4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit8, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3295,7 +3351,6 @@ Partial Class frmEmployeesCalculations
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.hideContainerRight.ResumeLayout(False)
         Me.DockPanel1.ResumeLayout(False)
         Me.DockPanel1_Container.ResumeLayout(False)
         CType(Me.VGridControl2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3319,6 +3374,12 @@ Partial Class frmEmployeesCalculations
         CType(Me.RepositoryItemSpinEdit14, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemToggleSwitch11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit11, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTimeEdit5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTimeEdit9, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit12, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit13, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit14, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3627,7 +3688,6 @@ Partial Class frmEmployeesCalculations
     Friend WithEvents RepositoryItemToggleSwitch11 As DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch
     Friend WithEvents MultiEditorRowProperties141 As DevExpress.XtraVerticalGrid.Rows.MultiEditorRowProperties
     Friend WithEvents RepositoryItemCheckEdit10 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-    Friend WithEvents hideContainerRight As DevExpress.XtraBars.Docking.AutoHideContainer
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents FF1 As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemDateEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemDateEdit
@@ -3638,7 +3698,6 @@ Partial Class frmEmployeesCalculations
     Friend WithEvents TT2 As DevExpress.XtraBars.BarEditItem
     Friend WithEvents RepositoryItemTimeEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit
     Friend WithEvents BarButtonItem3 As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents RibbonPageGroup4 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents BarButtonItem4 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup8 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents category As DevExpress.XtraVerticalGrid.Rows.CategoryRow
@@ -3684,4 +3743,14 @@ Partial Class frmEmployeesCalculations
     Friend WithEvents MultiEditorRowProperties147 As DevExpress.XtraVerticalGrid.Rows.MultiEditorRowProperties
     Friend WithEvents BarButtonItem5 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BarButtonItem6 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarEditItem2 As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemTimeEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit
+    Friend WithEvents BarEditItem3 As DevExpress.XtraBars.BarEditItem
+    Friend WithEvents RepositoryItemTimeEdit4 As DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit
+    Friend WithEvents RepositoryItemCheckEdit11 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RepositoryItemTimeEdit5 As DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit
+    Friend WithEvents RepositoryItemTimeEdit9 As DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit
+    Friend WithEvents RepositoryItemCheckEdit12 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RepositoryItemCheckEdit13 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RepositoryItemCheckEdit14 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

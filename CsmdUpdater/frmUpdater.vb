@@ -123,7 +123,7 @@ Public Class frmUpdater
     Public downloader As WebClient
 
     Public Sub DownloadStart(fileName As String, FileAction As Boolean)
-        Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/abidhospital/main/"
+        Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/parismart/master/"
         ProgressBar1.Visible = True
         ServicePointManager.Expect100Continue = True
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
@@ -191,7 +191,7 @@ Public Class frmUpdater
         'DownloadStart("CsmdBioDatabase.dll", True)
         'lbl1.Text = "Start Downloading..."
         'DownloadStart("CsmdBioReports.dll", True)
-        'Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/faazalplaza/main/"
+        'Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/parismart/master/"
         'Dim fileName As String = "Csmd%20Attendence.exe"
         'Dim request As WebRequest = WebRequest.Create(remoteUri + fileName)
         'request.Credentials = New NetworkCredential("elebillio", "26FAI26sal")
@@ -223,7 +223,7 @@ Public Class frmUpdater
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         'If LabelControl1.Text = "" Then
-        Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/abidhospital/main/header.txt"
+        Dim remoteUri As String = "https://raw.githubusercontent.com/elebillio/parismart/master/header.txt"
         ProgressBar1.Visible = True
             ServicePointManager.Expect100Continue = True
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
@@ -276,7 +276,7 @@ Public Class frmUpdater
             End Select
             j += 1
         End While
-        Dim remoteUri2 As String = "https://raw.githubusercontent.com/elebillio/abidhospital/main/notes.txt"
+        Dim remoteUri2 As String = "https://raw.githubusercontent.com/elebillio/parismart/master/notes.txt"
         'ProgressBar1.Visible = True
         ServicePointManager.Expect100Continue = True
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12

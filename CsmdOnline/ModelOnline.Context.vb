@@ -11,22 +11,25 @@ Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
 
-Partial Public Class CsmdBioAttendenceEntities1
+Partial Public Class CsmdBioAttendenceEntitiesOnline
     Inherits DbContext
 
     Public Sub New()
-        MyBase.New("name=CsmdBioAttendenceEntities1")
+        MyBase.New("name=CsmdBioAttendenceEntitiesOnline")
     End Sub
 
     Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
         Throw New UnintentionalCodeFirstException()
     End Sub
 
+    Public Overridable Property Attendance_Duty_Status() As DbSet(Of Attendance_Duty_Status)
     Public Overridable Property Attendence_Status() As DbSet(Of Attendence_Status)
     Public Overridable Property Auto_Number() As DbSet(Of Auto_Number)
+    Public Overridable Property Emp_Att_Payment() As DbSet(Of Emp_Att_Payment)
     Public Overridable Property Emp_Att_Set() As DbSet(Of Emp_Att_Set)
     Public Overridable Property Emp_Attendence_Device() As DbSet(Of Emp_Attendence_Device)
     Public Overridable Property Emp_Bio_Device_Users() As DbSet(Of Emp_Bio_Device_Users)
+    Public Overridable Property Emp_Cash_Register() As DbSet(Of Emp_Cash_Register)
     Public Overridable Property Employees() As DbSet(Of Employee)
     Public Overridable Property Plaza_User() As DbSet(Of Plaza_User)
     Public Overridable Property sysdiagrams() As DbSet(Of sysdiagram)

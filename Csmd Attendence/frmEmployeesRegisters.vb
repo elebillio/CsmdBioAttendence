@@ -3,10 +3,11 @@ Imports System.Data.Entity
 'Imports CsmdPlazaDatabase
 Imports CsmdBioDatabase
 Imports DevExpress.XtraEditors
+Imports DevExpress.XtraGrid.Views.Grid
 
 Public Class frmEmployeesRegisters
 
-    Dim db As New CsmdBioAttendenceEntities
+    Dim db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
     Sub New()
         InitializeComponent()
@@ -40,6 +41,7 @@ Public Class frmEmployeesRegisters
 
     Private Sub UserControl2_Load(sender As Object, e As EventArgs) Handles Me.Load
         frmLoadAction = frmNewAction
+        AdvBandedGridView1.IndicatorWidth = 35
     End Sub
 
     Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
@@ -68,5 +70,11 @@ Public Class frmEmployeesRegisters
     Private Sub BarButtonItem4_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem4.ItemClick
         AdvBandedGridView1.OptionsBehavior.Editable = False
         AdvBandedGridView1.ShowPrintPreview()
+    End Sub
+
+    Private Sub AdvBandedGridView1_CustomDrawRowIndicator(sender As Object, e As RowIndicatorCustomDrawEventArgs) Handles AdvBandedGridView1.CustomDrawRowIndicator
+        If e.RowHandle >= 0 Then
+            e.Info.DisplayText = (e.RowHandle + 1).ToString()
+        End If
     End Sub
 End Class

@@ -1,10 +1,29 @@
 ﻿Imports System.Configuration
+Imports System.Net
 
 Public Class CsmdCon
+    Public Shared myConnectionString As String = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string='data source=.\sqlexpress;initial catalog=CsmdBioAttendence;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;'"
+    '"metadata=.\Model1.csdl|.\Model1.ssdl|.\Model1.msl;provider=System.Data.SqlClient;provider connection string="";data source=.\sqlexpress;initial catalog=CsmdBioAttendence;integrated security=True;multipleactiveresultsets=True;App=EntityFramework"""
+    '"metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.\sqlexpress;initial catalog=CsmdBioAttendence;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot'"
     'Public Shared ConOleDB As String = ConfigurationManager.ConnectionStrings("att2000ConnectionString").ConnectionString
     Public Shared Function ConSqlDB() As String
         Dim RAW As New CsmdBioAttendenceEntities
         Return RAW.Database.Connection.ConnectionString
+    End Function
+    'Public Shared Function ConSqlDBonline() As String
+    '    Dim RAW As New CsmdBioAttendenceEntitiesonline
+    '    Return RAW.Database.Connection.ConnectionString
+    'End Function
+    Public Shared Function CheckForInternetConnection() As Boolean
+        Try
+            Using client = New WebClient()
+                Using stream = client.OpenRead("http://www.google.com")
+                    Return True
+                End Using
+            End Using
+        Catch
+            Return False
+        End Try
     End Function
 End Class
 Public Class CsmdVarible
@@ -62,7 +81,7 @@ Public Class CsmdDateTime
         Return CType(lastDay.AddMonths(1).AddDays(-1), String)
     End Function
     Public Shared Function StartDayTime(Datx As Date) As String
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And a.Emp_Att_Set_Date.Value.Year = Datx.Year Select a.Emp_Att_Set_Open_Time).FirstOrDefault
             If dt IsNot Nothing Then
                 Return dt.ToString
@@ -72,7 +91,7 @@ Public Class CsmdDateTime
         End Using
     End Function
     Public Shared Function EndDayTime(Datx As Date) As String
-        Using db As New CsmdBioAttendenceEntities
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And a.Emp_Att_Set_Date.Value.Year = Datx.Year Select a.Emp_Att_Set_Close_Time).FirstOrDefault
             If dt IsNot Nothing Then
                 Return dt.ToString

@@ -1,4 +1,10 @@
-﻿Public Class Class1
+﻿Imports DevExpress.XtraEditors.Repository
+
+Public Class Class1
+    Public Shared EmpID As Integer = 0
+    Public Shared EmpName As String = ""
+    Public Shared EmpDate As Date
+
     Public Shared MasterLive As String = ""
     Public Shared Sub DrawVertical(Col As String, ByVal e As DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs)
         If Not e.Column Is Nothing Then
@@ -28,4 +34,18 @@
         End If
     End Sub
 
+End Class
+Public Class cmb_Attendance_Duty_Status
+    Public Sub ColumnsAndData(GridLookUpEdit As RepositoryItemLookUpEdit)
+        Using db As New CsmdBioDatabase.CsmdBioAttendenceEntities
+            Dim dt = (From a In db.Attendance_Duty_Status Order By a.Attendance_Duty_Status_ID Ascending Select New With {.ID = a.Attendance_Duty_Status_ID, .StatusType = a.Attendance_Duty_Status_Type}).ToList()
+            If dt.Count() > 0 Then
+                GridLookUpEdit.DataSource = dt
+                GridLookUpEdit.DisplayMember = "StatusType"
+                GridLookUpEdit.ValueMember = "ID"
+                GridLookUpEdit.PopulateColumns()
+                GridLookUpEdit.Columns("ID").Visible = False
+            End If
+        End Using
+    End Sub
 End Class
