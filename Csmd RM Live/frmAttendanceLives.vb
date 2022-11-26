@@ -51,6 +51,7 @@ Public Class frmAttendanceLives
             txtIP.EditValue = GetSetting(Application.StartupPath, "CsmdAtt", "CsmdAttIP", "")
 
         End If
+        RibbonControl1.Minimized = True
         cmbStatus.TextEditStyle = TextEditStyles.DisableTextEditor
         AddHandler cmbStatus.EditValueChanged, AddressOf cmbStatus_EditValueChanged
         AddHandler cmbStatus.Popup, AddressOf cmbStatus_Popup
@@ -455,7 +456,7 @@ Public Class frmAttendanceLives
             Next
             'GridControl4.DataSource = ds2.Tables(0)
             GridControl2.DataSource = DataT
-
+            ShowSelectionAtt00000000()
 
             GridControl5.DataSource = Nothing
 
@@ -1870,9 +1871,19 @@ Public Class frmAttendanceLives
             Dim firstDay As Date = CDate(FF1.EditValue) ' CsmdDateTime.FirstDayOfMonth(FromDat)
             Dim lastDay As Date = CDate(FF2.EditValue) ' DateTime.Parse(CStr(firstDay)).AddDays(Date.DaysInMonth(FromDat.Year, FromDat.Month))
             'ClickforMonthly.Caption = "Now " & EmpName & " >>>"
-            If intList.Count > 0 Then
-                For i As Integer = 0 To intList.Count - 1
-                    Class1.EmpID = intList(i)
+            If intListE.Count > 0 Then
+                Dim k2 As Integer = 1
+                ProgressBarControl1.Properties.Maximum = intListE.Count
+                ProgressBarControl1.Properties.Minimum = 1
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 1
+                ProgressBarControl1.Update()
+                For i As Integer = 0 To intListE.Count - 1
+                    Class1.EmpID = intListE(i)
+                    ProgressBarControl1.Position = k2
+                    ProgressBarControl1.Update()
+                    k2 += 1
+                    Class1.EmpID = intListE(i)
                     Dim dtz = (From a In db.Employees Where a.Emp_ID = Class1.EmpID Select a).FirstOrDefault
                     If dtz IsNot Nothing Then
                         Dim k As Integer = 1
@@ -2056,6 +2067,7 @@ Public Class frmAttendanceLives
                                     'chkA2 = False
                                     'chkA = False
                                     rowNo += 1
+                                    Application.DoEvents()
                                 Next
 
                                 If chkA = True Then
@@ -2079,9 +2091,11 @@ Public Class frmAttendanceLives
                             chkA2 = False
 
                             'DBCon2.Close()
+                            Application.DoEvents()
                         Next
 
                     End If
+                    Application.DoEvents()
                 Next
             End If
 
@@ -2106,11 +2120,22 @@ Public Class frmAttendanceLives
             Dim firstDay As Date = CDate(FF1.EditValue) ' CsmdDateTime.FirstDayOfMonth(FromDat)
             Dim lastDay As Date = CDate(FF2.EditValue) ' DateTime.Parse(CStr(firstDay)).AddDays(Date.DaysInMonth(FromDat.Year, FromDat.Month))
             'ClickforMonthly.Caption = "Now " & EmpName & " >>>"
-            If intList.Count > 0 Then
-                For i As Integer = 0 To intList.Count - 1
-                    Class1.EmpID = intList(i)
+            If intListE.Count > 0 Then
+                Dim k2 As Integer = 1
+                ProgressBarControl1.Properties.Maximum = intListE.Count
+                ProgressBarControl1.Properties.Minimum = 1
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 1
+                ProgressBarControl1.Update()
+                For i As Integer = 0 To intListE.Count - 1
+                    Class1.EmpID = intListE(i)
+                    ProgressBarControl1.Position = k2
+                    ProgressBarControl1.Update()
+                    k2 += 1
+
                     Dim dtz = (From a In db.Employees Where a.Emp_ID = Class1.EmpID Select a).FirstOrDefault
                     If dtz IsNot Nothing Then
+                        GridColumn17.Caption = dtz.Emp_Name
                         Dim k As Integer = 1
                         ProgressBarControl3.Properties.Maximum = CInt((lastDay.ToOADate - firstDay.ToOADate)) + 1
                         ProgressBarControl3.Properties.Minimum = 1
@@ -2222,6 +2247,7 @@ Public Class frmAttendanceLives
                                 'ProgressBarControl3.Position = 0
                                 'ProgressBarControl3.Update()
                                 For Each dsx In dtx
+
                                     'ProgressBarControl3.Position = rowNo
                                     'ProgressBarControl3.Update()
                                     If CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH") >= thisDate.ToString("yyyy/MM/dd HH") And CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH") <= ToDate.ToString("yyyy/MM/dd HH") Then
@@ -2568,6 +2594,7 @@ Public Class frmAttendanceLives
                                     'chkA2 = False
                                     'chkA = False
                                     rowNo += 1
+                                    Application.DoEvents()
                                 Next
 
                                 'If chkA = True Then
@@ -2629,9 +2656,11 @@ Public Class frmAttendanceLives
                             chkA2 = False
 
                             'DBCon2.Close()
+                            Application.DoEvents()
                         Next
 
                     End If
+                    Application.DoEvents()
                 Next
             End If
 
@@ -3098,6 +3127,8 @@ Public Class frmAttendanceLives
             '    frm.ShowDialog()
             '    bn = True
             'End If
+            TempGridCheckMarksSelection.ClearSelection()
+            TempGridCheckMarksSelection.SelectRow(AdvBandedGridView1.FocusedRowHandle, True)
             LoadDock()
 
             'BarStaticItem2.Caption = EmpName & " isOn " & EmpDate
@@ -3113,20 +3144,83 @@ Public Class frmAttendanceLives
 
         End Try
     End Sub
+    'Dim intList() As Integer
+    'Dim intLists() As String
+    'Dim intListsX() As String
+
+    Dim intListE() As Integer
+    'Dim intLists() As String
+    Dim intListRow As List(Of Integer) = New List(Of Integer)
+    'Dim intListsX() As String
+    Dim intListRows As List(Of Integer) = New List(Of Integer)
+
     Private Sub ShowSelection()
         Dim intL As Integer = 0
         Dim RowCount As Integer = TempGridCheckMarksSelection.SelectedCount - 1
-        ReDim intList(RowCount)
+        ReDim intListE(RowCount)
+        intListRow.Clear()
         For ff As Integer = 0 To AdvBandedGridView1.RowCount - 1
             If TempGridCheckMarksSelection.IsRowSelected(ff) Then
                 Dim obj1 As Object = TryCast(AdvBandedGridView1.GetRowCellValue(ff, "Emp_ID"), Object)
                 If obj1 Is Nothing Then
                     Return
                 End If
-                intList(intL) = CInt(obj1)
+                intListRow.Add(CInt(obj1))
+                intListE(intL) = CInt(obj1)
                 intL += 1
             End If
         Next
+        If intListRow.Count = 1 Then
+            BtnLoad.Enabled = True
+            BtnInOut.Enabled = True
+            BtnActivity.Enabled = True
+            BtnDelete.Enabled = False
+            GridColumn17.Caption = Class1.EmpName
+        ElseIf intListRow.Count > 1 Then
+            BtnLoad.Enabled = False
+            BtnInOut.Enabled = True
+            BtnActivity.Enabled = True
+            BtnDelete.Enabled = False
+            GridColumn17.Caption = "Multi Selection"
+            GridControl5.DataSource = Nothing
+        Else
+            BtnLoad.Enabled = False
+            BtnInOut.Enabled = False
+            BtnActivity.Enabled = False
+            BtnDelete.Enabled = False
+            GridColumn17.Caption = "No Selection"
+            GridControl5.DataSource = Nothing
+        End If
+    End Sub
+    Private Sub ShowSelectionAtt00000000()
+        Try
+            intListRows.Clear()
+            For i As Integer = 0 To intListRow.Count - 1
+                intListRows.Add(intListRow.Item(i))
+            Next
+            'Dim RowCount As Integer = GridView2.SelectedRowsCount - 1
+            'ReDim intList(RowCount)
+            'ReDim intLists(RowCount)
+            'ReDim intListsX(RowCount)
+
+            For i As Integer = 0 To intListRows.Count - 1
+                'Dim row As Integer = (GridView2.GetSelectedRows()(i))
+                TempGridCheckMarksSelection.SelectRow(intListRows.Item(i), True)
+                'Dim obj As Object = TryCast(GridView2.GetRowCellValue(row, "ID"), Object)
+                'If obj Is Nothing Then
+                '    Return
+                'End If
+                'intList(i) = CInt(obj)
+            Next i
+            If intListRows.Count > 0 Then
+                'CsmdVarible.intEmpID = CInt(GridView2.GetRowCellValue(intListRows.Item(0), "ID"))
+
+                'LoadAtt(CsmdVarible.intEmpID, CDate(Issue_Date.EditValue))
+                'Load_Payment_Month_Single(CsmdVarible.intEmpID, CDate(Issue_Date.EditValue))
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
 
@@ -3392,6 +3486,11 @@ Public Class frmAttendanceLives
                 intLists(i) = objs.ToString
                 intListsX(i) = objsx.ToString
             Next i
+            If intList.Count > 0 Then
+                BtnDelete.Enabled = True
+            Else
+                BtnDelete.Enabled = False
+            End If
         Catch ex As Exception
 
         End Try
@@ -3401,7 +3500,7 @@ Public Class frmAttendanceLives
 
 #Region "Live Editors"
     Private Sub BarButtonItem3_ItemClick_2(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem3.ItemClick
-
+        RibbonMiniToolbar2.Hide()
         Call Load_Detail_View_DeviceBy_MonthBy_Edit(CDate(Dtp1.EditValue))
         LoadDock()
         'If bn = True Then
@@ -3414,6 +3513,7 @@ Public Class frmAttendanceLives
         'End If
     End Sub
     Private Sub BarButtonItem8_ItemClick_1(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem8.ItemClick
+        RibbonMiniToolbar3.Hide()
         Call Load_Detail_View_DeviceBy_MonthBy_EditOthers(CDate(Dtp1.EditValue))
         LoadDock()
     End Sub
@@ -3908,22 +4008,22 @@ Public Class frmAttendanceLives
         If axCZKEM1.ReadTimeGLogData(iMachineNumber, fromtime, totime) Then
             'If axCZKEM1.ReadGeneralLogData(iMachineNumber) Then
             While axCZKEM1.SSR_GetGeneralLogData(iMachineNumber, idwEnrollNumber, idwVerifyMode, idwInOutMode, idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond, idwWorkcode) 'iGLCount += 1
-                    'lvItem = lvLogs.Items.Add(iGLCount.ToString())
-                    'lvItem.SubItems.Add(idwEnrollNumber.ToString())
-                    'lvItem.SubItems.Add(idwVerifyMode.ToString())
-                    'lvItem.SubItems.Add(idwInOutMode.ToString())
-                    Dim kk As String = (idwYear.ToString() & "-" + idwMonth.ToString() & "-" & idwDay.ToString() & " " & idwHour.ToString() & ":" & idwMinute.ToString() & ":" & idwSecond.ToString())
-                    Dim dd As DateTime = CDate(CType(kk, DateTime).ToString("yyyy/MM/dd HH:mm:ss"))
+                'lvItem = lvLogs.Items.Add(iGLCount.ToString())
+                'lvItem.SubItems.Add(idwEnrollNumber.ToString())
+                'lvItem.SubItems.Add(idwVerifyMode.ToString())
+                'lvItem.SubItems.Add(idwInOutMode.ToString())
+                Dim kk As String = (idwYear.ToString() & "-" + idwMonth.ToString() & "-" & idwDay.ToString() & " " & idwHour.ToString() & ":" & idwMinute.ToString() & ":" & idwSecond.ToString())
+                Dim dd As DateTime = CDate(CType(kk, DateTime).ToString("yyyy/MM/dd HH:mm:ss"))
 
-                    Dim bb As String = (idwYear.ToString() & "-" + idwMonth.ToString() & "-" & idwDay.ToString())
-                    Dim ee As String = CType(bb, DateTime).ToString("yyyy/MM/dd")
+                Dim bb As String = (idwYear.ToString() & "-" + idwMonth.ToString() & "-" & idwDay.ToString())
+                Dim ee As String = CType(bb, DateTime).ToString("yyyy/MM/dd")
 
-                    Dim nn As String = (idwHour.ToString() & ":" & idwMinute.ToString())
-                    Dim ff As String = CType(nn, DateTime).ToString("HH:mm")
+                Dim nn As String = (idwHour.ToString() & ":" & idwMinute.ToString())
+                Dim ff As String = CType(nn, DateTime).ToString("HH:mm")
 
-                    If Not idwEnrollNumber = "" Then
-                        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
-                            Dim fg = (From a In db.Emp_Attendence_Device Where a.Emp_Bio_Device_Users_UserID = CType(idwEnrollNumber, Integer?) And a.Emp_Attendence_Device_DateTime = dd Select a).FirstOrDefault
+                If Not idwEnrollNumber = "" Then
+                    Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
+                        Dim fg = (From a In db.Emp_Attendence_Device Where a.Emp_Bio_Device_Users_UserID = CType(idwEnrollNumber, Integer?) And a.Emp_Attendence_Device_DateTime = dd Select a).FirstOrDefault
                         If fg IsNot Nothing Then
                             With fg
                                 '.Emp_ID = EmpID
@@ -3950,7 +4050,7 @@ Public Class frmAttendanceLives
                                     maxID = 1
                                     '  MsgBox(maxID)
                                 End Try
-                                    Dim dtNew = New CsmdBioDatabase.Emp_Attendence_Device
+                                Dim dtNew = New CsmdBioDatabase.Emp_Attendence_Device
                                 With dtNew
                                     .Emp_Attendence_Device_ID = maxID
                                     .Emp_Bio_Device_Users_UserID = CType(idwEnrollNumber, Integer?)
@@ -3973,25 +4073,26 @@ Public Class frmAttendanceLives
                             'MsgBox(dd)
                             'MsgBox("mk")
                         End If
-                        End Using
-                        'MsgBox("mj")
-                    Else
-                        MsgBox("No data from terminal returns!", MsgBoxStyle.Exclamation, "Error")
-                    End If
+                        Application.DoEvents()
+                    End Using
+                    'MsgBox("mj")
+                Else
+                    MsgBox("No data from terminal returns!", MsgBoxStyle.Exclamation, "Error")
+                End If
 
-                    iGLCount += 1
-                    'ProgressBarControl1. = (100 / 100) * iGLCount
+                iGLCount += 1
+                'ProgressBarControl1. = (100 / 100) * iGLCount
 
-                    ProgressBarControl2.Position = CInt((100 / 100) * iGLCount)
-                    ProgressBarControl2.Update()
-                    Application.DoEvents()
-                End While
-                ProgressBarControl2.Position = 100
+                ProgressBarControl2.Position = CInt((100 / 100) * iGLCount)
+                ProgressBarControl2.Update()
+                Application.DoEvents()
+            End While
+            ProgressBarControl2.Position = 100
             ProgressBarControl2.Update()
             dow = False
             Load_From_DeviceDB()
-            Else
-                Cursor = Cursors.Default
+        Else
+            Cursor = Cursors.Default
             axCZKEM1.GetLastError(idwErrorCode)
             If idwErrorCode <> 0 Then
                 MsgBox("Reading data from terminal failed,ErrorCode: " & idwErrorCode, MsgBoxStyle.Exclamation, "Error")
@@ -4446,9 +4547,11 @@ Public Class frmAttendanceLives
     End Sub
     Private Sub BarButtonItem6_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem6.ItemClick
         If BarButtonItem6.Down = True Then
+            strF = "Side"
             Me.WindowState = FormWindowState.Minimized
         Else
             BarButtonItem6.Caption = "Goto SidePanel"
+            strF = "Full"
             frm.Close()
         End If
     End Sub
@@ -4456,9 +4559,10 @@ Public Class frmAttendanceLives
                               ByVal e As EventArgs) Handles Me.SizeChanged
         If Me.WindowState = FormWindowState.Minimized Then
             BarButtonItem6.Caption = "Back Main"
+            strF = "Side"
             BarButtonItem6.Down = True
             frm = New Form
-            frm.Size = New Size(326, Screen.PrimaryScreen.WorkingArea.Height - 25)
+            frm.Size = New Size(320, Screen.PrimaryScreen.WorkingArea.Height - 30)
             Dim pt As Point = New Point(Screen.PrimaryScreen.WorkingArea.Width - 320, 30)
             frm.StartPosition = FormStartPosition.Manual
             frm.Location = pt
@@ -4471,17 +4575,90 @@ Public Class frmAttendanceLives
             frm.Controls.Add(LayoutControl3)
             frm.Show()
             AddHandler frm.FormClosing, AddressOf frm_FormClosing
+
             Me.NotifyIcon1.Visible = True
             Me.ShowInTaskbar = False
             frm.ShowInTaskbar = False
         Else
+            Try
+                frm.Close()
+            Catch ex As Exception
+
+            End Try
+
             Me.NotifyIcon1.Visible = False
             Me.ShowInTaskbar = True
         End If
     End Sub
+    Dim frmX As Form
+    Dim strF As String = "Full"
+    Private Sub SimpleButton4_Click_2(sender As Object, e As EventArgs) Handles SimpleButton4.Click
+        If strF = "Full" Then
+            strF = "Side"
+            Me.WindowState = FormWindowState.Minimized
+        ElseIf strF = "Side" Then
+            strF = "SideHide"
+            frm.Hide()
+            frmX = New Form
+            'MsgBox(SimpleButton4.Height)
+            frmX.Size = New Size(26, 22)
+            Dim pt As Point = New Point(Screen.PrimaryScreen.WorkingArea.Width - 26, 30)
+            frmX.StartPosition = FormStartPosition.Manual
+            frmX.Location = pt
+            frmX.TopMost = True
+            frmX.FormBorderStyle = FormBorderStyle.None
+            frmX.MinimizeBox = False
+            frmX.MaximizeBox = False
+            'MsgBox(frmX.Height)
+            SimpleButton4.Dock = DockStyle.Fill
+            frmX.Controls.Add(SimpleButton4)
+            frmX.Show()
+
+            AddHandler frmX.FormClosing, AddressOf frmX_FormClosing
+
+            frmX.ShowInTaskbar = False
+            frmX.Size = New Size(26, 24)
+            'SimpleButton4.Location = New Point(-2, 0)
+
+        ElseIf strF = "SideHide" Then
+            frmX.Close()
+            frm.Show()
+            strF = "Side"
+        End If
+        'Dim pt As Point = New Point(Screen.PrimaryScreen.WorkingArea.Width - 50, 30)
+        'frm.StartPosition = FormStartPosition.Manual
+
+        'SimpleButton4.Location = New Point(Screen.PrimaryScreen.WorkingArea.Width - 100, 30)
+
+        'frm.Location = pt
+    End Sub
+    'Private Sub SimpleButton4_DoubleClick(sender As Object, e As EventArgs) Handles SimpleButton4.DoubleClick
+    '    frm.Close()
+    'End Sub
+    Private Sub SimpleButton4_MouseDown(sender As Object, e As MouseEventArgs) Handles SimpleButton4.MouseDown
+        If e.Button.IsRight Then
+            If strF = "Full" Then
+            Else
+                If strF = "SideHide" Then
+                    frmX.Close()
+                    frm.Close()
+                Else
+                    frm.Close()
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub frmX_FormClosing(sender As Object, e As FormClosingEventArgs)
+        'strF = "Side"
+        'BarButtonItem6.Down = False
+        'LayoutControl3.Dock = DockStyle.Fill
+        LayoutControlItem23.Control = SimpleButton4
+        'Me.WindowState = FormWindowState.Maximized
+    End Sub
     Private Sub frm_FormClosing(sender As Object, e As FormClosingEventArgs)
         BarButtonItem6.Caption = "Goto SidePanel"
         BarButtonItem6.Down = False
+        strF = "Full"
         LayoutControl3.Dock = DockStyle.Fill
         DockPanel1.Controls.Add(LayoutControl3)
         Me.WindowState = FormWindowState.Maximized
@@ -4551,177 +4728,180 @@ Public Class frmAttendanceLives
     'End Sub
 
 #End Region
-    Private Sub RibbonControl1_CustomDrawItem(ByVal sender As Object, ByVal e As DevExpress.XtraBars.BarItemCustomDrawEventArgs) Handles RibbonControl1.CustomDrawItem
-        If e.RibbonItemInfo Is Nothing Then
-            Return
-        End If
-        Dim link = TryCast(e.RibbonItemInfo.Item, BarItemLink)
-        If TypeOf link Is BarSubItemLink Then
-            e.RibbonItemInfo.Appearance.ForeColor = Color.Red
-        End If
-        Dim linkb = TryCast(e.RibbonItemInfo.Item, BarEditItemLink)
-        'If TypeOf linkb Is BarEditItemLink Then
-        '    e.RibbonItemInfo.Appearance.ForeColor = Color.Red
-        'End If
+#Region "Ribbon Color"
+    '''''Private Sub RibbonControl1_CustomDrawItem(ByVal sender As Object, ByVal e As DevExpress.XtraBars.BarItemCustomDrawEventArgs) Handles RibbonControl1.CustomDrawItem
+    '''''If e.RibbonItemInfo Is Nothing Then
+    '''''    Return
+    '''''End If
+    '''''Dim link = TryCast(e.RibbonItemInfo.Item, BarItemLink)
+    '''''If TypeOf link Is BarSubItemLink Then
+    '''''    e.RibbonItemInfo.Appearance.ForeColor = Color.Red
+    '''''End If
+    '''''Dim linkb = TryCast(e.RibbonItemInfo.Item, BarEditItemLink)
+    ''''''If TypeOf linkb Is BarEditItemLink Then
+    ''''''    e.RibbonItemInfo.Appearance.ForeColor = Color.Red
+    ''''''End If
 
-        If link.Item.Name = "BarButtonItem3" Then
+    '''''If link.Item.Name = "BarButtonItem3" Then
 
-            Draw(Brushes.Cyan, e)
-        End If
-        If link.Item.Name = "ck1" Then
-            If TypeOf link Is BarEditItemLink Then
-                e.Cache.FillRectangle(Color.Cyan, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "ck2" Then
-            If TypeOf link Is BarEditItemLink Then
-                e.Cache.FillRectangle(Color.Cyan, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "TT1" Then
-            If TypeOf link Is BarEditItemLink Then
-                e.Cache.FillRectangle(Color.Cyan, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "TT2" Then
-            If TypeOf link Is BarEditItemLink Then
-                e.Cache.FillRectangle(Color.Cyan, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "FF2" Then
-            If TypeOf link Is BarEditItemLink Then
-                e.Cache.FillRectangle(Color.Cyan, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "FF1" Then
-            If TypeOf link Is BarEditItemLink Then
-                'e.RibbonItemInfo.Appearance.BackColor = Color.Green
-                Dim group As RibbonPageGroupViewInfo = TryCast(e.RibbonItemInfo.OwnerPageGroup, RibbonPageGroupViewInfo)
-                If group.PageGroup.Name = "RibbonPageGroup6" Then
-                    e.Graphics.FillRectangle(Brushes.Cyan, group.ContentBounds)
-                End If
-                e.Cache.FillRectangle(Color.Cyan, e.Bounds)
-            End If
-        End If
+    '''''    Draw(Brushes.Cyan, e)
+    '''''End If
+    '''''If link.Item.Name = "ck1" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        e.Cache.FillRectangle(Color.Cyan, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "ck2" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        e.Cache.FillRectangle(Color.Cyan, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "TT1" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        e.Cache.FillRectangle(Color.Cyan, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "TT2" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        e.Cache.FillRectangle(Color.Cyan, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "FF2" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        e.Cache.FillRectangle(Color.Cyan, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "FF1" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        'e.RibbonItemInfo.Appearance.BackColor = Color.Green
+    '''''        Dim group As RibbonPageGroupViewInfo = TryCast(e.RibbonItemInfo.OwnerPageGroup, RibbonPageGroupViewInfo)
+    '''''        If group.PageGroup.Name = "RibbonPageGroup6" Then
+    '''''            e.Graphics.FillRectangle(Brushes.Cyan, group.ContentBounds)
+    '''''        End If
+    '''''        e.Cache.FillRectangle(Color.Cyan, e.Bounds)
+    '''''    End If
+    '''''End If
 
-        If link.Item.Name = "BarButtonItem8" Then
-            Draw(Brushes.White, e)
-        End If
-        If link.Item.Name = "BarButtonItem6" Then
-            'If e.State = DevExpress.XtraBars.ViewInfo.BarLinkState.Highlighted Then
-            '    Using backBrush = New LinearGradientBrush(e.Bounds, Color.DarkOrange, Color.LightYellow, LinearGradientMode.BackwardDiagonal)
-            '        e.Cache.Graphics.FillRectangle(backBrush, e.Bounds)
-            '        e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.Right, e.Bounds.Y))
-            '        e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.X, e.Bounds.Bottom), New Point(e.Bounds.Right, e.Bounds.Bottom))
-            '        e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.X, e.Bounds.Bottom))
-            '        e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.Right, e.Bounds.Y), New Point(e.Bounds.Right, e.Bounds.Bottom))
-            '    End Using
-            'Else
-            '    e.Cache.FillRectangle(Brushes.Pink, e.Bounds)
-            'End If
-            'e.DrawText()
-            'e.DrawGlyph()
-            'e.Handled = True
-            Draw(Brushes.Pink, e)
-        End If
+    '''''If link.Item.Name = "BarButtonItem8" Then
+    '''''    Draw(Brushes.White, e)
+    '''''End If
+    '''''If link.Item.Name = "BarButtonItem6" Then
+    '''''    'If e.State = DevExpress.XtraBars.ViewInfo.BarLinkState.Highlighted Then
+    '''''    '    Using backBrush = New LinearGradientBrush(e.Bounds, Color.DarkOrange, Color.LightYellow, LinearGradientMode.BackwardDiagonal)
+    '''''    '        e.Cache.Graphics.FillRectangle(backBrush, e.Bounds)
+    '''''    '        e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.Right, e.Bounds.Y))
+    '''''    '        e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.X, e.Bounds.Bottom), New Point(e.Bounds.Right, e.Bounds.Bottom))
+    '''''    '        e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.X, e.Bounds.Bottom))
+    '''''    '        e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.Right, e.Bounds.Y), New Point(e.Bounds.Right, e.Bounds.Bottom))
+    '''''    '    End Using
+    '''''    'Else
+    '''''    '    e.Cache.FillRectangle(Brushes.Pink, e.Bounds)
+    '''''    'End If
+    '''''    'e.DrawText()
+    '''''    'e.DrawGlyph()
+    '''''    'e.Handled = True
+    '''''    Draw(Brushes.Pink, e)
+    '''''End If
 
-        If link.Item.Name = "BarButtonItem17" Then
-            Draw(Brushes.Thistle, e)
-        End If
-        If link.Item.Name = "Dtp1" Then
-            If TypeOf link Is BarEditItemLink Then
-                'e.RibbonItemInfo.Appearance.BackColor = Color.Green
-                e.Cache.FillRectangle(Color.Thistle, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "BarButtonItem16" Then
-            Dim group As RibbonPageGroupViewInfo = TryCast(e.RibbonItemInfo.OwnerPageGroup, RibbonPageGroupViewInfo)
-            If group.PageGroup.Name = "RibbonPageGroup4" Then
-                e.Graphics.FillRectangle(Brushes.Thistle, group.ContentBounds)
-            End If
-            Draw(Brushes.Thistle, e)
-        End If
-        If link.Item.Name = "Shl" Then
-            If TypeOf link Is BarEditItemLink Then
-                e.Cache.FillRectangle(Color.LightBlue, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "Lun" Then
-            If TypeOf link Is BarEditItemLink Then
-                e.Cache.FillRectangle(Color.Orange, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "Pri" Then
-            If TypeOf link Is BarEditItemLink Then
-                e.Cache.FillRectangle(Color.Pink, e.Bounds)
-            End If
-        End If
-        If link.Item.Name = "Pra" Then
-            If TypeOf link Is BarEditItemLink Then
-                'e.RibbonItemInfo.Appearance.BackColor = Color.Green
-                Dim group As RibbonPageGroupViewInfo = TryCast(e.RibbonItemInfo.OwnerPageGroup, RibbonPageGroupViewInfo)
-                If group.PageGroup.Name = "RibbonPageGroup3" Then
-                    e.Graphics.FillRectangle(Brushes.White, group.ContentBounds)
-                End If
-                e.Cache.FillRectangle(Color.Lime, e.Bounds)
-            End If
-        End If
+    '''''If link.Item.Name = "BarButtonItem17" Then
+    '''''    Draw(Brushes.Thistle, e)
+    '''''End If
+    '''''If link.Item.Name = "Dtp1" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        'e.RibbonItemInfo.Appearance.BackColor = Color.Green
+    '''''        e.Cache.FillRectangle(Color.Thistle, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "BarButtonItem16" Then
+    '''''    Dim group As RibbonPageGroupViewInfo = TryCast(e.RibbonItemInfo.OwnerPageGroup, RibbonPageGroupViewInfo)
+    '''''    If group.PageGroup.Name = "RibbonPageGroup4" Then
+    '''''        e.Graphics.FillRectangle(Brushes.Thistle, group.ContentBounds)
+    '''''    End If
+    '''''    Draw(Brushes.Thistle, e)
+    '''''End If
+    '''''If link.Item.Name = "Shl" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        e.Cache.FillRectangle(Color.LightBlue, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "Lun" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        e.Cache.FillRectangle(Color.Orange, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "Pri" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        e.Cache.FillRectangle(Color.Pink, e.Bounds)
+    '''''    End If
+    '''''End If
+    '''''If link.Item.Name = "Pra" Then
+    '''''    If TypeOf link Is BarEditItemLink Then
+    '''''        'e.RibbonItemInfo.Appearance.BackColor = Color.Green
+    '''''        Dim group As RibbonPageGroupViewInfo = TryCast(e.RibbonItemInfo.OwnerPageGroup, RibbonPageGroupViewInfo)
+    '''''        If group.PageGroup.Name = "RibbonPageGroup3" Then
+    '''''            e.Graphics.FillRectangle(Brushes.White, group.ContentBounds)
+    '''''        End If
+    '''''        e.Cache.FillRectangle(Color.Lime, e.Bounds)
+    '''''    End If
+    '''''End If
 
-        'e.Appearance.BackColor = Color.LightBlue
-        'Case "RR-Lunch A", "LR-Lunch B"
-        'e.Appearance.BackColor = Color.Orange
-        'Case "RP-Private A", "LP-Private B"
-        'e.Appearance.BackColor = Color.Pink
+    ''''''e.Appearance.BackColor = Color.LightBlue
+    ''''''Case "RR-Lunch A", "LR-Lunch B"
+    ''''''e.Appearance.BackColor = Color.Orange
+    ''''''Case "RP-Private A", "LP-Private B"
+    ''''''e.Appearance.BackColor = Color.Pink
 
-        'If link.PageGroupName = "RibbonPageGroup6" Then
-        '    'If e.State = DevExpress.XtraBars.ViewInfo.BarLinkState.Highlighted Then
-        '    'Using backBrush = New LinearGradientBrush(e.Bounds, Color.DarkOrange, Color.LightYellow, LinearGradientMode.BackwardDiagonal)
-        '    '    e.Cache.Graphics.FillRectangle(backBrush, e.Bounds)
-        '    '    e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.Right, e.Bounds.Y))
-        '    '    e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.X, e.Bounds.Bottom), New Point(e.Bounds.Right, e.Bounds.Bottom))
-        '    '    e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.X, e.Bounds.Bottom))
-        '    '    e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.Right, e.Bounds.Y), New Point(e.Bounds.Right, e.Bounds.Bottom))
-        '    'End Using
-        '    'Else
-        '    e.Cache.FillRectangle(Brushes.Yellow, e.Bounds)
-        '    'End If
-        '    e.DrawText()
-        '    e.DrawGlyph()
-        '    e.DrawBackground()
-        '    'e.DrawEditor()
-        '    e.Handled = True
-        'End If
-        'Dim group As RibbonPageGroupViewInfo = TryCast(sender, RibbonPageGroupViewInfo)
-        ''Dim group As RibbonPageGroupViewInfo = TryCast(e.RibbonItemInfo.OwnerPageGroup, RibbonPageGroupViewInfo)
-        '''group.ri
-        ''''If (group.PageGroup.Name == "YOUR_RibbonPageGroup_NAME") Then
-        ''''    e.Graphics.FillRectangle(Brushes.Yellow, group.ContentBounds);
-        ''''Dim group As RibbonPageGroupViewInfo = CType((CType(e, RibbonDrawInfo)).ViewInfo, RibbonPageGroupViewInfo)
-        ''If group.PageGroup.Name = "RibbonPageGroup6" Then
-        ''    e.Graphics.FillRectangle(Brushes.Yellow, group.ContentBounds)
-        ''End If
-        'Dim group As RibbonPageGroupViewInfo = CType((CType(e, RibbonDrawInfo)).ViewInfo, RibbonPageGroupViewInfo)
-        'Dim infoArgs As GroupObjectInfoArgs = group.GetDrawInfo()
-        'ObjectPainter.DrawObject(e.Cache, group.Painter, infoArgs)
-        'e.Graphics.FillRectangle(Brushes.IndianRed, group.CaptionBounds)
-        'e.Graphics.DrawString(group.PageGroup.Text, infoArgs.AppearanceCaption.Font, Brushes.Green, group.CaptionBounds)
-    End Sub
-    Private Sub Draw(ByVal Brush As Brush, ByVal e As DevExpress.XtraBars.BarItemCustomDrawEventArgs)
-        If e.State = DevExpress.XtraBars.ViewInfo.BarLinkState.Highlighted Then
-            Using backBrush = New LinearGradientBrush(e.Bounds, Color.DarkOrange, Color.LightYellow, LinearGradientMode.BackwardDiagonal)
-                e.Cache.Graphics.FillRectangle(backBrush, e.Bounds)
-                e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.Right, e.Bounds.Y))
-                e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.X, e.Bounds.Bottom), New Point(e.Bounds.Right, e.Bounds.Bottom))
-                e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.X, e.Bounds.Bottom))
-                e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.Right, e.Bounds.Y), New Point(e.Bounds.Right, e.Bounds.Bottom))
-            End Using
-        Else
-            e.Cache.FillRectangle(Brush, e.Bounds)
-        End If
-        e.DrawText()
-        e.DrawGlyph()
-        e.Handled = True
-    End Sub
+    ''''''If link.PageGroupName = "RibbonPageGroup6" Then
+    ''''''    'If e.State = DevExpress.XtraBars.ViewInfo.BarLinkState.Highlighted Then
+    ''''''    'Using backBrush = New LinearGradientBrush(e.Bounds, Color.DarkOrange, Color.LightYellow, LinearGradientMode.BackwardDiagonal)
+    ''''''    '    e.Cache.Graphics.FillRectangle(backBrush, e.Bounds)
+    ''''''    '    e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.Right, e.Bounds.Y))
+    ''''''    '    e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.X, e.Bounds.Bottom), New Point(e.Bounds.Right, e.Bounds.Bottom))
+    ''''''    '    e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.X, e.Bounds.Bottom))
+    ''''''    '    e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.Right, e.Bounds.Y), New Point(e.Bounds.Right, e.Bounds.Bottom))
+    ''''''    'End Using
+    ''''''    'Else
+    ''''''    e.Cache.FillRectangle(Brushes.Yellow, e.Bounds)
+    ''''''    'End If
+    ''''''    e.DrawText()
+    ''''''    e.DrawGlyph()
+    ''''''    e.DrawBackground()
+    ''''''    'e.DrawEditor()
+    ''''''    e.Handled = True
+    ''''''End If
+    ''''''Dim group As RibbonPageGroupViewInfo = TryCast(sender, RibbonPageGroupViewInfo)
+    '''''''Dim group As RibbonPageGroupViewInfo = TryCast(e.RibbonItemInfo.OwnerPageGroup, RibbonPageGroupViewInfo)
+    ''''''''group.ri
+    '''''''''If (group.PageGroup.Name == "YOUR_RibbonPageGroup_NAME") Then
+    '''''''''    e.Graphics.FillRectangle(Brushes.Yellow, group.ContentBounds);
+    '''''''''Dim group As RibbonPageGroupViewInfo = CType((CType(e, RibbonDrawInfo)).ViewInfo, RibbonPageGroupViewInfo)
+    '''''''If group.PageGroup.Name = "RibbonPageGroup6" Then
+    '''''''    e.Graphics.FillRectangle(Brushes.Yellow, group.ContentBounds)
+    '''''''End If
+    ''''''Dim group As RibbonPageGroupViewInfo = CType((CType(e, RibbonDrawInfo)).ViewInfo, RibbonPageGroupViewInfo)
+    ''''''Dim infoArgs As GroupObjectInfoArgs = group.GetDrawInfo()
+    ''''''ObjectPainter.DrawObject(e.Cache, group.Painter, infoArgs)
+    ''''''e.Graphics.FillRectangle(Brushes.IndianRed, group.CaptionBounds)
+    ''''''e.Graphics.DrawString(group.PageGroup.Text, infoArgs.AppearanceCaption.Font, Brushes.Green, group.CaptionBounds)
+    '''''End Sub
+    '''''Private Sub Draw(ByVal Brush As Brush, ByVal e As DevExpress.XtraBars.BarItemCustomDrawEventArgs)
+    '''''    If e.State = DevExpress.XtraBars.ViewInfo.BarLinkState.Highlighted Then
+    '''''        Using backBrush = New LinearGradientBrush(e.Bounds, Color.DarkOrange, Color.LightYellow, LinearGradientMode.BackwardDiagonal)
+    '''''            e.Cache.Graphics.FillRectangle(backBrush, e.Bounds)
+    '''''            e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.Right, e.Bounds.Y))
+    '''''            e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.X, e.Bounds.Bottom), New Point(e.Bounds.Right, e.Bounds.Bottom))
+    '''''            e.Cache.Graphics.DrawLine(Pens.White, e.Bounds.Location, New Point(e.Bounds.X, e.Bounds.Bottom))
+    '''''            e.Cache.Graphics.DrawLine(Pens.Black, New Point(e.Bounds.Right, e.Bounds.Y), New Point(e.Bounds.Right, e.Bounds.Bottom))
+    '''''        End Using
+    '''''    Else
+    '''''        e.Cache.FillRectangle(Brush, e.Bounds)
+    '''''    End If
+    '''''    e.DrawText()
+    '''''    e.DrawGlyph()
+    '''''    e.Handled = True
+    '''''End Sub
+#End Region
+
 
     Private Sub DockPanel2_CustomButtonClick(sender As Object, e As Docking2010.ButtonEventArgs)
         Select Case e.Button.Properties.Caption
@@ -4906,13 +5086,13 @@ Public Class frmAttendanceLives
                 "WHERE (dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID = " & devID & ")", DBCon2)
 
                             Dim ds2 As New DataSet()
-                                da2.Fill(ds2)
-                                If ds2.Tables(0).Rows.Count > 0 Then
+                            da2.Fill(ds2)
+                            If ds2.Tables(0).Rows.Count > 0 Then
 
 
-                                Else
-                                    'Try
-                                    Crt_User = " INSERT INTO Emp_Attendence_Device " &
+                            Else
+                                'Try
+                                Crt_User = " INSERT INTO Emp_Attendence_Device " &
                                                                    " (Emp_Attendence_Device_ID, " &
                                                                    " Emp_Bio_Device_Users_UserID, " &
                                                                    " Attendance_Duty_Status_ID, " &
@@ -4948,23 +5128,23 @@ Public Class frmAttendanceLives
                                                                    " '" & CDate(dts.Item("Emp_Attendence_Device_Day")).ToString("yyyy/MM/dd") & "', " &
                                                                    " '" & CDate(dts.Item("Emp_Attendence_Device_Time")).ToString("HH:mm") & "', " &
                                                                    " '" & CBool(dts.Item("Emp_Attendence_Device_Status")) & "')"
-                                    Dim SqldataSet As New DataSet()
-                                    Dim dataadapter As New SqlDataAdapter
-                                    Dim cmd As New SqlCommand
+                                Dim SqldataSet As New DataSet()
+                                Dim dataadapter As New SqlDataAdapter
+                                Dim cmd As New SqlCommand
 
-                                    connection.Open()
-                                    cmd.Connection = connection
-                                    'cmd.CommandText = Crt_Login
-                                    'cmd.ExecuteScalar()
-                                    cmd.CommandText = Crt_User
-                                    cmd.ExecuteNonQuery()
-                                    connection.Close()
-                                    'Catch ex As Exception
-                                    '    'MsgBox("Aa")
-                                    'End Try
+                                connection.Open()
+                                cmd.Connection = connection
+                                'cmd.CommandText = Crt_Login
+                                'cmd.ExecuteScalar()
+                                cmd.CommandText = Crt_User
+                                cmd.ExecuteNonQuery()
+                                connection.Close()
+                                'Catch ex As Exception
+                                '    'MsgBox("Aa")
+                                'End Try
 
-                                End If
-                                Application.DoEvents()
+                            End If
+                            Application.DoEvents()
                         Next
 
 
@@ -5190,6 +5370,29 @@ Public Class frmAttendanceLives
             Next
             SimpleButton2.PerformClick()
         End Using
+    End Sub
+
+
+    Private Sub NotifyIcon1_DoubleClick(sender As Object, e As EventArgs) Handles NotifyIcon1.DoubleClick
+        Me.WindowState = FormWindowState.Maximized
+    End Sub
+
+    Private Sub SimpleButton4_Click_1(sender As Object, e As EventArgs) Handles BtnInOut.Click
+        RibbonMiniToolbar2.Show(MousePosition)
+    End Sub
+
+    Private Sub SimpleButton5_Click(sender As Object, e As EventArgs) Handles BtnActivity.Click
+        RibbonMiniToolbar3.Show(MousePosition)
+    End Sub
+
+    Private Sub lblState_Click(sender As Object, e As EventArgs) Handles lblState.Click
+
+    End Sub
+
+    Private Sub RibbonControl1_ShowCustomizationMenu(sender As Object, e As Ribbon.RibbonCustomizationMenuEventArgs) Handles RibbonControl1.ShowCustomizationMenu
+        '  If (e.HitInfo.InItem And e.HitInfo.InToolbar) Then
+        e.ShowCustomizationMenu = False
+        ' End If
     End Sub
 End Class
 

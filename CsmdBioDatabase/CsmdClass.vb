@@ -76,7 +76,7 @@ Public Class CsmdDateTime
         Return New DateTime(sourceDate.Year, sourceDate.Month, 1)
     End Function
 
-    Public Shared Function LastDayOfMonth(ByVal sourceDate As DateTime) As String
+    Public Shared Function LastDayOfMonth(ByVal sourceDate As DateTime) As DateTime
         Dim lastDay As DateTime = New DateTime(sourceDate.Year, sourceDate.Month, 1)
         Return CType(lastDay.AddMonths(1).AddDays(-1), String)
     End Function
