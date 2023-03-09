@@ -107,7 +107,7 @@ Module frm
     Public Const AddMode As String = "AddMode"
     Public Const LoadMode As String = "LoadMode"
 
-    Public PlazaUserID As Integer
+
     Public UpdaterSW As Boolean = False
     Public intMultiAccount As Integer
     'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

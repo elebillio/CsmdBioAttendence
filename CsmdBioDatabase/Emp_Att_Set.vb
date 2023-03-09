@@ -12,9 +12,9 @@ Imports System.Collections.Generic
 
 Partial Public Class Emp_Att_Set
     Public Property Emp_Att_Set_ID As Integer
+    Public Property Emp_Att_Set_Fri_Status As Nullable(Of Boolean)
     Public Property Emp_Att_Set_Open_Time As String
     Public Property Emp_Att_Set_Close_Time As String
-    Public Property Emp_Att_Set_Fri_Status As Nullable(Of Boolean)
     Public Property Emp_Att_Set_DutyFriOn As String
     Public Property Emp_Att_Set_DutyFriOff As String
     Public Property Emp_Att_Set_FridayOff As String
@@ -23,7 +23,6 @@ Partial Public Class Emp_Att_Set
     Public Property Emp_Att_Set_Early_Status As Nullable(Of Boolean)
     Public Property Emp_Att_Set_Early_Time As Nullable(Of Double)
     Public Property Emp_Att_Set_Duty_OverTime_Status As Nullable(Of Boolean)
-    Public Property Emp_Att_Set_Date As Nullable(Of Date)
     Public Property Emp_Att_Set_Duty_OverTime_Time As Nullable(Of Double)
     Public Property Emp_Att_Set_Prayer_Late_Status As Nullable(Of Boolean)
     Public Property Emp_Att_Set_Prayer_Late_Time As Nullable(Of Double)
@@ -32,6 +31,7 @@ Partial Public Class Emp_Att_Set
     Public Property Emp_Att_Set_Lunch_Status As Nullable(Of Boolean)
     Public Property Emp_Att_Set_Lunch_Time As Nullable(Of Double)
     Public Property Emp_Att_Set_Lunch_OverTime_Status As Nullable(Of Boolean)
+    Public Property Emp_Att_Set_Date As Nullable(Of Date)
     Public Property Emp_Att_Set_Private_Late_Status As Nullable(Of Boolean)
     Public Property Emp_Att_Set_Private_Time As Nullable(Of Double)
 

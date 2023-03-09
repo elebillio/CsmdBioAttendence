@@ -337,6 +337,10 @@
       <Project>{28179e5e-9280-4501-bfba-bf5d791e6bd8}</Project>
       <Name>CsmdBioDatabase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CsmdOnline\CsmdOnline.vbproj">
+      <Project>{948f260e-8adf-42d9-ad70-a0edbf065e8f}</Project>
+      <Name>CsmdOnline</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CsmdUpdater\CsmdUpdater.vbproj">
       <Project>{c140bfcf-02bb-463b-a254-f4cc0078d0eb}</Project>
       <Name>CsmdUpdater</Name>

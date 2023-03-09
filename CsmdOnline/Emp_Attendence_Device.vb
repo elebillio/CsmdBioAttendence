@@ -28,7 +28,7 @@ Partial Public Class Emp_Attendence_Device
     Public Property Emp_Attendence_Device_Cal6 As String
     Public Property Emp_Attendence_Device_Cal7 As String
     Public Property Emp_Attendence_Device_Status As Nullable(Of Boolean)
-    Public Property User_ID As Nullable(Of Integer)
+    Public Property User_ID As Integer
 
     Public Overridable Property Attendance_Duty_Status As Attendance_Duty_Status
     Public Overridable Property Emp_Bio_Device_Users As Emp_Bio_Device_Users

@@ -51,6 +51,7 @@ Public Class frmAttendanceLives
             txtIP.EditValue = GetSetting(Application.StartupPath, "CsmdAtt", "CsmdAttIP", "")
 
         End If
+        CsmdVarible.PlazaUserID = 1
         RibbonControl1.Minimized = True
         cmbStatus.TextEditStyle = TextEditStyles.DisableTextEditor
         AddHandler cmbStatus.EditValueChanged, AddressOf cmbStatus_EditValueChanged
@@ -94,7 +95,7 @@ Public Class frmAttendanceLives
         GridView3.IndicatorWidth = 35
         GridView2.IndicatorWidth = 45
         AdvBandedGridView1.IndicatorWidth = 35
-
+        lblState.Text = "Disconnected"
         'CsmdScroll1.Timer1.Enabled = True
         'CsmdScroll1.M.BackColor = Color.Transparent
         'CsmdScroll1.M.Text = "Total Employees =30  @  Present Today =23 @ Absent Today =7"
@@ -166,7 +167,70 @@ Public Class frmAttendanceLives
 
 
     Public Sub Load_From_DeviceDB()
-        Using DBCon2 As New SqlConnection(CsmdCon.ConSqlDB)
+        ''''''Using DBCon As New SqlConnection(CsmdCon.ConSqlDB)
+
+        'Dim da2 As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter("SELECT 
+        '                USERINFO.USERID, 
+        '                USERINFO.Badgenumber,
+        '                USERINFO.SSN, 
+        '                USERINFO.Name, 
+        '                CHECKINOUT.CHECKTIME FROM CHECKINOUT INNER JOIN USERINFO ON
+        '                CHECKINOUT.USERID = USERINFO.USERID where DateValue(CHECKINOUT.CHECKTIME) = '" & CDate(Dtp1.EditValue) & "';", DBCon2)
+        '''''''            Dim sqlStr As String = "SELECT dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, dbo.Emp_Bio_Device_Users.Emp_ID, " &
+        '''''''        "dbo.Attendence_Status.Attendence_Status_Type, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time " &
+        '''''''"FROM dbo.Emp_Attendence_Device INNER JOIN " &
+        '''''''                             "dbo.Employees ON dbo.Emp_Attendence_Device.Emp_ID = dbo.Employees.Emp_ID INNER JOIN " &
+        '''''''                         "dbo.Emp_Bio_Device_Users ON dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID = dbo.Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID INNER JOIN " &
+        '''''''                         "dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID " &
+        '''''''"WHERE (dbo.Employees.Emp_Status='true' and dbo.Emp_Attendence_Device.User_ID =" & CsmdVarible.PlazaUserID & " and dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy/MM/dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true')"
+
+
+
+        'Select Case dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, 
+        '                         dbo.Attendence_Status.Attendence_Status_Type, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time
+        'From dbo.Emp_Attendence_Device INNER Join
+        '              dbo.Emp_Bio_Device_Users ON dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID = dbo.Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID INNER Join
+        '              dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID
+        ''''''Dim cmd As SqlCommand = New SqlCommand(sqlStr, DBCon)
+        ''''''DBCon.Open()
+        ''''''Dim da As SqlDataAdapter = New SqlDataAdapter(cmd)
+        ''''''Dim ds As New DataSet()
+        ''''''da.Fill(ds)
+        ''''''If ds.Tables(0).Rows.Count > 0 Then
+        ''''''    GridControl4.DataSource = ds.Tables(0)
+        ''''''Else
+        ''''''    GridControl4.DataSource = Nothing
+        ''''''End If
+        ''''''DBCon.Close()
+        ''''''da.Dispose()
+        Using db As New CsmdBioDatabase.CsmdBioAttendenceEntities
+            'Dim datx As DateTime = CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy/MM/dd")
+            Dim datx As DateTime = CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy-MM-dd")
+            Dim dt = (From a In db.Emp_Attendence_Device
+                      Where a.User_ID = CsmdVarible.PlazaUserID And
+                              a.Emp_Attendence_Device_Day = datx And
+                              a.Emp_Attendence_Device_Status = True
+                      Select a.Emp_Attendence_Device_ID, a.Emp_Bio_Device_Users_UserID, a.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name,
+                              a.Emp_Bio_Device_Users.Emp_ID, a.Emp_Bio_Device_Users.Attendence_Status.Attendence_Status_Type,
+                              a.Emp_Attendence_Device_Date, a.Emp_Attendence_Device_Time).ToList
+            If dt.Count > 0 Then
+                GridControl4.DataSource = dt
+            Else
+                GridControl4.DataSource = Nothing
+            End If
+        End Using
+        ''''''End Using
+
+
+
+
+
+    End Sub
+    Public Sub Load_From_DeviceDBonline()
+        If CsmdCon.CheckForInternetConnection = True Then
+
+
+            '''''Using DBCon2 As New SqlConnection(CsmdConOnline.ConSqlDBonline)
 
             'Dim da2 As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter("SELECT 
             '                USERINFO.USERID, 
@@ -174,13 +238,15 @@ Public Class frmAttendanceLives
             '                USERINFO.SSN, 
             '                USERINFO.Name, 
             '                CHECKINOUT.CHECKTIME FROM CHECKINOUT INNER JOIN USERINFO ON
-            '                CHECKINOUT.USERID = USERINFO.USERID where DateValue(CHECKINOUT.CHECKTIME) = '" & CDate(Dtp1.EditValue) & "';", DBCon2)
-            Dim da2 As SqlDataAdapter = New SqlDataAdapter("SELECT dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, dbo.Emp_Bio_Device_Users.Emp_ID, " &
-        "dbo.Attendence_Status.Attendence_Status_Type, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time " &
-"FROM dbo.Emp_Attendence_Device INNER JOIN " &
-                         "dbo.Emp_Bio_Device_Users ON dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID = dbo.Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID INNER JOIN " &
-                         "dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID " &
-"WHERE (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy/MM/dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true')", DBCon2)
+            '''''''            '                CHECKINOUT.USERID = USERINFO.USERID where DateValue(CHECKINOUT.CHECKTIME) = '" & CDate(Dtp1.EditValue) & "';", DBCon2)
+            '''''''            Dim strd As String = "SELECT dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, dbo.Emp_Bio_Device_Users.Emp_ID, " &
+            '''''''        "dbo.Attendence_Status.Attendence_Status_Type, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time " &
+            '''''''"FROM dbo.Emp_Attendence_Device INNER JOIN " &
+            '''''''                         "dbo.Employees ON dbo.Emp_Attendence_Device.Emp_ID = dbo.Employees.Emp_ID INNER JOIN " &
+            '''''''                         "dbo.Emp_Bio_Device_Users ON dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID = dbo.Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID INNER JOIN " &
+            '''''''                         "dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID " &
+            '''''''"WHERE (dbo.Employees.Emp_Status='true' and dbo.Emp_Attendence_Device.User_ID = " & CsmdVarible.PlazaUserID & " and dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy/MM/dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true')"
+            '''''''            Dim da2 As SqlDataAdapter = New SqlDataAdapter(strd, DBCon2)
 
 
             'Select Case dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, 
@@ -189,51 +255,34 @@ Public Class frmAttendanceLives
             '              dbo.Emp_Bio_Device_Users ON dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID = dbo.Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID INNER Join
             '              dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID
 
-            Dim ds2 As New DataSet()
-            da2.Fill(ds2)
-            If ds2.Tables(0).Rows.Count > 0 Then
-                GridControl4.DataSource = ds2.Tables(0)
-            Else
-                GridControl4.DataSource = Nothing
-            End If
-            DBCon2.Close()
-        End Using
-    End Sub
-    Public Sub Load_From_DeviceDBonline()
-        If CsmdCon.CheckForInternetConnection = True Then
-
-
-            Using DBCon2 As New SqlConnection(CsmdConOnline.ConSqlDBonline)
-
-                'Dim da2 As OleDb.OleDbDataAdapter = New OleDb.OleDbDataAdapter("SELECT 
-                '                USERINFO.USERID, 
-                '                USERINFO.Badgenumber,
-                '                USERINFO.SSN, 
-                '                USERINFO.Name, 
-                '                CHECKINOUT.CHECKTIME FROM CHECKINOUT INNER JOIN USERINFO ON
-                '                CHECKINOUT.USERID = USERINFO.USERID where DateValue(CHECKINOUT.CHECKTIME) = '" & CDate(Dtp1.EditValue) & "';", DBCon2)
-                Dim da2 As SqlDataAdapter = New SqlDataAdapter("SELECT dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, dbo.Emp_Bio_Device_Users.Emp_ID, " &
-            "dbo.Attendence_Status.Attendence_Status_Type, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time " &
-    "FROM dbo.Emp_Attendence_Device INNER JOIN " &
-                             "dbo.Emp_Bio_Device_Users ON dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID = dbo.Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID INNER JOIN " &
-                             "dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID " &
-    "WHERE (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy/MM/dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true')", DBCon2)
-
-
-                'Select Case dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, 
-                '                         dbo.Attendence_Status.Attendence_Status_Type, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time
-                'From dbo.Emp_Attendence_Device INNER Join
-                '              dbo.Emp_Bio_Device_Users ON dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID = dbo.Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID INNER Join
-                '              dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID
-
-                Dim ds2 As New DataSet()
-                    da2.Fill(ds2)
-                    If ds2.Tables(0).Rows.Count > 0 Then
-                        GridControl1.DataSource = ds2.Tables(0)
-                    Else
-                        GridControl1.DataSource = Nothing
-                    End If
-                    DBCon2.Close()
+            '''''''Dim ds2 As New DataSet()
+            '''''''    da2.Fill(ds2)
+            '''''''    If ds2.Tables(0).Rows.Count > 0 Then
+            '''''''        GridControl1.DataSource = ds2.Tables(0)
+            '''''''    Else
+            '''''''        GridControl1.DataSource = Nothing
+            '''''''    End If
+            '''''''    DBCon2.Close()
+            '            "SELECT dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, 
+            'dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID,
+            'dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, 
+            'dbo.Emp_Bio_Device_Users.Emp_ID,
+            ' dbo.Attendence_Status.Attendence_Status_Type, 
+            ' dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time 
+            Using db As New CsmdOnline.CsmdBioAttendenceEntitiesOnline
+                Dim datx As DateTime = CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy/MM/dd")
+                Dim dt = (From a In db.Emp_Attendence_Device
+                          Where a.User_ID = CsmdVarible.PlazaUserID And
+                              a.Emp_Attendence_Device_Day = datx And
+                              a.Emp_Attendence_Device_Status = True
+                          Select a.Emp_Attendence_Device_ID, a.Emp_Bio_Device_Users_UserID, a.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name,
+                              a.Emp_Bio_Device_Users.Emp_ID, a.Emp_Bio_Device_Users.Attendence_Status.Attendence_Status_Type,
+                              a.Emp_Attendence_Device_Date, a.Emp_Attendence_Device_Time).ToList
+                If dt.Count > 0 Then
+                    GridControl1.DataSource = dt
+                Else
+                    GridControl1.DataSource = Nothing
+                End If
             End Using
         Else
             MsgBox("Please Check Internet Connection", vbCritical, "Internet Error")
@@ -266,7 +315,7 @@ Public Class frmAttendanceLives
         DataT.Columns.Add("Sn9", GetType(String))
         DataT.Columns.Add("Sn10", GetType(String))
 
-        Dim FromDat As DateTime = CDate(Datx.Date)
+        Dim FromDat As DateTime = CDate(Datx.Date).ToString("yyyy-MM-dd")
         Dim firstDay As Date = CsmdDateTime.FirstDayOfMonth(FromDat)
         Dim lastDay As Date = DateTime.Parse(CStr(firstDay)).AddDays(Date.DaysInMonth(FromDat.Year, FromDat.Month))
 
@@ -274,7 +323,10 @@ Public Class frmAttendanceLives
         Dim DBCon As New SqlConnection(CsmdCon.ConSqlDB)
         'Dim FAZ As New CsmdBioAttendenceEntities
         'Dim DBCon As New SqlConnection(FAZ.Database.Connection.ConnectionString)
-        Dim da As SqlDataAdapter = New SqlDataAdapter("SELECT * From Employees WHERE Emp_Status='true'", DBCon)
+        Dim SqlStr As String = "Select * From Employees WHERE Emp_Status='true'"
+        Dim cmd As SqlCommand = New SqlCommand(SqlStr, DBCon)
+        DBCon.Open()
+        Dim da As SqlDataAdapter = New SqlDataAdapter(cmd)
         Dim dsEmp As New DataSet()
         da.Fill(dsEmp)
         If dsEmp.Tables(0).Rows.Count > 0 Then
@@ -306,16 +358,16 @@ Public Class frmAttendanceLives
                 'Dim TiB As String = "03:00" ').ToString("dd-MM-yyyy HH:mm"))
                 Dim DBCon2 As New SqlConnection(CsmdCon.ConSqlDB)
 
-                Dim SqlStr As String = "SELECT dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, dbo.Emp_Bio_Device_Users.Emp_ID, " &
-"dbo.Attendence_Status.Attendence_Status_Type, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Duty_On_Off, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time, dbo.Emp_Bio_Device_Users.Emp_ID " &
+                Dim SqlStr2 As String = "SELECT dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID, dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID, dbo.Emp_Bio_Device_Users.Emp_Bio_Device_User_Name, dbo.Emp_Bio_Device_Users.Emp_ID, " &
+"dbo.Attendence_Status.Attendence_Status_Type, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Duty_On_Off, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date, dbo.Emp_Attendence_Device.Emp_Attendence_Device_Time " &
 "FROM  dbo.Emp_Attendence_Device INNER JOIN " &
 "dbo.Emp_Bio_Device_Users ON dbo.Emp_Attendence_Device.Emp_Bio_Device_Users_UserID = dbo.Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID INNER JOIN " &
 "dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID " &
  "               WHERE " &
 "(dbo.Emp_Attendence_Device.Emp_Attendence_Device_Date = '" & thisDate.ToString("yyyy/MM/dd") & "') AND (dbo.Emp_Bio_Device_Users.Emp_ID = " & CInt(Emp.Item("Emp_ID")) & ") and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true') ORDER BY dbo.Emp_Attendence_Device.Emp_Attendence_Device_DateTime"
-
-                'MsgBox(SqlStr)
-                Dim da2 As SqlDataAdapter = New SqlDataAdapter(SqlStr, DBCon2)
+                Dim cmd2 As SqlCommand = New SqlCommand(SqlStr2, DBCon2)
+                DBCon2.Open()
+                Dim da2 As SqlDataAdapter = New SqlDataAdapter(cmd2)
                 Dim ds2 As New DataSet()
                 da2.Fill(ds2)
 
@@ -452,12 +504,13 @@ Public Class frmAttendanceLives
                 Mtr.Item("Fing") = kok
                 DataT.Rows.Add(Mtr)
                 DBCon2.Close()
+                da2.Dispose()
                 Application.DoEvents()
             Next
             'GridControl4.DataSource = ds2.Tables(0)
             GridControl2.DataSource = DataT
             ShowSelectionAtt00000000()
-
+             
             GridControl5.DataSource = Nothing
 
             'Dim dt = (From a In DataT Select New With {.USERID = a.Item("USERID"), .Emp_ID = EmpID,
@@ -469,6 +522,7 @@ Public Class frmAttendanceLives
             'SchedulerStorage1.Appointments.DataSource = DataT
         End If
         DBCon.Close()
+        da.Dispose()
     End Sub
 
     Public Sub Load_MainView_Single_Emp_DeviceBy_Month(EmpID As Integer, DateX As Date)
@@ -1066,8 +1120,8 @@ Public Class frmAttendanceLives
     End Sub
 
     Public Sub Load_Detail_View_DeviceBy_Month(EmpID As Integer, EmpCode As String, DateX As Date)
-        Using db As New CsmdBioAttendenceEntities
 
+        Using db As New CsmdBioAttendenceEntities
 
             Dim DataT As New DataTable
             Dim Mtr As DataRow
@@ -1080,9 +1134,9 @@ Public Class frmAttendanceLives
             DataT.Columns.Add("SSN", GetType(String))
             DataT.Columns.Add("Sn1", GetType(String))
 
-            Dim FromDat As DateTime = DateX.Date
-            Dim firstDay As Date = CsmdDateTime.FirstDayOfMonth(FromDat)
-            Dim lastDay As Date = DateTime.Parse(CStr(firstDay)).AddDays(Date.DaysInMonth(FromDat.Year, FromDat.Month))
+            Dim FromDat As DateTime = DateX.Date.ToString("yyyy-MM-dd")
+            Dim firstDay As Date = CsmdDateTime.FirstDayOfMonth(FromDat).ToString("yyyy-MM-dd")
+            Dim lastDay As Date = DateTime.Parse(CStr(firstDay)).AddDays(Date.DaysInMonth(FromDat.Year, FromDat.Month)).ToString("yyyy-MM-dd")
             'ClickforMonthly.Caption = "Now " & EmpName & " >>>"
             Dim k As Integer = 1
             ProgressBarControl3.Properties.Maximum = CInt((lastDay.ToOADate - firstDay.ToOADate))
@@ -1110,8 +1164,8 @@ Public Class frmAttendanceLives
                 Mtr.Item("USERID") = EmpCode
                 Mtr.Item("Sd1") = thisDate.Date.ToString("dd")
                 Mtr.Item("Sd2") = "-"
-                Mtr.Item("Date") = thisDate.ToString("dd/MM/yyyy HH:mm:ss")
-                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                Mtr.Item("Date") = thisDate.ToString("dd-MM-yyyy HH:mm:ss")
+                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                 'Mtr.Item("SSN") = "Duty ON " & EmpDutyOn & " - OFF " & EmpDutyOff & " - " & thisDate.Date.ToString("dddd")
                 Mtr.Item("SSN") = thisDate.Date.ToString("dddd")
                 Mtr.Item("Sn1") = "---"
@@ -1126,11 +1180,12 @@ Public Class frmAttendanceLives
                 '"dbo.Attendence_Status ON dbo.Emp_Bio_Device_Users.Attendence_Status_ID = dbo.Attendence_Status.Attendence_Status_ID INNER JOIN " &
                 '"dbo.Attendance_Duty_Status ON dbo.Attendance_Duty_Status.Attendance_Duty_Status_ID = dbo.Emp_Attendence_Device.Attendance_Duty_Status_ID " &
                 '"            WHERE " &
-                '"(dbo.Emp_Attendence_Device.Emp_Attendence_Device_Day = '" & thisDate.ToString("yyyy/MM/dd") & "')  " &
+                '"(dbo.Emp_Attendence_Device.Emp_Attendence_Device_Day = '" & thisDate.ToString("yyyy-MM-dd") & "')  " &
                 '"AND (dbo.Emp_Attendence_Device.Emp_ID = " & EmpID & ") AND (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true') ORDER BY dbo.Emp_Attendence_Device.Emp_Attendence_Device_DateTime", DBCon2)
                 '            Dim ds2 As New DataSet()
                 '            da2.Fill(ds2)
-                Dim datteb As Date = CDate(thisDate.ToString("yyyy/MM/dd"))
+
+                Dim datteb As Date = CDate(thisDate.ToString("yyyy-MM-dd"))
                 Dim dt = (From a In db.Emp_Attendence_Device
                           Where a.Emp_ID = EmpID And
                               a.Emp_Attendence_Device_Day = datteb.Date And
@@ -1193,7 +1248,7 @@ Public Class frmAttendanceLives
                         'k += 1
 
 
-                        If CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH") >= thisDate.ToString("yyyy/MM/dd HH") And CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH") <= ToDate.ToString("yyyy/MM/dd HH") Then
+                        If CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy-MM-dd HH") >= thisDate.ToString("yyyy-MM-dd HH") And CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy-MM-dd HH") <= ToDate.ToString("yyyy-MM-dd HH") Then
 
                             If Not IsNothing(dsx.Emp_Bio_Device_Users_UserID) Then
                                 If dsx.Attendence_Status_Type.ToString = "RT-Check In" Then
@@ -1201,8 +1256,8 @@ Public Class frmAttendanceLives
                                         chkA = True
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                        Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sd1") = dsx.Emp_Attendence_Device_Duty_On_Off
                                         Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1212,8 +1267,8 @@ Public Class frmAttendanceLives
                                         chkA = False
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                        Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sd1") = dsx.Emp_Attendence_Device_Duty_On_Off
                                         Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1222,14 +1277,14 @@ Public Class frmAttendanceLives
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) + 1
 
-                                        ChkAdate = thisDate.ToString("dd/MM/yyyy").ToString '("dd/MM/yyyy HHmm  ss")
+                                        ChkAdate = thisDate.ToString("dd-MM-yyyy").ToString '("dd-MM-yyyy HHmm  ss")
                                         ChkAtime = CDate(TT2.EditValue).ToString("HH:mm:ss")
 
-                                        Mtr.Item("Date") = CDate(ChkAdate & " " & ChkAtime).ToString("dd/MM/yyyy HH:mm:ss")
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Date") = DateTime.ParseExact(ChkAdate & " " & ChkAtime, "dd-MM-yyyy HH:mm:ss", Nothing).ToString
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = "LT-Check Out"
                                         Mtr.Item("Sd1") = TT2.EditValue.ToString & " zz"
-                                        Mtr.Item("Sn1") = ChkAtime & " vv"
+                                        Mtr.Item("Sn1") = "" ' ChkAtime & " vv"
                                         DataT.Rows.Add(Mtr)
 
                                     End If
@@ -1237,21 +1292,21 @@ Public Class frmAttendanceLives
                                 Else
                                     If dsx.Attendence_Status_Type.ToString = "LT-Check Out" Then
                                         If chkA = False Then
-                                            ChkAdate = thisDate.ToString("dd/MM/yyyy").ToString '("dd/MM/yyyy HHmm:ss")
+                                            ChkAdate = thisDate.ToString("dd-MM-yyyy").ToString '("dd-MM-yyyy HHmm:ss")
                                             ChkAtime = CDate(TT1.EditValue).ToString("HH:mm:ss")
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
-                                            Mtr.Item("Date") = CDate(ChkAdate & " " & ChkAtime).ToString("dd/MM/yyyy HH:mm:ss")
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Date") = DateTime.ParseExact(ChkAdate & " " & ChkAtime, "dd-MM-yyyy HH:mm:ss", Nothing).ToString
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = "RT-Check In"
                                             Mtr.Item("Sd1") = TT1.EditValue.ToString & " ss"
-                                            Mtr.Item("Sn1") = ChkAtime & " xx"
+                                            Mtr.Item("Sn1") = "" 'ChkAtime & " xx"
                                             DataT.Rows.Add(Mtr)
 
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sd1") = dsx.Emp_Attendence_Device_Duty_On_Off
                                             Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1261,8 +1316,8 @@ Public Class frmAttendanceLives
                                             chkA = False
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sd1") = dsx.Emp_Attendence_Device_Duty_On_Off
                                             Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1283,14 +1338,14 @@ Public Class frmAttendanceLives
                                 'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                 If dsx.Attendence_Status_Type.ToString = "RI-Prayer A" Then
                                     If chkB2 = False Then
-                                        PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                        PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                         PrayAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                         'praID = CInt(dsx.Emp_Bio_Device_Users_UserID"))
                                         'PrayAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo + 1).Item("Emp_Attendence_Device_Time")).ToString("HH:mm")
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr.Item("Date") = PrayAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sn1") = PrayAtime
                                         DataT.Rows.Add(Mtr)
@@ -1299,8 +1354,8 @@ Public Class frmAttendanceLives
                                     Else
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) + 1
-                                        Mtr.Item("Date") = PrayAdate ' CDate(dsx.Emp_Attendence_Device_DateTime")).ToString("dd/MM/yyyy HH:mm:ss")
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Date") = PrayAdate ' CDate(dsx.Emp_Attendence_Device_DateTime")).ToString("dd-MM-yyyy HH:mm:ss")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = "LI-Prayer B"
                                         Mtr.Item("Sn1") = "" ' PrayAtime & " hh"
                                         DataT.Rows.Add(Mtr)
@@ -1309,16 +1364,16 @@ Public Class frmAttendanceLives
                                         'If duration > CInt(Pra.EditValue) Then
                                         '    EditDEviceWithPSLP(praID + 1, True, CDate(PrayAtime).AddMinutes(CDbl(Pra.EditValue)), CDate(PrayAdate).AddMinutes(CDbl(Pra.EditValue)))
                                         'Else
-                                        '    EditDEviceWithPSLP(praID + 1, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PrayAtimeN))
+                                        '    EditDEviceWithPSLP(praID + 1, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & PrayAtimeN))
                                         'End If
-                                        PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                        PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                         PrayAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                         'praID = CInt(dsx.Emp_Bio_Device_Users_UserID"))
 
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr.Item("Date") = PrayAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sn1") = PrayAtime
                                         DataT.Rows.Add(Mtr)
@@ -1332,7 +1387,7 @@ Public Class frmAttendanceLives
                                                 Mtr = DataT.NewRow
                                                 Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
                                                 Mtr.Item("Date") = PrayAdate
-                                                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                                 Mtr.Item("SSN") = "RI-Prayer A"
                                                 Mtr.Item("Sn1") = "" ' PrayAtime & " hh"
                                                 DataT.Rows.Add(Mtr)
@@ -1341,18 +1396,18 @@ Public Class frmAttendanceLives
                                                 'If duration > CInt(Pra.EditValue) Then
                                                 '    EditDEviceWithPSLP(praID - 1, True, CDate(PrayAtime).AddMinutes(-CDbl(Pra.EditValue)), CDate(PrayAdate).AddMinutes(-CDbl(Pra.EditValue)))
                                                 'Else
-                                                '    EditDEviceWithPSLP(praID - 1, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PrayAtimeN))
+                                                '    EditDEviceWithPSLP(praID - 1, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & PrayAtimeN))
                                                 'End If
                                             Else
                                                 Mtr = DataT.NewRow
                                                 Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
-                                                Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                                Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                                 Mtr.Item("SSN") = "RI-Prayer A"
                                                 Mtr.Item("Sn1") = "" ' CDate(dsx.Emp_Attendence_Device_Time")).ToString("HH:mm")
                                                 DataT.Rows.Add(Mtr)
                                                 chkB = False
-                                                PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                                 PrayAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                 'praID = CInt(dsx.Emp_Bio_Device_Users_UserID"))
                                                 'PrayAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo - 1).Item("Emp_Attendence_Device_Time")).ToString("HH:mm")
@@ -1360,20 +1415,20 @@ Public Class frmAttendanceLives
                                                 'If duration > CInt(Pra.EditValue) Then
                                                 '    EditDEviceWithPSLP(praID - 1, True, CDate(PrayAtime).AddMinutes(-CDbl(Pra.EditValue)), CDate(PrayAdate).AddMinutes(-CDbl(Pra.EditValue)))
                                                 'Else
-                                                '    EditDEviceWithPSLP(praID - 1, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PrayAtimeN))
+                                                '    EditDEviceWithPSLP(praID - 1, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & PrayAtimeN))
                                                 'End If
                                             End If
 
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             DataT.Rows.Add(Mtr)
                                             chkB2 = False
                                         Else
-                                            PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                            PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                             PrayAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             'praID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                             'PrayAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo - 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1381,7 +1436,7 @@ Public Class frmAttendanceLives
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                             Mtr.Item("Date") = PrayAdate
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sn1") = PrayAtime
                                             DataT.Rows.Add(Mtr)
@@ -1393,14 +1448,14 @@ Public Class frmAttendanceLives
                                 'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                 If dsx.Attendence_Status_Type.ToString = "RM-Short Leave A" Then
                                     If chkC2 = False Then
-                                        ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                        ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                         ShAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                         'shlID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         'ShAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo + 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr.Item("Date") = ShAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sn1") = ShAtime
                                         DataT.Rows.Add(Mtr)
@@ -1410,7 +1465,7 @@ Public Class frmAttendanceLives
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) + 1
                                         Mtr.Item("Date") = ShAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = "LM-Short Leave B"
                                         Mtr.Item("Sn1") = "" ' ShAtime & " hh"
                                         DataT.Rows.Add(Mtr)
@@ -1419,16 +1474,16 @@ Public Class frmAttendanceLives
                                         'If duration > CInt(Shl.EditValue) Then
                                         '    EditDEviceWithPSLP(shlID + 1, True, CDate(ShAtime).AddMinutes(CDbl(Shl.EditValue)), CDate(ShAdate).AddMinutes(CDbl(Shl.EditValue)))
                                         'Else
-                                        '    EditDEviceWithPSLP(shlID + 1, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & ShAtimeN))
+                                        '    EditDEviceWithPSLP(shlID + 1, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & ShAtimeN))
                                         'End If
-                                        ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                        ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                         ShAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                         'shlID = CInt(dsx.Emp_Bio_Device_Users_UserID)
 
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr.Item("Date") = ShAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sn1") = ShAtime
                                         DataT.Rows.Add(Mtr)
@@ -1444,7 +1499,7 @@ Public Class frmAttendanceLives
                                                 Mtr = DataT.NewRow
                                                 Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
                                                 Mtr.Item("Date") = ShAdate
-                                                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                                 Mtr.Item("SSN") = "RM-Short Leave A"
                                                 Mtr.Item("Sn1") = "" ' ShAtime & " hh"
                                                 DataT.Rows.Add(Mtr)
@@ -1453,18 +1508,18 @@ Public Class frmAttendanceLives
                                                 'If duration > CInt(Shl.EditValue) Then
                                                 '    EditDEviceWithPSLP(shlID - 1, True, CDate(ShAtime).AddMinutes(-CDbl(Shl.EditValue)), CDate(ShAdate).AddMinutes(-CDbl(Shl.EditValue)))
                                                 'Else
-                                                '    EditDEviceWithPSLP(shlID - 1, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & ShAtimeN))
+                                                '    EditDEviceWithPSLP(shlID - 1, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & ShAtimeN))
                                                 'End If
                                             Else
                                                 Mtr = DataT.NewRow
                                                 Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
-                                                Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                                Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                                 Mtr.Item("SSN") = "RM-Short Leave A"
                                                 Mtr.Item("Sn1") = "" ' CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                 DataT.Rows.Add(Mtr)
                                                 chkC = False
-                                                ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                                 ShAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                 'shlID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                 'ShAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo - 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1472,29 +1527,29 @@ Public Class frmAttendanceLives
                                                 'If duration > CInt(Shl.EditValue) Then
                                                 '    EditDEviceWithPSLP(shlID - 1, True, CDate(ShAtime).AddMinutes(-CDbl(Shl.EditValue)), CDate(ShAdate).AddMinutes(-CDbl(Shl.EditValue)))
                                                 'Else
-                                                '    EditDEviceWithPSLP(shlID - 1, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & ShAtimeN))
+                                                '    EditDEviceWithPSLP(shlID - 1, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & ShAtimeN))
                                                 'End If
                                             End If
 
 
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             DataT.Rows.Add(Mtr)
                                             chkC2 = False
                                         Else
-                                            ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                            ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                             ShAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             'shlID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                             'ShAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo - 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
 
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             DataT.Rows.Add(Mtr)
@@ -1506,7 +1561,7 @@ Public Class frmAttendanceLives
                                 'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                 If dsx.Attendence_Status_Type.ToString = "RR-Lunch A" Then
                                     If chkD2 = False Then
-                                        LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                        LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                         LuAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                         'lunID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         'LuAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo + 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1514,7 +1569,7 @@ Public Class frmAttendanceLives
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr.Item("Date") = LuAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sn1") = LuAtime
                                         DataT.Rows.Add(Mtr)
@@ -1524,7 +1579,7 @@ Public Class frmAttendanceLives
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) + 1
                                         Mtr.Item("Date") = LuAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = "LR-Lunch B"
                                         Mtr.Item("Sn1") = "" ' LuAtime & " hh"
                                         DataT.Rows.Add(Mtr)
@@ -1534,15 +1589,15 @@ Public Class frmAttendanceLives
                                         'If duration > CInt(Lun.EditValue) Then
                                         '    EditDEviceWithPSLP(lunID + 1, True, CDate(LuAtime).AddMinutes(CDbl(Lun.EditValue)), CDate(LuAdate).AddMinutes(CDbl(Lun.EditValue)))
                                         'Else
-                                        '    EditDEviceWithPSLP(lunID + 1, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & LuAtimeN))
+                                        '    EditDEviceWithPSLP(lunID + 1, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & LuAtimeN))
                                         'End If
-                                        LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                        LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                         LuAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                         'lunID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr.Item("Date") = LuAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sn1") = LuAtime
                                         DataT.Rows.Add(Mtr)
@@ -1557,7 +1612,7 @@ Public Class frmAttendanceLives
                                                 Mtr = DataT.NewRow
                                                 Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
                                                 Mtr.Item("Date") = LuAdate
-                                                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                                 Mtr.Item("SSN") = "RR-Lunch A"
                                                 Mtr.Item("Sn1") = "" ' LuAtime & " hh"
                                                 DataT.Rows.Add(Mtr)
@@ -1566,18 +1621,18 @@ Public Class frmAttendanceLives
                                                 'If duration > CInt(Lun.EditValue) Then
                                                 '    EditDEviceWithPSLP(lunID - 1, True, CDate(LuAtime).AddMinutes(-CDbl(Lun.EditValue)), CDate(LuAdate).AddMinutes(-CDbl(Lun.EditValue)))
                                                 'Else
-                                                '    EditDEviceWithPSLP(lunID - 1, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & LuAtimeN))
+                                                '    EditDEviceWithPSLP(lunID - 1, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & LuAtimeN))
                                                 'End If
                                             Else
                                                 Mtr = DataT.NewRow
                                                 Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
-                                                Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                                Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                                 Mtr.Item("SSN") = "RR-Lunch A"
                                                 Mtr.Item("Sn1") = "" ' CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                 DataT.Rows.Add(Mtr)
                                                 chkD = False
-                                                LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                                 LuAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                 'lunID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                 'LuAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo - 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1585,21 +1640,21 @@ Public Class frmAttendanceLives
                                                 'If duration > CInt(Lun.EditValue) Then
                                                 '    EditDEviceWithPSLP(lunID - 1, True, CDate(LuAtime).AddMinutes(-CDbl(Lun.EditValue)), CDate(LuAdate).AddMinutes(-CDbl(Lun.EditValue)))
                                                 'Else
-                                                '    EditDEviceWithPSLP(lunID - 1, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & LuAtimeN))
+                                                '    EditDEviceWithPSLP(lunID - 1, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & LuAtimeN))
                                                 'End If
                                             End If
 
 
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             DataT.Rows.Add(Mtr)
                                             chkD2 = False
                                         Else
-                                            LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                            LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                             LuAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             'lunID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                             'LuAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo - 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1607,7 +1662,7 @@ Public Class frmAttendanceLives
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                             Mtr.Item("Date") = LuAdate
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             DataT.Rows.Add(Mtr)
@@ -1619,7 +1674,7 @@ Public Class frmAttendanceLives
                                 'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                 If dsx.Attendence_Status_Type.ToString = "RP-Private A" Then
                                     If chkE2 = False Then
-                                        PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                        PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                         PriAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                         'priID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         'PriAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo + 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1627,7 +1682,7 @@ Public Class frmAttendanceLives
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr.Item("Date") = PriAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sn1") = PriAtime
                                         DataT.Rows.Add(Mtr)
@@ -1638,7 +1693,7 @@ Public Class frmAttendanceLives
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) + 1
                                         Mtr.Item("Date") = PriAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = "LP-Private B"
                                         Mtr.Item("Sn1") = "" ' PriAtime & " hh"
                                         DataT.Rows.Add(Mtr)
@@ -1648,17 +1703,17 @@ Public Class frmAttendanceLives
                                         'If duration > CInt(Pri.EditValue) Then
                                         '    EditDEviceWithPSLP(priID + 1, True, CDate(PriAtime).AddMinutes(CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(CDbl(Pri.EditValue)))
                                         'Else
-                                        '    EditDEviceWithPSLP(priID + 1, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PriAtimeN))
+                                        '    EditDEviceWithPSLP(priID + 1, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & PriAtimeN))
                                         'End If
 
-                                        PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                        PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                         PriAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                         'priID = CInt(dsx.Emp_Bio_Device_Users_UserID)
 
                                         Mtr = DataT.NewRow
                                         Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                         Mtr.Item("Date") = PriAdate
-                                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                         Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                         Mtr.Item("Sn1") = PriAtime
                                         DataT.Rows.Add(Mtr)
@@ -1676,7 +1731,7 @@ Public Class frmAttendanceLives
                                                 Mtr = DataT.NewRow
                                                 Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
                                                 Mtr.Item("Date") = PriAdate
-                                                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                                 Mtr.Item("SSN") = "RP-Private A"
                                                 Mtr.Item("Sn1") = "" ' PriAtime & " hh"
                                                 DataT.Rows.Add(Mtr)
@@ -1686,18 +1741,18 @@ Public Class frmAttendanceLives
                                                 'If duration > CInt(Pri.EditValue) Then
                                                 '    EditDEviceWithPSLP(priID - 1, True, CDate(PriAtime).AddMinutes(-CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(-CDbl(Pri.EditValue)))
                                                 'Else
-                                                '    EditDEviceWithPSLP(priID - 1, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PriAtimeN))
+                                                '    EditDEviceWithPSLP(priID - 1, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & PriAtimeN))
                                                 'End If
                                             Else
                                                 Mtr = DataT.NewRow
                                                 Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID) - 1
-                                                Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                                Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                                Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                                Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                                 Mtr.Item("SSN") = "RP-Private A"
                                                 Mtr.Item("Sn1") = "" ' CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                 DataT.Rows.Add(Mtr)
                                                 chkE = False
-                                                PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                                 PriAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                 'priID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                 'PriAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo - 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1705,28 +1760,28 @@ Public Class frmAttendanceLives
                                                 'If duration > CInt(Pri.EditValue) Then
                                                 '    EditDEviceWithPSLP(priID - 1, True, CDate(PriAtime).AddMinutes(-CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(-CDbl(Pri.EditValue)))
                                                 'Else
-                                                '    EditDEviceWithPSLP(priID - 1, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PriAtimeN))
+                                                '    EditDEviceWithPSLP(priID - 1, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & PriAtimeN))
                                                 'End If
                                             End If
 
 
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
-                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             DataT.Rows.Add(Mtr)
                                             chkE2 = False
                                         Else
-                                            PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                            PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                             PriAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                             'priID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                             'PriAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo - 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
                                             Mtr = DataT.NewRow
                                             Mtr.Item("USERID") = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                             Mtr.Item("Date") = PriAdate
-                                            Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                            Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                             Mtr.Item("SSN") = dsx.Attendence_Status_Type
                                             Mtr.Item("Sn1") = PriAtime
                                             DataT.Rows.Add(Mtr)
@@ -1740,7 +1795,7 @@ Public Class frmAttendanceLives
                             If Not IsNothing(dsx.Attendance_Duty_Status_ID) Then
                                 If Not dsx.Attendance_Duty_Status_ID = 1 Then
                                     'Else
-                                    ''PriAdate = CDate(dsx.Item("Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                    ''PriAdate = CDate(dsx.Item("Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
                                     ''PriAtime = CDate(dsx.Item("Emp_Attendence_Device_Time).ToString("HH:mm")
                                     'priID = CInt(dsx.Item("Emp_Bio_Device_Users_UserID)
                                     'PriAtimeN = CDate(ds2.Tables(0).Rows.Item(rowNo + 1).Item("Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -1748,8 +1803,8 @@ Public Class frmAttendanceLives
                                     Mtr = DataT.NewRow
                                     Mtr.Item("USERID") = CInt(dsx.Emp_ID)
                                     Mtr.Item("Sd1") = "OFF"
-                                    Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
-                                    Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                                    Mtr.Item("Date") = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd-MM-yyyy HH:mm:ss")
+                                    Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                                     Mtr.Item("SSN") = dsx.Attendance_Duty_Status_ID
                                     Mtr.Item("Sn1") = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                     DataT.Rows.Add(Mtr)
@@ -1764,10 +1819,13 @@ Public Class frmAttendanceLives
                         chkA = False
                         Mtr = DataT.NewRow
                         Mtr.Item("USERID") = EmpCode
-                        ChkAdate = thisDate.ToString("dd/MM/yyyy").ToString '("dd/MM/yyyy HH:mm:ss")
+                        ChkAdate = thisDate.ToString("dd-MM-yyyy").ToString '("dd-MM-yyyy HH:mm:ss")
                         ChkAtime = CDate(TT2.EditValue).ToString("HH:mm:ss")
-                        Mtr.Item("Date") = CDate(ChkAdate & " " & ChkAtime).ToString("dd/MM/yyyy HH:mm:ss")
-                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+
+
+                        Mtr.Item("Date") = DateTime.ParseExact(ChkAdate & " " & ChkAtime, "dd-MM-yyyy HH:mm:ss", Nothing).ToString
+
+                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                         Mtr.Item("SSN") = "LT-Check Out"
                         Mtr.Item("Sd1") = "" ' ChkAtime & " dd"
                         Mtr.Item("Sn1") = "" ' ChkAtime & " cc"
@@ -1778,7 +1836,7 @@ Public Class frmAttendanceLives
                         Mtr = DataT.NewRow
                         Mtr.Item("USERID") = EmpCode
                         Mtr.Item("Date") = PrayAdate
-                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                         Mtr.Item("SSN") = "LI-Prayer B"
                         Mtr.Item("Sn1") = "" ' PrayAtime & " rr"
                         DataT.Rows.Add(Mtr)
@@ -1786,7 +1844,7 @@ Public Class frmAttendanceLives
                         'If duration > CInt(Pra.EditValue) Then
                         '    EditDEviceWithPSLP(praID + 1, True, CDate(PrayAtime).AddMinutes(CDbl(Pra.EditValue)), CDate(PrayAdate).AddMinutes(CDbl(Pra.EditValue)))
                         'Else
-                        '    EditDEviceWithPSLP(praID + 1, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PrayAtimeN))
+                        '    EditDEviceWithPSLP(praID + 1, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & PrayAtimeN))
                         'End If
                     End If
                     If chkC = True Then
@@ -1794,7 +1852,7 @@ Public Class frmAttendanceLives
                         Mtr = DataT.NewRow
                         Mtr.Item("USERID") = EmpCode
                         Mtr.Item("Date") = ShAdate
-                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                         Mtr.Item("SSN") = "LM-Short Leave B"
                         Mtr.Item("Sn1") = "" ' ShAtime & " rr"
                         DataT.Rows.Add(Mtr)
@@ -1802,7 +1860,7 @@ Public Class frmAttendanceLives
                         'If duration > CInt(Shl.EditValue) Then
                         '    EditDEviceWithPSLP(shlID + 1, True, CDate(ShAtime).AddMinutes(CDbl(Shl.EditValue)), CDate(ShAdate).AddMinutes(CDbl(Shl.EditValue)))
                         'Else
-                        '    EditDEviceWithPSLP(shlID + 1, True, CDate(shAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & shAtimeN))
+                        '    EditDEviceWithPSLP(shlID + 1, True, CDate(shAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & shAtimeN))
                         'End If
                     End If
                     If chkD = True Then
@@ -1810,7 +1868,7 @@ Public Class frmAttendanceLives
                         Mtr = DataT.NewRow
                         Mtr.Item("USERID") = EmpCode
                         Mtr.Item("Date") = LuAdate
-                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                         Mtr.Item("SSN") = "LR-Lunch B"
                         Mtr.Item("Sn1") = "" ' LuAtime & " rr"
                         DataT.Rows.Add(Mtr)
@@ -1819,7 +1877,7 @@ Public Class frmAttendanceLives
                         'If duration > CInt(Lun.EditValue) Then
                         '    EditDEviceWithPSLP(lunID + 1, True, CDate(LuAtime).AddMinutes(CDbl(Lun.EditValue)), CDate(LuAdate).AddMinutes(CDbl(Lun.EditValue)))
                         'Else
-                        '    EditDEviceWithPSLP(lunID + 1, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & LuAtimeN))
+                        '    EditDEviceWithPSLP(lunID + 1, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & LuAtimeN))
                         'End If
                     End If
                     If chkE = True Then
@@ -1827,7 +1885,7 @@ Public Class frmAttendanceLives
                         Mtr = DataT.NewRow
                         Mtr.Item("USERID") = EmpCode
                         Mtr.Item("Date") = PriAdate
-                        Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                        Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                         Mtr.Item("SSN") = "LP-Private B"
                         Mtr.Item("Sn1") = "" ' PriAtime & " rr"
                         DataT.Rows.Add(Mtr)
@@ -1835,7 +1893,7 @@ Public Class frmAttendanceLives
                         'If duration > CInt(Lun.EditValue) Then
                         '    EditDEviceWithPSLP(priID + 1, True, CDate(PriAtime).AddMinutes(CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(CDbl(Pri.EditValue)))
                         'Else
-                        '    EditDEviceWithPSLP(priID + 1, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PriAtimeN))
+                        '    EditDEviceWithPSLP(priID + 1, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd-MM-yyyy") & " " & PriAtimeN))
                         'End If
 
                         'EditDEviceWithPSLP(priID + 1, True, CDate(PriAtime).AddMinutes(CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(CDbl(Pri.EditValue)))
@@ -1847,7 +1905,7 @@ Public Class frmAttendanceLives
                     Mtr.Item("Sd1") = "OFF"
                     'Mtr.Item("Sd2") = "-."
                     Mtr.Item("Date") = thisDate.Date
-                    Mtr.Item("Day") = thisDate.ToString("yyyy/MM/dd")
+                    Mtr.Item("Day") = thisDate.ToString("yyyy-MM-dd")
                     Mtr.Item("SSN") = 2
                     Mtr.Item("Sn1") = ""
                     DataT.Rows.Add(Mtr)
@@ -1864,19 +1922,19 @@ Public Class frmAttendanceLives
         End Using
     End Sub
     Public Sub Load_Detail_View_DeviceBy_MonthBy_Edit(DateX As Date)
-        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
+        Using db As New CsmdBioAttendenceEntities
 
             Dim FromDat As DateTime = DateX.Date
 
-            Dim firstDay As Date = CDate(FF1.EditValue) ' CsmdDateTime.FirstDayOfMonth(FromDat)
-            Dim lastDay As Date = CDate(FF2.EditValue) ' DateTime.Parse(CStr(firstDay)).AddDays(Date.DaysInMonth(FromDat.Year, FromDat.Month))
+            Dim firstDay As DateTime = CDate(FF1.EditValue) ' CsmdDateTime.FirstDayOfMonth(FromDat)
+            Dim lastDay As DateTime = CDate(FF2.EditValue) ' DateTime.Parse(CStr(firstDay)).AddDays(Date.DaysInMonth(FromDat.Year, FromDat.Month))
             'ClickforMonthly.Caption = "Now " & EmpName & " >>>"
             If intListE.Count > 0 Then
                 Dim k2 As Integer = 1
                 ProgressBarControl1.Properties.Maximum = intListE.Count
-                ProgressBarControl1.Properties.Minimum = 1
+                ProgressBarControl1.Properties.Minimum = 0
                 ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
-                ProgressBarControl1.Position = 1
+                ProgressBarControl1.Position = 0
                 ProgressBarControl1.Update()
                 For i As Integer = 0 To intListE.Count - 1
                     Class1.EmpID = intListE(i)
@@ -1988,7 +2046,10 @@ Public Class frmAttendanceLives
                             'Dim lunID As Integer
                             'Dim priID As Integer
                             Dim uID As Integer
-
+                            Dim dd As String = Microsoft.VisualBasic.Left(thisDate.ToString("dd-MM-yyyy"), 2)
+                            Dim MM As String = Microsoft.VisualBasic.Mid(thisDate.ToString("dd-MM-yyyy"), 4, 2)
+                            Dim yyyy As String = Microsoft.VisualBasic.Mid(thisDate.ToString("dd-MM-yyyy"), 7, 4)
+                            Dim dat As String = yyyy & "-" & MM & "-" & dd
                             If dtx.Count > 0 Then
                                 Dim rowNo As Integer = 0
                                 'ProgressBarControl3.Properties.Maximum = dtx.Count - 1
@@ -2002,7 +2063,7 @@ Public Class frmAttendanceLives
                                     If CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH") >= thisDate.ToString("yyyy/MM/dd HH") And CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH") <= ToDate.ToString("yyyy/MM/dd HH") Then
 
                                         If Not IsNothing(dsx.Emp_Bio_Device_Users_UserID) Then
-                                            chkADate = CDate(CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy"))
+                                            chkADate = CDate(CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd"))
 
                                             If dsx.Attendence_Status_Type.ToString = "RT-Check In" Then
                                                 If chkA2 = False Then
@@ -2034,7 +2095,7 @@ Public Class frmAttendanceLives
                                                     Else
                                                         If mn = 0 Then
                                                             Dim dti As String = CDate(TT1.EditValue).AddMinutes(CDbl(ck1.EditValue)).ToString("HH:mm")
-                                                            Dim dStr As String = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy") & " " & dti
+                                                            Dim dStr As String = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd") & " " & dti
                                                             uID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                             EditDEvice(uID - 1, 1, Class1.EmpID, True, CType(TT1.EditValue, String), CDate(dti), CDate(dStr))
                                                             chkA2 = True
@@ -2060,7 +2121,8 @@ Public Class frmAttendanceLives
                                             'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                         Else
                                             If dsx.Attendance_Duty_Status_ID < 2 Then
-                                                EditDEvice(Nothing, 2, Class1.EmpID, True, CType(TT1.EditValue, String), CDate("08:00"), CDate(thisDate.ToString("dd/MM/yyyy") & " " & CDate("08:00")))
+
+                                                EditDEvice(Nothing, 2, Class1.EmpID, True, CType(TT1.EditValue, String), CType(TT1.EditValue, String), DateTime.ParseExact(dat & " " & CType(TT1.EditValue, String) & ":" & "00", "yyyy-MM-dd HH:mm:ss", Nothing))
                                             End If
                                         End If
                                     End If
@@ -2081,11 +2143,18 @@ Public Class frmAttendanceLives
                                     Dim dti As String = CDate(TT2.EditValue).AddMinutes(CDbl(ck2.EditValue)).ToString("HH:mm")
                                     Dim dStr As String = chkADate & " " & dti
 
-                                    EditDEvice(uIDs + 1, Nothing, Class1.EmpID, True, CType(TT2.EditValue, String), CDate(CDate(dti).ToString("HH:mm")), CDate(CDate(dStr).ToString("dd/MM/yyyy HH:mm")))
+                                    EditDEvice(uIDs + 1, Nothing, Class1.EmpID, True, CType(TT2.EditValue, String), CDate(CDate(dti).ToString("HH:mm")), CDate(CDate(dStr).ToString("yyyy/MM/dd HH:mm")))
                                     'mn = 1
                                 End If
                             Else
-                                EditDEvice(Nothing, 2, Class1.EmpID, True, CType(TT1.EditValue, String), CDate("08:00"), CDate(thisDate.ToString("dd/MM/yyyy") & " " & CDate("08:00")))
+
+                                Dim HH As String = CDate(TT1.EditValue).Hour
+                                Dim mmm As String = CDate(TT1.EditValue).Minute
+                                Dim ss As String = CDate(TT1.EditValue).Second
+                                Dim timX As String = HH.PadLeft(2, "0") & ":" & mmm.PadLeft(2, "0") & ":" & ss.PadLeft(2, "0")
+
+                                '  intLists(i) =
+                                EditDEvice(Nothing, 2, Class1.EmpID, True, CType(TT1.EditValue, String), CType(TT1.EditValue, String), DateTime.ParseExact(dat & " " & timX, "yyyy-MM-dd HH:mm:ss", Nothing))
                             End If
 
                             chkA2 = False
@@ -2253,7 +2322,7 @@ Public Class frmAttendanceLives
                                     If CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH") >= thisDate.ToString("yyyy/MM/dd HH") And CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH") <= ToDate.ToString("yyyy/MM/dd HH") Then
 
                                         If Not IsNothing(dsx.Emp_Bio_Device_Users_UserID) Then
-                                            'chkADate = CDate(CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy"))
+                                            'chkADate = CDate(CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd"))
 
                                             'If dsx.Emp_Bio_Device_Users.Attendence_Status.Attendence_Status_Type.ToString = "RT-Check In" Then
                                             '    If chkA2 = False Then
@@ -2285,7 +2354,7 @@ Public Class frmAttendanceLives
                                             '        Else
                                             '            If mn = 0 Then
                                             '                Dim dti As String = CDate(TT1.EditValue).AddMinutes(CDbl(ck1.EditValue)).ToString("HH:mm")
-                                            '                Dim dStr As String = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy") & " " & dti
+                                            '                Dim dStr As String = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd") & " " & dti
                                             '                uID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                             '                EditDEvice(uID - 1, 1, Class1.EmpID, True, CType(TT1.EditValue, String), CDate(dti), CDate(dStr))
                                             '                chkA2 = True
@@ -2311,7 +2380,7 @@ Public Class frmAttendanceLives
                                             'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                             If dsx.Attendence_Status_Type.ToString = "RI-Prayer A" Then
                                                 If chkB2 = False Then
-                                                    PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                    PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                     PrayAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                     praID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                     PrayAtimeN = CDate(dtx.Item(rowNo + 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2325,9 +2394,9 @@ Public Class frmAttendanceLives
                                                     If duration >= CInt(Pra.EditValue) Then
                                                         EditDEviceWithPSLP(praID + 1, 1, Class1.EmpID, True, CDate(PrayAtime).AddMinutes(CDbl(Pra.EditValue)), CDate(PrayAdate).AddMinutes(CDbl(Pra.EditValue)))
                                                     Else
-                                                        EditDEviceWithPSLP(praID + 1, 1, Class1.EmpID, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & CDate(PrayAtimeN)))
+                                                        EditDEviceWithPSLP(praID + 1, 1, Class1.EmpID, True, CDate(PrayAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & CDate(PrayAtimeN)))
                                                     End If
-                                                    PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                    PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                     PrayAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                     praID = CInt(dsx.Emp_Bio_Device_Users_UserID)
 
@@ -2345,12 +2414,12 @@ Public Class frmAttendanceLives
                                                             If duration >= CInt(Pra.EditValue) Then
                                                                 EditDEviceWithPSLP(praID - 1, 1, Class1.EmpID, True, CDate(PrayAtime).AddMinutes(-CDbl(Pra.EditValue)), CDate(PrayAdate).AddMinutes(-CDbl(Pra.EditValue)))
                                                             Else
-                                                                EditDEviceWithPSLP(praID - 1, 1, Class1.EmpID, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & CDate(PrayAtimeN)))
+                                                                EditDEviceWithPSLP(praID - 1, 1, Class1.EmpID, True, CDate(PrayAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & CDate(PrayAtimeN)))
                                                             End If
                                                         Else
 
                                                             chkB = False
-                                                            PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                            PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                             PrayAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                             praID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                             PrayAtimeN = CDate(dtx.Item(rowNo - 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2358,14 +2427,14 @@ Public Class frmAttendanceLives
                                                             If duration >= CInt(Pra.EditValue) Then
                                                                 EditDEviceWithPSLP(praID - 1, 1, Class1.EmpID, True, CDate(PrayAtime).AddMinutes(-CDbl(Pra.EditValue)), CDate(PrayAdate).AddMinutes(-CDbl(Pra.EditValue)))
                                                             Else
-                                                                EditDEviceWithPSLP(praID - 1, 1, Class1.EmpID, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & CDate(PrayAtimeN)))
+                                                                EditDEviceWithPSLP(praID - 1, 1, Class1.EmpID, True, CDate(PrayAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & CDate(PrayAtimeN)))
                                                             End If
                                                         End If
 
 
                                                         chkB2 = False
                                                     Else
-                                                        PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                        PrayAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                         PrayAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                         praID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                         PrayAtimeN = CDate(dtx.Item(rowNo - 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2379,7 +2448,7 @@ Public Class frmAttendanceLives
                                             'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                             If dsx.Attendence_Status_Type.ToString = "RM-Short Leave A" Then
                                                 If chkC2 = False Then
-                                                    ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                    ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                     ShAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                     shlID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                     ShAtimeN = CDate(dtx.Item(rowNo + 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2393,9 +2462,9 @@ Public Class frmAttendanceLives
                                                     If duration > CInt(Shl.EditValue) Then
                                                         EditDEviceWithPSLP(shlID + 1, 1, Class1.EmpID, True, CDate(ShAtime).AddMinutes(CDbl(Shl.EditValue)), CDate(ShAdate).AddMinutes(CDbl(Shl.EditValue)))
                                                     Else
-                                                        EditDEviceWithPSLP(shlID + 1, 1, Class1.EmpID, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & ShAtimeN))
+                                                        EditDEviceWithPSLP(shlID + 1, 1, Class1.EmpID, True, CDate(ShAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & ShAtimeN))
                                                     End If
-                                                    ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                    ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                     ShAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                     shlID = CInt(dsx.Emp_Bio_Device_Users_UserID)
 
@@ -2415,12 +2484,12 @@ Public Class frmAttendanceLives
                                                             If duration > CInt(Shl.EditValue) Then
                                                                 EditDEviceWithPSLP(shlID - 1, 1, Class1.EmpID, True, CDate(ShAtime).AddMinutes(-CDbl(Shl.EditValue)), CDate(ShAdate).AddMinutes(-CDbl(Shl.EditValue)))
                                                             Else
-                                                                EditDEviceWithPSLP(shlID - 1, 1, Class1.EmpID, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & ShAtimeN))
+                                                                EditDEviceWithPSLP(shlID - 1, 1, Class1.EmpID, True, CDate(ShAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & ShAtimeN))
                                                             End If
                                                         Else
 
                                                             chkC = False
-                                                            ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                            ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                             ShAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                             shlID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                             ShAtimeN = CDate(dtx.Item(rowNo - 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2428,7 +2497,7 @@ Public Class frmAttendanceLives
                                                             If duration >= CInt(Shl.EditValue) Then
                                                                 EditDEviceWithPSLP(shlID - 1, 1, Class1.EmpID, True, CDate(ShAtime).AddMinutes(-CDbl(Shl.EditValue)), CDate(ShAdate).AddMinutes(-CDbl(Shl.EditValue)))
                                                             Else
-                                                                EditDEviceWithPSLP(shlID - 1, 1, Class1.EmpID, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & ShAtimeN))
+                                                                EditDEviceWithPSLP(shlID - 1, 1, Class1.EmpID, True, CDate(ShAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & ShAtimeN))
                                                             End If
                                                         End If
 
@@ -2436,7 +2505,7 @@ Public Class frmAttendanceLives
 
                                                         chkC2 = False
                                                     Else
-                                                        ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                        ShAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                         ShAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                         shlID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                         ShAtimeN = CDate(dtx.Item(rowNo - 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2450,7 +2519,7 @@ Public Class frmAttendanceLives
                                             'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                             If dsx.Attendence_Status_Type.ToString = "RR-Lunch A" Then
                                                 If chkD2 = False Then
-                                                    LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                    LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                     LuAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                     lunID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                     LuAtimeN = CDate(dtx.Item(rowNo + 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2465,9 +2534,9 @@ Public Class frmAttendanceLives
                                                     If duration > CInt(Lun.EditValue) Then
                                                         EditDEviceWithPSLP(lunID + 1, 1, Class1.EmpID, True, CDate(LuAtime).AddMinutes(CDbl(Lun.EditValue)), CDate(LuAdate).AddMinutes(CDbl(Lun.EditValue)))
                                                     Else
-                                                        EditDEviceWithPSLP(lunID + 1, 1, Class1.EmpID, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & LuAtimeN))
+                                                        EditDEviceWithPSLP(lunID + 1, 1, Class1.EmpID, True, CDate(LuAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & LuAtimeN))
                                                     End If
-                                                    LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                    LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                     LuAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                     lunID = CInt(dsx.Emp_Bio_Device_Users_UserID)
 
@@ -2485,12 +2554,12 @@ Public Class frmAttendanceLives
                                                             If duration > CInt(Lun.EditValue) Then
                                                                 EditDEviceWithPSLP(lunID - 1, 1, Class1.EmpID, True, CDate(LuAtime).AddMinutes(-CDbl(Lun.EditValue)), CDate(LuAdate).AddMinutes(-CDbl(Lun.EditValue)))
                                                             Else
-                                                                EditDEviceWithPSLP(lunID - 1, 1, Class1.EmpID, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & LuAtimeN))
+                                                                EditDEviceWithPSLP(lunID - 1, 1, Class1.EmpID, True, CDate(LuAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & LuAtimeN))
                                                             End If
                                                         Else
 
                                                             chkD = False
-                                                            LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                            LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                             LuAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                             lunID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                             LuAtimeN = CDate(dtx.Item(rowNo - 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2498,13 +2567,13 @@ Public Class frmAttendanceLives
                                                             If duration > CInt(Lun.EditValue) Then
                                                                 EditDEviceWithPSLP(lunID - 1, 1, Class1.EmpID, True, CDate(LuAtime).AddMinutes(-CDbl(Lun.EditValue)), CDate(LuAdate).AddMinutes(-CDbl(Lun.EditValue)))
                                                             Else
-                                                                EditDEviceWithPSLP(lunID - 1, 1, Class1.EmpID, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & LuAtimeN))
+                                                                EditDEviceWithPSLP(lunID - 1, 1, Class1.EmpID, True, CDate(LuAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & LuAtimeN))
                                                             End If
                                                         End If
 
                                                         chkD2 = False
                                                     Else
-                                                        LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                        LuAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                         LuAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                         lunID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                         LuAtimeN = CDate(dtx.Item(rowNo - 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2517,7 +2586,7 @@ Public Class frmAttendanceLives
                                             'nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                                             If dsx.Attendence_Status_Type.ToString = "RP-Private A" Then
                                                 If chkE2 = False Then
-                                                    PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                    PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                     PriAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                     priID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                     PriAtimeN = CDate(dtx.Item(rowNo + 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2532,10 +2601,10 @@ Public Class frmAttendanceLives
                                                     If duration > CInt(Pri.EditValue) Then
                                                         EditDEviceWithPSLP(priID + 1, 1, Class1.EmpID, True, CDate(PriAtime).AddMinutes(CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(CDbl(Pri.EditValue)))
                                                     Else
-                                                        EditDEviceWithPSLP(priID + 1, 1, Class1.EmpID, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PriAtimeN))
+                                                        EditDEviceWithPSLP(priID + 1, 1, Class1.EmpID, True, CDate(PriAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & PriAtimeN))
                                                     End If
 
-                                                    PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                    PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                     PriAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                     priID = CInt(dsx.Emp_Bio_Device_Users_UserID)
 
@@ -2557,12 +2626,12 @@ Public Class frmAttendanceLives
                                                             If duration > CInt(Pri.EditValue) Then
                                                                 EditDEviceWithPSLP(priID - 1, 1, Class1.EmpID, True, CDate(PriAtime).AddMinutes(-CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(-CDbl(Pri.EditValue)))
                                                             Else
-                                                                EditDEviceWithPSLP(priID - 1, 1, Class1.EmpID, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PriAtimeN))
+                                                                EditDEviceWithPSLP(priID - 1, 1, Class1.EmpID, True, CDate(PriAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & PriAtimeN))
                                                             End If
                                                         Else
 
                                                             chkE = False
-                                                            PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                            PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                             PriAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                             priID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                             PriAtimeN = CDate(dtx.Item(rowNo - 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2570,13 +2639,13 @@ Public Class frmAttendanceLives
                                                             If duration > CInt(Pri.EditValue) Then
                                                                 EditDEviceWithPSLP(priID - 1, 1, Class1.EmpID, True, CDate(PriAtime).AddMinutes(-CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(-CDbl(Pri.EditValue)))
                                                             Else
-                                                                EditDEviceWithPSLP(priID - 1, 1, Class1.EmpID, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PriAtimeN))
+                                                                EditDEviceWithPSLP(priID - 1, 1, Class1.EmpID, True, CDate(PriAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & PriAtimeN))
                                                             End If
                                                         End If
 
                                                         chkE2 = False
                                                     Else
-                                                        PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("dd/MM/yyyy HH:mm:ss")
+                                                        PriAdate = CDate(dsx.Emp_Attendence_Device_DateTime).ToString("yyyy/MM/dd HH:mm:ss")
                                                         PriAtime = CDate(dsx.Emp_Attendence_Device_Time).ToString("HH:mm")
                                                         priID = CInt(dsx.Emp_Bio_Device_Users_UserID)
                                                         PriAtimeN = CDate(dtx.Item(rowNo - 1).Emp_Attendence_Device_Time).ToString("HH:mm")
@@ -2588,7 +2657,7 @@ Public Class frmAttendanceLives
                                                 End If
                                             End If
                                             'Else
-                                            '    EditDEvice(Nothing, 2, Class1.EmpID, True, CType(TT1.EditValue, String), CDate("08:00"), CDate(thisDate.ToString("dd/MM/yyyy") & " " & CDate("08:00")))
+                                            '    EditDEvice(Nothing, 2, Class1.EmpID, True, CType(TT1.EditValue, String), CDate("08:00"), CDate(thisDate.ToString("yyyy/MM/dd") & " " & CDate("08:00")))
                                         End If
                                     End If
                                     'chkA2 = False
@@ -2608,7 +2677,7 @@ Public Class frmAttendanceLives
                                 '    Dim dti As String = CDate(TT2.EditValue).AddMinutes(CDbl(ck2.EditValue)).ToString("HH:mm")
                                 '    Dim dStr As String = chkADate & " " & dti
 
-                                '    EditDEvice(uIDs + 1, 1, Class1.EmpID, True, CType(TT2.EditValue, String), CDate(CDate(dti).ToString("HH:mm")), CDate(CDate(dStr).ToString("dd/MM/yyyy HH:mm")))
+                                '    EditDEvice(uIDs + 1, 1, Class1.EmpID, True, CType(TT2.EditValue, String), CDate(CDate(dti).ToString("HH:mm")), CDate(CDate(dStr).ToString("yyyy/MM/dd HH:mm")))
                                 '    'mn = 1
                                 'End If
                                 If chkB = True Then
@@ -2617,7 +2686,7 @@ Public Class frmAttendanceLives
                                     If duration > CInt(Pra.EditValue) Then
                                         EditDEviceWithPSLP(praID + 1, 1, Class1.EmpID, True, CDate(PrayAtime).AddMinutes(CDbl(Pra.EditValue)), CDate(PrayAdate).AddMinutes(CDbl(Pra.EditValue)))
                                     Else
-                                        EditDEviceWithPSLP(praID + 1, 1, Class1.EmpID, True, CDate(PrayAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PrayAtimeN))
+                                        EditDEviceWithPSLP(praID + 1, 1, Class1.EmpID, True, CDate(PrayAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & PrayAtimeN))
                                     End If
                                 End If
                                 If chkC = True Then
@@ -2627,7 +2696,7 @@ Public Class frmAttendanceLives
                                     If duration > CInt(Shl.EditValue) Then
                                         EditDEviceWithPSLP(shlID + 1, 1, Class1.EmpID, True, CDate(ShAtime).AddMinutes(CDbl(Shl.EditValue)), CDate(ShAdate).AddMinutes(CDbl(Shl.EditValue)))
                                     Else
-                                        EditDEviceWithPSLP(shlID + 1, 1, Class1.EmpID, True, CDate(ShAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & ShAtimeN))
+                                        EditDEviceWithPSLP(shlID + 1, 1, Class1.EmpID, True, CDate(ShAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & ShAtimeN))
                                     End If
                                 End If
                                 If chkD = True Then
@@ -2636,7 +2705,7 @@ Public Class frmAttendanceLives
                                     If duration > CInt(Lun.EditValue) Then
                                         EditDEviceWithPSLP(lunID + 1, 1, Class1.EmpID, True, CDate(LuAtime).AddMinutes(CDbl(Lun.EditValue)), CDate(LuAdate).AddMinutes(CDbl(Lun.EditValue)))
                                     Else
-                                        EditDEviceWithPSLP(lunID + 1, 1, Class1.EmpID, True, CDate(LuAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & LuAtimeN))
+                                        EditDEviceWithPSLP(lunID + 1, 1, Class1.EmpID, True, CDate(LuAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & LuAtimeN))
                                     End If
                                 End If
                                 If chkE = True Then
@@ -2645,11 +2714,11 @@ Public Class frmAttendanceLives
                                     If duration > CInt(Lun.EditValue) Then
                                         EditDEviceWithPSLP(priID + 1, 1, Class1.EmpID, True, CDate(PriAtime).AddMinutes(CDbl(Pri.EditValue)), CDate(PriAdate).AddMinutes(CDbl(Pri.EditValue)))
                                     Else
-                                        EditDEviceWithPSLP(priID + 1, 1, Class1.EmpID, True, CDate(PriAtimeN), CDate(thisDate.ToString("dd/MM/yyyy") & " " & PriAtimeN))
+                                        EditDEviceWithPSLP(priID + 1, 1, Class1.EmpID, True, CDate(PriAtimeN), CDate(thisDate.ToString("yyyy/MM/dd") & " " & PriAtimeN))
                                     End If
                                 End If
                             Else
-                                'EditDEvice(Nothing, 2, Class1.EmpID, True, CType(TT1.EditValue, String), CDate("08:00"), CDate(thisDate.ToString("dd/MM/yyyy") & " " & CDate("08:00")))
+                                'EditDEvice(Nothing, 2, Class1.EmpID, True, CType(TT1.EditValue, String), CDate("08:00"), CDate(thisDate.ToString("yyyy/MM/dd") & " " & CDate("08:00")))
 
                             End If
 
@@ -3114,28 +3183,28 @@ Public Class frmAttendanceLives
     End Sub
 
     Private Sub AdvBandedGridView1_DoubleClick(sender As Object, e As EventArgs) Handles AdvBandedGridView1.DoubleClick
-        Try
-            'If bn = True Then
-            '    Dtp1.EditValue = Class1.EmpDate
-            '    Load_MainView_Multi_Emp_DeviceBy_Day(Class1.EmpDate) '(EmpName, EmpDate)
-            '    'TempGridCheckMarksSelection = New GridCheckMarksSelectionxx(Nothing)
-            '    bn = False
-            'Else
-            'Load_MainView_Single_Emp_DeviceBy_Month(Class1.EmpID, EmpDate)
-            'TempGridCheckMarksSelection = New GridCheckMarksSelectionxx(AdvBandedGridView1)
-            'Dim frm As New Form3
-            '    frm.ShowDialog()
-            '    bn = True
-            'End If
-            TempGridCheckMarksSelection.ClearSelection()
-            TempGridCheckMarksSelection.SelectRow(AdvBandedGridView1.FocusedRowHandle, True)
-            LoadDock()
+        'Try
+        'If bn = True Then
+        '    Dtp1.EditValue = Class1.EmpDate
+        '    Load_MainView_Multi_Emp_DeviceBy_Day(Class1.EmpDate) '(EmpName, EmpDate)
+        '    'TempGridCheckMarksSelection = New GridCheckMarksSelectionxx(Nothing)
+        '    bn = False
+        'Else
+        'Load_MainView_Single_Emp_DeviceBy_Month(Class1.EmpID, EmpDate)
+        'TempGridCheckMarksSelection = New GridCheckMarksSelectionxx(AdvBandedGridView1)
+        'Dim frm As New Form3
+        '    frm.ShowDialog()
+        '    bn = True
+        'End If
+        TempGridCheckMarksSelection.ClearSelection()
+        TempGridCheckMarksSelection.SelectRow(AdvBandedGridView1.FocusedRowHandle, True)
+        LoadDock()
 
-            'BarStaticItem2.Caption = EmpName & " isOn " & EmpDate
+        'BarStaticItem2.Caption = EmpName & " isOn " & EmpDate
 
-        Catch ex As Exception
+        'Catch ex As Exception
 
-        End Try
+        'End Try
     End Sub
     Private Sub AdvBandedGridView1_MouseUp(sender As Object, e As MouseEventArgs) Handles AdvBandedGridView1.MouseUp
         Try
@@ -3431,7 +3500,7 @@ Public Class frmAttendanceLives
             End Try
         End Using
         'Dim Crt_Login As String = "create login " & UserID.EditValue & " with password='" & UserPass.EditValue & "'"
-        Dim Crt_User As String = "INSERT INTO Emp_Attendence_Device (Emp_Attendence_Device_ID,Emp_Bio_Device_Users_UserID,Emp_Attendence_Device_DateTime,Emp_Attendence_Device_Date,Emp_Attendence_Device_Day,Emp_Attendence_Device_Time,Emp_Attendence_Device_Status) VALUES (" & maxID & "," & UserID & ",'" & datX & "','" & datc & "','" & datc & "','" & tim & "','true')"
+        Dim Crt_User As String = "INSERT INTO Emp_Attendence_Device (Emp_Attendence_Device_ID,Emp_Bio_Device_Users_UserID,Emp_Attendence_Device_DateTime,Emp_Attendence_Device_Date,Emp_Attendence_Device_Day,Emp_Attendence_Device_Time,Emp_Attendence_Device_Status,Emp_ID,User_ID) VALUES (" & maxID & "," & UserID & ",'" & datX & "','" & datc & "','" & datc & "','" & tim & "','true'," & Class1.EmpID & "," & CsmdVarible.PlazaUserID & ")"
         Dim SqldataSet As New DataSet()
         Dim dataadapter As New SqlDataAdapter
         Dim cmd As New SqlCommand
@@ -3463,37 +3532,48 @@ Public Class frmAttendanceLives
     Dim intListsX() As String
 
     Private Sub ShowSelectionAtt()
-        Try
-            Dim RowCount As Integer = GridView2.SelectedRowsCount - 1
-            ReDim intList(RowCount)
-            ReDim intLists(RowCount)
-            ReDim intListsX(RowCount)
-            For i As Integer = 0 To RowCount
-                Dim row As Integer = (GridView2.GetSelectedRows()(i))
-                Dim obj As Object = TryCast(GridView2.GetRowCellValue(row, "USERID"), Object)
-                Dim objs As Object = TryCast(GridView2.GetRowCellValue(row, "Date"), Object)
-                Dim objsx As Object = TryCast(GridView2.GetRowCellValue(row, "Sn1"), Object)
-                If obj Is Nothing Then
-                    Return
-                End If
-                If objs Is Nothing Then
-                    Return
-                End If
-                If objsx Is Nothing Then
-                    Return
-                End If
-                intList(i) = CInt(obj)
-                intLists(i) = objs.ToString
-                intListsX(i) = objsx.ToString
-            Next i
-            If intList.Count > 0 Then
-                BtnDelete.Enabled = True
-            Else
-                BtnDelete.Enabled = False
+        'Try
+        Dim RowCount As Integer = GridView2.SelectedRowsCount - 1
+        ReDim intList(RowCount)
+        ReDim intLists(RowCount)
+        ReDim intListsX(RowCount)
+        For i As Integer = 0 To RowCount
+            Dim row As Integer = (GridView2.GetSelectedRows()(i))
+            Dim obj As Object = TryCast(GridView2.GetRowCellValue(row, "USERID"), Object)
+            Dim objs As Object = TryCast(GridView2.GetRowCellValue(row, "Date"), Object)
+            Dim objsx As Object = TryCast(GridView2.GetRowCellValue(row, "Sn1"), Object)
+            If obj Is Nothing Then
+                Return
             End If
-        Catch ex As Exception
+            If objs Is Nothing Then
+                Return
+            End If
+            If objsx Is Nothing Then
+                Return
+            End If
+            intList(i) = CInt(obj)
+            'DateTime.ParseExact(ChkAdate & " " & ChkAtime, "dd-MM-yyyy HH:mm:ss", Nothing).ToString
 
-        End Try
+            Dim dd As String = Microsoft.VisualBasic.Left(objs.ToString, 2)
+            Dim MM As String = Microsoft.VisualBasic.Mid(objs.ToString, 4, 2)
+            Dim yyyy As String = Microsoft.VisualBasic.Mid(objs.ToString, 7, 4)
+            Dim dat As String = yyyy & "-" & MM & "-" & dd
+            Dim HH As String = Microsoft.VisualBasic.Mid(objs.ToString, 12, 2)
+            Dim mmm As String = Microsoft.VisualBasic.Mid(objs.ToString, 15, 2)
+            Dim ss As String = Microsoft.VisualBasic.Mid(objs.ToString, 18, 2)
+            Dim timX As String = HH & ":" & mmm & ":" & ss
+
+            intLists(i) = DateTime.ParseExact(dat & " " & timX, "yyyy-MM-dd HH:mm:ss", Nothing).ToString
+            intListsX(i) = objsx.ToString
+        Next i
+        If intList.Count > 0 Then
+            BtnDelete.Enabled = True
+        Else
+            BtnDelete.Enabled = False
+        End If
+        'Catch ex As Exception
+
+        'End Try
     End Sub
 
 #End Region
@@ -3502,7 +3582,15 @@ Public Class frmAttendanceLives
     Private Sub BarButtonItem3_ItemClick_2(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem3.ItemClick
         RibbonMiniToolbar2.Hide()
         Call Load_Detail_View_DeviceBy_MonthBy_Edit(CDate(Dtp1.EditValue))
-        LoadDock()
+
+        If intListE.Count > 1 Then
+            GridControl5.DataSource = Nothing
+            MsgBox("Missing object (CheckIn-CheckOut) fill Successfull")
+        Else
+            LoadDock()
+            MsgBox("Missing object (CheckIn-CheckOut) fill Successfull")
+        End If
+
         'If bn = True Then
         'Dtp1.EditValue = EmpDate
         ''''Load_MainView_Single_Emp_DeviceBy_Month(Class1.EmpID, Class1.EmpDate)
@@ -3518,8 +3606,8 @@ Public Class frmAttendanceLives
         LoadDock()
     End Sub
     Public Sub EditDEvice(uID As Integer, AttStatus As Integer, EmpID As Integer, Status As Boolean, dutyOnOff As String, timeX As Date, datetimeX As DateTime)
-        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
-            '  Dim datt As Date = CDate(CType(datetimeX.ToString("dd/MM/yyyy"), Date?))
+        Using db As New CsmdBioAttendenceEntities
+            '  Dim datt As Date = CDate(CType(datetimeX.ToString("yyyy/MM/dd"), Date?))
             Dim dt = (From a In db.Emp_Attendence_Device Where a.Emp_Attendence_Device_Status = True And a.Emp_ID = EmpID And a.Emp_Attendence_Device_DateTime = datetimeX Select a).FirstOrDefault
             If dt IsNot Nothing Then
                 If Not dutyOnOff = "" Then
@@ -3539,48 +3627,55 @@ Public Class frmAttendanceLives
                 dt.Emp_Attendence_Device_Status = Status
                 dt.Emp_Attendence_Device_Time = timeX.ToString("HH:mm")
                 'dt.Emp_Attendence_Device_DateTime = datetimeX
-                dt.Emp_Attendence_Device_Date = CType(datetimeX.ToString("dd/MM/yyyy"), Date?)
+                dt.Emp_Attendence_Device_Date = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
                 dt.Emp_Attendence_Device_Day = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
                 db.SaveChanges()
             Else
-                Dim maxID As Integer
                 Try
-                    maxID = (From a In db.Emp_Attendence_Device Select a.Emp_Attendence_Device_ID).Max + 1
-                Catch ex As Exception
-                    maxID = 1
-                End Try
-                Dim dtNew = New CsmdBioDatabase.Emp_Attendence_Device
-                With dtNew
-                    .Emp_Attendence_Device_ID = maxID
-                    If AttStatus = 1 Then
-                        .Attendance_Duty_Status_ID = AttStatus
-                        .Emp_Bio_Device_Users_UserID = uID
-                    ElseIf AttStatus = 2 Or AttStatus = 3 Or AttStatus = 4 Then
-                        .Attendance_Duty_Status_ID = AttStatus
-                    Else
-                        .Attendance_Duty_Status_ID = Nothing
-                        .Emp_Bio_Device_Users_UserID = uID
-                    End If
-                    If Not dutyOnOff = "" Then
-                        .Emp_Attendence_Device_Duty_On_Off = CDate(dutyOnOff).ToString("HH:mm")
-                    End If
-                    .Emp_ID = EmpID
+                    Dim maxID As Integer
+                    Try
+                        maxID = (From a In db.Emp_Attendence_Device Select a.Emp_Attendence_Device_ID).Max + 1
+                    Catch ex As Exception
+                        maxID = 1
+                    End Try
+                    Dim dtNew = New CsmdBioDatabase.Emp_Attendence_Device
+                    With dtNew
+                        .Emp_Attendence_Device_ID = maxID
+                        If AttStatus = 1 Then
+                            .Attendance_Duty_Status_ID = AttStatus
+                            .Emp_Bio_Device_Users_UserID = uID
+                        ElseIf AttStatus = 2 Or AttStatus = 3 Or AttStatus = 4 Then
+                            .Attendance_Duty_Status_ID = AttStatus
+                        Else
+                            .Attendance_Duty_Status_ID = Nothing
+                            .Emp_Bio_Device_Users_UserID = uID
+                        End If
+                        If Not dutyOnOff = "" Then
+                            .Emp_Attendence_Device_Duty_On_Off = CDate(dutyOnOff).ToString("HH:mm")
+                        End If
+                        .Emp_ID = EmpID
 
-                    .Emp_Attendence_Device_Status = Status
-                    .Emp_Attendence_Device_Time = timeX.ToString("HH:mm")
-                    .Emp_Attendence_Device_DateTime = datetimeX
-                    .Emp_Attendence_Device_Date = CType(datetimeX.ToString("dd/MM/yyyy"), Date?)
-                    .Emp_Attendence_Device_Day = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
-                End With
-                db.Emp_Attendence_Device.Add(dtNew)
-                db.SaveChanges()
+                        .Emp_Attendence_Device_Status = Status
+                        .Emp_Attendence_Device_Time = timeX.ToString("HH:mm")
+                        .Emp_Attendence_Device_DateTime = datetimeX
+                        .Emp_Attendence_Device_Date = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
+                        .Emp_Attendence_Device_Day = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
+                        .User_ID = CsmdVarible.PlazaUserID
+                    End With
+                    db.Emp_Attendence_Device.Add(dtNew)
+                    db.SaveChanges()
+
+
+                Catch ex As Exception
+
+                End Try
             End If
 
         End Using
     End Sub
     Public Sub EditDEviceWithPSLP(uID As Integer, AttStatus As Integer, EmpID As Integer, Status As Boolean, timeX As Date, datetimeX As DateTime)
         Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
-            '  Dim datt As Date = CDate(CType(datetimeX.ToString("dd/MM/yyyy"), Date?))
+            '  Dim datt As Date = CDate(CType(datetimeX.ToString("yyyy/MM/dd"), Date?))
             Dim dt = (From a In db.Emp_Attendence_Device Where a.Emp_Attendence_Device_Status = True And a.Emp_ID = EmpID And a.Emp_Attendence_Device_DateTime = datetimeX Select a).FirstOrDefault
             If dt IsNot Nothing Then
 
@@ -3589,7 +3684,7 @@ Public Class frmAttendanceLives
                 dt.Emp_Attendence_Device_Status = Status
                 dt.Emp_Attendence_Device_Time = timeX.ToString("HH:mm")
                 'dt.Emp_Attendence_Device_DateTime = datetimeX
-                dt.Emp_Attendence_Device_Date = CType(datetimeX.ToString("dd/MM/yyyy"), Date?)
+                dt.Emp_Attendence_Device_Date = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
                 dt.Emp_Attendence_Device_Day = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
                 db.SaveChanges()
             Else
@@ -3610,8 +3705,9 @@ Public Class frmAttendanceLives
                     .Emp_Attendence_Device_Status = Status
                     .Emp_Attendence_Device_Time = timeX.ToString("HH:mm")
                     .Emp_Attendence_Device_DateTime = datetimeX
-                    .Emp_Attendence_Device_Date = CType(datetimeX.ToString("dd/MM/yyyy"), Date?)
+                    .Emp_Attendence_Device_Date = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
                     .Emp_Attendence_Device_Day = CType(datetimeX.ToString("yyyy/MM/dd"), Date?)
+                    .User_ID = CsmdVarible.PlazaUserID
                 End With
                 db.Emp_Attendence_Device.Add(dtNew)
                 db.SaveChanges()
@@ -3721,8 +3817,8 @@ Public Class frmAttendanceLives
 
                 'Load_MainView_Single_Emp_DeviceBy_Month(EmpID, EmpDate)
         End Select
-        FF1.EditValue = CsmdDateTime.FirstDayOfMonth(CDate(Dtp1.EditValue))
-        FF2.EditValue = CsmdDateTime.LastDayOfMonth(CDate(Dtp1.EditValue))
+        FF1.EditValue = CsmdDateTime.FirstDayOfMonth(CType(Dtp1.EditValue, DateTime))
+        FF2.EditValue = CsmdDateTime.LastDayOfMonth(CType(Dtp1.EditValue, DateTime))
         'Timer2.Enabled = False
         'BarEditItem9.EditValue = False
         'BarStaticItem3.Caption = "Stop"
@@ -3915,11 +4011,32 @@ Public Class frmAttendanceLives
             End If
         Else
             axCZKEM1.GetLastError(idwErrorCode)
-            MsgBox("Unable to connect the device,ErrorCode=" & idwErrorCode, MsgBoxStyle.Exclamation, "Error")
+            lblState.Text = "No Found Device"
+            '  MsgBox("Unable to connect the device,ErrorCode=" & idwErrorCode, MsgBoxStyle.Exclamation, "Error")
         End If
         Cursor = Cursors.Default
     End Sub
-
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        'If lblState.Text = "No Found Device" Or lblState.Text = "Disconnected" Then
+        '    btnConnect.PerformClick()
+        'End If
+    End Sub
+    Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
+        'If bIsConnected = True Then
+        '    Timer2.Enabled = False
+        'Else
+        '    btnConnect.Text = "Connect"
+        '    lblState.Text = "Disconnected"
+        '    Timer2.Enabled = True
+        'End If
+    End Sub
+    Private Sub lblState_TextChanged(sender As Object, e As EventArgs) Handles lblState.TextChanged
+        'If lblState.Text = "No Found Device" Or lblState.Text = "Disconnected" Then
+        '    Timer2.Enabled = True
+        'Else
+        '    Timer2.Enabled = False
+        'End If
+    End Sub
     Private Sub BarButtonItem15_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs)
 
     End Sub
@@ -4003,27 +4120,58 @@ Public Class frmAttendanceLives
         Dim fromtime As String = f1.ToString("yyyy-MM-dd HH:mm:ss")
         Dim totime As String = f2.ToString("yyyy-MM-dd HH:mm:ss") ' f2.Year.ToString("yyyy") & "-" + f2.Month.ToString("MM") & "-" & f2.Day.ToString("dd") & " " & f2.Hour.ToString("HH") & ":" & f2.Minute.ToString("mm") & ":" & f2.Second.ToString("ss")
         Cursor = Cursors.WaitCursor
-
+        Dim k As Integer = 0
         axCZKEM1.EnableDevice(iMachineNumber, False) 'disable the device
-        If axCZKEM1.ReadTimeGLogData(iMachineNumber, fromtime, totime) Then
-            'If axCZKEM1.ReadGeneralLogData(iMachineNumber) Then
+        'If axCZKEM1.ReadTimeGLogData(iMachineNumber, fromtime, totime) Then
+        If axCZKEM1.ReadGeneralLogData(iMachineNumber) Then
+
+
+
+            'ProgressBarControl2.Properties.Appearance.BackColor = Color.Yellow
+            'ProgressBarControl2.Position = 0
+            'ProgressBarControl2.Update()
+            While axCZKEM1.SSR_GetGeneralLogData(iMachineNumber, idwEnrollNumber, idwVerifyMode, idwInOutMode, idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond, idwWorkcode)
+                If Not idwEnrollNumber = "" Then
+                    k += 1
+                End If
+            End While
+            ProgressBarControl2.Properties.Maximum = k
+            ProgressBarControl2.Properties.Minimum = 0
+            ProgressBarControl2.Position = 0
+            ProgressBarControl2.Update()
+        Else
+            Cursor = Cursors.Default
+            axCZKEM1.GetLastError(idwErrorCode)
+            If idwErrorCode <> 0 Then
+                MsgBox("Reading data from terminal failed,ErrorCode: " & idwErrorCode, MsgBoxStyle.Exclamation, "Error")
+            Else
+                MsgBox("No data from terminal returns!", MsgBoxStyle.Exclamation, "Error")
+            End If
+        End If
+
+        axCZKEM1.EnableDevice(iMachineNumber, True)
+        Cursor = Cursors.WaitCursor
+        axCZKEM1.EnableDevice(iMachineNumber, False)
+        If axCZKEM1.ReadAllGLogData(iMachineNumber) Then
             While axCZKEM1.SSR_GetGeneralLogData(iMachineNumber, idwEnrollNumber, idwVerifyMode, idwInOutMode, idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond, idwWorkcode) 'iGLCount += 1
+                'axCZKEM1.GetDeviceStatus(iMachineNumber, 6, k)
+                'axCZKEM1.SSR_GetDeviceDataCount()
                 'lvItem = lvLogs.Items.Add(iGLCount.ToString())
                 'lvItem.SubItems.Add(idwEnrollNumber.ToString())
                 'lvItem.SubItems.Add(idwVerifyMode.ToString())
                 'lvItem.SubItems.Add(idwInOutMode.ToString())
                 Dim kk As String = (idwYear.ToString() & "-" + idwMonth.ToString() & "-" & idwDay.ToString() & " " & idwHour.ToString() & ":" & idwMinute.ToString() & ":" & idwSecond.ToString())
-                Dim dd As DateTime = CDate(CType(kk, DateTime).ToString("yyyy/MM/dd HH:mm:ss"))
+                Dim dd As DateTime = CDate(CType(kk, DateTime).ToString("yyyy-MM-dd HH:mm:ss"))
 
                 Dim bb As String = (idwYear.ToString() & "-" + idwMonth.ToString() & "-" & idwDay.ToString())
-                Dim ee As String = CType(bb, DateTime).ToString("yyyy/MM/dd")
+                Dim ee As String = CType(bb, DateTime).ToString("yyyy-MM-dd")
 
                 Dim nn As String = (idwHour.ToString() & ":" & idwMinute.ToString())
                 Dim ff As String = CType(nn, DateTime).ToString("HH:mm")
 
                 If Not idwEnrollNumber = "" Then
                     Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
-                        Dim fg = (From a In db.Emp_Attendence_Device Where a.Emp_Bio_Device_Users_UserID = CType(idwEnrollNumber, Integer?) And a.Emp_Attendence_Device_DateTime = dd Select a).FirstOrDefault
+                        Dim fg = (From a In db.Emp_Attendence_Device Where a.User_ID = CsmdVarible.PlazaUserID And a.Emp_Bio_Device_Users_UserID = CType(idwEnrollNumber, Integer?) And a.Emp_Attendence_Device_DateTime = dd Select a).FirstOrDefault
                         If fg IsNot Nothing Then
                             With fg
                                 '.Emp_ID = EmpID
@@ -4041,10 +4189,10 @@ Public Class frmAttendanceLives
                             'RibbonPageGroup4.Text = dd
                         Else
                             Dim maxID As Integer = 0
-                            Try
+                            'Try
 
-                                Try
-                                    maxID = CInt((From a In db.Emp_Attendence_Device Select a.Emp_Attendence_Device_ID).Max) + 1
+                            Try
+                                    maxID = CInt((From a In db.Emp_Attendence_Device Where a.User_ID = CsmdVarible.PlazaUserID Select a.Emp_Attendence_Device_ID).Max) + 1
                                     '  MsgBox(maxID)
                                 Catch ex As Exception
                                     maxID = 1
@@ -4060,35 +4208,38 @@ Public Class frmAttendanceLives
                                     .Emp_Attendence_Device_Date = CType(ee, Date?)
                                     .Emp_Attendence_Device_Time = ff
                                     .Emp_Attendence_Device_Status = True
-                                End With
+                                    .User_ID = CsmdVarible.PlazaUserID
+                                'MsgBox(.User_ID)
+                            End With
                                 '  MsgBox(dtNew.Emp_ID)
                                 db.Emp_Attendence_Device.Add(dtNew)
 
                                 ' MsgBox(dtNew.Emp_Bio_Device_Users_UserID)
                                 db.SaveChanges()
 
-                            Catch ex As Exception
-                                'MsgBox(maxID & " ex")
-                            End Try
+                            'Catch ex As Exception
+                            '    'MsgBox(maxID & " ex")
+                            'End Try
                             'MsgBox(dd)
                             'MsgBox("mk")
                         End If
                         Application.DoEvents()
                     End Using
                     'MsgBox("mj")
+                    'iGLCount += 1
+                    'k += 1
+                    iGLCount += 1
+                    ProgressBarControl2.Position = iGLCount ' CInt((100 / 100) * iGLCount)
+                    ProgressBarControl2.Update()
+
                 Else
                     MsgBox("No data from terminal returns!", MsgBoxStyle.Exclamation, "Error")
                 End If
 
-                iGLCount += 1
-                'ProgressBarControl1. = (100 / 100) * iGLCount
-
-                ProgressBarControl2.Position = CInt((100 / 100) * iGLCount)
-                ProgressBarControl2.Update()
                 Application.DoEvents()
             End While
-            ProgressBarControl2.Position = 100
-            ProgressBarControl2.Update()
+            'ProgressBarControl2.Position = 100
+            'ProgressBarControl2.Update()
             dow = False
             Load_From_DeviceDB()
         Else
@@ -4171,10 +4322,10 @@ Public Class frmAttendanceLives
         Dim kk As String = (iYear.ToString() & "-" + iMonth.ToString() & "-" & iDay.ToString() & " " & iHour.ToString() & ":" & iMinute.ToString() & ":" & iSecond.ToString())
         'Dim kk As String = (idwYear.ToString() & "-" + idwMonth.ToString() & "-" & idwDay.ToString() & " " & idwHour.ToString() & ":" & idwMinute.ToString() & ":" & idwSecond.ToString())
 
-        Dim dd As DateTime = CDate(CType(kk, DateTime).ToString("yyyy/MM/dd HH:mm:ss"))
+        Dim dd As DateTime = CDate(CType(kk, DateTime).ToString("yyyy-MM-dd HH:mm:ss"))
 
         Dim bb As String = (iYear.ToString() & "-" + iMonth.ToString() & "-" & iDay.ToString())
-        Dim ee As String = CType(bb, DateTime).ToString("yyyy/MM/dd")
+        Dim ee As String = CType(bb, DateTime).ToString("yyyy-MM-dd")
 
         Dim nn As String = (iHour.ToString() & ":" & iMinute.ToString())
         Dim ff As String = CType(nn, DateTime).ToString("HH:mm")
@@ -4204,12 +4355,13 @@ Public Class frmAttendanceLives
                     End Try
                     .Emp_Attendence_Device_ID = maxID
                     .Emp_Bio_Device_Users_UserID = CType(sEnrollNumber, Integer?)
-                    .Emp_ID = .Emp_Bio_Device_Users.Emp_ID
+                    .Emp_ID = db.Emp_Bio_Device_Users.Where(Function(o) o.Emp_Bio_Device_Users_UserID = CType(sEnrollNumber, Integer?)).FirstOrDefault.Emp_ID
                     .Emp_Attendence_Device_Day = CType(ee, Date?)
                     .Emp_Attendence_Device_DateTime = dd
                     .Emp_Attendence_Device_Date = CType(ee, Date?)
                     .Emp_Attendence_Device_Time = ff
                     .Emp_Attendence_Device_Status = True
+                    .User_ID = CsmdVarible.PlazaUserID
                 End With
                 db.Emp_Attendence_Device.Add(dtNew)
                 db.SaveChanges()
@@ -4376,20 +4528,21 @@ Public Class frmAttendanceLives
                                             .Emp_Attendence_Device_ID = maxID
                                             .Emp_ID = EmpID
                                             .Emp_Bio_Device_Users_UserID = dx.Emp_Bio_Device_Users_UserID
-                                            .Emp_Attendence_Device_Date = CType(DateX.ToString("dd/MM/yyyy"), Date?)
+                                            .Emp_Attendence_Device_Date = CType(DateX.ToString("yyyy/MM/dd"), Date?)
                                             .Emp_Attendence_Device_Day = CType(DateX.ToString("yyyy/MM/dd"), Date?)
                                             .Emp_Attendence_Device_Status = True
                                             If dd = 1 Then
                                                 .Attendance_Duty_Status_ID = StatusID
                                                 .Emp_Attendence_Device_Time = CDate(TT1.EditValue).ToString("HH:mm")
-                                                .Emp_Attendence_Device_DateTime = CDate(DateX.ToString("dd/MM/yyyy") & " " & .Emp_Attendence_Device_Time)
+                                                .Emp_Attendence_Device_DateTime = CDate(DateX.ToString("yyyy/MM/dd") & " " & .Emp_Attendence_Device_Time)
                                                 .Emp_Attendence_Device_Duty_On_Off = .Emp_Attendence_Device_Time
                                             Else
                                                 .Attendance_Duty_Status_ID = Nothing
                                                 .Emp_Attendence_Device_Time = CDate(TT2.EditValue).ToString("HH:mm")
-                                                .Emp_Attendence_Device_DateTime = CDate(DateX.ToString("dd/MM/yyyy") & " " & .Emp_Attendence_Device_Time)
+                                                .Emp_Attendence_Device_DateTime = CDate(DateX.ToString("yyyy/MM/dd") & " " & .Emp_Attendence_Device_Time)
                                                 .Emp_Attendence_Device_Duty_On_Off = .Emp_Attendence_Device_Time
                                             End If
+                                            .User_ID = CsmdVarible.PlazaUserID
                                         End With
                                         db.Emp_Attendence_Device.Add(dtNew)
                                         db.SaveChanges()
@@ -4562,8 +4715,8 @@ Public Class frmAttendanceLives
             strF = "Side"
             BarButtonItem6.Down = True
             frm = New Form
-            frm.Size = New Size(320, Screen.PrimaryScreen.WorkingArea.Height - 30)
-            Dim pt As Point = New Point(Screen.PrimaryScreen.WorkingArea.Width - 320, 30)
+            frm.Size = New Size(270, Screen.PrimaryScreen.WorkingArea.Height - 30)
+            Dim pt As Point = New Point(Screen.PrimaryScreen.WorkingArea.Width - 270, 30)
             frm.StartPosition = FormStartPosition.Manual
             frm.Location = pt
             frm.TopMost = True
@@ -4598,6 +4751,7 @@ Public Class frmAttendanceLives
             Me.WindowState = FormWindowState.Minimized
         ElseIf strF = "Side" Then
             strF = "SideHide"
+            'frm.TopMost = False
             frm.Hide()
             frmX = New Form
             'MsgBox(SimpleButton4.Height)
@@ -4661,9 +4815,12 @@ Public Class frmAttendanceLives
         strF = "Full"
         LayoutControl3.Dock = DockStyle.Fill
         DockPanel1.Controls.Add(LayoutControl3)
+
         Me.WindowState = FormWindowState.Maximized
     End Sub
-
+    Private Sub NotifyIcon1_DoubleClick(sender As Object, e As EventArgs) Handles NotifyIcon1.DoubleClick
+        Me.WindowState = FormWindowState.Maximized
+    End Sub
     'Private Sub BarButtonItem6_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem6.ItemClick
     '    Dim filePath As String = Replace(System.Reflection.Assembly.GetExecutingAssembly().Location, ".exe", "") + ".exe.config"
     '    Dim objDoc As XDocument = XDocument.Load(filePath)
@@ -4952,7 +5109,8 @@ Public Class frmAttendanceLives
 
             Class1.EmpID = CType(AdvBandedGridView1.GetFocusedRowCellValue("Emp_ID"), Integer)
             Class1.EmpDate = CDate(AdvBandedGridView1.GetFocusedRowCellValue("Date"))
-
+            sum1 = 0
+            sum2 = 0
             Dim dt = (From a In db.Employees Where a.Emp_ID = Class1.EmpID Select a).FirstOrDefault
             If dt IsNot Nothing Then
                 Load_Detail_View_DeviceBy_Month(Class1.EmpID, dt.Emp_Reg, Class1.EmpDate)
@@ -4977,10 +5135,22 @@ Public Class frmAttendanceLives
                 For i As Integer = 0 To intList.Count - 1
                     Dim uID As Integer = intList(i)
                     If Not intLists(i) = "" Then
-                        Dim dAT As Date = CDate(intLists(i))
-                        Dim datX As Date = CDate(CDate(dAT).ToString("G")) '& " " & CDate(intListsX(i)).ToString("HH:mm")).ToString("G")
+                        Dim dAT As String = CType(intLists(i), DateTime).ToString("yyyy-MM-dd HH:mm:ss")
+                        'Dim datX As DateTime = CDate(CDate(dAT).ToString("G")) '& " " & CDate(intListsX(i)).ToString("HH:mm")).ToString("G")
+
+                        'Dim x1 As String = dAT.Day
+                        'Dim x2 As String = dAT.Month
+                        'Dim x3 As String = dAT.Year
+                        'Dim x4 As String = dAT.Hour
+                        'Dim x5 As String = dAT.Minute
+                        'Dim x6 As String = dAT.Second
+
+                        'Dim fDat As String = x3 & "-" & x2 & "-" & x1 & " " & x4 & ":" & x5 & ":" & x6
+
+
+                        'CType(dAT, DateTime).ToString("yyyy-MM-dd HH:mm:ss")
                         Dim Crt_User As String = "UPDATE [dbo].[Emp_Attendence_Device]  " &
-"SET [Emp_Attendence_Device_Status] = 'false' WHERE Emp_Bio_Device_Users_UserID = @USERID AND Emp_Attendence_Device_DateTime = @DateT ;"
+"SET [Emp_Attendence_Device_Status] = 'false' WHERE Emp_Bio_Device_Users_UserID = " & uID & " AND Emp_Attendence_Device_DateTime = '" & dAT & "' ;"
 
                         Dim cmd As New SqlCommand
                         Dim con As New SqlConnection(CsmdCon.ConSqlDB)
@@ -4988,8 +5158,8 @@ Public Class frmAttendanceLives
 
                         cmd.Connection = con
                         con.Open()
-                        cmd.Parameters.AddWithValue("@USERID", uID)
-                        cmd.Parameters.AddWithValue("@DateT", datX)
+                        ' cmd.Parameters.AddWithValue("@USERID", uID)
+                        ' cmd.Parameters.AddWithValue("@DateT", dAT.ToString("yyyy-MM-dd HH:mm:ss"))
                         cmd.CommandText = Crt_User
                         cmd.ExecuteNonQuery()
                         cmd.Dispose()
@@ -5057,7 +5227,7 @@ Public Class frmAttendanceLives
                 'Dim idd As Integer = CInt(TextBox1.Text)
                 Dim sqlStr As String = "SELECT * " &
                 "FROM dbo.Emp_Attendence_Device inner join Employees on dbo.Emp_Attendence_Device.Emp_ID=Employees.Emp_ID " &
-                "WHERE (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Day = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy-MM-dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true') and Employees.Emp_Status='true'"
+                "WHERE (dbo.Emp_Attendence_Device.User_ID=" & CsmdVarible.PlazaUserID & " and dbo.Emp_Attendence_Device.Emp_Attendence_Device_Day = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy-MM-dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true') and Employees.Emp_Status='true'"
                 Dim da1 As SqlDataAdapter = New SqlDataAdapter(sqlStr, DBCon1)
 
 
@@ -5083,7 +5253,7 @@ Public Class frmAttendanceLives
 
                             Dim da2 As SqlDataAdapter = New SqlDataAdapter("SELECT * " &
                                                                            "FROM dbo.Emp_Attendence_Device " &
-                "WHERE (dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID = " & devID & ")", DBCon2)
+                "WHERE (dbo.Emp_Attendence_Device.User_ID=" & CsmdVarible.PlazaUserID & " and dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID = " & devID & ")", DBCon2)
 
                             Dim ds2 As New DataSet()
                             da2.Fill(ds2)
@@ -5094,6 +5264,7 @@ Public Class frmAttendanceLives
                                 'Try
                                 Crt_User = " INSERT INTO Emp_Attendence_Device " &
                                                                    " (Emp_Attendence_Device_ID, " &
+                                                                   " User_ID, " &
                                                                    " Emp_Bio_Device_Users_UserID, " &
                                                                    " Attendance_Duty_Status_ID, " &
                                                                    " Emp_ID, " &
@@ -5112,7 +5283,8 @@ Public Class frmAttendanceLives
                                                                    " Emp_Attendence_Device_Status) " &
                                                                    "  VALUES  " &
                                                                    " (" & CInt(dts.Item("Emp_Attendence_Device_ID")) &
-                                                                       "," & If(Not IsDBNull(dts.Item("Emp_Bio_Device_Users_UserID")), dts.Item("Emp_Bio_Device_Users_UserID"), "NULL") & ", " &
+                                                                       "," & If(Not IsDBNull(dts.Item("User_ID")), dts.Item("User_ID"), "NULL") & ", " &
+                                                                       "" & If(Not IsDBNull(dts.Item("Emp_Bio_Device_Users_UserID")), dts.Item("Emp_Bio_Device_Users_UserID"), "NULL") & ", " &
                                                                 "" & If(Not IsDBNull(dts.Item("Attendance_Duty_Status_ID")), dts.Item("Attendance_Duty_Status_ID"), "NULL") &
                                                                     "," & If(Not IsDBNull(dts.Item("Emp_ID")), dts.Item("Emp_ID"), "NULL") & ", " &
                                                                  " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Duty_On_Off")), CStr(dts.Item("Emp_Attendence_Device_Duty_On_Off")), "") & "', " &
@@ -5206,7 +5378,7 @@ Public Class frmAttendanceLives
     Private Sub ProgressBarControl2_CustomDisplayText(sender As Object, e As CustomDisplayTextEventArgs) Handles ProgressBarControl2.CustomDisplayText
         Dim val As String = e.Value.ToString()
         If dow = True Then
-            'e.DisplayText = "The progress is: " & val '& " of " & ProgressBarControl3.Properties.Maximum
+            e.DisplayText = "The progress is: " & val & " of " & ProgressBarControl2.Properties.Maximum
         Else
             e.DisplayText = "The progress is: " & val & " of " & ProgressBarControl2.Properties.Maximum
         End If
@@ -5341,7 +5513,7 @@ Public Class frmAttendanceLives
                 Dim thisDate As DateTime = CDate(DateTime.FromOADate(loopDate) & " " & CsmdDateTime.StartDayTime(FromDat.Date))
                 Dim ToDate As DateTime = CDate(thisDate.AddDays(1).Date & " " & CsmdDateTime.EndDayTime(FromDat.Date))
 
-                Dim dts = (From a In db.Emp_Attendence_Device Where
+                Dim dts = (From a In db.Emp_Attendence_Device Where a.Emp_Attendence_Device_Status = True And
                                                                   a.Emp_Bio_Device_Users.Employee.Emp_Status = True And
                                                                              a.Emp_Attendence_Device_DateTime >= thisDate And
                                                                              a.Emp_Attendence_Device_DateTime <= ToDate
@@ -5373,9 +5545,7 @@ Public Class frmAttendanceLives
     End Sub
 
 
-    Private Sub NotifyIcon1_DoubleClick(sender As Object, e As EventArgs) Handles NotifyIcon1.DoubleClick
-        Me.WindowState = FormWindowState.Maximized
-    End Sub
+
 
     Private Sub SimpleButton4_Click_1(sender As Object, e As EventArgs) Handles BtnInOut.Click
         RibbonMiniToolbar2.Show(MousePosition)
@@ -5394,6 +5564,106 @@ Public Class frmAttendanceLives
         e.ShowCustomizationMenu = False
         ' End If
     End Sub
+
+    Private Sub BarButtonItem9_ItemClick_1(sender As Object, e As ItemClickEventArgs)
+        'Using db1 As New CsmdUpdater.CsmdBioAttendence2Entities   ' CsmdBioAttendence2Entities
+        '    Dim d11 As DateTime = CDate(FF1.EditValue).ToString("dd-MM-yyyy")
+        '    Dim d22 As DateTime = CDate(FF2.EditValue).ToString("dd-MM-yyyy")
+        '    Dim dt = (From a In db1.Emp_Attendence_Device Where a.Emp_Attendence_Device_DateTime >= d11 And a.Emp_Attendence_Device_DateTime <= d22 Select a).ToList
+        '    If dt.Count > 0 Then
+        '        For Each dts In dt
+        '            Using db As New CsmdBioDatabase.CsmdBioAttendenceEntities
+        '                Dim df = (From a In db.Emp_Attendence_Device Where a.Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID And a.Emp_Attendence_Device_DateTime = dts.Emp_Attendence_Device_DateTime Select a).FirstOrDefault
+        '                If df IsNot Nothing Then
+
+        '                Else
+        '                    Dim maxID As Integer = 0
+        '                    Try
+
+        '                        Try
+        '                            maxID = CInt((From a In db.Emp_Attendence_Device Select a.Emp_Attendence_Device_ID).Max) + 1
+        '                            '  MsgBox(maxID)
+        '                        Catch ex As Exception
+        '                            maxID = 1
+        '                            '  MsgBox(maxID)
+        '                        End Try
+        '                        Dim dtNew = New CsmdBioDatabase.Emp_Attendence_Device
+        '                        With dtNew
+        '                            .Emp_Attendence_Device_ID = maxID
+        '                            .Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID
+        '                            .Emp_ID = dts.Emp_Bio_Device_Users.Emp_ID ' db.Emp_Bio_Device_Users.Where(Function(o) o.Emp_Bio_Device_Users_UserID = CType(idwEnrollNumber, Integer?)).FirstOrDefault.Emp_ID
+        '                            '.Emp_Attendence_Device_Day = dts.Emp_Attendence_Device_Day
+        '                            .Emp_Attendence_Device_DateTime = dts.Emp_Attendence_Device_DateTime
+        '                            .Emp_Attendence_Device_Date = dts.Emp_Attendence_Device_Date
+        '                            .Emp_Attendence_Device_Time = dts.Emp_Attendence_Device_Time
+        '                            .Emp_Attendence_Device_Status = dts.Emp_Attendence_Device_Status
+        '                        End With
+        '                        '  MsgBox(dtNew.Emp_ID)
+        '                        db.Emp_Attendence_Device.Add(dtNew)
+
+        '                        ' MsgBox(dtNew.Emp_Bio_Device_Users_UserID)
+        '                        db.SaveChanges()
+
+        '                    Catch ex As Exception
+        '                        'MsgBox(maxID & " ex")
+        '                    End Try
+        '                End If
+        '            End Using
+        '        Next
+
+        '        MsgBox(dt.Count & " Done")
+        '    End If
+
+        'End Using
+    End Sub
+    Dim sum1 As Double = 0
+    Dim sum2 As Double = 0
+    'Dim intr As Integer = 0
+    Private Sub GridView2_CustomSummaryCalculate(sender As Object, e As CustomSummaryEventArgs) Handles GridView2.CustomSummaryCalculate
+        Try
+            Dim view As GridView = TryCast(sender, GridView)
+
+            If e.IsTotalSummary AndAlso (TryCast(e.Item, GridSummaryItem)).FieldName = "Sn1" Then
+                Dim item As GridSummaryItem = TryCast(e.Item, GridSummaryItem)
+                If item.FieldName = "Sn1" Then
+                    Select Case e.SummaryProcess
+                        Case CustomSummaryProcess.Start
+                            sum1 = 0
+                            sum1 = 0
+                        Case CustomSummaryProcess.Calculate
+                            Dim strr As String = CType(view.GetRowCellValue(e.RowHandle, "Sn1"), String)
+                            Dim strchk As String = CType(view.GetRowCellValue(e.RowHandle, "SSN"), String)
+                            Dim strout As String = CType(view.GetRowCellValue(e.RowHandle, "SSN"), String)
+
+                            If strchk = "RT-Check In" Or strout = "LT-Check Out" Then
+                                If strr = "" Then
+                                    sum1 += 1
+                                End If
+                            Else
+                                If strr = "" Then
+                                    sum2 += 1
+                                End If
+                            End If
+
+                        Case CustomSummaryProcess.Finalize
+                            'Dim hours As Integer = CInt(sum) \ 60
+                            'Dim minutes As Integer = CInt(sum - (hours * 60))
+                            BtnInOut.Text = "InOut (" & CStr(sum1) & ")"
+                            BtnActivity.Text = "Activity (" & CStr(sum2) & ")"
+                            'e.TotalValue = timeElapsed
+                    End Select
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnConnect_CheckedChanged(sender As Object, e As EventArgs) Handles btnConnect.CheckedChanged
+
+    End Sub
+
+
 End Class
 
 Public Class MyXtraMessageBoxForm

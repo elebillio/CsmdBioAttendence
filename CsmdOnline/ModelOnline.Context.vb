@@ -32,7 +32,6 @@ Partial Public Class CsmdBioAttendenceEntitiesOnline
     Public Overridable Property Emp_Cash_Register() As DbSet(Of Emp_Cash_Register)
     Public Overridable Property Employees() As DbSet(Of Employee)
     Public Overridable Property Plaza_User() As DbSet(Of Plaza_User)
-    Public Overridable Property sysdiagrams() As DbSet(Of sysdiagram)
     Public Overridable Property User_Type() As DbSet(Of User_Type)
 
 End Class

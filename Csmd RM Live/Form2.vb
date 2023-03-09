@@ -16,10 +16,10 @@ Public Class Form2
         'End Using
         Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim datem As Date = DateEdit1.EditValue
-            Dim dt = (From a In db.Emp_Attendence_Device Order By a.Emp_Attendence_Device_ID Ascending
+            Dim dt = (From a In db.Emp_Attendence_Device Where a.Employee.User_ID = 1 Order By a.Emp_Attendence_Device_ID Ascending
                       Select a.Emp_Attendence_Device_ID, a.Emp_ID, a.Attendance_Duty_Status_ID, a.Emp_Bio_Device_Users_UserID,
                           a.Emp_Attendence_Device_Day, a.Emp_Attendence_Device_Date,
-                          a.Emp_Attendence_Device_DateTime, a.Emp_Attendence_Device_Status, a.User_ID).ToList
+                          a.Emp_Attendence_Device_DateTime, a.Emp_Attendence_Device_Status).ToList
             If dt.Count > 0 Then
                 GridControl1.DataSource = dt
             End If

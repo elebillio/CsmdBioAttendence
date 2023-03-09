@@ -11,6 +11,7 @@ Imports System.Data.SqlClient
 Imports CsmdBioDatabase
 Imports System.Linq
 Imports DevExpress.XtraGrid.Views.Grid
+Imports CsmdOnline
 
 Public Class frmEmployeesAdds
 
@@ -162,7 +163,7 @@ Public Class frmEmployeesAdds
                         .Emp_Duty_Off = CDate(Emp_Duty_Off.EditValue).ToString("HH:mm")
                         .Emp_Salary = CType(Emp_Salary.Text, Double?)
                         Dim kkk As String = .Emp_DutyOn
-                        .User_ID = PlazaUserID
+                        .User_ID = CsmdVarible.PlazaUserID
                         db.SaveChanges()
                     End With
                     XtraMessageBox.Show("Update Employee Successfull")
@@ -186,8 +187,15 @@ Public Class frmEmployeesAdds
                     Next textEdit
                     SearchLookUpEdit1.Properties.ReadOnly = False
                 Else
-                    Dim TeaNew = New Employee
+                    Dim TeaNew = New CsmdBioDatabase.Employee
                     With TeaNew
+                        Dim maxID As Integer
+                        Try
+                            maxID = (From a In db.Employees Select a.Emp_ID).Max + 1
+                        Catch ex As Exception
+                            maxID = 1
+                        End Try
+                        .Emp_ID = maxID
                         .Emp_Reg = Emp_Reg.Text
                         .Emp_Name = Emp_Name.Text
                         .Emp_Father = Emp_Father.Text
@@ -216,7 +224,7 @@ Public Class frmEmployeesAdds
                         .Emp_DutyOn = CStr(CDate(Emp_DutyOn.EditValue).ToString("HH:mm"))
                         .Emp_Duty_Off = CStr(CDate(Emp_Duty_Off.EditValue).ToString("HH:mm"))
                         .Emp_Salary = CType(Emp_Salary.Text, Double?)
-                        .User_ID = PlazaUserID
+                        .User_ID = CsmdVarible.PlazaUserID
                     End With
                     db.Employees.Add(TeaNew)
                     Dim AddNum = (From a In db.Auto_Number Select a).FirstOrDefault
@@ -562,7 +570,7 @@ Public Class frmEmployeesAdds
                             End With
                             db.SaveChanges()
                         Else
-                            Dim dtNew = New Emp_Bio_Device_Users
+                            Dim dtNew = New CsmdBioDatabase.Emp_Bio_Device_Users
                             With dtNew
                                 .Emp_ID = EmpID
                                 .Attendence_Status_ID = dts.Attendence_Status_ID
@@ -575,6 +583,7 @@ Public Class frmEmployeesAdds
                                 .Emp_Bio_Device_User_Privilege = 0
                                 .Emp_Bio_Device_User_Password = ""
                                 .Emp_Bio_Device_User_Enabled = True
+                                .User_ID = CsmdVarible.PlazaUserID
                             End With
                             db.Emp_Bio_Device_Users.Add(dtNew)
                             db.SaveChanges()
@@ -1390,6 +1399,425 @@ Public Class frmEmployeesAdds
         lblStatem.Caption = "Current State: Connected"
         lblStatem.ItemAppearance.Normal.BackColor = Color.LimeGreen
     End Sub
+
+    Private Sub BarButtonItem5_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem5.ItemClick
+
+    End Sub
+
+    Private Sub BarButtonItem9_ItemClick_1(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem9.ItemClick
+        Using db As New CsmdBioDatabase.CsmdBioAttendenceEntities
+            Dim dts = (From a In db.Employees Where a.Emp_ID = ghj And a.User_ID = CsmdVarible.PlazaUserID Select a).FirstOrDefault
+            If dts IsNot Nothing Then
+                Dim k As Integer = 1
+                ProgressBarControl1.Properties.Maximum = 10
+                ProgressBarControl1.Properties.Minimum = 1
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 1
+                ProgressBarControl1.Update()
+                Using dbO As New CsmdBioAttendenceEntitiesOnline
+
+                    Dim dtGet = (From a In dbO.Employees Where a.Emp_ID = dts.Emp_ID And a.User_ID = dts.User_ID Select a).FirstOrDefault
+                    If dtGet IsNot Nothing Then
+                        With dtGet
+                            .Emp_Reg = dts.Emp_Reg
+                            .Emp_Name = dts.Emp_Name
+                            .Emp_Pass = dts.Emp_Pass
+                            .Emp_Father = dts.Emp_Father
+                            .Emp_Phone = dts.Emp_Phone
+                            .Emp_Phone2 = dts.Emp_Phone2
+                            .Emp_Address = dts.Emp_Address
+                            .Emp_Quali = dts.Emp_Quali
+                            .Emp_Designation = dts.Emp_Designation
+                            .Emp_Report_To = dts.Emp_Report_To
+                            .Emp_Date_Hired = dts.Emp_Date_Hired
+                            .Emp_Date_Terminated = dts.Emp_Date_Terminated
+                            .Emp_Date_ReHired = dts.Emp_Date_ReHired
+                            .Emp_Birth_Date = dts.Emp_Birth_Date
+                            .Emp_Beg_Balance = dts.Emp_Beg_Balance
+                            .Emp_Status = dts.Emp_Status
+                            .Emp_DutyOn = dts.Emp_DutyOn
+                            .Emp_Duty_Off = dts.Emp_Duty_Off
+                            .Emp_Salary = dts.Emp_Salary
+                            .User_ID = CInt(dts.User_ID)
+                        End With
+                        dbO.SaveChanges()
+                    Else
+                        Dim dtNew = New CsmdOnline.Employee
+                        With dtNew
+                            'Dim maxID As Integer
+                            'Try
+                            '    maxID = (From a In db.Employees Where a.User_ID = CsmdVarible.PlazaUserID Select a.Emp_ID).Max + 1
+                            'Catch ex As Exception
+                            '    maxID = 1
+                            'End Try
+                            .Emp_ID = dts.Emp_ID
+                            .Emp_Reg = dts.Emp_Reg
+                            .Emp_Name = dts.Emp_Name
+                            .Emp_Pass = dts.Emp_Pass
+                            .Emp_Father = dts.Emp_Father
+                            .Emp_Phone = dts.Emp_Phone
+                            .Emp_Phone2 = dts.Emp_Phone2
+                            .Emp_Address = dts.Emp_Address
+                            .Emp_Quali = dts.Emp_Quali
+                            .Emp_Designation = dts.Emp_Designation
+                            .Emp_Report_To = dts.Emp_Report_To
+                            .Emp_Date_Hired = dts.Emp_Date_Hired
+                            .Emp_Date_Terminated = dts.Emp_Date_Terminated
+                            .Emp_Date_ReHired = dts.Emp_Date_ReHired
+                            .Emp_Birth_Date = dts.Emp_Birth_Date
+                            .Emp_Beg_Balance = dts.Emp_Beg_Balance
+                            .Emp_Status = dts.Emp_Status
+                            .Emp_DutyOn = dts.Emp_DutyOn
+                            .Emp_Duty_Off = dts.Emp_Duty_Off
+                            .Emp_Salary = dts.Emp_Salary
+                            .User_ID = CInt(dts.User_ID)
+                        End With
+                        dbO.Employees.Add(dtNew)
+                    End If
+                    dbO.SaveChanges()
+                    GenerateUpload(ghj)
+                    ProgressBarControl1.Position = k
+                    ProgressBarControl1.Update()
+                    k += 1
+
+
+
+                    MsgBox("Employees Upload Successfull")
+                    'Dim dtO = (From a In dbO.Employees Select a).ToList
+                    'If dtO.Count > 0 Then
+                    '    GridControl2.DataSource = dtO
+                    'End If
+                End Using
+            End If
+        End Using
+
+    End Sub
+    Public Sub GenerateUpload(EmpID As Integer)
+        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
+            'Dim EmpID As Integer = ghj
+            Dim mm As Integer = EmpID * 10
+            Dim nn As Integer = mm - 9
+            Dim dty = (From a In db.Employees Where a.Emp_ID = EmpID And a.User_ID = CsmdVarible.PlazaUserID Select a).FirstOrDefault
+            If dty IsNot Nothing Then
+                Dim dt = (From a In db.Attendence_Status Select a).ToList
+                If dt.Count > 0 Then
+                    Dim kl As Integer = 1
+                    ProgressBarControl1.Properties.Maximum = dt.Count
+                    ProgressBarControl1.Properties.Minimum = 1
+                    ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                    ProgressBarControl1.Position = 1
+                    ProgressBarControl1.Update()
+                    Dim k As Integer = 0
+                    For Each dts In dt
+                        Using dbc As New CsmdBioAttendenceEntitiesOnline
+                            Dim fg = (From a In dbc.Emp_Bio_Device_Users Where a.Emp_ID = EmpID And a.User_ID = dty.User_ID And a.Attendence_Status_ID = dts.Attendence_Status_ID Select a).FirstOrDefault
+                            If fg IsNot Nothing Then
+                                With fg
+                                    .User_ID = CsmdVarible.PlazaUserID
+                                    .Emp_ID = EmpID
+                                    .Attendence_Status_ID = dts.Attendence_Status_ID
+                                    .Emp_Bio_Device_Users_UserID = nn
+                                    .Emp_Bio_Device_User_Name = dty.Emp_Name
+                                    '.Emp_Bio_Device_User_Finger = 0
+                                    '.Emp_Bio_Device_User_tmpData = ""
+                                    '.Emp_Bio_Device_User_Privilege = 0
+                                    .Emp_Bio_Device_User_Password = CType(GridView1.GetRowCellValue(k, "Emp_Bio_Device_User_Password"), String)
+                                    '.Emp_Bio_Device_User_Enabled = True
+                                End With
+                                db.SaveChanges()
+                            Else
+                                Dim dtNew = New CsmdOnline.Emp_Bio_Device_Users
+                                With dtNew
+                                    .User_ID = dty.User_ID
+                                    .Emp_ID = EmpID
+                                    .Attendence_Status_ID = dts.Attendence_Status_ID
+                                    .Emp_Bio_Device_Users_UserID = nn
+                                    .Emp_Bio_Device_User_Name = dty.Emp_Name
+                                    .Emp_Bio_Device_User_Finger = 0
+                                    .Emp_Bio_Device_User_tmpData = ""
+                                    .Emp_Bio_Device_User_FacetmpData = ""
+                                    .Emp_Bio_Device_User_iLength = 0
+                                    .Emp_Bio_Device_User_Privilege = 0
+                                    .Emp_Bio_Device_User_Password = ""
+                                    .Emp_Bio_Device_User_Enabled = True
+                                End With
+                                dbc.Emp_Bio_Device_Users.Add(dtNew)
+                                dbc.SaveChanges()
+                            End If
+                            nn += 1
+                            k += 1
+                        End Using
+                        ProgressBarControl1.Position = kl
+                        ProgressBarControl1.Update()
+                        kl += 1
+                    Next
+
+                End If
+            End If
+
+        End Using
+    End Sub
+
+    Private Sub BarButtonItem12_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem12.ItemClick
+        Using db As New CsmdOnline.CsmdBioAttendenceEntitiesOnline
+            Dim dt = (From a In db.Employees Where a.Emp_ID = ghj And a.User_ID = CsmdVarible.PlazaUserID Select a).ToList
+            If dt.Count > 0 Then
+                Dim k As Integer = 1
+                ProgressBarControl1.Properties.Maximum = dt.Count
+                ProgressBarControl1.Properties.Minimum = 1
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 1
+                ProgressBarControl1.Update()
+                Using dbO As New CsmdBioDatabase.CsmdBioAttendenceEntities
+                    For Each dts In dt
+                        Dim dtGet = (From a In dbO.Employees Where a.Emp_ID = dts.Emp_ID And a.User_ID = dts.User_ID Select a).FirstOrDefault
+                        If dtGet IsNot Nothing Then
+                            With dtGet
+                                .Emp_Reg = dts.Emp_Reg
+                                .Emp_Name = dts.Emp_Name
+                                .Emp_Pass = dts.Emp_Pass
+                                .Emp_Father = dts.Emp_Father
+                                .Emp_Phone = dts.Emp_Phone
+                                .Emp_Phone2 = dts.Emp_Phone2
+                                .Emp_Address = dts.Emp_Address
+                                .Emp_Quali = dts.Emp_Quali
+                                .Emp_Designation = dts.Emp_Designation
+                                .Emp_Report_To = dts.Emp_Report_To
+                                .Emp_Date_Hired = dts.Emp_Date_Hired
+                                .Emp_Date_Terminated = dts.Emp_Date_Terminated
+                                .Emp_Date_ReHired = dts.Emp_Date_ReHired
+                                .Emp_Birth_Date = dts.Emp_Birth_Date
+                                .Emp_Beg_Balance = dts.Emp_Beg_Balance
+                                .Emp_Status = dts.Emp_Status
+                                .Emp_DutyOn = dts.Emp_DutyOn
+                                .Emp_Duty_Off = dts.Emp_Duty_Off
+                                .Emp_Salary = dts.Emp_Salary
+                                .User_ID = dts.User_ID
+                            End With
+                            dbO.SaveChanges()
+                        Else
+                            Dim dtNew = New CsmdBioDatabase.Employee
+                            With dtNew
+                                Dim maxID As Integer
+                                Try
+                                    maxID = (From a In dbO.Employees Where a.User_ID = dts.User_ID Select a.Emp_ID).Max + 1
+                                Catch ex As Exception
+                                    maxID = 1
+                                End Try
+                                .Emp_ID = maxID
+                                .Emp_Reg = dts.Emp_Reg
+                                .Emp_Name = dts.Emp_Name
+                                .Emp_Pass = dts.Emp_Pass
+                                .Emp_Father = dts.Emp_Father
+                                .Emp_Phone = dts.Emp_Phone
+                                .Emp_Phone2 = dts.Emp_Phone2
+                                .Emp_Address = dts.Emp_Address
+                                .Emp_Quali = dts.Emp_Quali
+                                .Emp_Designation = dts.Emp_Designation
+                                .Emp_Report_To = dts.Emp_Report_To
+                                .Emp_Date_Hired = dts.Emp_Date_Hired
+                                .Emp_Date_Terminated = dts.Emp_Date_Terminated
+                                .Emp_Date_ReHired = dts.Emp_Date_ReHired
+                                .Emp_Birth_Date = dts.Emp_Birth_Date
+                                .Emp_Beg_Balance = dts.Emp_Beg_Balance
+                                .Emp_Status = dts.Emp_Status
+                                .Emp_DutyOn = dts.Emp_DutyOn
+                                .Emp_Duty_Off = dts.Emp_Duty_Off
+                                .Emp_Salary = dts.Emp_Salary
+                                .User_ID = dts.User_ID
+                            End With
+                            dbO.Employees.Add(dtNew)
+                        End If
+                        dbO.SaveChanges()
+                        GenerateDown()
+                        ProgressBarControl1.Position = k
+                        ProgressBarControl1.Update()
+                        k += 1
+
+                    Next
+
+                    MsgBox("Employees Download Successfull")
+                    'Dim dtO = (From a In dbO.Employees Select a).ToList
+                    'If dtO.Count > 0 Then
+                    '    GridControl2.DataSource = dtO
+                    'End If
+                End Using
+            End If
+        End Using
+
+    End Sub
+    Public Sub GenerateDown()
+        Using db As New CsmdOnline.CsmdBioAttendenceEntitiesOnline
+            Dim EmpID As Integer = ghj
+            Dim mm As Integer = EmpID * 10
+            Dim nn As Integer = mm - 9
+            Dim dty = (From a In db.Employees Where a.Emp_ID = EmpID And a.User_ID = CsmdVarible.PlazaUserID Select a).FirstOrDefault
+            If dty IsNot Nothing Then
+                Dim dt = (From a In db.Attendence_Status Select a).ToList
+                If dt.Count > 0 Then
+                    Dim kl As Integer = 1
+                    ProgressBarControl1.Properties.Maximum = dt.Count
+                    ProgressBarControl1.Properties.Minimum = 1
+                    ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                    ProgressBarControl1.Position = 1
+                    ProgressBarControl1.Update()
+                    Dim k As Integer = 0
+                    For Each dts In dt
+                        Using dbc As New CsmdBioDatabase.CsmdBioAttendenceEntities
+                            Dim fg = (From a In dbc.Emp_Bio_Device_Users Where a.Emp_ID = EmpID And a.Attendence_Status_ID = dts.Attendence_Status_ID Select a).FirstOrDefault
+                            If fg IsNot Nothing Then
+                                With fg
+                                    .Emp_ID = EmpID
+                                    .Attendence_Status_ID = dts.Attendence_Status_ID
+                                    .Emp_Bio_Device_Users_UserID = nn
+                                    .Emp_Bio_Device_User_Name = dty.Emp_Name
+                                    '.Emp_Bio_Device_User_Finger = 0
+                                    '.Emp_Bio_Device_User_tmpData = ""
+                                    '.Emp_Bio_Device_User_Privilege = 0
+                                    .Emp_Bio_Device_User_Password = CType(GridView1.GetRowCellValue(k, "Emp_Bio_Device_User_Password"), String)
+                                    '.Emp_Bio_Device_User_Enabled = True
+                                End With
+                                db.SaveChanges()
+                            Else
+                                Dim dtNew = New CsmdBioDatabase.Emp_Bio_Device_Users
+                                With dtNew
+                                    .Emp_ID = EmpID
+                                    .Attendence_Status_ID = dts.Attendence_Status_ID
+                                    .Emp_Bio_Device_Users_UserID = nn
+                                    .Emp_Bio_Device_User_Name = dty.Emp_Name
+                                    .Emp_Bio_Device_User_Finger = 0
+                                    .Emp_Bio_Device_User_tmpData = ""
+                                    .Emp_Bio_Device_User_FacetmpData = ""
+                                    .Emp_Bio_Device_User_iLength = 0
+                                    .Emp_Bio_Device_User_Privilege = 0
+                                    .Emp_Bio_Device_User_Password = ""
+                                    .Emp_Bio_Device_User_Enabled = True
+                                End With
+                                dbc.Emp_Bio_Device_Users.Add(dtNew)
+                                dbc.SaveChanges()
+                            End If
+                            nn += 1
+                            k += 1
+                        End Using
+                        ProgressBarControl1.Position = kl
+                        ProgressBarControl1.Update()
+                        kl += 1
+                    Next
+
+                End If
+            End If
+
+        End Using
+    End Sub
+
+    Private Sub BarButtonItem13_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem13.ItemClick
+        Using db As New CsmdBioAttendenceEntitiesOnline
+            Dim dts = (From a In db.Employees Where a.Emp_ID = ghj And a.User_ID = CsmdVarible.PlazaUserID Select a).FirstOrDefault
+            If dts IsNot Nothing Then
+                Dim dtGet = (From a In db.Emp_Bio_Device_Users Where a.Emp_ID = dts.Emp_ID And a.User_ID = dts.User_ID Select a).ToList
+                If dtGet.Count > 0 Then
+                    For Each df In dtGet
+                        db.Emp_Bio_Device_Users.Remove(df)
+                    Next
+                    db.SaveChanges()
+                End If
+                db.Employees.Remove(dts)
+                db.SaveChanges()
+                MsgBox("Employees Delete from Web Server Successfull")
+            End If
+        End Using
+    End Sub
+
+    Private Sub Emp_Name_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Name.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Father.Focus()
+        End If
+        If e.KeyCode = Keys.Control AndAlso e.KeyCode = Keys.U Then
+            If frmMain.TabX1.ActiveDocument.ControlName = CsmdFrm.frmEmployeesAdd And CsmdFrm.frmEmployeesAdd = CsmdFrm.frmEmployeesAddX Then
+                Dim frm As frmEmployeesAdds = CType(frmMain.Dcm1.View.ActiveDocument.Form, frmEmployeesAdds)
+                frm.BarButtonItem2.PerformClick()
+            End If
+        End If
+    End Sub
+
+    Private Sub Emp_Father_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Father.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Quali.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_Quali_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Quali.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Designation_ID.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_Designation_ID_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Designation_ID.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Birth_Date.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_Birth_Date_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Birth_Date.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_NIC_No.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_NIC_No_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_NIC_No.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Phone.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_Phone_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Phone.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Phone2.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_Phone2_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Phone2.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Address_ID.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_Address_ID_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Address_ID.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Report_To.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_Report_To_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Report_To.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Emp_Salary.Focus()
+        End If
+    End Sub
+
+    Private Sub Emp_Salary_KeyDown(sender As Object, e As KeyEventArgs) Handles Emp_Salary.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BarButtonItem3.PerformClick()
+            Emp_Name.Focus()
+        End If
+    End Sub
+
+    Private Sub frmEmployeesAdds_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        'If e.KeyCode = Keys.Control Then
+        '    BarButtonItem2.PerformClick()
+        '    Emp_Name.Focus()
+        'End If
+
+    End Sub
+
+    Private Sub RibbonControl1_KeyDown(sender As Object, e As KeyEventArgs) Handles RibbonControl1.KeyDown
+        If e.KeyCode = Keys.U Then
+            If frmMain.TabX1.ActiveDocument.ControlName = CsmdFrm.frmEmployeesAdd And CsmdFrm.frmEmployeesAdd = CsmdFrm.frmEmployeesAddX Then
+                Dim frm As frmEmployeesAdds = CType(frmMain.Dcm1.View.ActiveDocument.Form, frmEmployeesAdds)
+                frm.BarButtonItem2.PerformClick()
+            End If
+        End If
+    End Sub
+
 #End Region
 
 End Class

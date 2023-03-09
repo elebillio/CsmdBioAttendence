@@ -82,10 +82,16 @@ Public Class frmMain
 #End Region
 
 #Region "Main Form Functions"
+
+    Private Sub RibbonControl1_KeyDown(sender As Object, e As KeyEventArgs) Handles RibbonControl1.KeyDown
+
+    End Sub
     Private Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.H Then
             frmEmpA.Show()
         End If
+
+
     End Sub
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SaveSetting(Application.ProductName, "CsmdUserLookAndFeel", "CsmdActiveSkinName", UserLookAndFeel.Default.ActiveSkinName)
@@ -238,9 +244,9 @@ Public Class frmMain
         Try
             CsmdFrm.frmPrintDesignerX = GetSetting(Application.ProductName, "CsmdUserLookAndFeelIp", "CsmdActiveSkinNameIp8", "")
             If CsmdFrm.frmPrintDesigner = CsmdFrm.frmPrintDesignerX Then
-                Dim Form As New frmPrintDesigner
-                Form.Text = CsmdFrm.frmPrintDesigner
-                Form.ShowDialog()
+                'Dim Form As New frmPrintDesigner
+                'Form.Text = CsmdFrm.frmPrintDesigner
+                'Form.ShowDialog()
             End If
         Catch ex As Exception
             MsgBox("Permission Deniend")

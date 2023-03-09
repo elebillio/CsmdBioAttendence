@@ -32,7 +32,7 @@ Partial Public Class Employee
     Public Property Emp_DutyOn As String
     Public Property Emp_Duty_Off As String
     Public Property Emp_Salary As Nullable(Of Double)
-    Public Property User_ID As Nullable(Of Integer)
+    Public Property User_ID As Integer
 
     Public Overridable Property Emp_Att_Payment As ICollection(Of Emp_Att_Payment) = New HashSet(Of Emp_Att_Payment)
     Public Overridable Property Emp_Attendence_Device As ICollection(Of Emp_Attendence_Device) = New HashSet(Of Emp_Attendence_Device)

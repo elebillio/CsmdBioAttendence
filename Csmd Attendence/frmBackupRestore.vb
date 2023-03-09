@@ -59,6 +59,8 @@ Public Class frmBackupRestore
                     conn.Open()
                     bu2.ExecuteNonQuery()
                     conn.Close()
+                    ProgressBarControl1.Position = 3
+                    ProgressBarControl1.Update()
                     MessageBox.Show("Backup Created Sucessfully")
                 End Using
             End Using
@@ -86,19 +88,30 @@ Public Class frmBackupRestore
                     conn.Open()
                     bu1.ExecuteNonQuery()
                     conn.Close()
-                    MessageBox.Show("Offline Created Sucessfully")
+                    ProgressBarControl1.Position = 1
+                    ProgressBarControl1.Update()
+                    'MessageBox.Show("Offline Created Sucessfully")
                 End Using
-                Using bu2 As New SqlCommand(sqlStmt, conn)
-                    conn.Open()
-                    bu2.ExecuteNonQuery()
-                    conn.Close()
-                    MessageBox.Show("Restore Created Sucessfully")
-                End Using
+                Try
+                    Using bu2 As New SqlCommand(sqlStmt, conn)
+                        conn.Open()
+                        bu2.ExecuteNonQuery()
+                        conn.Close()
+                        ProgressBarControl1.Position = 2
+                        ProgressBarControl1.Update()
+                        'MessageBox.Show("Restore Created Sucessfully")
+                    End Using
+                Catch ex As Exception
+                    MsgBox("Please Paste a Backup File in Drive:D", vbCritical, "File Path Error")
+                    Exit Sub
+                End Try
                 Using bu3 As New SqlCommand(ggg, conn)
                     conn.Open()
                     bu3.ExecuteNonQuery()
                     conn.Close()
-                    MessageBox.Show("Online Created Sucessfully")
+                    ProgressBarControl1.Position = 3
+                    ProgressBarControl1.Update()
+                    MessageBox.Show("Database Restore Sucessfully")
                 End Using
             End Using
         End If

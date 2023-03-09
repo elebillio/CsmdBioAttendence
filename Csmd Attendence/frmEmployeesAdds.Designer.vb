@@ -54,9 +54,13 @@ Partial Class frmEmployeesAdds
         Me.sPort = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemTextEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.lblStatem = New DevExpress.XtraBars.BarStaticItem()
+        Me.BarButtonItem9 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem12 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem13 = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup4 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.rg1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup3 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -238,9 +242,9 @@ Partial Class frmEmployeesAdds
         '
         Me.RibbonControl1.AutoSizeItems = True
         Me.RibbonControl1.ExpandCollapseItem.Id = 0
-        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BarButtonItem4, Me.btnConnect, Me.txtIP, Me.txtPort, Me.lblState, Me.BarButtonItem5, Me.BarButtonItem6, Me.BarButtonItem10, Me.BarButtonItem11, Me.sIP, Me.sPort, Me.lblStatem})
+        Me.RibbonControl1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl1.ExpandCollapseItem, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BarButtonItem4, Me.btnConnect, Me.txtIP, Me.txtPort, Me.lblState, Me.BarButtonItem5, Me.BarButtonItem6, Me.BarButtonItem10, Me.BarButtonItem11, Me.sIP, Me.sPort, Me.lblStatem, Me.BarButtonItem9, Me.BarButtonItem12, Me.BarButtonItem13})
         Me.RibbonControl1.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl1.MaxItemId = 13
+        Me.RibbonControl1.MaxItemId = 16
         Me.RibbonControl1.Name = "RibbonControl1"
         Me.RibbonControl1.PageCategories.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageCategory() {Me.RibbonPageCategory1})
         Me.RibbonControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit3, Me.RepositoryItemTextEdit4})
@@ -407,6 +411,30 @@ Partial Class frmEmployeesAdds
         Me.lblStatem.Name = "lblStatem"
         Me.lblStatem.TextAlignment = System.Drawing.StringAlignment.Near
         '
+        'BarButtonItem9
+        '
+        Me.BarButtonItem9.Caption = "Upload on Web Server"
+        Me.BarButtonItem9.Glyph = CType(resources.GetObject("BarButtonItem9.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem9.Id = 13
+        Me.BarButtonItem9.LargeGlyph = CType(resources.GetObject("BarButtonItem9.LargeGlyph"), System.Drawing.Image)
+        Me.BarButtonItem9.Name = "BarButtonItem9"
+        '
+        'BarButtonItem12
+        '
+        Me.BarButtonItem12.Caption = "Download From Web Server"
+        Me.BarButtonItem12.Glyph = CType(resources.GetObject("BarButtonItem12.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem12.Id = 14
+        Me.BarButtonItem12.LargeGlyph = CType(resources.GetObject("BarButtonItem12.LargeGlyph"), System.Drawing.Image)
+        Me.BarButtonItem12.Name = "BarButtonItem12"
+        '
+        'BarButtonItem13
+        '
+        Me.BarButtonItem13.Caption = "Delete From Web"
+        Me.BarButtonItem13.Glyph = CType(resources.GetObject("BarButtonItem13.Glyph"), System.Drawing.Image)
+        Me.BarButtonItem13.Id = 15
+        Me.BarButtonItem13.LargeGlyph = CType(resources.GetObject("BarButtonItem13.LargeGlyph"), System.Drawing.Image)
+        Me.BarButtonItem13.Name = "BarButtonItem13"
+        '
         'RibbonPageCategory1
         '
         Me.RibbonPageCategory1.Name = "RibbonPageCategory1"
@@ -415,7 +443,7 @@ Partial Class frmEmployeesAdds
         '
         'RibbonPage1
         '
-        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.rg1, Me.RibbonPageGroup2, Me.RibbonPageGroup3})
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.RibbonPageGroup4, Me.rg1, Me.RibbonPageGroup2, Me.RibbonPageGroup3})
         Me.RibbonPage1.Name = "RibbonPage1"
         Me.RibbonPage1.Text = "Controls"
         '
@@ -429,6 +457,16 @@ Partial Class frmEmployeesAdds
         Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
         Me.RibbonPageGroup1.ShowCaptionButton = False
         Me.RibbonPageGroup1.Text = "Editor Controls"
+        '
+        'RibbonPageGroup4
+        '
+        Me.RibbonPageGroup4.AllowTextClipping = False
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.BarButtonItem12)
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.BarButtonItem9, True)
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.BarButtonItem13)
+        Me.RibbonPageGroup4.Name = "RibbonPageGroup4"
+        Me.RibbonPageGroup4.ShowCaptionButton = False
+        Me.RibbonPageGroup4.Text = "Online Data"
         '
         'rg1
         '
@@ -1715,4 +1753,8 @@ Partial Class frmEmployeesAdds
     Friend WithEvents lblStatem As DevExpress.XtraBars.BarStaticItem
     Friend WithEvents txtFin As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LayoutControlItem19 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents BarButtonItem9 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem12 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPageGroup4 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents BarButtonItem13 As DevExpress.XtraBars.BarButtonItem
 End Class

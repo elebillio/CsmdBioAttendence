@@ -45,6 +45,7 @@ Partial Class Form1
         Me.Button4 = New System.Windows.Forms.Button()
         Me.SimpleButton11 = New DevExpress.XtraEditors.SimpleButton()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.SimpleButton12 = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -242,11 +243,20 @@ Partial Class Form1
         Me.Button5.Text = "Button5"
         Me.Button5.UseVisualStyleBackColor = True
         '
+        'SimpleButton12
+        '
+        Me.SimpleButton12.Location = New System.Drawing.Point(853, 294)
+        Me.SimpleButton12.Name = "SimpleButton12"
+        Me.SimpleButton12.Size = New System.Drawing.Size(126, 23)
+        Me.SimpleButton12.TabIndex = 21
+        Me.SimpleButton12.Text = "Emp_Bio_Device_Users"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1031, 488)
+        Me.Controls.Add(Me.SimpleButton12)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.SimpleButton11)
         Me.Controls.Add(Me.Button4)
@@ -305,4 +315,5 @@ Partial Class Form1
     Friend WithEvents Button4 As Button
     Friend WithEvents SimpleButton11 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents Button5 As Button
+    Friend WithEvents SimpleButton12 As DevExpress.XtraEditors.SimpleButton
 End Class

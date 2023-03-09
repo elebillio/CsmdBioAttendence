@@ -139,12 +139,6 @@
     <Compile Include="CsmdScroll.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
@@ -194,9 +188,6 @@
   <ItemGroup>
     <EmbeddedResource Include="CsmdScroll.resx">
       <DependentUpon>CsmdScroll.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.vb</DependentUpon>
@@ -261,6 +252,10 @@
     <ProjectReference Include="..\CsmdOnline\CsmdOnline.vbproj">
       <Project>{948F260E-8ADF-42D9-AD70-A0EDBF065E8F}</Project>
       <Name>CsmdOnline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CsmdUpdater\CsmdUpdater.vbproj">
+      <Project>{c140bfcf-02bb-463b-a254-f4cc0078d0eb}</Project>
+      <Name>CsmdUpdater</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

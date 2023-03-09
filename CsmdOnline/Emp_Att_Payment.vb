@@ -73,6 +73,7 @@ Partial Public Class Emp_Att_Payment
     Public Property Emp_Att_Payment_Total As Nullable(Of Decimal)
     Public Property Emp_Att_Payment_Paid As Nullable(Of Decimal)
     Public Property Emp_Att_Payment_Balance As Nullable(Of Decimal)
+    Public Property User_ID As Integer
 
     Public Overridable Property Employee As Employee
 

@@ -1,13 +1,14 @@
 ﻿Imports System.Configuration
 Imports System.Net
 
+
 Public Class CsmdCon
     Public Shared myConnectionString As String = "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string='data source=.\sqlexpress;initial catalog=CsmdBioAttendence;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;'"
     '"metadata=.\Model1.csdl|.\Model1.ssdl|.\Model1.msl;provider=System.Data.SqlClient;provider connection string="";data source=.\sqlexpress;initial catalog=CsmdBioAttendence;integrated security=True;multipleactiveresultsets=True;App=EntityFramework"""
     '"metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.\sqlexpress;initial catalog=CsmdBioAttendence;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot'"
     'Public Shared ConOleDB As String = ConfigurationManager.ConnectionStrings("att2000ConnectionString").ConnectionString
     Public Shared Function ConSqlDB() As String
-        Dim RAW As New CsmdBioAttendenceEntities
+        Dim RAW As New CsmdBioDatabase.CsmdBioAttendenceEntities
         Return RAW.Database.Connection.ConnectionString
     End Function
     'Public Shared Function ConSqlDBonline() As String
@@ -28,6 +29,7 @@ Public Class CsmdCon
 End Class
 Public Class CsmdVarible
     Public Shared intEmpID As Integer
+    Public Shared PlazaUserID As Integer
     '  Public Shared updatePath As String
 End Class
 Public Class CsmdFrm
@@ -78,10 +80,10 @@ Public Class CsmdDateTime
 
     Public Shared Function LastDayOfMonth(ByVal sourceDate As DateTime) As DateTime
         Dim lastDay As DateTime = New DateTime(sourceDate.Year, sourceDate.Month, 1)
-        Return CType(lastDay.AddMonths(1).AddDays(-1), String)
+        Return CType(lastDay.AddMonths(1).AddDays(-1), DateTime)
     End Function
     Public Shared Function StartDayTime(Datx As Date) As String
-        Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
+        Using db As CsmdBioDatabase.CsmdBioAttendenceEntities = New CsmdBioDatabase.CsmdBioAttendenceEntities
             Dim dt = (From a In db.Emp_Att_Set Where a.Emp_Att_Set_Date.Value.Month = Datx.Month And a.Emp_Att_Set_Date.Value.Year = Datx.Year Select a.Emp_Att_Set_Open_Time).FirstOrDefault
             If dt IsNot Nothing Then
                 Return dt.ToString

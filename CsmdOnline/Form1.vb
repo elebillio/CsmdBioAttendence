@@ -6,6 +6,9 @@ Imports CsmdBioDatabase
 Imports DevExpress.XtraEditors.Controls
 
 Public Class Form1
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+        CsmdVarible.PlazaUserID = 2
+    End Sub
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
         Using db As New CsmdBioAttendenceEntities
             Dim dt = (From a In db.User_Type Select a).ToList
@@ -35,7 +38,7 @@ Public Class Form1
     End Sub
 
     Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles SimpleButton2.Click
-        Using db As New CsmdBioAttendenceEntities
+        Using db As New CsmdBioDatabase.CsmdBioAttendenceEntities
             Dim dt = (From a In db.Plaza_User Select a).ToList
             If dt.Count > 0 Then
                 Using dbO As New CsmdBioAttendenceEntitiesOnline
@@ -70,70 +73,78 @@ Public Class Form1
     End Sub
 
     Private Sub SimpleButton4_Click(sender As Object, e As EventArgs) Handles SimpleButton4.Click
-        'Using db As New CsmdBioAttendenceEntities
-        '    Dim dt = (From a In db.Employees Select a).ToList
-        '    If dt.Count > 0 Then
-        Using dbO As New CsmdBioAttendenceEntitiesOnline
-            'For Each dts In dt
-            '    Dim dtGet = (From a In dbO.Employees Where a.Emp_ID = dts.Emp_ID Select a).FirstOrDefault
-            '    If dtGet IsNot Nothing Then
-            '        With dtGet
-            '            .Emp_Reg = dts.Emp_Reg
-            '            .Emp_Name = dts.Emp_Name
-            '            .Emp_Pass = dts.Emp_Pass
-            '            .Emp_Father = dts.Emp_Father
-            '            .Emp_Phone = dts.Emp_Phone
-            '            .Emp_Phone2 = dts.Emp_Phone2
-            '            .Emp_Address = dts.Emp_Address
-            '            .Emp_Quali = dts.Emp_Quali
-            '            .Emp_Designation = dts.Emp_Designation
-            '            .Emp_Report_To = dts.Emp_Report_To
-            '            .Emp_Date_Hired = dts.Emp_Date_Hired
-            '            .Emp_Date_Terminated = dts.Emp_Date_Terminated
-            '            .Emp_Date_ReHired = dts.Emp_Date_ReHired
-            '            .Emp_Birth_Date = dts.Emp_Birth_Date
-            '            .Emp_Beg_Balance = dts.Emp_Beg_Balance
-            '            .Emp_Status = dts.Emp_Status
-            '            .Emp_DutyOn = dts.Emp_DutyOn
-            '            .Emp_Duty_Off = dts.Emp_Duty_Off
-            '            .Emp_Salary = dts.Emp_Salary
-            '            .User_ID = dts.User_ID
-            '        End With
-            '    Else
-            '        Dim dtNew = New Employee
-            '        With dtNew
-            '            .Emp_Reg = dts.Emp_Reg
-            '            .Emp_Name = dts.Emp_Name
-            '            .Emp_Pass = dts.Emp_Pass
-            '            .Emp_Father = dts.Emp_Father
-            '            .Emp_Phone = dts.Emp_Phone
-            '            .Emp_Phone2 = dts.Emp_Phone2
-            '            .Emp_Address = dts.Emp_Address
-            '            .Emp_Quali = dts.Emp_Quali
-            '            .Emp_Designation = dts.Emp_Designation
-            '            .Emp_Report_To = dts.Emp_Report_To
-            '            .Emp_Date_Hired = dts.Emp_Date_Hired
-            '            .Emp_Date_Terminated = dts.Emp_Date_Terminated
-            '            .Emp_Date_ReHired = dts.Emp_Date_ReHired
-            '            .Emp_Birth_Date = dts.Emp_Birth_Date
-            '            .Emp_Beg_Balance = dts.Emp_Beg_Balance
-            '            .Emp_Status = dts.Emp_Status
-            '            .Emp_DutyOn = dts.Emp_DutyOn
-            '            .Emp_Duty_Off = dts.Emp_Duty_Off
-            '            .Emp_Salary = dts.Emp_Salary
-            '            .User_ID = dts.User_ID
-            '        End With
-            '        dbO.Employees.Add(dtNew)
-            '    End If
-            'Next
-            'dbO.SaveChanges()
-            Dim dtO = (From a In dbO.Employees Select a).ToList
-            If dtO.Count > 0 Then
-                GridControl2.DataSource = dtO
+        Using db As New CsmdBioAttendenceEntities
+            Dim dt = (From a In db.Employees Where a.User_ID = CsmdVarible.PlazaUserID Select a).ToList
+            If dt.Count > 0 Then
+                Using dbO As New CsmdBioAttendenceEntitiesOnline
+                    For Each dts In dt
+                        Dim dtGet = (From a In dbO.Employees Where a.User_ID = CsmdVarible.PlazaUserID And a.Emp_ID = dts.Emp_ID Select a).FirstOrDefault
+                        If dtGet IsNot Nothing Then
+                            With dtGet
+                                .Emp_Reg = dts.Emp_Reg
+                                .Emp_Name = dts.Emp_Name
+                                .Emp_Pass = dts.Emp_Pass
+                                .Emp_Father = dts.Emp_Father
+                                .Emp_Phone = dts.Emp_Phone
+                                .Emp_Phone2 = dts.Emp_Phone2
+                                .Emp_Address = dts.Emp_Address
+                                .Emp_Quali = dts.Emp_Quali
+                                .Emp_Designation = dts.Emp_Designation
+                                .Emp_Report_To = dts.Emp_Report_To
+                                .Emp_Date_Hired = dts.Emp_Date_Hired
+                                .Emp_Date_Terminated = dts.Emp_Date_Terminated
+                                .Emp_Date_ReHired = dts.Emp_Date_ReHired
+                                .Emp_Birth_Date = dts.Emp_Birth_Date
+                                .Emp_Beg_Balance = dts.Emp_Beg_Balance
+                                .Emp_Status = dts.Emp_Status
+                                .Emp_DutyOn = dts.Emp_DutyOn
+                                .Emp_Duty_Off = dts.Emp_Duty_Off
+                                .Emp_Salary = dts.Emp_Salary
+                                .User_ID = dts.User_ID
+                            End With
+                        Else
+                            Dim dtNew = New CsmdOnline.Employee
+                            With dtNew
+                                'Dim maxID As Integer
+                                'Try
+                                '    maxID = (From a In dbO.Employees Where a.User_ID = dts.User_ID Select a.Emp_ID).Max + 1
+                                'Catch ex As Exception
+                                '    maxID = 1
+                                'End Try
+                                .Emp_ID = dts.Emp_ID
+                                .Emp_Reg = dts.Emp_Reg
+                                .Emp_Name = dts.Emp_Name
+                                .Emp_Pass = dts.Emp_Pass
+                                .Emp_Father = dts.Emp_Father
+                                .Emp_Phone = dts.Emp_Phone
+                                .Emp_Phone2 = dts.Emp_Phone2
+                                .Emp_Address = dts.Emp_Address
+                                .Emp_Quali = dts.Emp_Quali
+                                .Emp_Designation = dts.Emp_Designation
+                                .Emp_Report_To = dts.Emp_Report_To
+                                .Emp_Date_Hired = dts.Emp_Date_Hired
+                                .Emp_Date_Terminated = dts.Emp_Date_Terminated
+                                .Emp_Date_ReHired = dts.Emp_Date_ReHired
+                                .Emp_Birth_Date = dts.Emp_Birth_Date
+                                .Emp_Beg_Balance = dts.Emp_Beg_Balance
+                                .Emp_Status = dts.Emp_Status
+                                .Emp_DutyOn = dts.Emp_DutyOn
+                                .Emp_Duty_Off = dts.Emp_Duty_Off
+                                .Emp_Salary = dts.Emp_Salary
+                                .User_ID = dts.User_ID
+                            End With
+                            dbO.Employees.Add(dtNew)
+                        End If
+                        dbO.SaveChanges()
+                    Next
+
+                    Dim dtO = (From a In dbO.Employees Select a).ToList
+                    If dtO.Count > 0 Then
+                        GridControl2.DataSource = dtO
+                    End If
+                End Using
             End If
         End Using
-        '    End If
-        'End Using
     End Sub
     Private Sub SimpleButton6_Click(sender As Object, e As EventArgs) Handles SimpleButton6.Click
         Using db As New CsmdBioAttendenceEntities
@@ -169,13 +180,15 @@ Public Class Form1
     End Sub
     Private Sub SimpleButton5_Click(sender As Object, e As EventArgs) Handles SimpleButton5.Click
         Using db As New CsmdBioAttendenceEntities
-            Dim dt = (From a In db.Emp_Bio_Device_Users Where a.Employee.Emp_Status = True Select a).ToList
+            Dim dt = (From a In db.Emp_Bio_Device_Users Where a.Employee.Emp_Status = True And a.User_ID = CsmdVarible.PlazaUserID Select a).ToList
             If dt.Count > 0 Then
                 Using dbO As New CsmdBioAttendenceEntitiesOnline
+                    Dim kk As Integer = 0
                     For Each dts In dt
-                        Dim dtGet = (From a In dbO.Emp_Bio_Device_Users Where a.Employee.Emp_Status = True And a.Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID Select a).FirstOrDefault
+                        Dim dtGet = (From a In dbO.Emp_Bio_Device_Users Where a.Emp_ID = dts.Emp_ID And a.Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID And a.User_ID = CsmdVarible.PlazaUserID Select a).FirstOrDefault
                         If dtGet IsNot Nothing Then
                             With dtGet
+                                .User_ID = dts.User_ID
                                 .Emp_ID = dts.Emp_ID
                                 .Attendence_Status_ID = dts.Attendence_Status_ID
                                 .Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID
@@ -189,8 +202,9 @@ Public Class Form1
                                 .Emp_Bio_Device_User_Enabled = dts.Emp_Bio_Device_User_Enabled
                             End With
                         Else
-                            Dim dtNew = New Emp_Bio_Device_Users
+                            Dim dtNew = New CsmdOnline.Emp_Bio_Device_Users
                             With dtNew
+                                .User_ID = dts.User_ID
                                 .Emp_ID = dts.Emp_ID
                                 .Attendence_Status_ID = dts.Attendence_Status_ID
                                 .Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID
@@ -205,8 +219,12 @@ Public Class Form1
                             End With
                             dbO.Emp_Bio_Device_Users.Add(dtNew)
                         End If
+                        dbO.SaveChanges()
+                        Me.Text = kk
+                        kk += 1
+
                     Next
-                    dbO.SaveChanges()
+
                     Dim dtO = (From a In dbO.Emp_Bio_Device_Users Select a).ToList
                     If dtO.Count > 0 Then
                         GridControl2.DataSource = dtO
@@ -588,6 +606,30 @@ Public Class Form1
                 GridControl2.DataSource = ds3.Tables(0)
             End If
             DBCon2.Close()
+        End Using
+    End Sub
+
+    Private Sub SimpleButton12_Click(sender As Object, e As EventArgs) Handles SimpleButton12.Click
+        Using db As New CsmdBioAttendenceEntities
+            Dim dt = (From a In db.Emp_Attendence_Device Select a).ToList
+            If dt.Count > 0 Then
+                Dim k As Integer = 1
+                ProgressBarControl1.Properties.Maximum = dt.Count
+                ProgressBarControl1.Properties.Minimum = 1
+                ProgressBarControl1.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl1.Position = 1
+                ProgressBarControl1.Update()
+                Dim ff As Integer = 1
+                For Each dts In dt
+                    dts.User_ID = 2
+                    Me.Text = ff
+                    ProgressBarControl1.Position = ff
+                    ProgressBarControl1.Update()
+                    ff += 1
+                    db.SaveChanges()
+                Next
+
+            End If
         End Using
     End Sub
 End Class

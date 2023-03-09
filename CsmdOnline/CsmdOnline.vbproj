@@ -171,9 +171,6 @@
     <Compile Include="Plaza_User.vb">
       <DependentUpon>ModelOnline.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.vb">
-      <DependentUpon>ModelOnline.tt</DependentUpon>
-    </Compile>
     <Compile Include="User_Type.vb">
       <DependentUpon>ModelOnline.tt</DependentUpon>
     </Compile>

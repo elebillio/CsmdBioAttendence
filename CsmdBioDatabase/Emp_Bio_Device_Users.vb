@@ -11,9 +11,10 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class Emp_Bio_Device_Users
-    Public Property Emp_ID As Integer
-    Public Property Attendence_Status_ID As Nullable(Of Integer)
+    Public Property User_ID As Integer
     Public Property Emp_Bio_Device_Users_UserID As Integer
+    Public Property Emp_ID As Nullable(Of Integer)
+    Public Property Attendence_Status_ID As Nullable(Of Integer)
     Public Property Emp_Bio_Device_User_Name As String
     Public Property Emp_Bio_Device_User_Finger As Nullable(Of Integer)
     Public Property Emp_Bio_Device_User_tmpData As String

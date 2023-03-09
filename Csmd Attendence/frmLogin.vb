@@ -1,4 +1,5 @@
 ﻿Imports System.Data.Entity.Core.Objects
+Imports System.Data.SqlClient
 Imports System.Text
 'Imports CsmdPlazaDatabase
 Imports CsmdBioDatabase
@@ -7,6 +8,16 @@ Imports DevExpress.LookAndFeel
 Public Class frmLogin
 
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
+        Using conn As New SqlConnection("Data Source=.\sqlexpress;Initial Catalog=master; integrated security=True;")
+            Dim ggg = "alter database [CsmdBioAttendence] set online"
+            Using bu3 As New SqlCommand(ggg, conn)
+                conn.Open()
+                bu3.ExecuteNonQuery()
+                conn.Close()
+                'MessageBox.Show("Online Created Sucessfully")
+            End Using
+        End Using
+
         Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim Unm As String = uName.Text
             Dim uPs As String = uPass.Text
@@ -16,7 +27,7 @@ Public Class frmLogin
                 'vbccvc
                 Me.Hide()
                 'frmPlazaOpening.Show()
-                PlazaUserID = dt.User_ID
+                CsmdVarible.PlazaUserID = dt.User_ID
                 frmMain.Show()
             Else
                 MsgBox("Wrong Password")
@@ -46,10 +57,10 @@ Public Class frmLogin
             SaveSetting(Application.ProductName, "CsmdUserLookAndFeel", "CsmdActiveSkinName", UserLookAndFeel.Default.ActiveSkinName)
         End Try
         'MsgBox(SplitOnCapitals("ThisIsMyCapsDelimitedString"))
-        uName.Text = "Csmd Softwares"
+        'uName.Text = "Csmd Softwares"
         uName.Text = "moaz"
         'uName.Text = "ch imran"
-        uPass.Text = "123"
+        uPass.Text = "12321"
         uPass.Focus()
 
     End Sub

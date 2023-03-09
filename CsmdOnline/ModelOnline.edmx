@@ -35,6 +35,7 @@
         <EntityType Name="Emp_Att_Payment">
           <Key>
             <PropertyRef Name="Emp_Att_Payment_ID" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="Emp_Att_Payment_ID" Type="int" Nullable="false" />
           <Property Name="Emp_ID" Type="int" />
@@ -98,6 +99,7 @@
           <Property Name="Emp_Att_Payment_Total" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Emp_Att_Payment_Paid" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Emp_Att_Payment_Balance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Emp_Att_Set">
           <Key>
@@ -131,6 +133,7 @@
           <Key>
             <PropertyRef Name="Emp_Attendence_Device_ID" />
             <PropertyRef Name="Emp_Attendence_Device_DateTime" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="Emp_Attendence_Device_ID" Type="int" Nullable="false" />
           <Property Name="Emp_Attendence_Device_DateTime" Type="datetime" Nullable="false" />
@@ -149,11 +152,12 @@
           <Property Name="Emp_Attendence_Device_Cal6" Type="varchar" MaxLength="50" />
           <Property Name="Emp_Attendence_Device_Cal7" Type="varchar" MaxLength="50" />
           <Property Name="Emp_Attendence_Device_Status" Type="bit" />
-          <Property Name="User_ID" Type="int" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Emp_Bio_Device_Users">
           <Key>
             <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="Emp_ID" Type="int" Nullable="false" />
           <Property Name="Attendence_Status_ID" Type="int" />
@@ -166,6 +170,7 @@
           <Property Name="Emp_Bio_Device_User_FacetmpData" Type="nvarchar(max)" />
           <Property Name="Emp_Bio_Device_User_iLength" Type="int" />
           <Property Name="Emp_Bio_Device_User_Enabled" Type="bit" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Emp_Cash_Register">
           <Key>
@@ -179,6 +184,7 @@
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="Emp_ID" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="Emp_ID" Type="int" Nullable="false" />
           <Property Name="Emp_Reg" Type="varchar" MaxLength="50" />
@@ -201,7 +207,7 @@
           <Property Name="Emp_DutyOn" Type="varchar" MaxLength="50" />
           <Property Name="Emp_Duty_Off" Type="varchar" MaxLength="50" />
           <Property Name="Emp_Salary" Type="float" />
-          <Property Name="User_ID" Type="int" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Plaza_User">
           <Key>
@@ -212,16 +218,6 @@
           <Property Name="User_Name" Type="varchar" MaxLength="50" />
           <Property Name="User_Pass" Type="varchar" MaxLength="50" />
           <Property Name="User_Status" Type="bit" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="User_Type">
           <Key>
@@ -236,9 +232,11 @@
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Emp_Att_Payment">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -259,9 +257,11 @@
           <End Role="Emp_Attendence_Device" Type="Self.Emp_Attendence_Device" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Emp_Bio_Device_Users">
+              <PropertyRef Name="User_ID" />
               <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
             </Principal>
             <Dependent Role="Emp_Attendence_Device">
+              <PropertyRef Name="User_ID" />
               <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -272,9 +272,11 @@
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Emp_Attendence_Device">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -296,14 +298,16 @@
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Emp_Bio_Device_Users">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_Plaza_User">
-          <End Role="Plaza_User" Type="Self.Plaza_User" Multiplicity="0..1" />
+          <End Role="Plaza_User" Type="Self.Plaza_User" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Plaza_User">
@@ -337,7 +341,6 @@
           <EntitySet Name="Emp_Cash_Register" EntityType="Self.Emp_Cash_Register" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plaza_User" EntityType="Self.Plaza_User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Type" EntityType="Self.User_Type" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Emp_Att_Payment_Employees" Association="Self.FK_Emp_Att_Payment_Employees">
             <End Role="Employees" EntitySet="Employees" />
@@ -387,7 +390,6 @@
           <EntitySet Name="Emp_Cash_Register" EntityType="CsmdBioAttendenceModelOnline.Emp_Cash_Register" />
           <EntitySet Name="Employees" EntityType="CsmdBioAttendenceModelOnline.Employee" />
           <EntitySet Name="Plaza_User" EntityType="CsmdBioAttendenceModelOnline.Plaza_User" />
-          <EntitySet Name="sysdiagrams" EntityType="CsmdBioAttendenceModelOnline.sysdiagram" />
           <EntitySet Name="User_Type" EntityType="CsmdBioAttendenceModelOnline.User_Type" />
           <AssociationSet Name="FK_Emp_Attendence_Device_Attendance_Duty_Status" Association="CsmdBioAttendenceModelOnline.FK_Emp_Attendence_Device_Attendance_Duty_Status">
             <End Role="Attendance_Duty_Status" EntitySet="Attendance_Duty_Status" />
@@ -454,6 +456,7 @@
         <EntityType Name="Emp_Att_Payment">
           <Key>
             <PropertyRef Name="Emp_Att_Payment_ID" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="Emp_Att_Payment_ID" Type="Int32" Nullable="false" />
           <Property Name="Emp_ID" Type="Int32" />
@@ -517,6 +520,7 @@
           <Property Name="Emp_Att_Payment_Total" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Emp_Att_Payment_Paid" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Emp_Att_Payment_Balance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Att_Payment_Employees" FromRole="Emp_Att_Payment" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Emp_Att_Set">
@@ -551,6 +555,7 @@
           <Key>
             <PropertyRef Name="Emp_Attendence_Device_ID" />
             <PropertyRef Name="Emp_Attendence_Device_DateTime" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="Emp_Attendence_Device_ID" Type="Int32" Nullable="false" />
           <Property Name="Emp_Attendence_Device_DateTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -569,7 +574,7 @@
           <Property Name="Emp_Attendence_Device_Cal6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Emp_Attendence_Device_Cal7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Emp_Attendence_Device_Status" Type="Boolean" />
-          <Property Name="User_ID" Type="Int32" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Attendance_Duty_Status" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Attendence_Device_Attendance_Duty_Status" FromRole="Emp_Attendence_Device" ToRole="Attendance_Duty_Status" />
           <NavigationProperty Name="Emp_Bio_Device_Users" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Attendence_Device_Emp_Bio_Device_Users" FromRole="Emp_Attendence_Device" ToRole="Emp_Bio_Device_Users" />
           <NavigationProperty Name="Employee" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Attendence_Device_Employees" FromRole="Emp_Attendence_Device" ToRole="Employee" />
@@ -577,6 +582,7 @@
         <EntityType Name="Emp_Bio_Device_Users">
           <Key>
             <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="Emp_ID" Type="Int32" Nullable="false" />
           <Property Name="Attendence_Status_ID" Type="Int32" />
@@ -589,6 +595,7 @@
           <Property Name="Emp_Bio_Device_User_FacetmpData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Emp_Bio_Device_User_iLength" Type="Int32" />
           <Property Name="Emp_Bio_Device_User_Enabled" Type="Boolean" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Attendence_Status" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Bio_Device_Users_Attendence_Status" FromRole="Emp_Bio_Device_Users" ToRole="Attendence_Status" />
           <NavigationProperty Name="Emp_Attendence_Device" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Attendence_Device_Emp_Bio_Device_Users" FromRole="Emp_Bio_Device_Users" ToRole="Emp_Attendence_Device" />
           <NavigationProperty Name="Employee" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Bio_Device_Users_Employees" FromRole="Emp_Bio_Device_Users" ToRole="Employee" />
@@ -605,6 +612,7 @@
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Emp_ID" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="Emp_ID" Type="Int32" Nullable="false" />
           <Property Name="Emp_Reg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -627,7 +635,7 @@
           <Property Name="Emp_DutyOn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Emp_Duty_Off" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Emp_Salary" Type="Double" />
-          <Property Name="User_ID" Type="Int32" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Emp_Att_Payment" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Att_Payment_Employees" FromRole="Employee" ToRole="Emp_Att_Payment" />
           <NavigationProperty Name="Emp_Attendence_Device" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Attendence_Device_Employees" FromRole="Employee" ToRole="Emp_Attendence_Device" />
           <NavigationProperty Name="Emp_Bio_Device_Users" Relationship="CsmdBioAttendenceModelOnline.FK_Emp_Bio_Device_Users_Employees" FromRole="Employee" ToRole="Emp_Bio_Device_Users" />
@@ -644,16 +652,6 @@
           <Property Name="User_Status" Type="Boolean" />
           <NavigationProperty Name="Employees" Relationship="CsmdBioAttendenceModelOnline.FK_Employees_Plaza_User" FromRole="Plaza_User" ToRole="Employee" />
           <NavigationProperty Name="User_Type" Relationship="CsmdBioAttendenceModelOnline.FK_Plaza_User_User_Type" FromRole="Plaza_User" ToRole="User_Type" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User_Type">
           <Key>
@@ -693,9 +691,11 @@
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Emp_Att_Payment">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -704,9 +704,11 @@
           <End Type="CsmdBioAttendenceModelOnline.Emp_Attendence_Device" Role="Emp_Attendence_Device" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Emp_Bio_Device_Users">
+              <PropertyRef Name="User_ID" />
               <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
             </Principal>
             <Dependent Role="Emp_Attendence_Device">
+              <PropertyRef Name="User_ID" />
               <PropertyRef Name="Emp_Bio_Device_Users_UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -717,9 +719,11 @@
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Emp_Attendence_Device">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -729,14 +733,16 @@
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Emp_Bio_Device_Users">
               <PropertyRef Name="Emp_ID" />
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_Plaza_User">
-          <End Type="CsmdBioAttendenceModelOnline.Plaza_User" Role="Plaza_User" Multiplicity="0..1" />
+          <End Type="CsmdBioAttendenceModelOnline.Plaza_User" Role="Plaza_User" Multiplicity="1" />
           <End Type="CsmdBioAttendenceModelOnline.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Plaza_User">
@@ -759,7 +765,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -798,6 +804,7 @@
           <EntitySetMapping Name="Emp_Att_Payment">
             <EntityTypeMapping TypeName="CsmdBioAttendenceModelOnline.Emp_Att_Payment">
               <MappingFragment StoreEntitySet="Emp_Att_Payment">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="Emp_Att_Payment_Balance" ColumnName="Emp_Att_Payment_Balance" />
                 <ScalarProperty Name="Emp_Att_Payment_Paid" ColumnName="Emp_Att_Payment_Paid" />
                 <ScalarProperty Name="Emp_Att_Payment_Total" ColumnName="Emp_Att_Payment_Total" />
@@ -919,6 +926,7 @@
           <EntitySetMapping Name="Emp_Bio_Device_Users">
             <EntityTypeMapping TypeName="CsmdBioAttendenceModelOnline.Emp_Bio_Device_Users">
               <MappingFragment StoreEntitySet="Emp_Bio_Device_Users">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="Emp_Bio_Device_User_Enabled" ColumnName="Emp_Bio_Device_User_Enabled" />
                 <ScalarProperty Name="Emp_Bio_Device_User_iLength" ColumnName="Emp_Bio_Device_User_iLength" />
                 <ScalarProperty Name="Emp_Bio_Device_User_FacetmpData" ColumnName="Emp_Bio_Device_User_FacetmpData" />
@@ -979,17 +987,6 @@
                 <ScalarProperty Name="User_Name" ColumnName="User_Name" />
                 <ScalarProperty Name="User_Type_ID" ColumnName="User_Type_ID" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CsmdBioAttendenceModelOnline.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

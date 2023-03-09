@@ -11,6 +11,7 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class Emp_Att_Payment
+    Public Property User_ID As Integer
     Public Property Emp_Att_Payment_ID As Integer
     Public Property Emp_ID As Nullable(Of Integer)
     Public Property Emp_Att_Payment_Issue_Date As Nullable(Of Date)

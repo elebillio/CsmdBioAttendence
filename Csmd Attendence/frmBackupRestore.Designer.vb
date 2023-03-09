@@ -36,6 +36,8 @@ Partial Class frmBackupRestore
         Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem5 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
+        Me.ProgressBarControl1 = New DevExpress.XtraEditors.ProgressBarControl()
+        Me.LayoutControlItem6 = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
         CType(Me.LayoutControlGroup1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -46,10 +48,13 @@ Partial Class frmBackupRestore
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ProgressBarControl1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
         '
+        Me.LayoutControl1.Controls.Add(Me.ProgressBarControl1)
         Me.LayoutControl1.Controls.Add(Me.LabelControl1)
         Me.LayoutControl1.Controls.Add(Me.SimpleButton2)
         Me.LayoutControl1.Controls.Add(Me.SimpleButton1)
@@ -59,7 +64,7 @@ Partial Class frmBackupRestore
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControl1.Name = "LayoutControl1"
         Me.LayoutControl1.Root = Me.LayoutControlGroup1
-        Me.LayoutControl1.Size = New System.Drawing.Size(1043, 167)
+        Me.LayoutControl1.Size = New System.Drawing.Size(1043, 188)
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
         '
@@ -68,7 +73,7 @@ Partial Class frmBackupRestore
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 20.0!)
         Me.LabelControl1.Location = New System.Drawing.Point(12, 12)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(1019, 52)
+        Me.LabelControl1.Size = New System.Drawing.Size(1019, 39)
         Me.LabelControl1.StyleController = Me.LayoutControl1
         Me.LabelControl1.TabIndex = 8
         Me.LabelControl1.Text = "CSMD BioData Backup and Restore Databases"
@@ -77,7 +82,7 @@ Partial Class frmBackupRestore
         '
         Me.SimpleButton2.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold)
         Me.SimpleButton2.Appearance.Options.UseFont = True
-        Me.SimpleButton2.Location = New System.Drawing.Point(847, 118)
+        Me.SimpleButton2.Location = New System.Drawing.Point(847, 138)
         Me.SimpleButton2.Name = "SimpleButton2"
         Me.SimpleButton2.Size = New System.Drawing.Size(184, 26)
         Me.SimpleButton2.StyleController = Me.LayoutControl1
@@ -88,7 +93,7 @@ Partial Class frmBackupRestore
         '
         Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold)
         Me.SimpleButton1.Appearance.Options.UseFont = True
-        Me.SimpleButton1.Location = New System.Drawing.Point(608, 118)
+        Me.SimpleButton1.Location = New System.Drawing.Point(608, 138)
         Me.SimpleButton1.Name = "SimpleButton1"
         Me.SimpleButton1.Size = New System.Drawing.Size(235, 26)
         Me.SimpleButton1.StyleController = Me.LayoutControl1
@@ -98,7 +103,7 @@ Partial Class frmBackupRestore
         'cmbdatabase
         '
         Me.cmbdatabase.FormattingEnabled = True
-        Me.cmbdatabase.Location = New System.Drawing.Point(107, 93)
+        Me.cmbdatabase.Location = New System.Drawing.Point(107, 113)
         Me.cmbdatabase.Name = "cmbdatabase"
         Me.cmbdatabase.Size = New System.Drawing.Size(924, 21)
         Me.cmbdatabase.TabIndex = 5
@@ -106,7 +111,7 @@ Partial Class frmBackupRestore
         'cmbserver
         '
         Me.cmbserver.FormattingEnabled = True
-        Me.cmbserver.Location = New System.Drawing.Point(107, 68)
+        Me.cmbserver.Location = New System.Drawing.Point(107, 88)
         Me.cmbserver.Name = "cmbserver"
         Me.cmbserver.Size = New System.Drawing.Size(924, 21)
         Me.cmbserver.TabIndex = 4
@@ -115,10 +120,10 @@ Partial Class frmBackupRestore
         '
         Me.LayoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup1.GroupBordersVisible = False
-        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.EmptySpaceItem2, Me.LayoutControlItem5, Me.EmptySpaceItem1})
+        Me.LayoutControlGroup1.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem1, Me.LayoutControlItem2, Me.LayoutControlItem3, Me.LayoutControlItem4, Me.EmptySpaceItem2, Me.LayoutControlItem5, Me.EmptySpaceItem1, Me.LayoutControlItem6})
         Me.LayoutControlGroup1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup1.Name = "LayoutControlGroup1"
-        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1043, 167)
+        Me.LayoutControlGroup1.Size = New System.Drawing.Size(1043, 188)
         Me.LayoutControlGroup1.TextVisible = False
         '
         'LayoutControlItem1
@@ -126,7 +131,7 @@ Partial Class frmBackupRestore
         Me.LayoutControlItem1.AppearanceItemCaption.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.LayoutControlItem1.AppearanceItemCaption.Options.UseFont = True
         Me.LayoutControlItem1.Control = Me.cmbserver
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 56)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(0, 76)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
         Me.LayoutControlItem1.Size = New System.Drawing.Size(1023, 25)
         Me.LayoutControlItem1.Text = "Server Name:"
@@ -137,7 +142,7 @@ Partial Class frmBackupRestore
         Me.LayoutControlItem2.AppearanceItemCaption.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.LayoutControlItem2.AppearanceItemCaption.Options.UseFont = True
         Me.LayoutControlItem2.Control = Me.cmbdatabase
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 81)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(0, 101)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
         Me.LayoutControlItem2.Size = New System.Drawing.Size(1023, 25)
         Me.LayoutControlItem2.Text = "Database Name:"
@@ -146,7 +151,7 @@ Partial Class frmBackupRestore
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.SimpleButton1
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(596, 106)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(596, 126)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
         Me.LayoutControlItem3.Size = New System.Drawing.Size(239, 30)
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
@@ -155,7 +160,7 @@ Partial Class frmBackupRestore
         'LayoutControlItem4
         '
         Me.LayoutControlItem4.Control = Me.SimpleButton2
-        Me.LayoutControlItem4.Location = New System.Drawing.Point(835, 106)
+        Me.LayoutControlItem4.Location = New System.Drawing.Point(835, 126)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
         Me.LayoutControlItem4.Size = New System.Drawing.Size(188, 30)
         Me.LayoutControlItem4.TextSize = New System.Drawing.Size(0, 0)
@@ -164,18 +169,19 @@ Partial Class frmBackupRestore
         'EmptySpaceItem2
         '
         Me.EmptySpaceItem2.AllowHotTrack = False
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(596, 136)
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(596, 156)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
-        Me.EmptySpaceItem2.Size = New System.Drawing.Size(427, 11)
+        Me.EmptySpaceItem2.Size = New System.Drawing.Size(427, 12)
         Me.EmptySpaceItem2.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem5
         '
         Me.LayoutControlItem5.Control = Me.LabelControl1
         Me.LayoutControlItem5.Location = New System.Drawing.Point(0, 0)
-        Me.LayoutControlItem5.MinSize = New System.Drawing.Size(70, 17)
+        Me.LayoutControlItem5.MaxSize = New System.Drawing.Size(0, 43)
+        Me.LayoutControlItem5.MinSize = New System.Drawing.Size(70, 43)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(1023, 56)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(1023, 43)
         Me.LayoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem5.TextVisible = False
@@ -183,16 +189,40 @@ Partial Class frmBackupRestore
         'EmptySpaceItem1
         '
         Me.EmptySpaceItem1.AllowHotTrack = False
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 106)
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 126)
+        Me.EmptySpaceItem1.MaxSize = New System.Drawing.Size(0, 42)
+        Me.EmptySpaceItem1.MinSize = New System.Drawing.Size(10, 42)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(596, 41)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(596, 42)
+        Me.EmptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
+        '
+        'ProgressBarControl1
+        '
+        Me.ProgressBarControl1.Location = New System.Drawing.Point(12, 55)
+        Me.ProgressBarControl1.Name = "ProgressBarControl1"
+        Me.ProgressBarControl1.Properties.Maximum = 3
+        Me.ProgressBarControl1.Size = New System.Drawing.Size(1019, 29)
+        Me.ProgressBarControl1.StyleController = Me.LayoutControl1
+        Me.ProgressBarControl1.TabIndex = 9
+        '
+        'LayoutControlItem6
+        '
+        Me.LayoutControlItem6.Control = Me.ProgressBarControl1
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 43)
+        Me.LayoutControlItem6.MaxSize = New System.Drawing.Size(0, 33)
+        Me.LayoutControlItem6.MinSize = New System.Drawing.Size(54, 33)
+        Me.LayoutControlItem6.Name = "LayoutControlItem6"
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(1023, 33)
+        Me.LayoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem6.TextVisible = False
         '
         'frmBackupRestore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1043, 167)
+        Me.ClientSize = New System.Drawing.Size(1043, 188)
         Me.Controls.Add(Me.LayoutControl1)
         Me.Name = "frmBackupRestore"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -207,6 +237,8 @@ Partial Class frmBackupRestore
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ProgressBarControl1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -224,4 +256,6 @@ Partial Class frmBackupRestore
     Friend WithEvents EmptySpaceItem2 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents LayoutControlItem5 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents EmptySpaceItem1 As DevExpress.XtraLayout.EmptySpaceItem
+    Friend WithEvents ProgressBarControl1 As DevExpress.XtraEditors.ProgressBarControl
+    Friend WithEvents LayoutControlItem6 As DevExpress.XtraLayout.LayoutControlItem
 End Class

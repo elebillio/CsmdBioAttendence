@@ -22,6 +22,7 @@ Partial Public Class Emp_Bio_Device_Users
     Public Property Emp_Bio_Device_User_FacetmpData As String
     Public Property Emp_Bio_Device_User_iLength As Nullable(Of Integer)
     Public Property Emp_Bio_Device_User_Enabled As Nullable(Of Boolean)
+    Public Property User_ID As Integer
 
     Public Overridable Property Attendence_Status As Attendence_Status
     Public Overridable Property Emp_Attendence_Device As ICollection(Of Emp_Attendence_Device) = New HashSet(Of Emp_Attendence_Device)

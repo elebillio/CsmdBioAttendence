@@ -166,6 +166,7 @@ Public Class frmEmployeesCalculations
     '        Dim ExcelCon As New OleDbConnection
     '        Dim ExcelAdp As OleDbDataAdapter
     '        Dim ExcelComm As OleDbCommand
+
     '        Dim StrSql As String
     '        Dim successfulImport As Boolean = False
     '        Dim fileAlreadyAdded As Integer = 0
@@ -540,7 +541,6 @@ Public Class frmEmployeesCalculations
                 MsgBox("Please Select a Employees IDs", vbCritical, "Action Error")
             End If
         End Using
-
     End Sub
     Private Sub LoadImportDateCalcu()
         Using db As New CsmdBioAttendenceEntities
@@ -978,9 +978,6 @@ Public Class frmEmployeesCalculations
     End Sub
 
     Private Sub CreateInvoices()
-
-
-
         Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
 
             If intList IsNot Nothing Then
@@ -1441,27 +1438,19 @@ Public Class frmEmployeesCalculations
                             Try
                                 Dim dcNew = New Emp_Att_Payment
                                 dcNew.Emp_ID = emp.Emp_ID
+                                dcNew.User_ID = CsmdVarible.PlazaUserID
                                 dcNew.Emp_Att_Payment_Issue_Date = datX.Date
 
                                 DutyOn1X = CDate(CDate(emp.Emp_DutyOn).ToString("HH:mm"))
                                 DutyOn2X = CDate(CDate(emp.Emp_DutyOn).ToString("HH:mm"))
                                 DutyOffX = CDate(CDate(emp.Emp_Duty_Off).ToString("HH:mm"))
 
-
-
-
-
-
                                 dcNew.Emp_Att_Payment_DutyOn = DutyOn1X.ToString("HH:mm")
                                 dcNew.Emp_Att_Payment_DutyOff = DutyOffX.ToString("HH:mm")
                                 dcNew.Emp_Att_Payment_DutyFriOff = DutyFriX.ToString("HH:mm")
 
-
-
                                 duration = CInt(DateDiff(DateInterval.Minute, DutyOn1X, DutyOffX))
                                 duration2 = CInt(DateDiff(DateInterval.Minute, DutyOn2X, DutyOffX)) ' Change for rawayat
-
-
 
                                 Dim Emp_Att_Payment_From_Date As Date
                                 Dim Emp_Att_Payment_To_Date As Date
@@ -1534,7 +1523,6 @@ Public Class frmEmployeesCalculations
 
                                                 Dim datet As DateTime = CDate(CStr(.Emp_Attendence_Device_DateTime).ToString)
                                                 If datet.ToString("yyyy/MM/dd HH:mm") >= thisDate.ToString("yyyy/MM/dd HH:mm") And datet.ToString("yyyy/MM/dd HH:mm") <= toDate.ToString("yyyy/MM/dd HH:mm") Then
-
 
                                                     Dim val1 As String = .Emp_Attendence_Device_Cal1
                                                     Dim val2 As String = .Emp_Attendence_Device_Cal2
@@ -1832,8 +1820,6 @@ Public Class frmEmployeesCalculations
                 ProgressBarControl3.Properties.Appearance.BackColor = Color.Green
                 ProgressBarControl3.Update()
                 LoadEmp(CDate(Issue_Date.EditValue))
-
-
 
                 'Load_Payment_Month_Multi(CDate(Issue_Date.EditValue))
             Else
@@ -2296,7 +2282,7 @@ Public Class frmEmployeesCalculations
   FROM [dbo].[Emp_Attendence_Device]
   inner join Emp_Bio_Device_Users  on Emp_Bio_Device_Users.Emp_Bio_Device_Users_UserID  = Emp_Attendence_Device .Emp_Bio_Device_Users_UserID 
   inner join Employees on Employees.Emp_ID = Emp_Bio_Device_Users.Emp_ID  
-  where Employees.Emp_Status ='true' and Emp_Attendence_Device_Status = 'true' and Emp_Bio_Device_Users.Emp_ID = " & Emp & " and Emp_Attendence_Device_Date like '%" & CDate(Issue_Date.EditValue.ToString).Date.ToString("yyyy/MM") & "%'", DBCon2)
+  where Employees.Emp_Status ='true' and Emp_Attendence_Device_Status = 'true' and Emp_Bio_Device_Users.Emp_ID = " & Emp & " and Emp_Attendence_Device_Date like '%" & CDate(Issue_Date.EditValue.ToString).Date.ToString("yyyy-MM") & "%'", DBCon2)
             'CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy/MM/dd")
             Dim ds2 As New DataSet()
             da2.Fill(ds2)
