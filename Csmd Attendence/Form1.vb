@@ -12,6 +12,7 @@ Public Class Form1
             Dim idX As Integer = CInt(mK.Text)
             Dim dt = (From a In db.Employees Where a.User_ID = 2 Select a).ToList
             If dt.Count > 0 Then
+                p1.Minimum = 0
                 p1.Maximum = dt.Count - 1
                 p1.Value = 0
                 For Each dta In dt
