@@ -3311,13 +3311,13 @@ Public Class frmAttendanceLives
     End Sub
     Private Sub GridView3_RowClick(sender As Object, e As RowClickEventArgs) Handles GridView3.RowClick
         Try
-            Class1.EmpID = CType(GridView3.GetFocusedRowCellValue("Emp_ID"), Integer)
-            Class1.EmpName = CType(GridView3.GetFocusedRowCellValue("Emp_Bio_Device_User_Name"), String)
-            Class1.EmpDate = CDate(GridView3.GetFocusedRowCellValue("Emp_Attendence_Device_Date"))
-            'BarStaticItem2.Caption = EmpName & " isOn " & EmpDate
-            FilterMonth = False
-            GridColumn17.Caption = Class1.EmpName
-            Load_Detail_View_DeviceBy_Day(Class1.EmpID, CDate(Dtp1.EditValue))
+            'Class1.EmpID = CType(GridView3.GetFocusedRowCellValue("Emp_ID"), Integer)
+            'Class1.EmpName = CType(GridView3.GetFocusedRowCellValue("Emp_Bio_Device_User_Name"), String)
+            'Class1.EmpDate = CDate(GridView3.GetFocusedRowCellValue("Emp_Attendence_Device_Date"))
+            ''BarStaticItem2.Caption = EmpName & " isOn " & EmpDate
+            'FilterMonth = False
+            'GridColumn17.Caption = Class1.EmpName
+            'Load_Detail_View_DeviceBy_Day(Class1.EmpID, CDate(Dtp1.EditValue))
         Catch ex As Exception
 
         End Try
@@ -4016,10 +4016,16 @@ Public Class frmAttendanceLives
         End If
         Cursor = Cursors.Default
     End Sub
+    Dim interNetonOFF As Boolean = False
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
         'If lblState.Text = "No Found Device" Or lblState.Text = "Disconnected" Then
         '    btnConnect.PerformClick()
         'End If
+        If CsmdCon.CheckForInternetConnection = True Then
+            interNetonOFF = True
+        Else
+            interNetonOFF = False
+        End If
     End Sub
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
         'If bIsConnected = True Then
@@ -4331,6 +4337,7 @@ Public Class frmAttendanceLives
         Dim ff As String = CType(nn, DateTime).ToString("HH:mm")
         Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
             Dim fg = (From a In db.Emp_Attendence_Device Where a.Emp_Bio_Device_Users_UserID = CType(sEnrollNumber, Integer?) And a.Emp_Attendence_Device_DateTime = dd Select a).FirstOrDefault
+            Dim maxID As Integer
             If fg IsNot Nothing Then
                 'With fg
                 '    '.Emp_ID = EmpID
@@ -4347,7 +4354,7 @@ Public Class frmAttendanceLives
             Else
                 Dim dtNew = New CsmdBioDatabase.Emp_Attendence_Device
                 With dtNew
-                    Dim maxID As Integer
+
                     Try
                         maxID = (From a In db.Emp_Attendence_Device Select a.Emp_Attendence_Device_ID).Max + 1
                     Catch ex As Exception
@@ -4366,8 +4373,24 @@ Public Class frmAttendanceLives
                 db.Emp_Attendence_Device.Add(dtNew)
                 db.SaveChanges()
             End If
-            Load_From_DeviceDB()
+            Try
+                If My.Computer.Network.Ping("www.google.com") = True Then
+                    'Load_From_DeviceDB()
+                    DevOnline(maxID)
+
+                End If
+            Catch ex As Exception
+
+                XtraTabControl1.SelectedTabPage = XtraTabPage1
+                Load_From_DeviceDB()
+            End Try
+
+
+
         End Using
+
+
+
         'Using db As CsmdBioAttendenceEntities = New CsmdBioAttendenceEntities
         '    Dim po = (From a In db.Emp_Attendence_Device Where a.Emp_Bio_Device_Users_UserID = CType(sEnrollNumber, Integer?) And a.Emp_Attendence_Device_DateTime = dd Select a).FirstOrDefault
         '    If po IsNot Nothing Then
@@ -5221,13 +5244,134 @@ Public Class frmAttendanceLives
     End Sub
 
     Private Sub SimpleButton3_Click(sender As Object, e As EventArgs) Handles SimpleButton3.Click
-        If CsmdCon.CheckForInternetConnection = True Then
-            Using DBCon1 As New SqlConnection(CsmdCon.ConSqlDB)
+        Try
+
+
+            If My.Computer.Network.Ping("www.google.com") = True Then
+                '  If CsmdCon.CheckForInternetConnection = True Then
+                Using DBCon1 As New SqlConnection(CsmdCon.ConSqlDB)
+                        Dim dat As Date = CDate(Dtp1.EditValue)
+                        'Dim idd As Integer = CInt(TextBox1.Text)
+                        Dim sqlStr As String = "SELECT * " &
+                        "FROM dbo.Emp_Attendence_Device inner join Employees on dbo.Emp_Attendence_Device.Emp_ID=Employees.Emp_ID " &
+                        "WHERE (dbo.Emp_Attendence_Device.User_ID=" & CsmdVarible.PlazaUserID & " and dbo.Emp_Attendence_Device.Emp_Attendence_Device_Day = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy-MM-dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true') and Employees.Emp_Status='true'"
+                        Dim da1 As SqlDataAdapter = New SqlDataAdapter(sqlStr, DBCon1)
+
+
+
+                        Dim ds1 As New DataSet()
+                        da1.Fill(ds1)
+                        If ds1.Tables(0).Rows.Count > 0 Then
+                            Using DBCon2 As New SqlConnection(CsmdConOnline.ConSqlDBonline)
+                                Dim k As Integer = 1
+                                ProgressBarControl2.Properties.Maximum = ds1.Tables(0).Rows.Count
+                                ProgressBarControl2.Properties.Minimum = 1
+                                ProgressBarControl2.Properties.Appearance.BackColor = Color.Yellow
+                                ProgressBarControl2.Position = 1
+                                ProgressBarControl2.Update()
+                                Dim Crt_User As String = ""
+                                Dim connection As New SqlConnection(CsmdConOnline.ConSqlDBonline)
+                                For Each dts As DataRow In ds1.Tables(0).Rows
+                                    ProgressBarControl2.Position = k
+                                    ProgressBarControl2.Update()
+                                    k += 1
+                                    Dim devID As Integer = CInt(dts.Item("Emp_Attendence_Device_ID")) + 100000
+
+
+                                    Dim da2 As SqlDataAdapter = New SqlDataAdapter("SELECT * " &
+                                                                                   "FROM dbo.Emp_Attendence_Device " &
+                        "WHERE (dbo.Emp_Attendence_Device.User_ID=" & CsmdVarible.PlazaUserID & " and dbo.Emp_Attendence_Device.Emp_Attendence_Device_ID = " & devID & ")", DBCon2)
+
+                                    Dim ds2 As New DataSet()
+                                    da2.Fill(ds2)
+                                    If ds2.Tables(0).Rows.Count > 0 Then
+
+
+                                    Else
+                                        Try
+                                            Crt_User = " INSERT INTO Emp_Attendence_Device " &
+                                                                           " (Emp_Attendence_Device_ID, " &
+                                                                           " User_ID, " &
+                                                                           " Emp_Bio_Device_Users_UserID, " &
+                                                                           " Attendance_Duty_Status_ID, " &
+                                                                           " Emp_ID, " &
+                                                                           " Emp_Attendence_Device_Duty_On_Off, " &
+                                                                           " Emp_Attendence_Device_Cal1, " &
+                                                                           " Emp_Attendence_Device_Cal2, " &
+                                                                           " Emp_Attendence_Device_Cal3, " &
+                                                                           " Emp_Attendence_Device_Cal4, " &
+                                                                           " Emp_Attendence_Device_Cal5, " &
+                                                                           " Emp_Attendence_Device_Cal6, " &
+                                                                           " Emp_Attendence_Device_Cal7, " &
+                                                                           " Emp_Attendence_Device_DateTime, " &
+                                                                           " Emp_Attendence_Device_Date, " &
+                                                                           " Emp_Attendence_Device_Day, " &
+                                                                           " Emp_Attendence_Device_Time, " &
+                                                                           " Emp_Attendence_Device_Status) " &
+                                                                           "  VALUES  " &
+                                                                           " (" & devID &
+                                                                               "," & If(Not IsDBNull(dts.Item("User_ID")), dts.Item("User_ID"), "NULL") & ", " &
+                                                                               "" & If(Not IsDBNull(dts.Item("Emp_Bio_Device_Users_UserID")), dts.Item("Emp_Bio_Device_Users_UserID"), "NULL") & ", " &
+                                                                        "" & If(Not IsDBNull(dts.Item("Attendance_Duty_Status_ID")), dts.Item("Attendance_Duty_Status_ID"), "NULL") &
+                                                                            "," & If(Not IsDBNull(dts.Item("Emp_ID")), dts.Item("Emp_ID"), "NULL") & ", " &
+                                                                         " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Duty_On_Off")), CStr(dts.Item("Emp_Attendence_Device_Duty_On_Off")), "") & "', " &
+                                                                           " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Cal1")), CStr(dts.Item("Emp_Attendence_Device_Cal1")), "") & "', " &
+                                                                          " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Cal2")), CStr(dts.Item("Emp_Attendence_Device_Cal2")), "") & "', " &
+                                                                          " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Cal3")), CStr(dts.Item("Emp_Attendence_Device_Cal3")), "") & "', " &
+                                                                          " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Cal4")), CStr(dts.Item("Emp_Attendence_Device_Cal4")), "") & "', " &
+                                                                          " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Cal5")), CStr(dts.Item("Emp_Attendence_Device_Cal5")), "") & "', " &
+                                                                          " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Cal6")), CStr(dts.Item("Emp_Attendence_Device_Cal6")), "") & "', " &
+                                                                          " '" & If(Not IsDBNull(dts.Item("Emp_Attendence_Device_Cal7")), CStr(dts.Item("Emp_Attendence_Device_Cal7")), "") & "', " &
+                                                                          " '" & CDate(dts.Item("Emp_Attendence_Device_DateTime")).ToString("yyyy/MM/dd HH:mm:ss") & "', " &
+                                                                           " '" & CDate(dts.Item("Emp_Attendence_Device_Date")).ToString("yyyy/MM/dd") & "', " &
+                                                                           " '" & CDate(dts.Item("Emp_Attendence_Device_Day")).ToString("yyyy/MM/dd") & "', " &
+                                                                           " '" & CDate(dts.Item("Emp_Attendence_Device_Time")).ToString("HH:mm") & "', " &
+                                                                           " '" & CBool(dts.Item("Emp_Attendence_Device_Status")) & "')"
+                                            Dim SqldataSet As New DataSet()
+                                            Dim dataadapter As New SqlDataAdapter
+                                            Dim cmd As New SqlCommand
+
+                                            connection.Open()
+                                            cmd.Connection = connection
+                                            'cmd.CommandText = Crt_Login
+                                            'cmd.ExecuteScalar()
+                                            cmd.CommandText = Crt_User
+                                            cmd.ExecuteNonQuery()
+                                            connection.Close()
+                                        Catch ex As Exception
+                                            'MsgBox("Aa")
+                                        End Try
+
+                                    End If
+                                    Application.DoEvents()
+                                Next
+
+
+
+                                DBCon2.Close()
+                            End Using
+                        End If
+                        DBCon1.Close()
+                        XtraTabControl1.SelectedTabPage = XtraTabPage2
+                        Load_From_DeviceDBonline()
+                    End Using
+                ' Else
+                '  MsgBox("Please Check Internet Connection", vbCritical, "Internet Error")
+                'End If
+            End If
+        Catch ex As Exception
+            MsgBox("Please Check Internet Connection", vbCritical, "Internet Error")
+        End Try
+    End Sub
+    Public Sub DevOnline(DevIDs As Integer)
+
+        'If CsmdCon.CheckForInternetConnection = True Then
+        Using DBCon1 As New SqlConnection(CsmdCon.ConSqlDB)
                 Dim dat As Date = CDate(Dtp1.EditValue)
                 'Dim idd As Integer = CInt(TextBox1.Text)
                 Dim sqlStr As String = "SELECT * " &
                 "FROM dbo.Emp_Attendence_Device inner join Employees on dbo.Emp_Attendence_Device.Emp_ID=Employees.Emp_ID " &
-                "WHERE (dbo.Emp_Attendence_Device.User_ID=" & CsmdVarible.PlazaUserID & " and dbo.Emp_Attendence_Device.Emp_Attendence_Device_Day = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy-MM-dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true') and Employees.Emp_Status='true'"
+                "WHERE (dbo.Emp_Attendence_Device.User_ID=" & CsmdVarible.PlazaUserID & " and dbo.Emp_Attendence_Device.Emp_Attendence_Device_Day = '" & CDate(Dtp1.EditValue.ToString).Date.ToString("yyyy-MM-dd") & "') and (dbo.Emp_Attendence_Device.Emp_Attendence_Device_Status = 'true') and Employees.Emp_Status='true' and Emp_Attendence_Device_ID=" & DevIDs
                 Dim da1 As SqlDataAdapter = New SqlDataAdapter(sqlStr, DBCon1)
 
 
@@ -5236,19 +5380,19 @@ Public Class frmAttendanceLives
                 da1.Fill(ds1)
                 If ds1.Tables(0).Rows.Count > 0 Then
                     Using DBCon2 As New SqlConnection(CsmdConOnline.ConSqlDBonline)
-                        Dim k As Integer = 1
-                        ProgressBarControl2.Properties.Maximum = ds1.Tables(0).Rows.Count
-                        ProgressBarControl2.Properties.Minimum = 1
-                        ProgressBarControl2.Properties.Appearance.BackColor = Color.Yellow
-                        ProgressBarControl2.Position = 1
-                        ProgressBarControl2.Update()
+                        'Dim k As Integer = 1
+                        'ProgressBarControl2.Properties.Maximum = ds1.Tables(0).Rows.Count
+                        'ProgressBarControl2.Properties.Minimum = 1
+                        'ProgressBarControl2.Properties.Appearance.BackColor = Color.Yellow
+                        'ProgressBarControl2.Position = 1
+                        'ProgressBarControl2.Update()
                         Dim Crt_User As String = ""
                         Dim connection As New SqlConnection(CsmdConOnline.ConSqlDBonline)
                         For Each dts As DataRow In ds1.Tables(0).Rows
-                            ProgressBarControl2.Position = k
-                            ProgressBarControl2.Update()
-                            k += 1
-                            Dim devID As Integer = CInt(dts.Item("Emp_Attendence_Device_ID"))
+                            'ProgressBarControl2.Position = k
+                            'ProgressBarControl2.Update()
+                            'k += 1
+                            Dim devID As Integer = CInt(dts.Item("Emp_Attendence_Device_ID")) + 100000
 
 
                             Dim da2 As SqlDataAdapter = New SqlDataAdapter("SELECT * " &
@@ -5261,8 +5405,8 @@ Public Class frmAttendanceLives
 
 
                             Else
-                                'Try
-                                Crt_User = " INSERT INTO Emp_Attendence_Device " &
+                                Try
+                                    Crt_User = " INSERT INTO Emp_Attendence_Device " &
                                                                    " (Emp_Attendence_Device_ID, " &
                                                                    " User_ID, " &
                                                                    " Emp_Bio_Device_Users_UserID, " &
@@ -5282,7 +5426,7 @@ Public Class frmAttendanceLives
                                                                    " Emp_Attendence_Device_Time, " &
                                                                    " Emp_Attendence_Device_Status) " &
                                                                    "  VALUES  " &
-                                                                   " (" & CInt(dts.Item("Emp_Attendence_Device_ID")) &
+                                                                   " (" & devID &
                                                                        "," & If(Not IsDBNull(dts.Item("User_ID")), dts.Item("User_ID"), "NULL") & ", " &
                                                                        "" & If(Not IsDBNull(dts.Item("Emp_Bio_Device_Users_UserID")), dts.Item("Emp_Bio_Device_Users_UserID"), "NULL") & ", " &
                                                                 "" & If(Not IsDBNull(dts.Item("Attendance_Duty_Status_ID")), dts.Item("Attendance_Duty_Status_ID"), "NULL") &
@@ -5300,20 +5444,20 @@ Public Class frmAttendanceLives
                                                                    " '" & CDate(dts.Item("Emp_Attendence_Device_Day")).ToString("yyyy/MM/dd") & "', " &
                                                                    " '" & CDate(dts.Item("Emp_Attendence_Device_Time")).ToString("HH:mm") & "', " &
                                                                    " '" & CBool(dts.Item("Emp_Attendence_Device_Status")) & "')"
-                                Dim SqldataSet As New DataSet()
-                                Dim dataadapter As New SqlDataAdapter
-                                Dim cmd As New SqlCommand
+                                    Dim SqldataSet As New DataSet()
+                                    Dim dataadapter As New SqlDataAdapter
+                                    Dim cmd As New SqlCommand
 
-                                connection.Open()
-                                cmd.Connection = connection
-                                'cmd.CommandText = Crt_Login
-                                'cmd.ExecuteScalar()
-                                cmd.CommandText = Crt_User
-                                cmd.ExecuteNonQuery()
-                                connection.Close()
-                                'Catch ex As Exception
-                                '    'MsgBox("Aa")
-                                'End Try
+                                    connection.Open()
+                                    cmd.Connection = connection
+                                    'cmd.CommandText = Crt_Login
+                                    'cmd.ExecuteScalar()
+                                    cmd.CommandText = Crt_User
+                                    cmd.ExecuteNonQuery()
+                                    connection.Close()
+                                Catch ex As Exception
+                                    'MsgBox("Aa")
+                                End Try
 
                             End If
                             Application.DoEvents()
@@ -5328,11 +5472,11 @@ Public Class frmAttendanceLives
                 XtraTabControl1.SelectedTabPage = XtraTabPage2
                 Load_From_DeviceDBonline()
             End Using
-        Else
-            MsgBox("Please Check Internet Connection", vbCritical, "Internet Error")
-        End If
-    End Sub
+        'Else
+        '    MsgBox("Please Check Internet Connection", vbCritical, "Internet Error")
+        'End If
 
+    End Sub
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
         Download_By_Month()
     End Sub
@@ -5663,7 +5807,139 @@ Public Class frmAttendanceLives
 
     End Sub
 
+    Private Sub SimpleButton5_Click_1(sender As Object, e As EventArgs) Handles SimpleButton5.Click
+        SimpleButton1.PerformClick()
 
+        If bIsConnected = False Then
+            MsgBox("Please connect the device first", MsgBoxStyle.Exclamation, "Error")
+            Return
+        End If
+        Dim idwErrorCode As Integer
+
+        'lvLogs.Items.Clear()
+        axCZKEM1.EnableDevice(iMachineNumber, False) 'disable the device
+        If axCZKEM1.ClearGLog(iMachineNumber) = True Then
+            axCZKEM1.RefreshData(iMachineNumber) 'the data in the device should be refreshed
+            MsgBox("All att Logs have been cleared from teiminal!", MsgBoxStyle.Information, "Success")
+        Else
+            axCZKEM1.GetLastError(idwErrorCode)
+            MsgBox("Operation failed,ErrorCode=" & idwErrorCode, MsgBoxStyle.Exclamation, "Error")
+        End If
+
+        axCZKEM1.EnableDevice(iMachineNumber, True) 'enable the device
+    End Sub
+
+    Private Sub SimpleButton6_Click(sender As Object, e As EventArgs) Handles SimpleButton6.Click
+        Using db As New CsmdBioAttendenceEntities1
+            Dim datX As Date = CDate(Dtp1.EditValue)
+            Dim dt = (From a In db.Emp_Attendence_Device Where a.Emp_Attendence_Device_Day.Value.Month = datX.Month And a.Emp_Attendence_Device_Day.Value.Year = datX.Year Select a).ToList
+            If dt.Count > 0 Then
+                Dim k As Integer = 1
+                ProgressBarControl2.Properties.Maximum = dt.Count
+                ProgressBarControl2.Properties.Minimum = 0
+                ProgressBarControl2.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl2.Position = 0
+                ProgressBarControl2.Update()
+                Using dbX As New CsmdBioAttendenceEntities
+                    For Each dts In dt
+                        ProgressBarControl2.Position = k
+                        ProgressBarControl2.Update()
+                        k += 1
+
+                        Dim df = (From a In dbX.Emp_Attendence_Device Where a.Emp_Attendence_Device_ID = dts.Emp_Attendence_Device_ID Select a).FirstOrDefault
+                        If df IsNot Nothing Then
+
+                        Else
+                            Dim dtNew = New CsmdBioDatabase.Emp_Attendence_Device
+                            With dtNew
+                                .Attendance_Duty_Status_ID = dts.Attendance_Duty_Status_ID
+                                .Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID
+                                .Emp_Attendence_Device_ID = dts.Emp_Attendence_Device_ID
+                                .Emp_ID = dts.Emp_ID
+                                .User_ID = dts.User_ID
+                                .Emp_Attendence_Device_Date = dts.Emp_Attendence_Device_Date
+                                .Emp_Attendence_Device_Time = dts.Emp_Attendence_Device_Time
+                                .Emp_Attendence_Device_DateTime = dts.Emp_Attendence_Device_DateTime
+                                .Emp_Attendence_Device_Day = dts.Emp_Attendence_Device_Day
+                                .Emp_Attendence_Device_Duty_On_Off = dts.Emp_Attendence_Device_Duty_On_Off
+                                .Emp_Attendence_Device_Status = dts.Emp_Attendence_Device_Status
+                                .Emp_Attendence_Device_Cal1 = dts.Emp_Attendence_Device_Cal1
+                                .Emp_Attendence_Device_Cal2 = dts.Emp_Attendence_Device_Cal2
+                                .Emp_Attendence_Device_Cal3 = dts.Emp_Attendence_Device_Cal3
+                                .Emp_Attendence_Device_Cal4 = dts.Emp_Attendence_Device_Cal4
+                                .Emp_Attendence_Device_Cal5 = dts.Emp_Attendence_Device_Cal5
+                                .Emp_Attendence_Device_Cal6 = dts.Emp_Attendence_Device_Cal6
+                                .Emp_Attendence_Device_Cal7 = dts.Emp_Attendence_Device_Cal7
+                            End With
+                            dbX.Emp_Attendence_Device.Add(dtNew)
+
+                        End If
+
+                        Application.DoEvents()
+                    Next
+                    dbX.SaveChanges()
+                End Using
+
+                MsgBox("Attendance Log Import Successfull", vbInformation, "Importing")
+            End If
+        End Using
+    End Sub
+
+    Private Sub SimpleButton7_Click(sender As Object, e As EventArgs) Handles SimpleButton7.Click
+        Using db As New CsmdBioAttendenceEntities
+            Dim datX As Date = CDate(Dtp1.EditValue)
+            Dim dt = (From a In db.Emp_Attendence_Device Where a.Emp_Attendence_Device_Day.Value.Month = datX.Month And a.Emp_Attendence_Device_Day.Value.Year = datX.Year Select a).ToList
+            If dt.Count > 0 Then
+                Dim k As Integer = 1
+                ProgressBarControl2.Properties.Maximum = dt.Count
+                ProgressBarControl2.Properties.Minimum = 0
+                ProgressBarControl2.Properties.Appearance.BackColor = Color.Yellow
+                ProgressBarControl2.Position = 0
+                ProgressBarControl2.Update()
+                Using dbX As New CsmdBioAttendenceEntities1
+                    For Each dts In dt
+                        ProgressBarControl2.Position = k
+                        ProgressBarControl2.Update()
+                        k += 1
+
+                        Dim df = (From a In dbX.Emp_Attendence_Device Where a.Emp_Attendence_Device_ID = dts.Emp_Attendence_Device_ID Select a).FirstOrDefault
+                        If df IsNot Nothing Then
+
+                        Else
+                            Dim dtNew = New CsmdBioDatabase.Emp_Attendence_Device
+                            With dtNew
+                                .Attendance_Duty_Status_ID = dts.Attendance_Duty_Status_ID
+                                .Emp_Bio_Device_Users_UserID = dts.Emp_Bio_Device_Users_UserID
+                                .Emp_Attendence_Device_ID = dts.Emp_Attendence_Device_ID
+                                .Emp_ID = dts.Emp_ID
+                                .User_ID = dts.User_ID
+                                .Emp_Attendence_Device_Date = dts.Emp_Attendence_Device_Date
+                                .Emp_Attendence_Device_Time = dts.Emp_Attendence_Device_Time
+                                .Emp_Attendence_Device_DateTime = dts.Emp_Attendence_Device_DateTime
+                                .Emp_Attendence_Device_Day = dts.Emp_Attendence_Device_Day
+                                .Emp_Attendence_Device_Duty_On_Off = dts.Emp_Attendence_Device_Duty_On_Off
+                                .Emp_Attendence_Device_Status = dts.Emp_Attendence_Device_Status
+                                .Emp_Attendence_Device_Cal1 = dts.Emp_Attendence_Device_Cal1
+                                .Emp_Attendence_Device_Cal2 = dts.Emp_Attendence_Device_Cal2
+                                .Emp_Attendence_Device_Cal3 = dts.Emp_Attendence_Device_Cal3
+                                .Emp_Attendence_Device_Cal4 = dts.Emp_Attendence_Device_Cal4
+                                .Emp_Attendence_Device_Cal5 = dts.Emp_Attendence_Device_Cal5
+                                .Emp_Attendence_Device_Cal6 = dts.Emp_Attendence_Device_Cal6
+                                .Emp_Attendence_Device_Cal7 = dts.Emp_Attendence_Device_Cal7
+                            End With
+                            dbX.Emp_Attendence_Device.Add(dtNew)
+
+                        End If
+
+                        Application.DoEvents()
+                    Next
+                    dbX.SaveChanges()
+                End Using
+
+                MsgBox("Attendance Log Export Successfull", vbInformation, "Exporting")
+            End If
+        End Using
+    End Sub
 End Class
 
 Public Class MyXtraMessageBoxForm

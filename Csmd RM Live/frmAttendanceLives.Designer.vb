@@ -22,28 +22,29 @@ Partial Class frmAttendanceLives
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim SerializableAppearanceObject4 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim SerializableAppearanceObject5 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim SerializableAppearanceObject6 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim SerializableAppearanceObject7 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject11 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject12 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject13 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject14 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAttendanceLives))
-        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
-        Dim SerializableAppearanceObject3 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject8 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject9 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject10 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTimeEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BandedGridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
+        Me.BarManager1 = New DevExpress.XtraBars.BarManager()
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
-        Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
+        Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager()
         Me.DockPanel1 = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.LayoutControl3 = New DevExpress.XtraLayout.LayoutControl()
+        Me.SimpleButton6 = New DevExpress.XtraEditors.SimpleButton()
+        Me.SimpleButton5 = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton4 = New DevExpress.XtraEditors.SimpleButton()
         Me.ProgressBarControl2 = New DevExpress.XtraEditors.ProgressBarControl()
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
@@ -64,6 +65,7 @@ Partial Class frmAttendanceLives
         Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.Dtp1 = New DevExpress.XtraEditors.DateEdit()
         Me.SimpleButton3 = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
@@ -80,9 +82,10 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem10 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem20 = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.EmptySpaceItem4 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem5 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.LayoutControlItem23 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem24 = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.LayoutControlItem26 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarEditItem4 = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemTextEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -165,7 +168,7 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem25 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.LayoutControlItem1 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem1 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer()
         Me.RibbonControl1 = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.BarButtonItem19 = New DevExpress.XtraBars.BarButtonItem()
         Me.SkinRibbonGalleryBarItem1 = New DevExpress.XtraBars.SkinRibbonGalleryBarItem()
@@ -197,8 +200,8 @@ Partial Class frmAttendanceLives
         Me.BarButtonItem8 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem7 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
-        Me.RibbonMiniToolbar2 = New DevExpress.XtraBars.Ribbon.RibbonMiniToolbar(Me.components)
-        Me.RibbonMiniToolbar3 = New DevExpress.XtraBars.Ribbon.RibbonMiniToolbar(Me.components)
+        Me.RibbonMiniToolbar2 = New DevExpress.XtraBars.Ribbon.RibbonMiniToolbar()
+        Me.RibbonMiniToolbar3 = New DevExpress.XtraBars.Ribbon.RibbonMiniToolbar()
         Me.RibbonPageCategory1 = New DevExpress.XtraBars.Ribbon.RibbonPageCategory()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup5 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -213,9 +216,11 @@ Partial Class frmAttendanceLives
         Me.RepositoryItemTextEdit13 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.RepositoryItemTextEdit14 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.RepositoryItemTextEdit15 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
-        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon()
+        Me.Timer2 = New System.Windows.Forms.Timer()
+        Me.Timer3 = New System.Windows.Forms.Timer()
+        Me.SimpleButton7 = New DevExpress.XtraEditors.SimpleButton()
+        Me.LayoutControlItem27 = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.RepositoryItemTimeEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -245,9 +250,10 @@ Partial Class frmAttendanceLives
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem20, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LayoutControlItem23, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem24, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem26, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit19, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit18, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -304,6 +310,7 @@ Partial Class frmAttendanceLives
         CType(Me.RepositoryItemTextEdit13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit15, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LayoutControlItem27, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GridColumn18
@@ -415,8 +422,8 @@ Partial Class frmAttendanceLives
         Me.DockPanel1.Location = New System.Drawing.Point(0, 143)
         Me.DockPanel1.Name = "DockPanel1"
         Me.DockPanel1.Options.ShowCloseButton = False
-        Me.DockPanel1.OriginalSize = New System.Drawing.Size(267, 200)
-        Me.DockPanel1.Size = New System.Drawing.Size(267, 350)
+        Me.DockPanel1.OriginalSize = New System.Drawing.Size(302, 200)
+        Me.DockPanel1.Size = New System.Drawing.Size(302, 350)
         Me.DockPanel1.Text = "Device Connectivity"
         '
         'DockPanel1_Container
@@ -424,11 +431,14 @@ Partial Class frmAttendanceLives
         Me.DockPanel1_Container.Controls.Add(Me.LayoutControl3)
         Me.DockPanel1_Container.Location = New System.Drawing.Point(4, 23)
         Me.DockPanel1_Container.Name = "DockPanel1_Container"
-        Me.DockPanel1_Container.Size = New System.Drawing.Size(259, 323)
+        Me.DockPanel1_Container.Size = New System.Drawing.Size(294, 323)
         Me.DockPanel1_Container.TabIndex = 0
         '
         'LayoutControl3
         '
+        Me.LayoutControl3.Controls.Add(Me.SimpleButton7)
+        Me.LayoutControl3.Controls.Add(Me.SimpleButton6)
+        Me.LayoutControl3.Controls.Add(Me.SimpleButton5)
         Me.LayoutControl3.Controls.Add(Me.SimpleButton4)
         Me.LayoutControl3.Controls.Add(Me.ProgressBarControl2)
         Me.LayoutControl3.Controls.Add(Me.XtraTabControl1)
@@ -444,9 +454,29 @@ Partial Class frmAttendanceLives
         Me.LayoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(618, 357, 347, 350)
         Me.LayoutControl3.Padding = New System.Windows.Forms.Padding(10)
         Me.LayoutControl3.Root = Me.LayoutControlGroup3
-        Me.LayoutControl3.Size = New System.Drawing.Size(259, 323)
+        Me.LayoutControl3.Size = New System.Drawing.Size(294, 323)
         Me.LayoutControl3.TabIndex = 5
         Me.LayoutControl3.Text = "LayoutControl3"
+        '
+        'SimpleButton6
+        '
+        Me.SimpleButton6.Image = CType(resources.GetObject("SimpleButton6.Image"), System.Drawing.Image)
+        Me.SimpleButton6.Location = New System.Drawing.Point(2, 80)
+        Me.SimpleButton6.Name = "SimpleButton6"
+        Me.SimpleButton6.Size = New System.Drawing.Size(143, 22)
+        Me.SimpleButton6.StyleController = Me.LayoutControl3
+        Me.SimpleButton6.TabIndex = 24
+        Me.SimpleButton6.Text = "Import"
+        '
+        'SimpleButton5
+        '
+        Me.SimpleButton5.Image = CType(resources.GetObject("SimpleButton5.Image"), System.Drawing.Image)
+        Me.SimpleButton5.Location = New System.Drawing.Point(2, 112)
+        Me.SimpleButton5.Name = "SimpleButton5"
+        Me.SimpleButton5.Size = New System.Drawing.Size(60, 24)
+        Me.SimpleButton5.StyleController = Me.LayoutControl3
+        Me.SimpleButton5.TabIndex = 23
+        Me.SimpleButton5.Text = "DelAtt"
         '
         'SimpleButton4
         '
@@ -464,17 +494,17 @@ Partial Class frmAttendanceLives
         Me.ProgressBarControl2.Name = "ProgressBarControl2"
         Me.ProgressBarControl2.Properties.PercentView = False
         Me.ProgressBarControl2.Properties.ShowTitle = True
-        Me.ProgressBarControl2.Size = New System.Drawing.Size(225, 22)
+        Me.ProgressBarControl2.Size = New System.Drawing.Size(260, 22)
         Me.ProgressBarControl2.StyleController = Me.LayoutControl3
         Me.ProgressBarControl2.TabIndex = 21
         '
         'XtraTabControl1
         '
-        Me.XtraTabControl1.Location = New System.Drawing.Point(2, 114)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(2, 140)
         Me.XtraTabControl1.MultiLine = DevExpress.Utils.DefaultBoolean.[True]
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.XtraTabPage1
-        Me.XtraTabControl1.Size = New System.Drawing.Size(255, 207)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(290, 181)
         Me.XtraTabControl1.TabIndex = 20
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2})
         '
@@ -483,7 +513,7 @@ Partial Class frmAttendanceLives
         Me.XtraTabPage1.Controls.Add(Me.GridControl4)
         Me.XtraTabPage1.Image = CType(resources.GetObject("XtraTabPage1.Image"), System.Drawing.Image)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(249, 160)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(284, 134)
         Me.XtraTabPage1.Text = "This (Offline)"
         '
         'GridControl4
@@ -493,7 +523,7 @@ Partial Class frmAttendanceLives
         Me.GridControl4.MainView = Me.GridView1
         Me.GridControl4.MenuManager = Me.BarManager1
         Me.GridControl4.Name = "GridControl4"
-        Me.GridControl4.Size = New System.Drawing.Size(249, 160)
+        Me.GridControl4.Size = New System.Drawing.Size(284, 134)
         Me.GridControl4.TabIndex = 4
         Me.GridControl4.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -561,7 +591,7 @@ Partial Class frmAttendanceLives
         Me.XtraTabPage2.Controls.Add(Me.GridControl1)
         Me.XtraTabPage2.Image = CType(resources.GetObject("XtraTabPage2.Image"), System.Drawing.Image)
         Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(249, 160)
+        Me.XtraTabPage2.Size = New System.Drawing.Size(284, 160)
         Me.XtraTabPage2.Text = "This (Online)"
         '
         'GridControl1
@@ -571,7 +601,7 @@ Partial Class frmAttendanceLives
         Me.GridControl1.MainView = Me.GridView3
         Me.GridControl1.MenuManager = Me.BarManager1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(249, 160)
+        Me.GridControl1.Size = New System.Drawing.Size(284, 160)
         Me.GridControl1.TabIndex = 5
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView3})
         '
@@ -585,7 +615,7 @@ Partial Class frmAttendanceLives
         Me.GridView3.Appearance.Row.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GridView3.Appearance.Row.Options.UseFont = True
         Me.GridView3.ColumnPanelRowHeight = 40
-        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn24, Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn29})
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn24, Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30})
         Me.GridView3.GridControl = Me.GridControl1
         Me.GridView3.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Emp_Bio_Device_User_Name", Nothing, " >> "), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "Attendence_Status_Type", Nothing, "Activity Count= ({0})")})
         Me.GridView3.Name = "GridView3"
@@ -643,10 +673,16 @@ Partial Class frmAttendanceLives
         Me.GridColumn29.FieldName = "Emp_ID"
         Me.GridColumn29.Name = "GridColumn29"
         '
+        'GridColumn30
+        '
+        Me.GridColumn30.Caption = "DevID"
+        Me.GridColumn30.FieldName = "Emp_Attendence_Device_ID"
+        Me.GridColumn30.Name = "GridColumn30"
+        '
         'Dtp1
         '
         Me.Dtp1.EditValue = New Date(2022, 11, 21, 12, 47, 37, 326)
-        Me.Dtp1.Location = New System.Drawing.Point(45, 86)
+        Me.Dtp1.Location = New System.Drawing.Point(66, 112)
         Me.Dtp1.MenuManager = Me.BarManager1
         Me.Dtp1.Name = "Dtp1"
         Me.Dtp1.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 11.0!)
@@ -654,7 +690,7 @@ Partial Class frmAttendanceLives
         Me.Dtp1.Properties.Appearance.Options.UseTextOptions = True
         Me.Dtp1.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.Dtp1.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
-        Me.Dtp1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, True, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Dtp1.Properties.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject4, "", Nothing, Nothing, True), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, True, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Dtp1.Properties.Buttons1"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject5, "", Nothing, Nothing, True), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Dtp1.Properties.Buttons2"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject6, "", Nothing, Nothing, True), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Dtp1.Properties.Buttons3"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject7, "", Nothing, Nothing, True)})
+        Me.Dtp1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, True, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Dtp1.Properties.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject11, "", Nothing, Nothing, True), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, True, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Dtp1.Properties.Buttons1"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject12, "", Nothing, Nothing, True), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Dtp1.Properties.Buttons2"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject13, "", Nothing, Nothing, True), New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("Dtp1.Properties.Buttons3"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject14, "", Nothing, Nothing, True)})
         Me.Dtp1.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.Dtp1.Properties.DisplayFormat.FormatString = "dd-MM-yyyy"
         Me.Dtp1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
@@ -668,9 +704,9 @@ Partial Class frmAttendanceLives
         'SimpleButton3
         '
         Me.SimpleButton3.Image = CType(resources.GetObject("SimpleButton3.Image"), System.Drawing.Image)
-        Me.SimpleButton3.Location = New System.Drawing.Point(134, 54)
+        Me.SimpleButton3.Location = New System.Drawing.Point(149, 54)
         Me.SimpleButton3.Name = "SimpleButton3"
-        Me.SimpleButton3.Size = New System.Drawing.Size(123, 22)
+        Me.SimpleButton3.Size = New System.Drawing.Size(143, 22)
         Me.SimpleButton3.StyleController = Me.LayoutControl3
         Me.SimpleButton3.TabIndex = 12
         Me.SimpleButton3.Text = "Sync Data"
@@ -680,7 +716,7 @@ Partial Class frmAttendanceLives
         Me.SimpleButton1.Image = CType(resources.GetObject("SimpleButton1.Image"), System.Drawing.Image)
         Me.SimpleButton1.Location = New System.Drawing.Point(2, 54)
         Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(128, 22)
+        Me.SimpleButton1.Size = New System.Drawing.Size(143, 22)
         Me.SimpleButton1.StyleController = Me.LayoutControl3
         Me.SimpleButton1.TabIndex = 10
         Me.SimpleButton1.Text = "Download"
@@ -690,22 +726,22 @@ Partial Class frmAttendanceLives
         Me.lblState.Appearance.BackColor = System.Drawing.Color.Red
         Me.lblState.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.lblState.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
-        Me.lblState.Location = New System.Drawing.Point(176, 28)
+        Me.lblState.Location = New System.Drawing.Point(203, 28)
         Me.lblState.Name = "lblState"
-        Me.lblState.Size = New System.Drawing.Size(81, 22)
+        Me.lblState.Size = New System.Drawing.Size(89, 22)
         Me.lblState.StyleController = Me.LayoutControl3
         Me.lblState.TabIndex = 8
         '
         'txtIP
         '
         Me.txtIP.EditValue = "192.168.1.201"
-        Me.txtIP.Location = New System.Drawing.Point(84, 28)
+        Me.txtIP.Location = New System.Drawing.Point(106, 28)
         Me.txtIP.MenuManager = Me.BarManager1
         Me.txtIP.Name = "txtIP"
         Me.txtIP.Properties.Appearance.Options.UseTextOptions = True
         Me.txtIP.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.txtIP.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
-        Me.txtIP.Size = New System.Drawing.Size(88, 20)
+        Me.txtIP.Size = New System.Drawing.Size(93, 20)
         Me.txtIP.StyleController = Me.LayoutControl3
         Me.txtIP.TabIndex = 7
         '
@@ -717,7 +753,7 @@ Partial Class frmAttendanceLives
         Me.btnConnect.Image = CType(resources.GetObject("btnConnect.Image"), System.Drawing.Image)
         Me.btnConnect.Location = New System.Drawing.Point(2, 28)
         Me.btnConnect.Name = "btnConnect"
-        Me.btnConnect.Size = New System.Drawing.Size(78, 22)
+        Me.btnConnect.Size = New System.Drawing.Size(100, 22)
         Me.btnConnect.StyleController = Me.LayoutControl3
         Me.btnConnect.TabIndex = 6
         Me.btnConnect.Text = "Connect"
@@ -726,11 +762,11 @@ Partial Class frmAttendanceLives
         '
         Me.LayoutControlGroup3.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.LayoutControlGroup3.GroupBordersVisible = False
-        Me.LayoutControlGroup3.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem15, Me.LayoutControlItem17, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem21, Me.EmptySpaceItem3, Me.LayoutControlItem3, Me.LayoutControlItem10, Me.LayoutControlItem20, Me.EmptySpaceItem4, Me.EmptySpaceItem5, Me.LayoutControlItem23})
+        Me.LayoutControlGroup3.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem15, Me.LayoutControlItem17, Me.LayoutControlItem18, Me.LayoutControlItem19, Me.LayoutControlItem21, Me.EmptySpaceItem3, Me.LayoutControlItem3, Me.LayoutControlItem10, Me.LayoutControlItem20, Me.EmptySpaceItem5, Me.LayoutControlItem23, Me.LayoutControlItem24, Me.LayoutControlItem26, Me.LayoutControlItem27})
         Me.LayoutControlGroup3.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup3.Name = "Root"
         Me.LayoutControlGroup3.Padding = New DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0)
-        Me.LayoutControlGroup3.Size = New System.Drawing.Size(259, 323)
+        Me.LayoutControlGroup3.Size = New System.Drawing.Size(294, 323)
         Me.LayoutControlGroup3.TextVisible = False
         '
         'LayoutControlItem15
@@ -738,26 +774,26 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem15.Control = Me.btnConnect
         Me.LayoutControlItem15.Location = New System.Drawing.Point(0, 26)
         Me.LayoutControlItem15.Name = "LayoutControlItem15"
-        Me.LayoutControlItem15.Size = New System.Drawing.Size(82, 26)
+        Me.LayoutControlItem15.Size = New System.Drawing.Size(104, 26)
         Me.LayoutControlItem15.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem15.TextVisible = False
         '
         'LayoutControlItem17
         '
         Me.LayoutControlItem17.Control = Me.txtIP
-        Me.LayoutControlItem17.Location = New System.Drawing.Point(82, 26)
+        Me.LayoutControlItem17.Location = New System.Drawing.Point(104, 26)
         Me.LayoutControlItem17.Name = "LayoutControlItem17"
-        Me.LayoutControlItem17.Size = New System.Drawing.Size(92, 26)
+        Me.LayoutControlItem17.Size = New System.Drawing.Size(97, 26)
         Me.LayoutControlItem17.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem17.TextVisible = False
         '
         'LayoutControlItem18
         '
         Me.LayoutControlItem18.Control = Me.lblState
-        Me.LayoutControlItem18.Location = New System.Drawing.Point(174, 26)
+        Me.LayoutControlItem18.Location = New System.Drawing.Point(201, 26)
         Me.LayoutControlItem18.MinSize = New System.Drawing.Size(70, 17)
         Me.LayoutControlItem18.Name = "LayoutControlItem18"
-        Me.LayoutControlItem18.Size = New System.Drawing.Size(85, 26)
+        Me.LayoutControlItem18.Size = New System.Drawing.Size(93, 26)
         Me.LayoutControlItem18.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem18.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem18.TextVisible = False
@@ -767,43 +803,43 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem19.Control = Me.SimpleButton1
         Me.LayoutControlItem19.Location = New System.Drawing.Point(0, 52)
         Me.LayoutControlItem19.Name = "LayoutControlItem19"
-        Me.LayoutControlItem19.Size = New System.Drawing.Size(132, 26)
+        Me.LayoutControlItem19.Size = New System.Drawing.Size(147, 26)
         Me.LayoutControlItem19.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem19.TextVisible = False
         '
         'LayoutControlItem21
         '
         Me.LayoutControlItem21.Control = Me.SimpleButton3
-        Me.LayoutControlItem21.Location = New System.Drawing.Point(132, 52)
+        Me.LayoutControlItem21.Location = New System.Drawing.Point(147, 52)
         Me.LayoutControlItem21.Name = "LayoutControlItem21"
-        Me.LayoutControlItem21.Size = New System.Drawing.Size(127, 26)
+        Me.LayoutControlItem21.Size = New System.Drawing.Size(147, 26)
         Me.LayoutControlItem21.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem21.TextVisible = False
         '
         'EmptySpaceItem3
         '
         Me.EmptySpaceItem3.AllowHotTrack = False
-        Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 78)
+        Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 104)
         Me.EmptySpaceItem3.MaxSize = New System.Drawing.Size(0, 6)
         Me.EmptySpaceItem3.MinSize = New System.Drawing.Size(104, 6)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
-        Me.EmptySpaceItem3.Size = New System.Drawing.Size(259, 6)
+        Me.EmptySpaceItem3.Size = New System.Drawing.Size(294, 6)
         Me.EmptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.XtraTabControl1
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 112)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(0, 138)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
-        Me.LayoutControlItem3.Size = New System.Drawing.Size(259, 211)
+        Me.LayoutControlItem3.Size = New System.Drawing.Size(294, 185)
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem3.TextVisible = False
         '
         'LayoutControlItem10
         '
         Me.LayoutControlItem10.Control = Me.Dtp1
-        Me.LayoutControlItem10.Location = New System.Drawing.Point(43, 84)
+        Me.LayoutControlItem10.Location = New System.Drawing.Point(64, 110)
         Me.LayoutControlItem10.MaxSize = New System.Drawing.Size(204, 28)
         Me.LayoutControlItem10.MinSize = New System.Drawing.Size(204, 28)
         Me.LayoutControlItem10.Name = "LayoutControlItem10"
@@ -818,25 +854,17 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem20.Location = New System.Drawing.Point(30, 0)
         Me.LayoutControlItem20.MinSize = New System.Drawing.Size(54, 20)
         Me.LayoutControlItem20.Name = "LayoutControlItem20"
-        Me.LayoutControlItem20.Size = New System.Drawing.Size(229, 26)
+        Me.LayoutControlItem20.Size = New System.Drawing.Size(264, 26)
         Me.LayoutControlItem20.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem20.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem20.TextVisible = False
         '
-        'EmptySpaceItem4
-        '
-        Me.EmptySpaceItem4.AllowHotTrack = False
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(0, 84)
-        Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
-        Me.EmptySpaceItem4.Size = New System.Drawing.Size(43, 28)
-        Me.EmptySpaceItem4.TextSize = New System.Drawing.Size(0, 0)
-        '
         'EmptySpaceItem5
         '
         Me.EmptySpaceItem5.AllowHotTrack = False
-        Me.EmptySpaceItem5.Location = New System.Drawing.Point(247, 84)
+        Me.EmptySpaceItem5.Location = New System.Drawing.Point(268, 110)
         Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Size = New System.Drawing.Size(12, 28)
+        Me.EmptySpaceItem5.Size = New System.Drawing.Size(26, 28)
         Me.EmptySpaceItem5.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem23
@@ -850,6 +878,27 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem23.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem23.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem23.TextVisible = False
+        '
+        'LayoutControlItem24
+        '
+        Me.LayoutControlItem24.Control = Me.SimpleButton5
+        Me.LayoutControlItem24.Location = New System.Drawing.Point(0, 110)
+        Me.LayoutControlItem24.MaxSize = New System.Drawing.Size(64, 28)
+        Me.LayoutControlItem24.MinSize = New System.Drawing.Size(64, 28)
+        Me.LayoutControlItem24.Name = "LayoutControlItem24"
+        Me.LayoutControlItem24.Size = New System.Drawing.Size(64, 28)
+        Me.LayoutControlItem24.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
+        Me.LayoutControlItem24.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem24.TextVisible = False
+        '
+        'LayoutControlItem26
+        '
+        Me.LayoutControlItem26.Control = Me.SimpleButton6
+        Me.LayoutControlItem26.Location = New System.Drawing.Point(0, 78)
+        Me.LayoutControlItem26.Name = "LayoutControlItem26"
+        Me.LayoutControlItem26.Size = New System.Drawing.Size(147, 26)
+        Me.LayoutControlItem26.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem26.TextVisible = False
         '
         'BarButtonItem1
         '
@@ -898,14 +947,14 @@ Partial Class frmAttendanceLives
         '
         'ProgressBarControl3
         '
-        Me.ProgressBarControl3.Location = New System.Drawing.Point(613, 28)
+        Me.ProgressBarControl3.Location = New System.Drawing.Point(588, 28)
         Me.ProgressBarControl3.MenuManager = Me.BarManager1
         Me.ProgressBarControl3.Name = "ProgressBarControl3"
         Me.ProgressBarControl3.Properties.Appearance.BackColor = System.Drawing.Color.White
         Me.ProgressBarControl3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.ProgressBarControl3.Properties.PercentView = False
         Me.ProgressBarControl3.Properties.ShowTitle = True
-        Me.ProgressBarControl3.Size = New System.Drawing.Size(347, 14)
+        Me.ProgressBarControl3.Size = New System.Drawing.Size(337, 14)
         Me.ProgressBarControl3.StyleController = Me.LayoutControl2
         Me.ProgressBarControl3.TabIndex = 20
         '
@@ -927,18 +976,18 @@ Partial Class frmAttendanceLives
         Me.LayoutControl2.Controls.Add(Me.GridControl2)
         Me.LayoutControl2.Controls.Add(Me.ProgressBarControl1)
         Me.LayoutControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutControl2.Location = New System.Drawing.Point(267, 143)
+        Me.LayoutControl2.Location = New System.Drawing.Point(302, 143)
         Me.LayoutControl2.Name = "LayoutControl2"
         Me.LayoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(450, 195, 330, 350)
         Me.LayoutControl2.Root = Me.LayoutControlGroup2
-        Me.LayoutControl2.Size = New System.Drawing.Size(962, 350)
+        Me.LayoutControl2.Size = New System.Drawing.Size(927, 350)
         Me.LayoutControl2.TabIndex = 32
         Me.LayoutControl2.Text = "LayoutControl2"
         '
         'BtnActivity
         '
         Me.BtnActivity.Image = CType(resources.GetObject("BtnActivity.Image"), System.Drawing.Image)
-        Me.BtnActivity.Location = New System.Drawing.Point(784, 2)
+        Me.BtnActivity.Location = New System.Drawing.Point(759, 2)
         Me.BtnActivity.Name = "BtnActivity"
         Me.BtnActivity.Size = New System.Drawing.Size(91, 22)
         Me.BtnActivity.StyleController = Me.LayoutControl2
@@ -948,7 +997,7 @@ Partial Class frmAttendanceLives
         'BtnInOut
         '
         Me.BtnInOut.Image = CType(resources.GetObject("BtnInOut.Image"), System.Drawing.Image)
-        Me.BtnInOut.Location = New System.Drawing.Point(690, 2)
+        Me.BtnInOut.Location = New System.Drawing.Point(665, 2)
         Me.BtnInOut.Name = "BtnInOut"
         Me.BtnInOut.Size = New System.Drawing.Size(90, 22)
         Me.BtnInOut.StyleController = Me.LayoutControl2
@@ -968,7 +1017,7 @@ Partial Class frmAttendanceLives
         'CheckButton5
         '
         Me.CheckButton5.Image = CType(resources.GetObject("CheckButton5.Image"), System.Drawing.Image)
-        Me.CheckButton5.Location = New System.Drawing.Point(578, 2)
+        Me.CheckButton5.Location = New System.Drawing.Point(553, 2)
         Me.CheckButton5.Name = "CheckButton5"
         Me.CheckButton5.Size = New System.Drawing.Size(26, 23)
         Me.CheckButton5.StyleController = Me.LayoutControl2
@@ -977,7 +1026,7 @@ Partial Class frmAttendanceLives
         'CheckButton4
         '
         Me.CheckButton4.Image = CType(resources.GetObject("CheckButton4.Image"), System.Drawing.Image)
-        Me.CheckButton4.Location = New System.Drawing.Point(548, 2)
+        Me.CheckButton4.Location = New System.Drawing.Point(523, 2)
         Me.CheckButton4.Name = "CheckButton4"
         Me.CheckButton4.Size = New System.Drawing.Size(26, 23)
         Me.CheckButton4.StyleController = Me.LayoutControl2
@@ -986,7 +1035,7 @@ Partial Class frmAttendanceLives
         'CheckButton3
         '
         Me.CheckButton3.Image = CType(resources.GetObject("CheckButton3.Image"), System.Drawing.Image)
-        Me.CheckButton3.Location = New System.Drawing.Point(518, 2)
+        Me.CheckButton3.Location = New System.Drawing.Point(493, 2)
         Me.CheckButton3.Name = "CheckButton3"
         Me.CheckButton3.Size = New System.Drawing.Size(26, 23)
         Me.CheckButton3.StyleController = Me.LayoutControl2
@@ -995,7 +1044,7 @@ Partial Class frmAttendanceLives
         'CheckButton2
         '
         Me.CheckButton2.Image = CType(resources.GetObject("CheckButton2.Image"), System.Drawing.Image)
-        Me.CheckButton2.Location = New System.Drawing.Point(488, 2)
+        Me.CheckButton2.Location = New System.Drawing.Point(463, 2)
         Me.CheckButton2.Name = "CheckButton2"
         Me.CheckButton2.Size = New System.Drawing.Size(26, 23)
         Me.CheckButton2.StyleController = Me.LayoutControl2
@@ -1007,7 +1056,7 @@ Partial Class frmAttendanceLives
         Me.CheckButton1.Appearance.Options.UseBackColor = True
         Me.CheckButton1.Checked = True
         Me.CheckButton1.Image = CType(resources.GetObject("CheckButton1.Image"), System.Drawing.Image)
-        Me.CheckButton1.Location = New System.Drawing.Point(458, 2)
+        Me.CheckButton1.Location = New System.Drawing.Point(433, 2)
         Me.CheckButton1.Name = "CheckButton1"
         Me.CheckButton1.Size = New System.Drawing.Size(26, 23)
         Me.CheckButton1.StyleController = Me.LayoutControl2
@@ -1016,7 +1065,7 @@ Partial Class frmAttendanceLives
         'BtnDelete
         '
         Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
-        Me.BtnDelete.Location = New System.Drawing.Point(899, 2)
+        Me.BtnDelete.Location = New System.Drawing.Point(864, 2)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(61, 22)
         Me.BtnDelete.StyleController = Me.LayoutControl2
@@ -1026,7 +1075,7 @@ Partial Class frmAttendanceLives
         'BtnLoad
         '
         Me.BtnLoad.Image = CType(resources.GetObject("BtnLoad.Image"), System.Drawing.Image)
-        Me.BtnLoad.Location = New System.Drawing.Point(614, 2)
+        Me.BtnLoad.Location = New System.Drawing.Point(589, 2)
         Me.BtnLoad.Name = "BtnLoad"
         Me.BtnLoad.Size = New System.Drawing.Size(72, 22)
         Me.BtnLoad.StyleController = Me.LayoutControl2
@@ -1035,11 +1084,11 @@ Partial Class frmAttendanceLives
         '
         'GridControl5
         '
-        Me.GridControl5.Location = New System.Drawing.Point(613, 46)
+        Me.GridControl5.Location = New System.Drawing.Point(588, 46)
         Me.GridControl5.MainView = Me.GridView2
         Me.GridControl5.Name = "GridControl5"
         Me.GridControl5.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemDateEdit2, Me.RepositoryItemTimeEdit2, Me.RepositoryItemButtonEdit3})
-        Me.GridControl5.Size = New System.Drawing.Size(347, 300)
+        Me.GridControl5.Size = New System.Drawing.Size(337, 300)
         Me.GridControl5.TabIndex = 10
         Me.GridControl5.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
         '
@@ -1075,7 +1124,7 @@ Partial Class frmAttendanceLives
         'RepositoryItemButtonEdit3
         '
         Me.RepositoryItemButtonEdit3.AutoHeight = False
-        Me.RepositoryItemButtonEdit3.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit3.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "", Nothing, Nothing, True)})
+        Me.RepositoryItemButtonEdit3.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit3.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject8, "", Nothing, Nothing, True)})
         Me.RepositoryItemButtonEdit3.Name = "RepositoryItemButtonEdit3"
         Me.RepositoryItemButtonEdit3.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -1152,7 +1201,7 @@ Partial Class frmAttendanceLives
         Me.LabelControl1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.LabelControl1.Location = New System.Drawing.Point(108, 2)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(346, 23)
+        Me.LabelControl1.Size = New System.Drawing.Size(321, 23)
         Me.LabelControl1.StyleController = Me.LayoutControl2
         Me.LabelControl1.TabIndex = 27
         Me.LabelControl1.Text = "Attendance From "
@@ -1165,7 +1214,7 @@ Partial Class frmAttendanceLives
         Me.GridControl2.MenuManager = Me.BarManager1
         Me.GridControl2.Name = "GridControl2"
         Me.GridControl2.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTimeEdit1, Me.RepositoryItemButtonEdit1, Me.RepositoryItemButtonEdit2})
-        Me.GridControl2.Size = New System.Drawing.Size(602, 299)
+        Me.GridControl2.Size = New System.Drawing.Size(577, 299)
         Me.GridControl2.TabIndex = 9
         Me.GridControl2.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.AdvBandedGridView1})
         '
@@ -1479,7 +1528,7 @@ Partial Class frmAttendanceLives
         'RepositoryItemButtonEdit2
         '
         Me.RepositoryItemButtonEdit2.AutoHeight = False
-        Me.RepositoryItemButtonEdit2.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit2.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
+        Me.RepositoryItemButtonEdit2.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit2.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject9, "", Nothing, Nothing, True)})
         Me.RepositoryItemButtonEdit2.Name = "RepositoryItemButtonEdit2"
         Me.RepositoryItemButtonEdit2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -1497,7 +1546,7 @@ Partial Class frmAttendanceLives
         'RepositoryItemButtonEdit1
         '
         Me.RepositoryItemButtonEdit1.AutoHeight = False
-        Me.RepositoryItemButtonEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "M", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit1.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject3, "", Nothing, Nothing, True)})
+        Me.RepositoryItemButtonEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "M", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, CType(resources.GetObject("RepositoryItemButtonEdit1.Buttons"), System.Drawing.Image), New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject10, "", Nothing, Nothing, True)})
         Me.RepositoryItemButtonEdit1.Name = "RepositoryItemButtonEdit1"
         Me.RepositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
         '
@@ -1509,7 +1558,7 @@ Partial Class frmAttendanceLives
         Me.ProgressBarControl1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.ProgressBarControl1.Properties.PercentView = False
         Me.ProgressBarControl1.Properties.ShowTitle = True
-        Me.ProgressBarControl1.Size = New System.Drawing.Size(602, 14)
+        Me.ProgressBarControl1.Size = New System.Drawing.Size(577, 14)
         Me.ProgressBarControl1.StyleController = Me.LayoutControl2
         Me.ProgressBarControl1.TabIndex = 19
         '
@@ -1521,7 +1570,7 @@ Partial Class frmAttendanceLives
         Me.LayoutControlGroup2.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup2.Name = "Root"
         Me.LayoutControlGroup2.Padding = New DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 2)
-        Me.LayoutControlGroup2.Size = New System.Drawing.Size(962, 350)
+        Me.LayoutControlGroup2.Size = New System.Drawing.Size(927, 350)
         Me.LayoutControlGroup2.TextVisible = False
         '
         'LayoutControlItem6
@@ -1529,23 +1578,23 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem6.Control = Me.GridControl2
         Me.LayoutControlItem6.Location = New System.Drawing.Point(0, 45)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
-        Me.LayoutControlItem6.Size = New System.Drawing.Size(606, 303)
+        Me.LayoutControlItem6.Size = New System.Drawing.Size(581, 303)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem6.TextVisible = False
         '
         'LayoutControlItem7
         '
         Me.LayoutControlItem7.Control = Me.GridControl5
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(611, 44)
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(586, 44)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
-        Me.LayoutControlItem7.Size = New System.Drawing.Size(351, 304)
+        Me.LayoutControlItem7.Size = New System.Drawing.Size(341, 304)
         Me.LayoutControlItem7.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem7.TextVisible = False
         '
         'SplitterItem1
         '
         Me.SplitterItem1.AllowHotTrack = True
-        Me.SplitterItem1.Location = New System.Drawing.Point(606, 26)
+        Me.SplitterItem1.Location = New System.Drawing.Point(581, 26)
         Me.SplitterItem1.Name = "SplitterItem1"
         Me.SplitterItem1.Size = New System.Drawing.Size(5, 322)
         '
@@ -1556,7 +1605,7 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem5.MaxSize = New System.Drawing.Size(0, 27)
         Me.LayoutControlItem5.MinSize = New System.Drawing.Size(70, 27)
         Me.LayoutControlItem5.Name = "LayoutControlItem5"
-        Me.LayoutControlItem5.Size = New System.Drawing.Size(350, 27)
+        Me.LayoutControlItem5.Size = New System.Drawing.Size(325, 27)
         Me.LayoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem5.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem5.TextVisible = False
@@ -1564,7 +1613,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem8
         '
         Me.LayoutControlItem8.Control = Me.BtnLoad
-        Me.LayoutControlItem8.Location = New System.Drawing.Point(612, 0)
+        Me.LayoutControlItem8.Location = New System.Drawing.Point(587, 0)
         Me.LayoutControlItem8.MaxSize = New System.Drawing.Size(76, 26)
         Me.LayoutControlItem8.MinSize = New System.Drawing.Size(76, 26)
         Me.LayoutControlItem8.Name = "LayoutControlItem8"
@@ -1576,7 +1625,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem9
         '
         Me.LayoutControlItem9.Control = Me.BtnDelete
-        Me.LayoutControlItem9.Location = New System.Drawing.Point(897, 0)
+        Me.LayoutControlItem9.Location = New System.Drawing.Point(862, 0)
         Me.LayoutControlItem9.MaxSize = New System.Drawing.Size(65, 26)
         Me.LayoutControlItem9.MinSize = New System.Drawing.Size(65, 26)
         Me.LayoutControlItem9.Name = "LayoutControlItem9"
@@ -1588,7 +1637,7 @@ Partial Class frmAttendanceLives
         'EmptySpaceItem2
         '
         Me.EmptySpaceItem2.AllowHotTrack = False
-        Me.EmptySpaceItem2.Location = New System.Drawing.Point(606, 0)
+        Me.EmptySpaceItem2.Location = New System.Drawing.Point(581, 0)
         Me.EmptySpaceItem2.MinSize = New System.Drawing.Size(6, 10)
         Me.EmptySpaceItem2.Name = "EmptySpaceItem2"
         Me.EmptySpaceItem2.Size = New System.Drawing.Size(6, 26)
@@ -1598,7 +1647,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem16
         '
         Me.LayoutControlItem16.Control = Me.CheckButton1
-        Me.LayoutControlItem16.Location = New System.Drawing.Point(456, 0)
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(431, 0)
         Me.LayoutControlItem16.MaxSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem16.MinSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem16.Name = "LayoutControlItem16"
@@ -1610,7 +1659,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem11
         '
         Me.LayoutControlItem11.Control = Me.CheckButton2
-        Me.LayoutControlItem11.Location = New System.Drawing.Point(486, 0)
+        Me.LayoutControlItem11.Location = New System.Drawing.Point(461, 0)
         Me.LayoutControlItem11.MaxSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem11.MinSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem11.Name = "LayoutControlItem11"
@@ -1622,7 +1671,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem12
         '
         Me.LayoutControlItem12.Control = Me.CheckButton3
-        Me.LayoutControlItem12.Location = New System.Drawing.Point(516, 0)
+        Me.LayoutControlItem12.Location = New System.Drawing.Point(491, 0)
         Me.LayoutControlItem12.MaxSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem12.MinSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem12.Name = "LayoutControlItem12"
@@ -1634,7 +1683,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem13
         '
         Me.LayoutControlItem13.Control = Me.CheckButton4
-        Me.LayoutControlItem13.Location = New System.Drawing.Point(546, 0)
+        Me.LayoutControlItem13.Location = New System.Drawing.Point(521, 0)
         Me.LayoutControlItem13.MaxSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem13.MinSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem13.Name = "LayoutControlItem13"
@@ -1646,7 +1695,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem14
         '
         Me.LayoutControlItem14.Control = Me.CheckButton5
-        Me.LayoutControlItem14.Location = New System.Drawing.Point(576, 0)
+        Me.LayoutControlItem14.Location = New System.Drawing.Point(551, 0)
         Me.LayoutControlItem14.MaxSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem14.MinSize = New System.Drawing.Size(30, 27)
         Me.LayoutControlItem14.Name = "LayoutControlItem14"
@@ -1658,11 +1707,11 @@ Partial Class frmAttendanceLives
         'LayoutControlItem2
         '
         Me.LayoutControlItem2.Control = Me.ProgressBarControl3
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(611, 26)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(586, 26)
         Me.LayoutControlItem2.MaxSize = New System.Drawing.Size(0, 18)
         Me.LayoutControlItem2.MinSize = New System.Drawing.Size(54, 18)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
-        Me.LayoutControlItem2.Size = New System.Drawing.Size(351, 18)
+        Me.LayoutControlItem2.Size = New System.Drawing.Size(341, 18)
         Me.LayoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem2.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem2.TextVisible = False
@@ -1674,7 +1723,7 @@ Partial Class frmAttendanceLives
         Me.LayoutControlItem4.MaxSize = New System.Drawing.Size(0, 18)
         Me.LayoutControlItem4.MinSize = New System.Drawing.Size(54, 18)
         Me.LayoutControlItem4.Name = "LayoutControlItem4"
-        Me.LayoutControlItem4.Size = New System.Drawing.Size(606, 18)
+        Me.LayoutControlItem4.Size = New System.Drawing.Size(581, 18)
         Me.LayoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem4.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem4.TextVisible = False
@@ -1694,7 +1743,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem25
         '
         Me.LayoutControlItem25.Control = Me.BtnInOut
-        Me.LayoutControlItem25.Location = New System.Drawing.Point(688, 0)
+        Me.LayoutControlItem25.Location = New System.Drawing.Point(663, 0)
         Me.LayoutControlItem25.MaxSize = New System.Drawing.Size(94, 26)
         Me.LayoutControlItem25.MinSize = New System.Drawing.Size(94, 26)
         Me.LayoutControlItem25.Name = "LayoutControlItem25"
@@ -1706,7 +1755,7 @@ Partial Class frmAttendanceLives
         'LayoutControlItem1
         '
         Me.LayoutControlItem1.Control = Me.BtnActivity
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(782, 0)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(757, 0)
         Me.LayoutControlItem1.MaxSize = New System.Drawing.Size(95, 26)
         Me.LayoutControlItem1.MinSize = New System.Drawing.Size(95, 26)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
@@ -1718,9 +1767,9 @@ Partial Class frmAttendanceLives
         'EmptySpaceItem1
         '
         Me.EmptySpaceItem1.AllowHotTrack = False
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(877, 0)
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(852, 0)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(20, 26)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(10, 26)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'Timer1
@@ -2144,6 +2193,25 @@ Partial Class frmAttendanceLives
         Me.Timer3.Enabled = True
         Me.Timer3.Interval = 1000
         '
+        'SimpleButton7
+        '
+        Me.SimpleButton7.Image = CType(resources.GetObject("SimpleButton7.Image"), System.Drawing.Image)
+        Me.SimpleButton7.Location = New System.Drawing.Point(149, 80)
+        Me.SimpleButton7.Name = "SimpleButton7"
+        Me.SimpleButton7.Size = New System.Drawing.Size(143, 22)
+        Me.SimpleButton7.StyleController = Me.LayoutControl3
+        Me.SimpleButton7.TabIndex = 25
+        Me.SimpleButton7.Text = "Export"
+        '
+        'LayoutControlItem27
+        '
+        Me.LayoutControlItem27.Control = Me.SimpleButton7
+        Me.LayoutControlItem27.Location = New System.Drawing.Point(147, 78)
+        Me.LayoutControlItem27.Name = "LayoutControlItem27"
+        Me.LayoutControlItem27.Size = New System.Drawing.Size(147, 26)
+        Me.LayoutControlItem27.TextSize = New System.Drawing.Size(0, 0)
+        Me.LayoutControlItem27.TextVisible = False
+        '
         'frmAttendanceLives
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -2187,9 +2255,10 @@ Partial Class frmAttendanceLives
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem20, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmptySpaceItem4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LayoutControlItem23, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem24, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem26, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit19, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit18, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2246,6 +2315,7 @@ Partial Class frmAttendanceLives
         CType(Me.RepositoryItemTextEdit13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit14, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit15, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LayoutControlItem27, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2415,7 +2485,6 @@ Partial Class frmAttendanceLives
     Friend WithEvents SimpleButton2 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LayoutControlItem22 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents LayoutControlItem20 As DevExpress.XtraLayout.LayoutControlItem
-    Friend WithEvents EmptySpaceItem4 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents EmptySpaceItem5 As DevExpress.XtraLayout.EmptySpaceItem
     Friend WithEvents BarButtonItem7 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup4 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
@@ -2436,4 +2505,11 @@ Partial Class frmAttendanceLives
     Friend WithEvents LayoutControlItem23 As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents Timer2 As Timer
     Friend WithEvents Timer3 As Timer
+    Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SimpleButton5 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LayoutControlItem24 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents SimpleButton6 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LayoutControlItem26 As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents SimpleButton7 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LayoutControlItem27 As DevExpress.XtraLayout.LayoutControlItem
 End Class

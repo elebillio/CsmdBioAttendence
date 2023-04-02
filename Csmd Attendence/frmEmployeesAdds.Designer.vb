@@ -356,6 +356,7 @@ Partial Class frmEmployeesAdds
         Me.BarButtonItem6.Id = 6
         Me.BarButtonItem6.LargeGlyph = CType(resources.GetObject("BarButtonItem6.LargeGlyph"), System.Drawing.Image)
         Me.BarButtonItem6.Name = "BarButtonItem6"
+        Me.BarButtonItem6.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         '
         'BarButtonItem10
         '
@@ -484,20 +485,18 @@ Partial Class frmEmployeesAdds
         '
         Me.RibbonPageGroup2.AllowTextClipping = False
         Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem5)
-        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem6)
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.ShowCaptionButton = False
         Me.RibbonPageGroup2.Text = "Importing"
-        Me.RibbonPageGroup2.Visible = False
         '
         'RibbonPageGroup3
         '
         Me.RibbonPageGroup3.AllowTextClipping = False
-        Me.RibbonPageGroup3.ItemLinks.Add(Me.BarButtonItem10)
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.BarButtonItem10, True)
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.BarButtonItem6)
         Me.RibbonPageGroup3.Name = "RibbonPageGroup3"
         Me.RibbonPageGroup3.ShowCaptionButton = False
         Me.RibbonPageGroup3.Text = "Exporting"
-        Me.RibbonPageGroup3.Visible = False
         '
         'RibbonStatusBar1
         '
@@ -540,7 +539,8 @@ Partial Class frmEmployeesAdds
         Me.ProgressBarControl1.Location = New System.Drawing.Point(12, 12)
         Me.ProgressBarControl1.MenuManager = Me.RibbonControl1
         Me.ProgressBarControl1.Name = "ProgressBarControl1"
-        Me.ProgressBarControl1.Size = New System.Drawing.Size(1252, 14)
+        Me.ProgressBarControl1.Properties.ShowTitle = True
+        Me.ProgressBarControl1.Size = New System.Drawing.Size(1252, 18)
         Me.ProgressBarControl1.StyleController = Me.LayoutControl1
         Me.ProgressBarControl1.TabIndex = 36
         '
@@ -564,11 +564,11 @@ Partial Class frmEmployeesAdds
         Me.LayoutControl5.Controls.Add(Me.Emp_Date_Leave)
         Me.LayoutControl5.Controls.Add(Me.Emp_Date_Join)
         Me.LayoutControl5.Controls.Add(Me.Emp_Address_ID)
-        Me.LayoutControl5.Location = New System.Drawing.Point(209, 221)
+        Me.LayoutControl5.Location = New System.Drawing.Point(209, 229)
         Me.LayoutControl5.Name = "LayoutControl5"
         Me.LayoutControl5.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = New System.Drawing.Rectangle(517, 353, 250, 259)
         Me.LayoutControl5.Root = Me.LayoutControlGroup5
-        Me.LayoutControl5.Size = New System.Drawing.Size(1055, 368)
+        Me.LayoutControl5.Size = New System.Drawing.Size(1055, 364)
         Me.LayoutControl5.TabIndex = 0
         Me.LayoutControl5.Text = "LayoutControl5"
         '
@@ -604,7 +604,7 @@ Partial Class frmEmployeesAdds
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
         Me.GridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemButtonEdit1, Me.RepositoryItemButtonEdit2, Me.RepositoryItemButtonEdit3})
-        Me.GridControl1.Size = New System.Drawing.Size(582, 302)
+        Me.GridControl1.Size = New System.Drawing.Size(582, 298)
         Me.GridControl1.TabIndex = 84
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -942,7 +942,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlGroup5.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.LayoutControlItem4, Me.LayoutControlItem5, Me.LayoutControlItem35, Me.EmptySpaceItem5, Me.LayoutControlItem9, Me.LayoutControlItem10, Me.LayoutControlItem12, Me.LayoutControlItem23, Me.EmptySpaceItem2, Me.EmptySpaceItem3, Me.SplitterItem1, Me.LayoutControlItem34, Me.LayoutControlItem22, Me.LayoutControlItem26, Me.EmptySpaceItem1, Me.LayoutControlItem14, Me.LayoutControlItem17, Me.LayoutControlItem13, Me.LayoutControlItem21, Me.LayoutControlItem25, Me.LayoutControlItem19})
         Me.LayoutControlGroup5.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlGroup5.Name = "Root"
-        Me.LayoutControlGroup5.Size = New System.Drawing.Size(1055, 368)
+        Me.LayoutControlGroup5.Size = New System.Drawing.Size(1055, 364)
         Me.LayoutControlGroup5.TextVisible = False
         '
         'LayoutControlItem4
@@ -989,7 +989,7 @@ Partial Class frmEmployeesAdds
         Me.EmptySpaceItem5.AllowHotTrack = False
         Me.EmptySpaceItem5.Location = New System.Drawing.Point(0, 308)
         Me.EmptySpaceItem5.Name = "EmptySpaceItem5"
-        Me.EmptySpaceItem5.Size = New System.Drawing.Size(444, 40)
+        Me.EmptySpaceItem5.Size = New System.Drawing.Size(444, 36)
         Me.EmptySpaceItem5.TextSize = New System.Drawing.Size(0, 0)
         '
         'LayoutControlItem9
@@ -1071,7 +1071,7 @@ Partial Class frmEmployeesAdds
         Me.SplitterItem1.AllowHotTrack = True
         Me.SplitterItem1.Location = New System.Drawing.Point(444, 0)
         Me.SplitterItem1.Name = "SplitterItem1"
-        Me.SplitterItem1.Size = New System.Drawing.Size(5, 348)
+        Me.SplitterItem1.Size = New System.Drawing.Size(5, 344)
         '
         'LayoutControlItem34
         '
@@ -1126,7 +1126,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem14.Control = Me.GridControl1
         Me.LayoutControlItem14.Location = New System.Drawing.Point(449, 42)
         Me.LayoutControlItem14.Name = "LayoutControlItem14"
-        Me.LayoutControlItem14.Size = New System.Drawing.Size(586, 306)
+        Me.LayoutControlItem14.Size = New System.Drawing.Size(586, 302)
         Me.LayoutControlItem14.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem14.TextVisible = False
         '
@@ -1185,7 +1185,7 @@ Partial Class frmEmployeesAdds
         '
         'Emp_Image
         '
-        Me.Emp_Image.Location = New System.Drawing.Point(1128, 30)
+        Me.Emp_Image.Location = New System.Drawing.Point(1128, 38)
         Me.Emp_Image.Name = "Emp_Image"
         Me.Emp_Image.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Always
         Me.Emp_Image.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
@@ -1206,12 +1206,12 @@ Partial Class frmEmployeesAdds
         Me.TileBar1.DropDownOptions.BeakColor = System.Drawing.Color.Empty
         Me.TileBar1.Groups.Add(Me.TileBarGroup2)
         Me.TileBar1.ItemSize = 40
-        Me.TileBar1.Location = New System.Drawing.Point(12, 30)
+        Me.TileBar1.Location = New System.Drawing.Point(12, 38)
         Me.TileBar1.MaxId = 2
         Me.TileBar1.Name = "TileBar1"
         Me.TileBar1.Orientation = System.Windows.Forms.Orientation.Vertical
         Me.TileBar1.ScrollMode = DevExpress.XtraEditors.TileControlScrollMode.ScrollButtons
-        Me.TileBar1.Size = New System.Drawing.Size(193, 559)
+        Me.TileBar1.Size = New System.Drawing.Size(193, 555)
         Me.TileBar1.TabIndex = 11
         Me.TileBar1.Text = "TileBar1"
         '
@@ -1267,7 +1267,7 @@ Partial Class frmEmployeesAdds
         '
         'Emp_Reg
         '
-        Me.Emp_Reg.Location = New System.Drawing.Point(402, 121)
+        Me.Emp_Reg.Location = New System.Drawing.Point(402, 129)
         Me.Emp_Reg.Name = "Emp_Reg"
         Me.Emp_Reg.Size = New System.Drawing.Size(263, 26)
         Me.Emp_Reg.StyleController = Me.LayoutControl1
@@ -1277,7 +1277,7 @@ Partial Class frmEmployeesAdds
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Times New Roman", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.LabelControl1.Location = New System.Drawing.Point(209, 30)
+        Me.LabelControl1.Location = New System.Drawing.Point(209, 38)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(915, 46)
         Me.LabelControl1.StyleController = Me.LayoutControl1
@@ -1286,7 +1286,7 @@ Partial Class frmEmployeesAdds
         '
         'Emp_Quali
         '
-        Me.Emp_Quali.Location = New System.Drawing.Point(862, 151)
+        Me.Emp_Quali.Location = New System.Drawing.Point(862, 159)
         Me.Emp_Quali.Name = "Emp_Quali"
         Me.Emp_Quali.Size = New System.Drawing.Size(262, 26)
         Me.Emp_Quali.StyleController = Me.LayoutControl1
@@ -1295,7 +1295,7 @@ Partial Class frmEmployeesAdds
         'Emp_Status
         '
         Me.Emp_Status.EditValue = True
-        Me.Emp_Status.Location = New System.Drawing.Point(669, 121)
+        Me.Emp_Status.Location = New System.Drawing.Point(669, 129)
         Me.Emp_Status.Name = "Emp_Status"
         Me.Emp_Status.Properties.Caption = "Active?"
         Me.Emp_Status.Size = New System.Drawing.Size(455, 23)
@@ -1304,7 +1304,7 @@ Partial Class frmEmployeesAdds
         '
         'Emp_Father
         '
-        Me.Emp_Father.Location = New System.Drawing.Point(402, 181)
+        Me.Emp_Father.Location = New System.Drawing.Point(402, 189)
         Me.Emp_Father.Name = "Emp_Father"
         Me.Emp_Father.Size = New System.Drawing.Size(263, 26)
         Me.Emp_Father.StyleController = Me.LayoutControl1
@@ -1313,7 +1313,7 @@ Partial Class frmEmployeesAdds
         'Emp_Name
         '
         Me.Emp_Name.EditValue = ""
-        Me.Emp_Name.Location = New System.Drawing.Point(402, 151)
+        Me.Emp_Name.Location = New System.Drawing.Point(402, 159)
         Me.Emp_Name.Name = "Emp_Name"
         Me.Emp_Name.Properties.NullText = "Select or Write"
         Me.Emp_Name.Size = New System.Drawing.Size(263, 26)
@@ -1322,7 +1322,7 @@ Partial Class frmEmployeesAdds
         '
         'SearchLookUpEdit1
         '
-        Me.SearchLookUpEdit1.Location = New System.Drawing.Point(402, 80)
+        Me.SearchLookUpEdit1.Location = New System.Drawing.Point(402, 88)
         Me.SearchLookUpEdit1.Name = "SearchLookUpEdit1"
         Me.SearchLookUpEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SearchLookUpEdit1.Properties.NullText = ""
@@ -1340,7 +1340,7 @@ Partial Class frmEmployeesAdds
         '
         'Emp_Designation_ID
         '
-        Me.Emp_Designation_ID.Location = New System.Drawing.Point(862, 181)
+        Me.Emp_Designation_ID.Location = New System.Drawing.Point(862, 189)
         Me.Emp_Designation_ID.Name = "Emp_Designation_ID"
         Me.Emp_Designation_ID.Properties.NullText = "Select"
         Me.Emp_Designation_ID.Size = New System.Drawing.Size(262, 26)
@@ -1360,7 +1360,7 @@ Partial Class frmEmployeesAdds
         'LayoutControlItem6
         '
         Me.LayoutControlItem6.Control = Me.Emp_Status
-        Me.LayoutControlItem6.Location = New System.Drawing.Point(657, 109)
+        Me.LayoutControlItem6.Location = New System.Drawing.Point(657, 117)
         Me.LayoutControlItem6.Name = "LayoutControlItem6"
         Me.LayoutControlItem6.Size = New System.Drawing.Size(459, 30)
         Me.LayoutControlItem6.TextSize = New System.Drawing.Size(0, 0)
@@ -1369,7 +1369,7 @@ Partial Class frmEmployeesAdds
         'LayoutControlItem15
         '
         Me.LayoutControlItem15.Control = Me.LabelControl1
-        Me.LayoutControlItem15.Location = New System.Drawing.Point(197, 18)
+        Me.LayoutControlItem15.Location = New System.Drawing.Point(197, 26)
         Me.LayoutControlItem15.MaxSize = New System.Drawing.Size(0, 50)
         Me.LayoutControlItem15.MinSize = New System.Drawing.Size(350, 50)
         Me.LayoutControlItem15.Name = "LayoutControlItem15"
@@ -1385,7 +1385,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem28.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem28.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem28.Control = Me.Emp_Reg
-        Me.LayoutControlItem28.Location = New System.Drawing.Point(197, 109)
+        Me.LayoutControlItem28.Location = New System.Drawing.Point(197, 117)
         Me.LayoutControlItem28.Name = "LayoutControlItem28"
         Me.LayoutControlItem28.Size = New System.Drawing.Size(460, 30)
         Me.LayoutControlItem28.Text = "Reg#"
@@ -1394,11 +1394,11 @@ Partial Class frmEmployeesAdds
         'LayoutControlItem16
         '
         Me.LayoutControlItem16.Control = Me.TileBar1
-        Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 18)
+        Me.LayoutControlItem16.Location = New System.Drawing.Point(0, 26)
         Me.LayoutControlItem16.MaxSize = New System.Drawing.Size(197, 0)
         Me.LayoutControlItem16.MinSize = New System.Drawing.Size(197, 24)
         Me.LayoutControlItem16.Name = "LayoutControlItem16"
-        Me.LayoutControlItem16.Size = New System.Drawing.Size(197, 563)
+        Me.LayoutControlItem16.Size = New System.Drawing.Size(197, 559)
         Me.LayoutControlItem16.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom
         Me.LayoutControlItem16.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem16.TextVisible = False
@@ -1406,7 +1406,7 @@ Partial Class frmEmployeesAdds
         'LayoutControlItem24
         '
         Me.LayoutControlItem24.Control = Me.Emp_Image
-        Me.LayoutControlItem24.Location = New System.Drawing.Point(1116, 18)
+        Me.LayoutControlItem24.Location = New System.Drawing.Point(1116, 26)
         Me.LayoutControlItem24.MaxSize = New System.Drawing.Size(140, 175)
         Me.LayoutControlItem24.MinSize = New System.Drawing.Size(140, 175)
         Me.LayoutControlItem24.Name = "LayoutControlItem24"
@@ -1422,7 +1422,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem2.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem2.Control = Me.Emp_Name
-        Me.LayoutControlItem2.Location = New System.Drawing.Point(197, 139)
+        Me.LayoutControlItem2.Location = New System.Drawing.Point(197, 147)
         Me.LayoutControlItem2.Name = "LayoutControlItem2"
         Me.LayoutControlItem2.Size = New System.Drawing.Size(460, 30)
         Me.LayoutControlItem2.Text = "Name:"
@@ -1435,7 +1435,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem3.Control = Me.Emp_Father
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(197, 169)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(197, 177)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
         Me.LayoutControlItem3.Size = New System.Drawing.Size(460, 30)
         Me.LayoutControlItem3.Text = "Father Name:"
@@ -1448,7 +1448,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem7.Control = Me.Emp_Quali
-        Me.LayoutControlItem7.Location = New System.Drawing.Point(657, 139)
+        Me.LayoutControlItem7.Location = New System.Drawing.Point(657, 147)
         Me.LayoutControlItem7.Name = "LayoutControlItem7"
         Me.LayoutControlItem7.Size = New System.Drawing.Size(459, 30)
         Me.LayoutControlItem7.Text = "Qualification:"
@@ -1461,7 +1461,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem8.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem8.Control = Me.Emp_Designation_ID
-        Me.LayoutControlItem8.Location = New System.Drawing.Point(657, 169)
+        Me.LayoutControlItem8.Location = New System.Drawing.Point(657, 177)
         Me.LayoutControlItem8.Name = "LayoutControlItem8"
         Me.LayoutControlItem8.Size = New System.Drawing.Size(459, 30)
         Me.LayoutControlItem8.Text = "Designation:"
@@ -1474,7 +1474,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = True
         Me.LayoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LayoutControlItem1.Control = Me.SearchLookUpEdit1
-        Me.LayoutControlItem1.Location = New System.Drawing.Point(197, 68)
+        Me.LayoutControlItem1.Location = New System.Drawing.Point(197, 76)
         Me.LayoutControlItem1.Name = "LayoutControlItem1"
         Me.LayoutControlItem1.Size = New System.Drawing.Size(919, 30)
         Me.LayoutControlItem1.Text = "     Search  Employee ID #"
@@ -1483,7 +1483,7 @@ Partial Class frmEmployeesAdds
         'EmptySpaceItem4
         '
         Me.EmptySpaceItem4.AllowHotTrack = False
-        Me.EmptySpaceItem4.Location = New System.Drawing.Point(197, 98)
+        Me.EmptySpaceItem4.Location = New System.Drawing.Point(197, 106)
         Me.EmptySpaceItem4.MaxSize = New System.Drawing.Size(0, 11)
         Me.EmptySpaceItem4.MinSize = New System.Drawing.Size(10, 11)
         Me.EmptySpaceItem4.Name = "EmptySpaceItem4"
@@ -1494,7 +1494,7 @@ Partial Class frmEmployeesAdds
         'EmptySpaceItem6
         '
         Me.EmptySpaceItem6.AllowHotTrack = False
-        Me.EmptySpaceItem6.Location = New System.Drawing.Point(197, 199)
+        Me.EmptySpaceItem6.Location = New System.Drawing.Point(197, 207)
         Me.EmptySpaceItem6.MaxSize = New System.Drawing.Size(0, 10)
         Me.EmptySpaceItem6.MinSize = New System.Drawing.Size(10, 10)
         Me.EmptySpaceItem6.Name = "EmptySpaceItem6"
@@ -1505,9 +1505,9 @@ Partial Class frmEmployeesAdds
         'LayoutControlItem18
         '
         Me.LayoutControlItem18.Control = Me.LayoutControl5
-        Me.LayoutControlItem18.Location = New System.Drawing.Point(197, 209)
+        Me.LayoutControlItem18.Location = New System.Drawing.Point(197, 217)
         Me.LayoutControlItem18.Name = "LayoutControlItem18"
-        Me.LayoutControlItem18.Size = New System.Drawing.Size(1059, 372)
+        Me.LayoutControlItem18.Size = New System.Drawing.Size(1059, 368)
         Me.LayoutControlItem18.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem18.TextVisible = False
         '
@@ -1516,7 +1516,7 @@ Partial Class frmEmployeesAdds
         Me.LayoutControlItem11.Control = Me.ProgressBarControl1
         Me.LayoutControlItem11.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControlItem11.Name = "LayoutControlItem11"
-        Me.LayoutControlItem11.Size = New System.Drawing.Size(1256, 18)
+        Me.LayoutControlItem11.Size = New System.Drawing.Size(1256, 26)
         Me.LayoutControlItem11.TextSize = New System.Drawing.Size(0, 0)
         Me.LayoutControlItem11.TextVisible = False
         '

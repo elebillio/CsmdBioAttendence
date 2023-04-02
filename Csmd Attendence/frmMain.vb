@@ -8,6 +8,8 @@ Imports CsmdBioDashBoard
 Imports CsmdBioReports
 Imports DevExpress.XtraNavBar
 Imports CsmdUpdater
+Imports System.Data.SqlClient
+
 Public Class frmMain
 
 #Region "Get Reports"
@@ -388,7 +390,206 @@ Public Class frmMain
     End Sub
 
 
+#Region "Backup and Restore"
+    Private Sub BarButtonItem16_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem16.ItemClick
+        'Try
+        'Dim sd As New SaveFileDialog()
+        'sd.Filter = "SQL Server database backup files"
+        'sd.Title = "Create Database Backup"
+        'sd.FileName = "CsmdBioAttendence_Backup_" & Now.ToString("d-M-yyyy_hh-mm tt" & ".bak")
+        Dim SDD As String = Application.StartupPath & "\DATA\CsmdBioAttendence_Backup_" & Now.ToString("d-M-yyyy_hh-mm tt" & ".bak")
+        'CsmdTheLeadsSchool_Backup_" & sd.FileName & Now.ToString("d-mm-yyyy") & "
+        'If sd.ShowDialog() = DialogResult.OK Then
+        'MsgBox(sd.FileName)
+        Using conn As New SqlConnection("Data Source=CASHIER-PC\SQLEXPRESS,786;Initial Catalog=CsmdBioAttendence;user id=sa; password=123;")
+            Dim sqlStmt As String = String.Format("backup database [CsmdBioAttendence] to disk='{0}'", SDD)
+            'Dim sqlStmt As String = String.Format("backup database [" & cmbdatabase.Text.Trim & "] to disk='{0}'", System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool_Backup.bak")
+            Using bu2 As New SqlCommand(sqlStmt, conn)
+                conn.Open()
+                bu2.ExecuteNonQuery()
+                conn.Close()
+                'ProgressBarControl1.Position = 3
+                'ProgressBarControl1.Update()
+                MessageBox.Show("Backup Created Sucessfully")
+            End Using
+        End Using
+        'End If
+        'Catch generatedExceptionName As Exception
+        '    MessageBox.Show(generatedExceptionName.Message)
+        'End Try
+        ' Dim Asd As New OpenFileDialog()
+        'sd.Filter = "SQL Server database backup files|*.bak"
+        '  Asd.Title = "Create Database Backup"
+        '  If Asd.ShowDialog() = DialogResult.OK Then
+        'Using conn As New SqlConnection("Data Source=" & Trim(cmbserver.Text) & ";AttachDbFilename=|DataDirectory|DATA\CsmdTheLeadsSchool.mdf;integrated security=True;")
+        Using conn As New SqlConnection("Data Source=DESKTOP-DLTNMHS\SQLEXPRESS;Initial Catalog=master; integrated security=true;")
+            'Dim sqlStmt As String = String.Format("backup database [" + System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool.mdf] to disk='{0}'", sd.FileName)
+            'System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool_Backup.bak
+            'query("DROP DATABASE " & ComboBoxdb.Text)
+            Dim ff = "alter database [CsmdBioAttendence]  set offline with rollback immediate"
+            Dim sqlStmt As String = String.Format("RESTORE database [CsmdBioAttendence] from disk='" + SDD + "'WITH REPLACE, RECOVERY")
+            Dim ggg = "alter database [CsmdBioAttendence] set online"
+            Using bu1 As New SqlCommand(ff, conn)
+                conn.Open()
+                bu1.ExecuteNonQuery()
+                conn.Close()
+                'ProgressBarControl1.Position = 1
+                'ProgressBarControl1.Update()
+                'MessageBox.Show("Offline Created Sucessfully")
+            End Using
+            Try
+                Using bu2 As New SqlCommand(sqlStmt, conn)
+                    conn.Open()
+                    bu2.ExecuteNonQuery()
+                    conn.Close()
+                    'ProgressBarControl1.Position = 2
+                    'ProgressBarControl1.Update()
+                    'MessageBox.Show("Restore Created Sucessfully")
+                End Using
+            Catch ex As Exception
+                MsgBox("Please Paste a Backup File in Drive:D", vbCritical, "File Path Error")
+                Exit Sub
+            End Try
+            Using bu3 As New SqlCommand(ggg, conn)
+                conn.Open()
+                bu3.ExecuteNonQuery()
+                conn.Close()
+                'ProgressBarControl1.Position = 3
+                'ProgressBarControl1.Update()
+                MessageBox.Show("Database Restore Sucessfully")
+            End Using
+        End Using
+        ' End If
+    End Sub
+    Private Sub BarButtonItem17_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem17.ItemClick
+        Dim SDD As String = Application.StartupPath & "\DATA\CsmdBioAttendence_Backup_" & Now.ToString("d-M-yyyy_hh-mm tt" & ".bak")
+        'CsmdTheLeadsSchool_Backup_" & sd.FileName & Now.ToString("d-mm-yyyy") & "
+        'If sd.ShowDialog() = DialogResult.OK Then
+        'MsgBox(sd.FileName)
+        Using conn As New SqlConnection("Data Source=DESKTOP-DLTNMHS\SQLEXPRESS;Initial Catalog=CsmdBioAttendence; integrated security=true;")
+            Dim sqlStmt As String = String.Format("backup database [CsmdBioAttendence] to disk='{0}'", SDD)
+            'Dim sqlStmt As String = String.Format("backup database [" & cmbdatabase.Text.Trim & "] to disk='{0}'", System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool_Backup.bak")
+            Using bu2 As New SqlCommand(sqlStmt, conn)
+                conn.Open()
+                bu2.ExecuteNonQuery()
+                conn.Close()
+                'ProgressBarControl1.Position = 3
+                'ProgressBarControl1.Update()
+                MessageBox.Show("Backup Created Sucessfully")
+            End Using
+        End Using
 
+
+        'Try
+        '  Dim sd As New OpenFileDialog()
+        'sd.Filter = "SQL Server database backup files|*.bak"
+        '  sd.Title = "Create Database Backup"
+        '  If sd.ShowDialog() = DialogResult.OK Then
+        'Using conn As New SqlConnection("Data Source=" & Trim(cmbserver.Text) & ";AttachDbFilename=|DataDirectory|DATA\CsmdTheLeadsSchool.mdf;integrated security=True;")
+        Using conn As New SqlConnection("Data Source=CASHIER-PC\SQLEXPRESS,786;Initial Catalog=master; user id=sa; password=123;")
+                'Dim sqlStmt As String = String.Format("backup database [" + System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool.mdf] to disk='{0}'", sd.FileName)
+                'System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool_Backup.bak
+                'query("DROP DATABASE " & ComboBoxdb.Text)
+                Dim ff = "alter database [CsmdBioAttendence]  set offline with rollback immediate"
+            Dim sqlStmt As String = String.Format("RESTORE database [CsmdBioAttendence] from disk='" + SDD + "'WITH REPLACE, RECOVERY")
+            Dim ggg = "alter database [CsmdBioAttendence] set online"
+                Using bu1 As New SqlCommand(ff, conn)
+                    conn.Open()
+                    bu1.ExecuteNonQuery()
+                    conn.Close()
+                    'ProgressBarControl1.Position = 1
+                    'ProgressBarControl1.Update()
+                    'MessageBox.Show("Offline Created Sucessfully")
+                End Using
+                Try
+                    Using bu2 As New SqlCommand(sqlStmt, conn)
+                        conn.Open()
+                        bu2.ExecuteNonQuery()
+                        conn.Close()
+                        'ProgressBarControl1.Position = 2
+                        'ProgressBarControl1.Update()
+                        'MessageBox.Show("Restore Created Sucessfully")
+                    End Using
+                Catch ex As Exception
+                    MsgBox("Please Paste a Backup File in Drive:D", vbCritical, "File Path Error")
+                    Exit Sub
+                End Try
+                Using bu3 As New SqlCommand(ggg, conn)
+                    conn.Open()
+                    bu3.ExecuteNonQuery()
+                    conn.Close()
+                    'ProgressBarControl1.Position = 3
+                    'ProgressBarControl1.Update()
+                    MessageBox.Show("Database Restore Sucessfully")
+                End Using
+            End Using
+        '  End If
+        'Catch generatedExceptionName As Exception
+        '    MessageBox.Show(generatedExceptionName.Message)
+        'End Try
+    End Sub
+
+    Private Sub BarButtonItem18_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem18.ItemClick
+        Dim SDD As String = Application.StartupPath & "\DATA\CsmdBioAttendence_Backup_" & Now.ToString("d-M-yyyy_hh-mm tt" & ".bak")
+        'CsmdTheLeadsSchool_Backup_" & sd.FileName & Now.ToString("d-mm-yyyy") & "
+        'If sd.ShowDialog() = DialogResult.OK Then
+        'MsgBox(sd.FileName)
+        Using conn As New SqlConnection("Data Source=CASHIER-PC\SQLEXPRESS,786;Initial Catalog=CsmdBioAttendence;user id=sa; password=123;")
+            Dim sqlStmt As String = "backup database [CsmdBioAttendence] to disk='" + SDD + "' with FORMAT"
+            'Dim sqlStmt As String = String.Format("backup database [" & cmbdatabase.Text.Trim & "] to disk='{0}'", System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool_Backup.bak")
+            Using bu2 As New SqlCommand(sqlStmt, conn)
+                conn.Open()
+                bu2.ExecuteNonQuery()
+                conn.Close()
+                'ProgressBarControl1.Position = 3
+                'ProgressBarControl1.Update()
+                MessageBox.Show("Backup Created Sucessfully")
+            End Using
+        End Using
+    End Sub
+
+    Private Sub BarButtonItem19_ItemClick(sender As Object, e As ItemClickEventArgs) Handles BarButtonItem19.ItemClick
+        Using conn As New SqlConnection("Data Source=FAAZAL-PLAZA\SQLEXPRESS;Initial Catalog=master; integrated security=true;")
+            'Dim sqlStmt As String = String.Format("backup database [" + System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool.mdf] to disk='{0}'", sd.FileName)
+            'System.Windows.Forms.Application.StartupPath + "\DATA\CsmdTheLeadsSchool_Backup.bak
+            'query("DROP DATABASE " & ComboBoxdb.Text)
+            Dim SDD As String = Application.StartupPath & "\DATA\CsmdBioAttendence_Backup_" & Now.ToString("d-M-yyyy_hh-mm tt" & ".bak")
+            Dim ff = "alter database [CsmdBioAttendence]  set offline with rollback immediate"
+            Dim sqlStmt As String = String.Format("RESTORE database [CsmdBioAttendence] from disk='" + SDD + "' WITH REPLACE, RECOVERY")
+            Dim ggg = "alter database [CsmdBioAttendence] set online"
+            Using bu1 As New SqlCommand(ff, conn)
+                conn.Open()
+                bu1.ExecuteNonQuery()
+                conn.Close()
+                'ProgressBarControl1.Position = 1
+                'ProgressBarControl1.Update()
+                'MessageBox.Show("Offline Created Sucessfully")
+            End Using
+            Try
+                Using bu2 As New SqlCommand(sqlStmt, conn)
+                    conn.Open()
+                    bu2.ExecuteNonQuery()
+                    conn.Close()
+                    'ProgressBarControl1.Position = 2
+                    'ProgressBarControl1.Update()
+                    'MessageBox.Show("Restore Created Sucessfully")
+                End Using
+            Catch ex As Exception
+                MsgBox("Please Paste a Backup File in Drive:D", vbCritical, "File Path Error")
+                Exit Sub
+            End Try
+            Using bu3 As New SqlCommand(ggg, conn)
+                conn.Open()
+                bu3.ExecuteNonQuery()
+                conn.Close()
+                'ProgressBarControl1.Position = 3
+                'ProgressBarControl1.Update()
+                MessageBox.Show("Database Restore Sucessfully")
+            End Using
+        End Using
+    End Sub
+
+#End Region
 
 #End Region
 

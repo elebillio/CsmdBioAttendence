@@ -15,8 +15,8 @@ Partial Public Class Emp_Attendence_Device
     Public Property Emp_Attendence_Device_ID As Integer
     Public Property Emp_Attendence_Device_DateTime As Date
     Public Property Emp_ID As Nullable(Of Integer)
-    Public Property Emp_Bio_Device_Users_UserID As Nullable(Of Integer)
     Public Property Attendance_Duty_Status_ID As Nullable(Of Integer)
+    Public Property Emp_Bio_Device_Users_UserID As Nullable(Of Integer)
     Public Property Emp_Attendence_Device_Duty_On_Off As String
     Public Property Emp_Attendence_Device_Day As Nullable(Of Date)
     Public Property Emp_Attendence_Device_Date As Nullable(Of Date)

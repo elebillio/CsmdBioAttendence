@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ed42eeab08e4423fb7090454d7ea1cbf" Name="Diagram1">
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Attendance_Duty_Status" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Attendence_Status" Width="1.5" PointX="8.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Auto_Number" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Emp_Att_Payment" Width="1.5" PointX="7.5" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Emp_Att_Set" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Emp_Attendence_Device" Width="1.5" PointX="7.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Emp_Bio_Device_Users" Width="1.5" PointX="10.5" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Emp_Cash_Register" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Employee" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.Plaza_User" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CsmdBioAttendenceModel1.User_Type" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Emp_Attendence_Device_Attendance_Duty_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Emp_Bio_Device_Users_Attendence_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Emp_Att_Payment_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Emp_Att_Set_Plaza_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Emp_Attendence_Device_Emp_Bio_Device_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Emp_Attendence_Device_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Emp_Bio_Device_Users_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Employees_Plaza_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CsmdBioAttendenceModel1.FK_Plaza_User_User_Type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

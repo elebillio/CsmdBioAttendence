@@ -87,32 +87,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attendance_Duty_Status.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="Attendence_Status.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="Auto_Number.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="CsmdClass.vb" />
     <Compile Include="Employee.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="Emp_Attendence_Device.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="Emp_Att_Payment.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="Emp_Att_Set.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="Emp_Bio_Device_Users.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="Emp_Cash_Register.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="Encryption.vb" />
     <Compile Include="GridCheckMarksSelection.vb" />
@@ -131,6 +131,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model8.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model8.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model8.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model8.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model8.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model8.tt</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -147,13 +162,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Plaza_User.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
     <Compile Include="User_Type.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Model8.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +188,13 @@
     </EntityDeploy>
     <None Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Model8.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model8.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model8.edmx.diagram">
+      <DependentUpon>Model8.edmx</DependentUpon>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -198,6 +220,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.vb</LastGenOutput>
+    </Content>
+    <Content Include="Model8.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model8.edmx</DependentUpon>
+      <LastGenOutput>Model8.Context.vb</LastGenOutput>
+    </Content>
+    <Content Include="Model8.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model8.edmx</DependentUpon>
+      <LastGenOutput>Model8.vb</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

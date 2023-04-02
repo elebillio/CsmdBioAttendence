@@ -17,6 +17,7 @@ Partial Public Class Plaza_User
     Public Property User_Pass As String
     Public Property User_Status As Nullable(Of Boolean)
 
+    Public Overridable Property Emp_Att_Set As ICollection(Of Emp_Att_Set) = New HashSet(Of Emp_Att_Set)
     Public Overridable Property Employees As ICollection(Of Employee) = New HashSet(Of Employee)
     Public Overridable Property User_Type As User_Type
 
